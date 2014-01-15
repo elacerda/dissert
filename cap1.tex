@@ -48,16 +48,17 @@ dos catálogos é produto direto da evolução dos equipamentos. No início da d
 extragalática entra nesse cenário de produção sistemática em massa de dados. De
 lá para cá a quantidade de dados só aumenta e, com a criação dos
 {\em mega-surveys} \citep[\SDSS; ][]{York2000} \citep[2dFGRS;][]{Colless1999}
-\citep[2MASS;][]{Skrutskie2006} já terminados e alguns ainda começando ou por
-terminar \citep[LSST; ][]{Ivezic2008} \citep[J-PAS;][]{Benitez2009}, beira o humanamente
-impossível de se avaliar, necessitando assim da ajuda de métodos computacionais.
+\citep[2MASS;][]{Skrutskie2006}, alguns já terminados, outros ainda começando ou
+por terminar \citep[LSST; ][]{Ivezic2008} \citep[J-PAS;][]{Benitez2009},
+estamos a beira do humanamente impossível de se avaliar, necessitando assim a
+ajuda de máquinas e métodos computacionais cada vez mais eficientes.
 
-Com esse crescimento exponencial na quantidade de dados precisamos cada vez mais
-de ferramentas matemáticas/estatísticas. No contexto de espectros de galáxias,
+Com esse crescimento exponencial na quantidade de dados, precisamos cada vez
+mais de ferramentas matemáticas/estatísticas. No contexto de espectros de galáxias,
 uma ferramenta muito útil para síntese espectral é o \starlight, desenvolvido
 por \citet{CidFernandes2005}. Hoje, com o uso de painéis de fibras óticas
-apontadas para as galáxias temps os {\em surveys} de IFS ({\em Integral Field
-Spectrography})  onde passamos a ter, não um, mas dezenas, centenas e até
+apontadas para as galáxias temos os {\em surveys} de IFS ({\em Integral Field
+Spectrography}) onde passamos a obter, não um, mas dezenas, centenas e até
 milhares de espectros por galáxia, ganhando assim uma dimensão a mais nos dados.
 Assim temos para cada píxel (duas dimensões espaciais) um espectro (uma dimensão
 espectral), formando assim um cubo de {\em spaxels}\footnote{spectral pixels}.
@@ -70,7 +71,7 @@ Com esses cubos de dados em mão, podemos assim executar o \starlight para
 cada {\em spaxel} e então obtemos propriedades físicas em função da posição na
 galáxia \citep{CidFernandes20131}. Uma ferramenta menos astrofísica, mas não
 menos utilizada, é o PCA ({\em Principal Component Analysis}) e no presente
-trabalho fazemos useu uso juntamente com uma técnica criada por
+trabalho fazemos seu uso juntamente com uma técnica criada por
 \citet{Steiner2009} chamada de Tomografia PCA, onde une-se imageamento e
 espectrografia ao mesmo tempo.
 
@@ -95,10 +96,11 @@ TODO XXX referências e exemplos de uso do PCA}.
 
 Com a criação da técnica de Tomografia PCA citada anteriormente temos, além da
 análise das componentes principais, uma imagem formada pela matriz de
-covariancia (as questões matemáticas serão abordadas mais a frente no presente
-trabalho). Assim podemos saber o peso, ou relevância, de cada componente
-principal (daqui pra frente PC) relacionada a uma posição na galáxia, aliando a
-infinidade de informações físicas presentes nos espectros e nas imagens.
+covariância (as questões matemáticas serão abordadas no
+capítulo \ref{sec:PCAeTomoPCA}). Assim podemos saber o peso, ou relevância, de
+cada componente principal (daqui pra frente CP) relacionada a uma posição na
+galáxia, aliando a infinidade de informações físicas presentes nos espectros e
+nas imagens.
 
 \section{Este trabalho}
 \label{sec:Intro:ThisWork}
@@ -107,14 +109,51 @@ Através da colaboração do Grupo de Astrofísica da Universidade Federal de Sa
 Catarina (GAS-UFSC) com o grupo de pesquisadores do projeto CALIFA tive a
 oportunidade de trabalhar com os dados de IFS das galáxias observadas por esse
 projeto, que ainda está em andamento. O seu primeiro {\em Data Release}
-\citep{CALIFADR1} possui $100$ objetos e por volta de $400000$ espectros. Esses
-objetos estão no universo local com $redshifts$ entre $0.005 < z < 0.03$
-observados com um espectrógrafo PMAS/PPak, montado em um telescópio no
-observatório de Calar Alto, em Granada, na Espanha. Os objetos estão
-distribuídos em uma ampla variedade de tipos morfologicos, massa em
-estrelas, condições do gas ionizante. A previsão é que ao término do projeto
-serão observadas até $600$ objetos.
+\citep{CALIFADR1} possui $100$ objetos e por volta de $400000$ espectros.
+Veja \ref{sec:CALePyC:Apresent} para mais informações. A previsão é que ao
+término do projeto serão observadas até $600$ objetos. Embora outros surveys de
+IFS estão completos ou em andamento, o CALIFA é o que podemos chamar de {\em
+estado da arte} em surveys de espectroscopia de campo integrado (IFS).
 
+Dado o grande número de informações sobre cada galáxia necessitamos de um {\em
+pipeline} que faça a organização de todos os dados para que cálculos e gráficos
+de mais variadas dificuldade sejam fácil para que até um programador de nível
+iniciante possa fazer. {\em XXX TODO XXX existe paper do PyCASSO ???? se existir
+citar aqui} André Amorim, colaborador de nosso grupo, juntamente com outros
+colaboradores do projeto CALIFA construiu o PyCASSO ({\em Python CALIFA
+\starlight Synthesis Organizer}) Que faz a organização dos dados que vêm do
+{\em survey} juntamente com a síntese de populações estelares feitas com
+o \starlight, facilitando, e muito, o trabalho de quem usa estes dados. Sem a
+ajuda deste organizador, este trabalho seria muito mais difícil e acredito que
+não sería realizável em tempo hábil.
 
+\subsection{Organização deste trabalho}
+
+No seguinte capítulo faço uma apresentação mais detalhada do {\em survey}
+CALIFA, bem como do {\em pipeline} PyCASSO. Discuto sua a utilização com alguns
+exemplos de uso.
+
+O terceiro capítulo descreve matemáticamente a técnica PCA e a Tomografia PCA,
+bem como sua utilização no presente trabalho. 
+
+A partir do quarto capítulo descrevo e discuto os mais diferentes {\em
+sabores}\footnote{sabores aqui é usado apenas como uma maneira de tipificar
+diferentes pré-processamentos dos dados antes da execução da análise de
+componentes principais.} de execução do PCA, juntamente com suas implicações aos
+resultados das análises. Juntamente apresento diversos gráficos demonstrando as
+diferenças entre a utilização de cada pré-processamento juntamente com a análise
+da Tomografia PCA e das CPs, bem como as principais referências na área.
+
+Com todo o arcabouço teórico em mãos, no capítulo cinco faço um estudo de caso
+para $9$ objetos do survey CALIFA, escolhidos por seu tipo morfológico. São $3$
+galáxias espirais, $3$ elípticas e $3$ objetos compostos (mergers). Faço também
+uma espécie de engenharia reversa através de correlações e comparações com os
+resultados da síntese de populações estelares executadas pelo \starlight nesses
+objetos.
+
+Por fim, apresento as conclusões e as perspectivas futuras deste trabalho e da
+nossa colaboração com o projeto CALIFA no sexto e último capítulo. Devido ao
+grande número de imagens e dados para análise, muitas delas ficaram em anexo,
+bem como um ou outro código Python usado.
 
 % End of this chapter
