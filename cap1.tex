@@ -65,11 +65,12 @@ espectral), formando assim um cubo de {\em spaxels}\footnote{spectral pixels}.
 O pioneiro nessa produção em massa de dados é o {\em Calar Alto Legacy Integral
 Field spectroscopy Area survey} \citep[CALIFA; ][]{CALIFAPresent2012},
 produzindo cerca de mil espectros por galáxia observada. Outros {\em
-mega-surveys} IFS estão por vir {\em XXX TODO XXX REFERENCIAS MANGA, SAMI, VENGA.}. 
+mega-surveys} IFS estão por vir \fixme \citneed \textcolor{blue}{REFERENCIAS
+MANGA, SAMI, VENGA.}.
 
 Com esses cubos de dados em mão, podemos assim executar o \starlight para
 cada {\em spaxel} e então obtemos propriedades físicas em função da posição na
-galáxia \citep{CidFernandes20131}. Uma ferramenta menos astrofísica, mas não
+galáxia \citep{CidFernandes2013a}. Uma ferramenta menos astrofísica, mas não
 menos utilizada, é o PCA ({\em Principal Component Analysis}) e no presente
 trabalho fazemos seu uso juntamente com uma técnica criada por
 \citet{Steiner2009} chamada de Tomografia PCA, onde une-se imageamento e
@@ -87,8 +88,8 @@ de spaxels, temos as dimensões espaciais também, obtendo assim uma infinidade 
 variáveis. O grande problema do PCA é que você tem a resposta, mas não sabe a
 pergunta.
 
-Hoje, PCA é utilizado exaustivamente em várias áreas de conhecimento. {\em XXX
-TODO XXX referências e exemplos de uso do PCA}.
+Hoje, PCA é utilizado exaustivamente em várias áreas de conhecimento. \fixme
+\citneed \textcolor{blue}{Referências e exemplos de uso do PCA}.
 % http://arxiv.org/abs/1009.4974
 % http://arxiv.org/abs/1208.3700
 % http://arxiv.org/abs/astro-ph/0010424
@@ -109,7 +110,7 @@ Através da colaboração do Grupo de Astrofísica da Universidade Federal de Sa
 Catarina (GAS-UFSC) com o grupo de pesquisadores do projeto CALIFA tive a
 oportunidade de trabalhar com os dados de IFS das galáxias observadas por esse
 projeto, que ainda está em andamento. O seu primeiro {\em Data Release}
-\citep{CALIFADR1} possui $100$ objetos e por volta de $400000$ espectros.
+\citep{Husemann2013} possui $100$ objetos e por volta de $400000$ espectros.
 Veja \ref{sec:CALePyC:Apresent} para mais informações. A previsão é que ao
 término do projeto serão observadas até $600$ objetos. Embora outros surveys de
 IFS estão completos ou em andamento, o CALIFA é o que podemos chamar de {\em
@@ -118,14 +119,13 @@ estado da arte} em surveys de espectroscopia de campo integrado (IFS).
 Dado o grande número de informações sobre cada galáxia necessitamos de um {\em
 pipeline} que faça a organização de todos os dados para que cálculos e gráficos
 de mais variadas dificuldade sejam fácil para que até um programador de nível
-iniciante possa fazer. {\em XXX TODO XXX existe paper do PyCASSO ???? se existir
-citar aqui} André Amorim, colaborador de nosso grupo, juntamente com outros
-colaboradores do projeto CALIFA construiu o PyCASSO ({\em Python CALIFA
-\starlight Synthesis Organizer}) Que faz a organização dos dados que vêm do
-{\em survey} juntamente com a síntese de populações estelares feitas com
-o \starlight, facilitando, e muito, o trabalho de quem usa estes dados. Sem a
-ajuda deste organizador, este trabalho seria muito mais difícil e acredito que
-não sería realizável em tempo hábil.
+iniciante possa fazer. André Amorim, colaborador de nosso grupo, juntamente com
+outros colaboradores do projeto CALIFA construiu o PyCASSO ({\em Python CALIFA
+\starlight Synthesis Organizer}) \citep{CidFernandes2013a} que faz a organização
+dos dados que vêm do {\em survey} juntamente com a síntese de populações
+estelares feitas com o \starlight, facilitando, e muito, o trabalho de quem usa
+estes dados. Sem a ajuda deste organizador, este trabalho seria muito mais
+difícil e acredito que não sería realizável em tempo hábil.
 
 \subsection{Organização deste trabalho}
 
