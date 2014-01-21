@@ -42,15 +42,15 @@ científica.
 Os primeiros {\em surveys}\footnote{Um {\em survey} astronômico é um
 levantamento de informações ou mapeamento de regiões do céu utilizando
 telescópios e detetores.} astronômicos surgem com a inata curiosidade do homem
-de observar tudo a sua volta e registrar suas observações. O crescimento
-dos catálogos é produto direto da evolução dos equipamentos. No início da década de 80
-\citep{Huchra1983} \citep{Huchra1988} \citep{DaCosta1988} a astronomia
-extragalática entra nesse cenário de produção sistemática em massa de dados. De
-lá para cá a quantidade de dados só aumenta e, com a criação dos
-{\em mega-surveys} \citep[\SDSS; ][]{York2000} \citep[2dFGRS;][]{Colless1999}
-\citep[2MASS;][]{Skrutskie2006}, alguns já terminados, outros ainda começando ou
-por terminar \citep[LSST; ][]{Ivezic2008} \citep[J-PAS;][]{Benitez2009},
-estamos a beira do humanamente impossível de se avaliar, necessitando assim a
+de observar tudo a sua volta e registrar suas observações. O crescimento dos
+catálogos é produto direto da evolução dos equipamentos. No início da década de
+80 \citep{Huchra1983, Huchra1988, DaCosta1988} a astronomia extragalática
+entra nesse cenário de produção sistemática em massa de dados. De lá para cá a
+quantidade de dados só aumenta e, com a criação dos {\em mega-surveys}
+\citep[\SDSS; ][]{York2000} \citep[2dFGRS;][]{Colless1999}
+\citep[2MASS;][]{Skrutskie2006}, alguns já terminados, outros ainda começando
+ou por terminar \citep[LSST; ][]{Ivezic2008} \citep[J-PAS;][]{Benitez2009},
+estamos à beira do humanamente impossível de se avaliar, necessitando assim a
 ajuda de máquinas e métodos computacionais cada vez mais eficientes.
 
 Com esse crescimento exponencial na quantidade de dados, precisamos cada vez
@@ -59,11 +59,11 @@ uma ferramenta muito útil para síntese espectral é o \starlight, desenvolvido
 por \citet{CidFernandes2005}. Hoje, com o uso de painéis de fibras óticas
 apontadas para as galáxias temos os {\em surveys} de IFS ({\em Integral Field
 Spectrography}) onde passamos a obter, não um, mas dezenas, centenas e até
-milhares de espectros por galáxia, ganhando assim uma dimensão a mais nos dados.
-Assim temos para cada píxel (duas dimensões espaciais) um espectro (uma dimensão
-espectral), formando assim um cubo de {\em spaxels}\footnote{spectral pixels}.
-O pioneiro nessa produção em massa de dados é o {\em Calar Alto Legacy Integral
-Field spectroscopy Area survey} \citep[CALIFA; ][]{CALIFAPresent2012},
+milhares de espectros por galáxia, ganhando assim dimensão espacial também nos
+dados. Assim temos para cada píxel (duas dimensões espaciais) um espectro (uma
+dimensão espectral), formando assim um cubo de {\em spaxels}\footnote{spectral
+pixels}. O pioneiro nessa produção em massa de dados é o {\em Calar Alto Legacy
+Integral Field spectroscopy Area survey} \citep[CALIFA; ][]{CALIFAPresent2012},
 produzindo cerca de mil espectros por galáxia observada. Outros {\em
 mega-surveys} IFS estão por vir (veja a seção \ref{sec:CALePyC:Apresent}).
 
@@ -88,7 +88,8 @@ variáveis. O grande problema do PCA é que você tem a resposta, mas não sabe 
 pergunta.
 
 Hoje, PCA é utilizado exaustivamente em várias áreas de conhecimento. \ojo
-\citneed \textcolor{blue}{Referências e exemplos de uso do PCA}.
+\citneed \textcolor{blue}{Referências e exemplos de uso do PCA, mais pra
+frente procuro}.
 % http://arxiv.org/abs/1009.4974
 % http://arxiv.org/abs/1208.3700
 % http://arxiv.org/abs/astro-ph/0010424
@@ -97,7 +98,7 @@ Hoje, PCA é utilizado exaustivamente em várias áreas de conhecimento. \ojo
 Com a criação da técnica de Tomografia PCA citada anteriormente temos, além da
 análise das componentes principais, uma imagem formada pela matriz de
 covariância (as questões matemáticas serão abordadas no
-capítulo \ref{sec:PCAeTomoPCA}). Assim podemos saber o peso, ou relevância, de
+Capítulo \ref{sec:PCAeTomoPCA}). Assim podemos saber o peso, ou relevância, de
 cada componente principal (daqui pra frente CP) relacionada a uma posição na
 galáxia, aliando a infinidade de informações físicas presentes nos espectros e
 nas imagens.
@@ -109,22 +110,22 @@ Através da colaboração do Grupo de Astrofísica da Universidade Federal de Sa
 Catarina (GAS-UFSC) com o grupo de pesquisadores do projeto CALIFA tive a
 oportunidade de trabalhar com os dados de IFS das galáxias observadas por esse
 projeto, que ainda está em andamento. O seu primeiro {\em Data Release}
-\citep{Husemann2013} possui $100$ objetos e por volta de $400000$ espectros.
-Veja \ref{sec:CALePyC:Apresent} para mais informações. A previsão é que ao
-término do projeto serão observadas até $600$ objetos. Embora outros surveys de
-IFS estão completos ou em andamento, o CALIFA é o que podemos chamar de {\em
-estado da arte} em surveys de espectroscopia de campo integrado (IFS).
+\citep{Husemann2013} possui $100$ objetos e por volta de $400$ mil espectros. A
+previsão é que ao término do projeto serão observadas até $600$ objetos. Embora
+outros surveys de IFS estão completos ou em andamento (ver Seção
+\ref{sec:CALePyC:Apresent}), o CALIFA é o que podemos chamar de {\em estado da
+arte} em surveys de espectroscopia de campo integrado (IFS).
 
 Dado o grande número de informações sobre cada galáxia necessitamos de um {\em
 pipeline} que faça a organização de todos os dados para que cálculos e gráficos
 de mais variadas dificuldade sejam fácil para que até um programador de nível
-iniciante possa fazer. André Amorim, colaborador de nosso grupo, juntamente com
-outros colaboradores do projeto CALIFA construiu o PyCASSO ({\em Python CALIFA
-\starlight Synthesis Organizer}) \citep{CidFernandes2013a} que faz a organização
-dos dados que vêm do {\em survey} juntamente com a síntese de populações
-estelares feitas com o \starlight, facilitando, e muito, o trabalho de quem usa
-estes dados. Sem a ajuda deste organizador, este trabalho seria muito mais
-difícil e acredito que não sería realizável em tempo hábil.
+iniciante possa fazer. André L. de Amorim, colaborador de nosso grupo,
+juntamente com outros colaboradores do projeto CALIFA construiu o PyCASSO ({\em
+Python CALIFA \starlight Synthesis Organizer}) \citep{CidFernandes2013a} que
+faz a organização dos dados que vêm do {\em survey} juntamente com a síntese de
+populações estelares feitas com o \starlight, facilitando, e muito, o trabalho
+de quem usa estes dados. Sem a ajuda deste organizador, este trabalho seria
+muito mais difícil e acredito que não sería realizável em tempo hábil.
 
 \subsection{Organização deste trabalho}
 
