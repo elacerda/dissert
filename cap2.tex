@@ -43,39 +43,40 @@ ou físicos.
 
 No sul da Espanha, mais precisamente em {\em Sierra de Los Filabres}
 (Andalucía), está situado o germano-espânico {\em Calar Alto Observatory}. O
-projeto CALIFA está sendo possível através de observações de o maior de seus
-$3$ telescópios ($3.5$m) e terá ao todo $\sim 600$ objetos ao longo de $250$
-noites de observação. Em comparação com o \SDSS, o CALIFA terá a mesma ordem de
-número de espectros para estudo ($\sim10^6$), mas, apesar de um número menor de
-galáxias, graças ao IFU será o com melhor completeza por objeto. Existem alguns poucos
-surveys IFU e todos com, além de poucos objetos e FoV menor, focos de estudo
-muito estreitos, dificultando o legado do survey para outras pequisas
-científicas mais abrangentes \citep[SAURON; ][região central de 72 galáxias
-com $z < 0.01$.]{de-Zeeuw2002} \citep[PINGS; ][algumas galáxias muito próximas
-($\sim 10$ Mpc) e o estudo atual de 70 (U)LIRGs com $z <0.26$]{RosalesOrtega2010}
-\citep[VENGA; ][$30$ galáxias espirais]{Blanc2010}. Apesar de ser primariamente
-construído para o estudo da física bariônica da evolução de galáxias, o CALIFA
-está projetado para que seu legado seja bem abrangente, possibilitando diversos
-tipos de estudos em diversas áreas. Outros surveys IFU ainda estão por vir, como
-SAMI \citep{Croom2012} e MaNGA \citetext{Bundy et al., in prep}. 
+projeto CALIFA está sendo possível através de observações pelo maior de seus $3$
+telescópios ($3.5$m) ao longo de $250$ noites. Em comparação com o \SDSS, o
+CALIFA terá a mesma ordem de número de espectros para estudo ($\sim10^6$), mas,
+apesar de um número menor de galáxias, graças ao IFU será o com melhor
+completeza por objeto. Existem alguns poucos surveys IFU e todos com, além de
+poucos objetos e FoV menor, focos de estudo muito estreitos, dificultando o
+legado do survey para outras pequisas científicas mais abrangentes
+\citep[SAURON; ][região central de 72 galáxias com $z < 0.01$.]{de-Zeeuw2002}
+\citep[PINGS; ][algumas galáxias muito próximas ($\sim 10$ Mpc) e o estudo atual
+de 70 (U)LIRGs com $z <0.26$]{RosalesOrtega2010} \citep[VENGA; ][$30$ galáxias
+espirais]{Blanc2010}. Apesar de ser primariamente construído para o estudo da
+física bariônica da evolução de galáxias, o CALIFA está projetado para que seu
+legado seja bem abrangente, possibilitando diversos tipos de estudos em diversas
+áreas. Outros surveys IFU ainda estão por vir, como SAMI \citep{Croom2012} e
+MaNGA \citetext{Bundy et al., in prep}.
 
 \subsection{A ``{\em colméia}'' de fibras - os dados do CALIFA que usamos neste
 trabalho}
 
-A amostra mãe do projeto comporta $939$ galáxias com {\em redshifts} entre
-$0.005 < z < 0.03$ que distribuídas cobrem o diagrama cor-magnitude com $M_r <
--18$ (Figura \ref{fig:cm-uzMz}) em uma ampla variedade de tipos morfologicos,
-massa em estrelas, condições do gás ionizante. Para melhor aproveitar o {\em
-FoV} ({\em field-of-view}\footnote{campo de visão}) do instrumento de IFU é
-feito também um corte em dimensão ($\sim1'$ em diâmetro). No telescópio usado
-para o projeto está instalado o equipamento Potsdam Multi Aperture Spectrograph
-\citep[PMAS; ][]{Roth2005} no modo PPAK \citep{Verheijen2004, Kelz2006}
-formando um espectrofotômetro de campo integrado com um {\em bundle} de $382$
-fibras (Figura \ref{fig:BundlePPAK}), das quais, $331$ são para observação dos
-objetos, outras $36$ para \ojo \textcolor{blue}{\em sky background sample} e
-outras $15$ para calibração. As {\em science fibers} ($331$) cobrem um campo de
-visão hexagonal de $74"$ x $64"$ que, através de uma técnica de três pontos de
-dithering \ojo torna possível a observação de $100\%$ do campo.
+A amostra-mãe do projeto comporta $939$ galáxias (das quais $\sim 600$ serão
+observadas) com {\em redshifts} entre $0.005 < z < 0.03$ que distribuídas cobrem
+o diagrama cor-magnitude com $M_r < -18$ (Figura \ref{fig:cm-uzMz}) em uma ampla
+variedade de tipos morfologicos, massa em estrelas, condições do gás ionizante.
+Para melhor aproveitar o {\em FoV} ({\em field-of-view}\footnote{campo de
+visão}) do instrumento de IFU é feito também um corte em dimensão ($\sim1'$ em
+diâmetro). No telescópio usado para o projeto está instalado o equipamento
+Potsdam Multi Aperture Spectrograph \citep[PMAS; ][]{Roth2005} no modo PPAK
+\citep{Verheijen2004, Kelz2006} formando um espectrofotômetro de campo integrado
+com um {\em bundle} de $382$ fibras (Figura \ref{fig:BundlePPAK}), das quais,
+$331$ são para observação dos objetos, outras $36$ para \ojo
+\textcolor{blue}{\em sky background sample} e outras $15$ para calibração. As
+{\em science fibers} ($331$) cobrem um campo de visão hexagonal de $74"$ x $64"$
+que, através de uma técnica de três pontos de dithering \ojo torna possível a
+observação de $100\%$ do campo.
 
 \begin{figure}
     \includegraphics[height=0.5\textwidth]{figuras/figHusemann2013Fig2.pdf}
@@ -122,5 +123,17 @@ próxima seção.
 
 \section{O {\em pipeline} PyCASSO}
 \label{sec:CALePyC:PyCASSO}
+
+A beleza da espectroscopia de campo integral é poder unir imageamento e
+espectroscopia, obtendo-se assim a galáxia vista como um cubo de dados  $(x, y,
+\lambda)$; para cada $\lambda$ temos uma imagem, e para cada par de ascenção
+reta e declinação $(x, y)$ temos um espectro. \ojo \textcolor{blue}{Pedir uma
+imagem chique de cubo para o André.}
+
+Com esses dados é então possível realizar a síntese de populações estelares com
+o \starlight, resolvendo espacialmente as propriedades físicas estelares das
+galáxias \citep{CidFernandes2013a} (\ojo \textcolor{}{já citei esse paper
+outras vezes, vale a pena citar novamente???}).
+
 
 % End of this chapter
