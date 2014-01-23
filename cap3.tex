@@ -17,17 +17,96 @@
 
 \chapter{PCA e Tomografia PCA}
 \label{sec:PCAeTomoPCA}
-\ojo
-%***************************************************************%
-%                                                               %
-%                             PCA                               %
-%                                                               %
-%***************************************************************%
+
+De medidas fisiológicas, como pulsação e respiração, até reconhecimento de
+padrões em sistemas complexos como reconhecimento facial e criptografia,
+passando por compactação de imagem, neurosciência, redução de ruídos em sinal
+gerado por transdures de qualquer espécie (óticos, acústicos, sísmicos), podemos ver
+atuação de técnicas de PCA. \ojo Brincando com a própria técnica, o PCA em si é
+uma CP de um universo matemático-estatístico.
+
+% ***************************************************************% % PCA        
+%                       % %
+% ***************************************************************%
 
 \section{Principal Component Analisys}
 \label{sec:PCAeTomoPCA:PCA}
-\ojo
-Aqui vão as fórmulas, exemplos e referências de PCA.
+
+Baseada em encontrar os eixos com maiores variâncias em um conjunto de variáveis
+(no nosso caso, fluxos por lambda e por zona), a técnica PCA vem sendo de grande
+utilidade quando o assunto é estatística com muitas variáveis. Através de
+operações relativamente simples computacionalmente usando álgebra linear, é
+feito uma rotação na base de dados original, gerando uma nova base ortonormal
+não correlacionada através de um conjunto de auto-valores e auto-vetores.
+
+\fixme Existem diversas formas de se cálcular essa base final, mas a forma mais
+formal de se obter os auto-valores e auto-vetores seria através do cálculo variacional,
+usando restrições matemáticas, como o fato do auto-vetor ter que ser ortonormal
+a qualquer outro da base e o auto-valor ser aquele que maximiza a variância
+entre os auto-vetores \citep[][cap 1]{JolliffePCA1986}. 
+\fixme covariâncias entre todos os seus vetores de dados.
+Para isso, de maneira mais formal matemáticamente, fazemos uso de cálculo
+variacional  Para esse cálculos usamos uma função pronta da biblioteca de
+científica de Python chamada \texttt{SciPy}\footnote{\url{http://scipy.org/}}.
+
+Conforme a Seção \ref{sec:CALePyC:PyCASSO} vimos que os dados das galáxias estão
+acessíveis no PyCASSO separados por zonas. Então, por exemplo, os espectros
+estão armazenados em forma de uma matriz $(n x m)$ com $n$ zonas e $m$
+comprimentos de onda.
+
+\begin{equation}
+    \label{eq:PCA:fluxMatrix}
+    \textbf{F}{}_{z \lambda} = \left[
+    \begin{array}{ccccc}
+        f_{z_0 \lambda_0} & f_{z_0 \lambda_1} & f_{z_0 \lambda_2} & ... & f_{z_0 \lambda_m} \\
+        f_{z_1 \lambda_0} & f_{z_1 \lambda_1} & f_{z_1 \lambda_2} & ... & f_{z_1 \lambda_m} \\
+        f_{z_2 \lambda_0} & f_{z_2 \lambda_1} & f_{z_2 \lambda_2} & ... & f_{z_2 \lambda_m} \\
+        ...               & ...               & ...               & ... & ...               \\
+        f_{z_n \lambda_0} & f_{z_n \lambda_1} & f_{z_n \lambda_2} & ... & f_{z_n \lambda_m} 
+    \end{array} 
+    \right]
+\end{equation}
+
+Calculamos então o espectro médio de uma galáxia através da equação $\langle
+\textbf{F}{}_\lambda \rangle = (1 / n) \sum_{i=0}^{n} f_{z_i}{}_{\lambda}$ e
+então subtraímos a média de todos os espectros ($\textbf{I}{}_{z \lambda} =
+\textbf{F}{}_{z \lambda} - \langle \textbf{F}{}_\lambda \rangle$) para o cálculo
+da matriz de covariâncias usando um conjunto de dados com média zero.
+
+\begin{equation}
+	\label{eq:PCA:covMatrix}
+	\mathbf{C}{}_{cov} = \frac{[\mathbf{I}{}_{z \lambda}]^T \cdot \mathbf{I}{}_{z
+	\lambda}}{n - 1}
+\end{equation}
+
+\begin{figure}
+\begin{python}
+# Carregar arquivo FITS com os dados.
+from pycasso import fitsQ3DataCube
+K = fitsQ3DataCube('K0277_synthesis_suffix.fits')
+
+# Calcular o espectro medio de uma galaxia. 
+# K.f_obs tem dimensao (lambda, zona), portanto, 
+# fazemos o espectro medio de todas as zonas.
+f_obs_mean__l = K.f_obs.mean(axis = 1)
+
+# Subtraimos a media
+I_obs__zl = K.f_obs.transpose() - f_obs_mean__l
+
+# Calcular a matrix de convariancia
+import scipy as sp
+n = K.N_zone
+covMat__ll = (1.0 / n) * sp.dot(I_obs__zl.transpose(), I_obs__zl) 
+
+\end{python}
+	\caption[Exemplo de cálculo da matriz de covariância usando o PyCASSO]
+	{Cálculo da matriz de covariância usando o PyCASSO e a biblioteca científica
+	de Python chamada \texttt{SciPy}}
+	\label{fig:PCA:covMatrix}
+\end{figure}
+
+Na Figura \ref{fig:PCA:covMatrix} podemos ver a implementação de um código
+Python usando o PyCASSO e a biblioteca científica \texttt{SciPy}.
 
 %***************************************************************%
 %                                                               %
