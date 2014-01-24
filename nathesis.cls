@@ -102,5 +102,5 @@ emph={self},
 emphstyle={\color{self}\slshape},
 %
 }}{}
-
 %%%%% END Python environment
+

@@ -25,9 +25,11 @@ gerado por transdures de qualquer espécie (óticos, acústicos, sísmicos), pod
 atuação de técnicas de PCA. \ojo Brincando com a própria técnica, o PCA em si é
 uma CP de um universo matemático-estatístico.
 
-% ***************************************************************% % PCA        
-%                       % %
-% ***************************************************************%
+%***************************************************************% 
+%                                                               %
+%                              PCA                              %
+%                                                               % 
+%***************************************************************%
 
 \section{Principal Component Analisys}
 \label{sec:PCAeTomoPCA:PCA}
@@ -37,21 +39,25 @@ Baseada em encontrar os eixos com maiores variâncias em um conjunto de variáve
 utilidade quando o assunto é estatística com muitas variáveis. Através de
 operações relativamente simples computacionalmente usando álgebra linear, é
 feito uma rotação na base de dados original, gerando uma nova base ortonormal
-não correlacionada através de um conjunto de auto-valores e auto-vetores.
+não correlacionada através de um conjunto de autovalores e autovetores.
 
-\fixme Existem diversas formas de se cálcular essa base final, mas a forma mais
-formal de se obter os auto-valores e auto-vetores seria através do cálculo variacional,
-usando restrições matemáticas, como o fato do auto-vetor ter que ser ortonormal
-a qualquer outro da base e o auto-valor ser aquele que maximiza a variância
-entre os auto-vetores \citep[][cap 1]{JolliffePCA1986}. 
-\fixme covariâncias entre todos os seus vetores de dados.
-Para isso, de maneira mais formal matemáticamente, fazemos uso de cálculo
-variacional  Para esse cálculos usamos uma função pronta da biblioteca de
-científica de Python chamada \texttt{SciPy}\footnote{\url{http://scipy.org/}}.
+Existem diversas formas de se calcular essa base final. A prova matemática que
+você pode obter essa base é feita através de multiplicadores de Lagrange,
+calculando os autovetores e autovalores ($\mathbf{e}{}_k$ e $\lambda_k$) que
+maximizam o valor de $\mathbf{e}{}_k^T \cdot \mathbf{C}{}_{cov} \cdot
+\mathbf{e}{}_k$ (ver Eq. \ref{eq:PCA:covMatrix}) sujeito a restrição de que um
+autovetor deve ser ortogonal a qualquer outro da base ($\mathbf{e}{}_i^T
+\mathbf{e}{}_j = 0$) e que deve todos devem ser normalizados ($\mathbf{e}{}_i^T
+\mathbf{e}{}_i = 1$) \citep[][cap 1]{JolliffePCA1986}. Para esse cálculo usamos
+a biblioteca científica \texttt{SciPy}\footnote{\url{http://scipy.org/}}
+(\ref{fig:PCA:covMatrix}), que encontra os autovetores e autovalores da matriz
+de correlação.
+
+\subsection{PCA das galáxias do CALIFA}
 
 Conforme a Seção \ref{sec:CALePyC:PyCASSO} vimos que os dados das galáxias estão
 acessíveis no PyCASSO separados por zonas. Então, por exemplo, os espectros
-estão armazenados em forma de uma matriz $(n x m)$ com $n$ zonas e $m$
+estão armazenados em forma de uma matriz $(n \times m)$ com $n$ zonas e $m$
 comprimentos de onda.
 
 \begin{equation}
@@ -71,13 +77,21 @@ Calculamos então o espectro médio de uma galáxia através da equação $\lang
 \textbf{F}{}_\lambda \rangle = (1 / n) \sum_{i=0}^{n} f_{z_i}{}_{\lambda}$ e
 então subtraímos a média de todos os espectros ($\textbf{I}{}_{z \lambda} =
 \textbf{F}{}_{z \lambda} - \langle \textbf{F}{}_\lambda \rangle$) para o cálculo
-da matriz de covariâncias usando um conjunto de dados com média zero.
+da matriz de covariâncias usando um conjunto de dados com média zero. Vemos que
+a matriz de covariância possui dimensão $\lambda \times \lambda$. 
 
 \begin{equation}
 	\label{eq:PCA:covMatrix}
 	\mathbf{C}{}_{cov} = \frac{[\mathbf{I}{}_{z \lambda}]^T \cdot \mathbf{I}{}_{z
 	\lambda}}{n - 1}
 \end{equation}
+
+Agora calculamos os autovalores e autovetores da matriz de covariância. Neste
+trabalho usamos autoespectros ao inves de autovetores pois são autovetores de
+uma matriz de covariâncias entre espectros de cada zona. Então ordenamos os
+autovetores decrescentemente pelo valor de seus autovalores. Os autoespectros
+são as CPs e os autovalores as variâncias. Isso feito, temos então o que
+necessitamos para iniciar o cálculo do Tomograma PCA.
 
 \begin{figure}
 \begin{python}
@@ -96,17 +110,29 @@ I_obs__zl = K.f_obs.transpose() - f_obs_mean__l
 # Calcular a matrix de convariancia
 import scipy as sp
 n = K.N_zone
-covMat__ll = (1.0 / n) * sp.dot(I_obs__zl.transpose(), I_obs__zl) 
+dot_product = sp.dot(I_obs__zl.transpose(), I_obs__zl)
+covMat__ll = dot_product / (n - 1.0)   
 
+# Calcular os autovalores e autovetores
+w, e = linalg.eigh(covMat__ll)
+
+# Ordenar os autovetores decrescentemente pelo seu autovalor
+S = sp.argsort(w)[::-1]
+eigval = W[S]
+eigvect = e[:, S]
+ 
 \end{python}
-	\caption[Exemplo de cálculo da matriz de covariância usando o PyCASSO]
-	{Cálculo da matriz de covariância usando o PyCASSO e a biblioteca científica
-	de Python chamada \texttt{SciPy}}
+	\caption[Exemplo de cálculo de PCA usando o PyCASSO e SciPy] {Cálculo do
+	procedimento completo de PCA para os espectros observados de uma galáxia do
+	CALIFA usando o PyCASSO e a biblioteca científica de Python chamada
+	\texttt{SciPy}. No final do código temos eigval e eigvect que são os
+	autovalores e autovetores ordenados em forma decrescente.}
 	\label{fig:PCA:covMatrix}
 \end{figure}
 
-Na Figura \ref{fig:PCA:covMatrix} podemos ver a implementação de um código
-Python usando o PyCASSO e a biblioteca científica \texttt{SciPy}.
+Muitas figuras de CPs e suas utilizações serão mostradas no Capítulo
+\ref{sec:result} juntamente com a Tomografia PCA e as comparações com os
+parâmetros físicos da sintese de populações estelar.
 
 %***************************************************************%
 %                                                               %
@@ -116,7 +142,35 @@ Python usando o PyCASSO e a biblioteca científica \texttt{SciPy}.
 
 \section{Tomografia PCA}
 \label{sec:PCAeTomoPCA:TomoPCA}
-\ojo
-Aqui vão as fórmulas, exemplos e referências da Tomografia PCA.
+
+Na técnica de PCA procuramos os autoespectros (CPs) da matriz de correlação,
+ordenados pela variância, formam uma base ($\mathbf{E}{}_{\lambda k}$) onde 
+podemos projetar os nossos dados através da transformação:
+
+\begin{equation}
+	\label{eq:TomoPCA:tomogram2D}
+	\mathbf{T}{}_{z k} = \mathbf{I}{}_{z \lambda} \cdot \mathbf{E}{}_{\lambda k}
+\end{equation}
+
+Projetamos nossa matriz de observáveis com a média subtraida ($\mathbf{I}{}_{z
+\lambda}$) na base das CPs ($\mathbf{E}{}_{\lambda k}$). Na posse dessa nova
+matriz transformada e de um mapa que leve de zona para uma par de coordenada ($z
+\to (x, y)$), podemos montar assim uma imagem. Cada imagem funciona como uma
+``fatia'' de um cubo de dados expandido na nova base, assim formando a
+Tomografia PCA\footnote{\url{http://www.astro.iag.usp.br/~pcatomography/}},
+criada e assim batizada por \citet{Steiner2009}, que em seu artigo faz um
+paralelo com fatias de um espaço tridimensional (tomograma do corpo humano, por
+exemplo) ou no espaço de velocidades (Tomografia Doppler). Cada ``fatia'' possui
+um autoespectro relacionado que, em conjunto, trazem novas perspectivas e ideias
+para a interpretação de ambos. A passagem de coordenadas $z \to (x, y)$ está
+exemplificada na Figura \ref{fig:mapaIdade} através da função de
+\texttt{zoneToYX} dentro do PyCASSO.
+
+
+Com isso em mãos podemos gerar nosso próprios tomogramas nas galáxias do CALIFA.
+
+
+Assim formando 
+\ojo Aqui vão as fórmulas, exemplos e referências da Tomografia PCA.
 
 %% End of this chapter

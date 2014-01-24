@@ -134,11 +134,14 @@ mais afastadas do núcleo da galáxia o brilho superficial é menor, há uma que
 na relação sinal-ruído (S/N) dos dados. De maneira que haja S/N constante, é
 feito um agrupamento de pixels (zonificação de Voronoi) nas regiões mais
 afetadas (ver \citep[][sec. 3]{CidFernandes2013a}. Vale aqui frisar que a grande
-maioria das zonas comporta um pixel apenas. Portanto o cubo original e
-transformado numa matriz de zonas e comprimentos de onda. Com esses dados é
-então possível realizar a síntese de populações estelares com o \starlight,
-resolvendo espacialmente as propriedades físicas estelares das galáxias
-\citep{CidFernandes2013a, CidFernandes2013b, GonzalezDelgado2013}.
+maioria das zonas comporta um pixel apenas. Para a galáxia NGC 2916, por
+exemplo, $93\%$ das zonas possuem apenas $1$ pixel e $\sim 3\%$ com mais de $10$
+pixeis agrupados, mesmo com a imposição de relaçao S/N em $20$ (veja Tabela
+\ref{tab:pixelZones}). Portanto o cubo original e transformado numa matriz de
+zonas e comprimentos de onda. Com esses dados é então possível realizar a
+síntese de populações estelares com o \starlight, resolvendo espacialmente as
+propriedades físicas estelares das galáxias \citep{CidFernandes2013a,
+CidFernandes2013b, GonzalezDelgado2013}.
 
 \subsection{E/S de dados no PyCASSO}
 
@@ -161,14 +164,15 @@ Ler um arquivo FITS é fácil com o PyCASSO, assim como o acesso aos dados. Na
 Figura \ref{fig:dataAccess} temos um exemplo de leitura de arquivo FITS e um
 cálculo da idade estelar média da galáxia a partir da idade média ponderada pela
 luminosidade, por zona (\texttt{at\_flux\_\_z}). A idade estelar média é
-calculada usando a expressão $\langle \log t \rangle^{gal}_L = \sum_z \langle
-\log t \rangle_{L,z} L_z / \sum_z L_z$ onde $L_Z$ é a luminosidade e $\langle
-\log t \rangle_L$ é a idade estelar média, ambas por zona.
+calculada usando a expressão $ \langle \log t \rangle^{gal}_L = \sum_z \langle
+\log t \rangle_{L,z} L_z /\sum_z L_z$ onde $L_Z $ é a luminosidade e $ \langle
+\log t \rangle_L $ é a idade estelar média, ambas por zona.
 
-Usando o \texttt{matplotlib}\footnote\url{http://matplotlib.org} podemos fazer
-gráficos facilmente acessando as matrizes e vetores do PyCASSO, como
-pode ser visto no programa na Figura \ref{fig:programaMapaIdade} e sua imagem
-gerada (Figura \ref{fig:mapaIdade}).
+Usando o \texttt{matplotlib}\footnote{\url{http://matplotlib.org}} podemos fazer
+gráficos facilmente acessando as matrizes e vetores do PyCASSO, como pode ser
+visto no programa na Figura \ref{fig:programaMapaIdade} e sua imagem gerada
+(Figura \ref{fig:mapaIdade}). Os cálculos necessários para o PCA e também para a
+Tomografia PCA se tornam simples contas usando pacotes matemáticos de python.
 
 \begin{figure}
 \begin{python}
@@ -200,8 +204,12 @@ at_image = K.zoneToYX(K.at_flux__z, extensive=False)
 
 # Desenhar o mapa.
 import matplotlib.pyplot as plt
-plt.imshow(at_image)
-plt.colorbar()
+plt.imshow(at_image, origin='lower', interpolation='nearest')
+plt.xlabel('Pixels')
+plt.title('$\langle \log t \langle_{L z}')
+cb = plt.colorbar()
+cb.set_lavel('log t [anos]')
+
 \end{python}
 	\caption[Programa idade estelar média]
 	{Programa para desenhar o mapa de idade	estelar média ponderada pela 
@@ -210,14 +218,32 @@ plt.colorbar()
 \end{figure}
 
 \begin{figure}
-	\includegraphics{figuras/figmeanStellarAge.pdf}
-	\caption[Mapa da idade estelar média da galáxia NGC 2916] {Mapa de idade
-	estelar média ponderada pela luminosidade da galáxia NGC 2916 (CALIFA 277)
-	gerado pelo programa da Figura \ref{fig:programaMapaIdade}.}
+	\includegraphics{figuras/at_flux_zone.pdf}
+	\caption[Mapa da idade estelar média da galáxia NGC 2916] 
+	{Mapa de idade estelar média ponderada pela luminosidade da galáxia NGC 2916
+	(CALIFA 277) gerado pelo programa da Figura \ref{fig:programaMapaIdade}.}
 	\label{fig:mapaIdade}
 \end{figure}
 
-Os cálculos necessários para o PCA e também para a Tomografia PCA se tornam
-simples contas usando pacotes matemáticos de python. 
-
+\begin{table}
+	\caption[Relação de pixels e zonas em algumas galáxias do CALIFA]
+	{Relação entre números de pixels por zona nas galáxias do CALIFA utilizadas
+	neste trabalho. $N_z$ representa o número de zonas. $N_1$ é o numero de zonas
+	com $1$ pixel apenas e $N_{10}$ aquelas que possuem mais de $10$ pixels por
+	zona.}
+	\begin{tabular}{l l r r r r r}
+		Nome da galáxia & CALIFA ID & $N_z$ & $N_{1}$ & ${}^{N_1}/_{N_z}$ & 
+		$N_{10}$ & ${}^{N_{10}}/_{N_z}$ \\
+		\midrule
+		NGC0001 & K0008 & $1132$ & $1077$ & $0.95$ & $40$ & $0.04$ \\
+		NGC0776 & K0073 & $1733$ & $1628$ & $0.94$ & $61$ & $0.04$ \\
+		NGC1167 & K0119 & $1879$ & $1771$ & $0.94$ & $50$ & $0.03$ \\
+		NGC2623 & K0213 & $561$ & $530$ & $0.94$ & $19$ & $0.03$ \\
+		NGC2916 & K0277 & $1638$ & $1528$ & $0.93$ & $53$ & $0.03$ \\
+		NGC4210 & K0518 & $1938$ & $1847$ & $0.95$ & $38$ & $0.02$ \\
+		ARP220 & K0802 & $1157$ & $1103$ & $0.95$ & $39$ & $0.03$ \\
+		NGC6515 & K0864 & $887$ & $811$ & $0.91$ & $44$ & $0.05$ \\
+	\end{tabular}
+	\label{tab:pixelZones}
+\end{table}
 % End of this chapter
