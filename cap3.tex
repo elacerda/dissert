@@ -20,10 +20,9 @@
 
 De medidas fisiológicas, como pulsação e respiração, até reconhecimento de
 padrões em sistemas complexos como reconhecimento facial e criptografia,
-passando por compactação de imagem, neurosciência, redução de ruídos em sinal
-gerado por transdures de qualquer espécie (óticos, acústicos, sísmicos), podemos ver
-atuação de técnicas de PCA. \ojo Brincando com a própria técnica, o PCA em si é
-uma CP de um universo matemático-estatístico.
+passando por compactação de imagem, neurosciência e redução de ruídos em dados,
+podemos ver atuação de técnicas de PCA. \ojo Brincando com a própria técnica, o
+PCA em si é uma PC de um universo matemático-estatístico.
 
 %***************************************************************% 
 %                                                               %
@@ -47,8 +46,8 @@ calculando os autovetores e autovalores ($\mathbf{e}{}_k$ e $\lambda_k$) que
 maximizam o valor de $\mathbf{e}{}_k^T \cdot \mathbf{C}{}_{cov} \cdot
 \mathbf{e}{}_k$ (ver Eq. \ref{eq:PCA:covMatrix}) sujeito a restrição de que um
 autovetor deve ser ortogonal a qualquer outro da base ($\mathbf{e}{}_i^T
-\mathbf{e}{}_j = 0$) e que deve todos devem ser normalizados ($\mathbf{e}{}_i^T
-\mathbf{e}{}_i = 1$) \citep[][cap 1]{JolliffePCA1986}. Para esse cálculo usamos
+\mathbf{e}{}_j = 0$) e que todos devem ser normalizados ($\mathbf{e}{}_i^T
+\mathbf{e}{}_i = 1$) \citep[][p. 5-6]{JolliffePCA1986}. Para esse cálculo usamos
 a biblioteca científica \texttt{SciPy}\footnote{\url{http://scipy.org/}}
 (\ref{fig:PCA:covMatrix}), que encontra os autovetores e autovalores da matriz
 de correlação.
@@ -56,9 +55,10 @@ de correlação.
 \subsection{PCA das galáxias do CALIFA}
 
 Conforme a Seção \ref{sec:CALePyC:PyCASSO} vimos que os dados das galáxias estão
-acessíveis no PyCASSO separados por zonas. Então, por exemplo, os espectros
-estão armazenados em forma de uma matriz $(n \times m)$ com $n$ zonas e $m$
-comprimentos de onda.
+acessíveis no PyCASSO separados por zonas. Os espectros observados estão
+armazenados em forma de uma matriz $(n \times m)$ com $n$ zonas e $m$
+comprimentos de onda (\texttt{f\_obs}\footnote{No PyCASSO está amostrado de
+forma transposta ($\lambda \times z$) a usada.} no PyCASSO).
 
 \begin{equation}
     \label{eq:PCA:fluxMatrix}
@@ -87,11 +87,11 @@ a matriz de covariância possui dimensão $\lambda \times \lambda$.
 \end{equation}
 
 Agora calculamos os autovalores e autovetores da matriz de covariância. Neste
-trabalho usamos autoespectros ao inves de autovetores pois são autovetores de
-uma matriz de covariâncias entre espectros de cada zona. Então ordenamos os
-autovetores decrescentemente pelo valor de seus autovalores. Os autoespectros
-são as CPs e os autovalores as variâncias. Isso feito, temos então o que
-necessitamos para iniciar o cálculo do Tomograma PCA.
+trabalho usamos o nome autoespectro para designar esses autovetores pois são de
+uma matriz de covariâncias entre espectros de cada zona. Então ordenamos-os
+decrescentemente pelo valor de seus autovalores. Os autoespectros são as PCs e
+os autovalores as variâncias. Isso feito, temos então o que necessitamos para
+iniciar o cálculo do Tomograma PCA.
 
 \begin{figure}
 \begin{python}
@@ -130,9 +130,10 @@ eigvect = e[:, S]
 	\label{fig:PCA:covMatrix}
 \end{figure}
 
-Muitas figuras de CPs e suas utilizações serão mostradas no Capítulo
-\ref{sec:result} juntamente com a Tomografia PCA e as comparações com os
-parâmetros físicos da sintese de populações estelar.
+Muitas figuras de PCs e suas utilizações e diferenças nos pré-processamentos
+serão mostradas nos Capítulos \ref{sec:UsoPCA} e \ref{sec:result}, juntamente
+com a Tomografia PCA e as comparações com os parâmetros físicos da sintese de
+populações estelar.
 
 %***************************************************************%
 %                                                               %
@@ -143,7 +144,7 @@ parâmetros físicos da sintese de populações estelar.
 \section{Tomografia PCA}
 \label{sec:PCAeTomoPCA:TomoPCA}
 
-Na técnica de PCA procuramos os autoespectros (CPs) da matriz de correlação,
+Na técnica de PCA procuramos os autoespectros (PCs) da matriz de correlação,
 ordenados pela variância, formam uma base ($\mathbf{E}{}_{\lambda k}$) onde 
 podemos projetar os nossos dados através da transformação:
 
@@ -153,7 +154,7 @@ podemos projetar os nossos dados através da transformação:
 \end{equation}
 
 Projetamos nossa matriz de observáveis com a média subtraida ($\mathbf{I}{}_{z
-\lambda}$) na base das CPs ($\mathbf{E}{}_{\lambda k}$). Na posse dessa nova
+\lambda}$) na base das PCs ($\mathbf{E}{}_{\lambda k}$). Na posse dessa nova
 matriz transformada e de um mapa que leve de zona para uma par de coordenada ($z
 \to (x, y)$), podemos montar assim uma imagem. Cada imagem funciona como uma
 ``fatia'' de um cubo de dados expandido na nova base, assim formando a
@@ -166,11 +167,67 @@ para a interpretação de ambos. A passagem de coordenadas $z \to (x, y)$ está
 exemplificada na Figura \ref{fig:mapaIdade} através da função de
 \texttt{zoneToYX} dentro do PyCASSO.
 
+\subsection{Evidências de linhas largas}
 
-Com isso em mãos podemos gerar nosso próprios tomogramas nas galáxias do CALIFA.
+No artigo citado anteriormente, através do estudo dos autoespectros, e suas
+respectivas imagens, da galáxia LINER ({\em Low Ionizations Nuclear
+Emission-line Region}) NGC 4736, foram encontradas evidências de {\em broad
+lines} nas regiões nucleares da galáxia. Quando temos uma fonte que é capaz de
+produzir linhas largas no espectro é sinal da existência de um SMBH ({\em Super
+Massive Black Hole}). \citet{CidFernandes2004} mostra que a subtração bem
+detalhada das populações estelares nos espectros ajuda a encontrar linhas largas
+mais fracas em Seyferts-II, que são aquelas que possuem linhas estreitas,
+ajudando assim em na classificação desses objetos como tipo I ou II. O PCA,
+juntamente com a Tomografia PCA, fazem esse papel da subtração das populações
+estelares sem haver nenhuma parametrização.
 
+Foram estudados os primeiros 8 autoespectros escolhidos através de um {\em scree
+test} (\ref{fig:TomoPCA:scree}), no qual se verifica a variância de cada PC e
+toma-se as mais relevantes. O autoespectro com mais variância (no artigo tratado
+com E1) possui $99.74\%$ da variância e reproduz comportamento do gás e da
+população estelar somados (Figura \ref{fig:TomoPCA:eigspec1}). O segundo
+contribui com $0.088\%$ para a variância e tem um claro padrão de rotação, tanto
+nas linhas do autoespectro quanto na imagem da tomografia (Figura
+\ref{fig:TomoPCA:eigspec2}). Mas é no terceiro ($0.032\%$ da variância) que
+mostra evidências de uma emissão larga de \Halpha (Figura
+\ref{fig:TomoPCA:eigspec3}). Essa assinatura e uma evidência tipica de objetos
+com um AGN associado a um SMBH (Seyfert-I).
 
-Assim formando 
-\ojo Aqui vão as fórmulas, exemplos e referências da Tomografia PCA.
+Com isso em mãos podemos estudar a Tomografia PCA nas galáxias do CALIFA. Temos
+disponíveis várias galáxias com os cubos de dados COMBO e aplicaremos essa
+técnica às galáxias presentes na Tabela \ref{tab:pixelZones} no Capítulo
+\ref{sec:result}.
+
+\begin{figure}
+    \includegraphics[width=0.7\textwidth]{figuras/figSteiner2009fig1.pdf}
+    \caption[{\em Scree test} na galáxia NGC 4736.]
+    {Scree test das primeiras 16 PCs do cubo de espectros da região
+    central da galáxia NGC 4736. Retirado de \citet[][fig. 1]{Steiner2009}.}
+    \label{fig:TomoPCA:scree}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=0.9\textwidth]{figuras/figSteiner2009figA1.pdf}
+    \caption[Tomograma e autoespectro 1 da galáxia NGC 4736.]
+    {Autoespectro 1 e seu respectivo tomograma. Retirado de \citet[][fig.
+    A1]{Steiner2009}.}
+    \label{fig:TomoPCA:eigspec1}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=0.9\textwidth]{figuras/figSteiner2009figA2.pdf}
+    \caption[Tomograma e autoespectro 2 da galáxia NGC 4736.]
+    {Autoespectro 2 e seu respectivo tomograma. Retirado de \citet[][fig.
+    A2]{Steiner2009}.}
+    \label{fig:TomoPCA:eigspec2}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=0.9\textwidth]{figuras/figSteiner2009figA3.pdf}
+    \caption[Tomograma e autoespectro 3 da galáxia NGC 4736.]
+    {Autoespectro 2 e seu respectivo tomograma. Retirado de \citet[][fig.
+    A3]{Steiner2009}.}
+    \label{fig:TomoPCA:eigspec3}
+\end{figure}
 
 %% End of this chapter

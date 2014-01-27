@@ -27,7 +27,7 @@ pensar as galáxias no nosso universo de forma que entendamos melhor a nossa tam
 
 Com a massiva quantidade de dados obtidos, resultado direto de um projeto de
 ciência de ponta, vem também a dificuldade da interpretação dos dados. No caso
-do CALIFA, através da {\em pipeline} PyCASSO \citep{CidFernandes2013a}, a
+do CALIFA, através da {\em pipeline} PyCASSO \citep{CidFernandes2013I}, a
 programação investigativa se torna simples e ao mesmo tempo robusta, facilitando
 a construção de todo tipo de resultados, sejam eles \ojo matemáticos ou físicos.
 
@@ -56,7 +56,7 @@ espirais]{Blanc2010}. Apesar de ser primariamente construído para o estudo da
 física bariônica da evolução de galáxias, o CALIFA está projetado para que seu
 legado seja bem abrangente, possibilitando diversos tipos de estudos em diversas
 áreas. Outros surveys IFU ainda estão por vir, como SAMI \citep{Croom2012} e
-MaNGA \citetext{Bundy et al., in prep}.
+MaNGA\footnote{\url{http://www.sdss3.org/future/manga.php}}
 
 \subsection{A ``{\em colméia}'' de fibras - os dados do CALIFA usados neste
 trabalho}
@@ -111,7 +111,7 @@ outra parte do V$500$. Os espectros foram reamostrados no mesmo FWHM do V$500$.
 Após os dados passarem pelo CALIFA {\em Pipeline} v$1.3$c, os parâmetros físicos
 aqui usados vêm do PyCASSO que organiza as saídas da síntese de populações
 estelares resultantes da execução de cada espectro do IFU pelo \starlight
-\citep{CidFernandes2005} como descrito em \citet{CidFernandes2013a} e também na
+\citep{CidFernandes2005} como descrito em \citet{CidFernandes2013I} e também na
 próxima seção.
 
 %***************************************************************%
@@ -133,16 +133,37 @@ devido a \ojo {\em seeing} do céu e ao processo de observação. Como nas regi�
 mais afastadas do núcleo da galáxia o brilho superficial é menor, há uma queda
 na relação sinal-ruído (S/N) dos dados. De maneira que haja S/N constante, é
 feito um agrupamento de pixels (zonificação de Voronoi) nas regiões mais
-afetadas (ver \citep[][sec. 3]{CidFernandes2013a}. Vale aqui frisar que a grande
+afetadas (ver \citep[][sec. 3]{CidFernandes2013I}. Vale aqui frisar que a grande
 maioria das zonas comporta um pixel apenas. Para a galáxia NGC 2916, por
 exemplo, $93\%$ das zonas possuem apenas $1$ pixel e $\sim 3\%$ com mais de $10$
 pixeis agrupados, mesmo com a imposição de relaçao S/N em $20$ (veja Tabela
 \ref{tab:pixelZones}). Portanto o cubo original e transformado numa matriz de
 zonas e comprimentos de onda. Com esses dados é então possível realizar a
 síntese de populações estelares com o \starlight, resolvendo espacialmente as
-propriedades físicas estelares das galáxias \citep{CidFernandes2013a,
-CidFernandes2013b, GonzalezDelgado2013}.
+propriedades físicas estelares das galáxias \citep{CidFernandes2013I,
+CidFernandes2013II, GonzalezDelgado2013}.
 
+\begin{table}
+	\caption[Relação de pixels e zonas em algumas galáxias do CALIFA]
+	{Relação entre números de pixels por zona nas galáxias do CALIFA utilizadas
+	neste trabalho. $N_z$ representa o número de zonas. $N_1$ é o numero de zonas
+	com $1$ pixel apenas e $N_{10}$ aquelas que possuem mais de $10$ pixels por
+	zona.}
+	\begin{tabular}{l l r r r r r}
+		Nome da galáxia & CALIFA ID & $N_z$ & $N_{1}$ & ${}^{N_1}/_{N_z}$ & 
+		$N_{10}$ & ${}^{N_{10}}/_{N_z}$ \\
+		\midrule
+		NGC0001 & K0008 & $1132$ & $1077$ & $0.95$ & $40$ & $0.04$ \\
+		NGC0776 & K0073 & $1733$ & $1628$ & $0.94$ & $61$ & $0.04$ \\
+		NGC1167 & K0119 & $1879$ & $1771$ & $0.94$ & $50$ & $0.03$ \\
+		NGC2623 & K0213 & $561$ & $530$ & $0.94$ & $19$ & $0.03$ \\
+		NGC2916 & K0277 & $1638$ & $1528$ & $0.93$ & $53$ & $0.03$ \\
+		NGC4210 & K0518 & $1938$ & $1847$ & $0.95$ & $38$ & $0.02$ \\
+		ARP220 & K0802 & $1157$ & $1103$ & $0.95$ & $39$ & $0.03$ \\
+		NGC6515 & K0864 & $887$ & $811$ & $0.91$ & $44$ & $0.05$ \\
+	\end{tabular}
+	\label{tab:pixelZones}
+\end{table}
 \subsection{E/S de dados no PyCASSO}
 
 O PyCASSO é uma biblioteca desenvolvida em Python para organizar os dados da
@@ -168,12 +189,6 @@ calculada usando a expressão $ \langle \log t \rangle^{gal}_L = \sum_z \langle
 \log t \rangle_{L,z} L_z /\sum_z L_z$ onde $L_Z $ é a luminosidade e $ \langle
 \log t \rangle_L $ é a idade estelar média, ambas por zona.
 
-Usando o \texttt{matplotlib}\footnote{\url{http://matplotlib.org}} podemos fazer
-gráficos facilmente acessando as matrizes e vetores do PyCASSO, como pode ser
-visto no programa na Figura \ref{fig:programaMapaIdade} e sua imagem gerada
-(Figura \ref{fig:mapaIdade}). Os cálculos necessários para o PCA e também para a
-Tomografia PCA se tornam simples contas usando pacotes matemáticos de python.
-
 \begin{figure}
 \begin{python}
 # Carregar arquivo FITS com os dados.
@@ -193,6 +208,12 @@ print 'Idade media da galaxia K0277: \%.2f' \% at_total
 	\label{fig:dataAccess}
 \end{figure}
 
+Usando o \texttt{matplotlib}\footnote{\url{http://matplotlib.org}} podemos fazer
+gráficos facilmente acessando as matrizes e vetores do PyCASSO, como pode ser
+visto no programa na Figura \ref{fig:programaMapaIdade} e sua imagem gerada
+(Figura \ref{fig:mapaIdade}). Os cálculos necessários para o PCA e também para a
+Tomografia PCA se tornam simples contas usando pacotes matemáticos de python.
+
 \begin{figure}
 \begin{python}
 # Carregar arquivo FITS com os dados.
@@ -206,9 +227,9 @@ at_image = K.zoneToYX(K.at_flux__z, extensive=False)
 import matplotlib.pyplot as plt
 plt.imshow(at_image, origin='lower', interpolation='nearest')
 plt.xlabel('Pixels')
-plt.title('$\langle \log t \langle_{L z}')
 cb = plt.colorbar()
-cb.set_lavel('log t [anos]')
+cb.set_label(r'\langle \log t \langle_L [anos]')
+plt.title(r'\langle \log t \langle_{L z}')
 
 \end{python}
 	\caption[Programa idade estelar média]
@@ -225,25 +246,51 @@ cb.set_lavel('log t [anos]')
 	\label{fig:mapaIdade}
 \end{figure}
 
-\begin{table}
-	\caption[Relação de pixels e zonas em algumas galáxias do CALIFA]
-	{Relação entre números de pixels por zona nas galáxias do CALIFA utilizadas
-	neste trabalho. $N_z$ representa o número de zonas. $N_1$ é o numero de zonas
-	com $1$ pixel apenas e $N_{10}$ aquelas que possuem mais de $10$ pixels por
-	zona.}
-	\begin{tabular}{l l r r r r r}
-		Nome da galáxia & CALIFA ID & $N_z$ & $N_{1}$ & ${}^{N_1}/_{N_z}$ & 
-		$N_{10}$ & ${}^{N_{10}}/_{N_z}$ \\
-		\midrule
-		NGC0001 & K0008 & $1132$ & $1077$ & $0.95$ & $40$ & $0.04$ \\
-		NGC0776 & K0073 & $1733$ & $1628$ & $0.94$ & $61$ & $0.04$ \\
-		NGC1167 & K0119 & $1879$ & $1771$ & $0.94$ & $50$ & $0.03$ \\
-		NGC2623 & K0213 & $561$ & $530$ & $0.94$ & $19$ & $0.03$ \\
-		NGC2916 & K0277 & $1638$ & $1528$ & $0.93$ & $53$ & $0.03$ \\
-		NGC4210 & K0518 & $1938$ & $1847$ & $0.95$ & $38$ & $0.02$ \\
-		ARP220 & K0802 & $1157$ & $1103$ & $0.95$ & $39$ & $0.03$ \\
-		NGC6515 & K0864 & $887$ & $811$ & $0.91$ & $44$ & $0.05$ \\
-	\end{tabular}
-	\label{tab:pixelZones}
-\end{table}
+Gerar perfis radiais ou axiais também são de fundamental importância para o
+estudo de diversas propriedades galáticas. Podemos ver na Figura
+\ref{fig:programaPerfRad} (e em sua imagem gerada \ref{fig:perfRad}) um exemplo
+de perfil radia executado através da função \texttt{radialProfile}.
+
+\begin{figure}
+\begin{python}
+# Carregar arquivo FITS com os dados.
+from pycasso import fitsQ3DataCube
+K = fitsQ3DataCube('K0277_synthesis_suffix.fits')
+
+# Converter zonas para imagem.
+at_image = K.zoneToYX(K.at_flux__z, extensive=False)
+
+# Calcular o perfil radial.
+bins = np.arange(0, 26, 1)
+bin_center = (bins[1:] + bins[:-1]) / 2.0
+at_rad = K.radialProfile(at_imagem, bins, rad_scale = 1.0)
+
+# Desenhar o perfil.
+import matplotlib.pyplot as plt
+plt.xlabel('radius [arcsec]')
+plt.ylabel(r'\langle \log t \langle_L [anos]')
+cb = plt.colorbar()
+plt.plot(bin_center, at_rad)
+
+\end{python}
+	\caption[Exemplo de programa para perfil radial]
+	{Programa para desenhar o perfil radial da idade estelar média ponderada pela
+	luminosidade.}
+	\label{fig:programaPerfRad}
+\end{figure}
+
+\begin{figure}
+	\includegraphics{figuras/at_flux_radprof.pdf}
+	\caption[Perfil radial da idade estelar média da galáxia NGC 2916]
+	{Perfil radial da idade estelar média ponderada pela luminosidade da galáxia
+	NGC 2916 (CALIFA 277) gerado pelo programa da Figura \ref{fig:programaPerfRad}.}
+	\label{fig:perfRad}
+\end{figure}
+
+Já existem vários artigos utilizando o PyCASSO \citep{CidFernandes2013I,
+CidFernandes2013II, Perez2013, GonzalezDelgado2013}, também há alguns usando
+indiretamente \citep{Husemann2013, IglesiasParamo2013} e uma tese de doutorado
+em curso. São mais de $10$ pessoas utilizando a biblioteca em nossa colaboração.
+
+
 % End of this chapter
