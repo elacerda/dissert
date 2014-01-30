@@ -89,14 +89,20 @@ spaxels, temos as dimensões espaciais também, obtendo assim uma infinidade de
 variáveis. O grande problema do PCA é que você tem a resposta, mas não sabe a
 pergunta.
 
-Hoje, PCA é utilizado exaustivamente em várias áreas de conhecimento. \ojo
-\citneed \textcolor{green}{Referências e exemplos de uso do PCA, mais pra
-frente procuro, algumas podem ser 
-\url{http://arxiv.org/abs/1009.4974}
-\url{http://arxiv.org/abs/1208.3700}
-\url{http://arxiv.org/abs/astro-ph/0010424}
-\url{http://arxiv.org/abs/1310.4217}, procurar papers do Laerte e Abílio
-também}
+Hoje, PCA é utilizado exaustivamente em várias áreas de conhecimento,
+principalmente em reconhecimento de padrões, computação visual e filtragem e
+compactação de dados. Podemos ver exemplos em algoritmos de detecção de face
+\citep{Kamruzzaman2010}, em radares {\em SAR}\footnote{Synthetic-aperture radar
+é um radar usado pra medir movimento relativo.} \citep{Borcea2012}, medidas
+fisiológicas através de imagem em vídeo \citep{Balakrishnan2013}. Na
+astrofísica, é muito usado para filtragem de dados, principalmente cubos de
+dados advindos de IFS, retirando dados espúrios devido a grande complexidade dos
+instrumentos de medição \citep{Riffel2011} \fixme \citneed. Outro exemplo de uso
+de PCA aparece no artigo IV do grupo SEAGal/\starlight \citep{Mateus2007}
+auxiliando no estudo da dependência ambiental de algumas propriedades físicas
+(idade estelar média ponderada pela luz, massa estelar, metalicidade estelar e
+{\em mass-to-light ratio} ($M_\star / L$)) em uma amostra de galáxias
+do \SDSS DR4.
 
 Com a criação da técnica de Tomografia PCA citada anteriormente temos, além da
 análise das componentes principais, uma imagem formada pela matriz de
@@ -104,7 +110,8 @@ covariância (as questões matemáticas serão abordadas no Capítulo
 \ref{sec:PCAeTomoPCA}). Assim podemos saber o peso, ou relevância, de cada
 componente principal (daqui pra frente PC) relacionada a uma posição na galáxia,
 aliando a infinidade de informações físicas presentes nos espectros e nas
-imagens.
+imagens. Além do artigo de \citet{Steiner2009}, outros exemplos de uso de
+Tomografia PCA podem ser encontrados em \citet{Riffel2011} e \citet{Ricci2011}.
 
 \section{Este trabalho}
 \label{sec:Intro:ThisWork}
@@ -151,9 +158,9 @@ diferenças entre a utilização de cada pré-processamento, análise da
 Tomografia PCA e das PCs, bem como as principais referências na área.
 
 Com todo o arcabouço teórico em mãos, no capítulo cinco temos um estudo de caso
-para $9$ objetos do survey CALIFA, escolhidos por seu tipo morfológico. São $3$
-galáxias espirais, $3$ elípticas e $3$ objetos compostos (mergers). Como forma
-de compação com os resultados da síntese de populações estelares executadas pelo
+para $9$ objetos do survey CALIFA, escolhidos por seu tipo morfológico. São $2$
+galáxias {\em early-type}, $4$ espirais e $2$ objetos compostos (mergers).
+Como forma de compação com os resultados da síntese de populações estelares executadas pelo
 \starlight nesses objetos tambem é feito uma espécie de engenharia reversa
 através de correlações e comparações.
 

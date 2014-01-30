@@ -18,9 +18,45 @@
 
 \chapter{Uso do PCA}
 \label{sec:UsoPCA}
-\ojo
-A Filosofia desse capítulo é aprender/testar como operar o PCA para que ele 
-reflita isso ou aquilo... descrevemos uma série de experimentos nesse sentido.
+
+O uso de métodos estatísticos já se estende por séculos em praticamente todas
+(senão todas) as áreas de conhecimento. Esse fato cria uma necessidade de que
+existam cada vez mais estudos sobre estudos, ou {\em metaestudos}\footnote{Em
+alusão a metadados, que são dados sobre dados.}. Precisamos saber de que maneira
+os pré-processamentos de nossa amostra afetam os dados e, principalmente, o
+resultado após a aplicação de determinada técnica, para que dessa
+forma, o desenvolvimento não se torne uma ``caixa preta'' inacessível.
+
+\section{Pré-processamento dos cubos}
+\label{sec:UsoPCA:PCAlidades}
+
+Durante a construção deste trabalho, podemos ver que cada mudança no
+pré-processamento no cubo de dados original gerava resultados diferente na
+técnica de PCA e, consequentemente, na Tomografia PCA. Iclusive fizemos
+comparações usando o cubo de espectros observados e o de espectros modelados pelo \starlight
+\citep{CidFernandes2013I}.
+
+Como o PCA é uma técnica em qual calcula-se os eixos que, através da variância,
+melhor expandem sua base de dados, é natural que qualquer pré-processamento que
+altere a variância dos dados resultará num conjunto diferente de PCs.
+Modificações de caráter físico também podem ser feitas nos espectros, como, por
+exemplo, a correção de cinemática ou a remoção de linhas espectrais de emissão
+(ou absorção). Um outro exemplo de pré-processamento apenas de específicos
+intervalos na SED, procurando variâncias em linhas espectrais ou regiões de
+interesse com diferentes linhas ou {\em line-ratios}. O importante é,
+sabendo que isso ocorre, tentar entender e manipular as consequências de cada
+pre-processamento.
+
+ saber que a cada
+pré-processamento nos dados pode alterar (algumas vezes muito) os resultados.
+
+
+
+
+
+\ojo A Filosofia desse capítulo é aprender/testar
+como operar o PCA para que ele reflita isso ou aquilo... descrevemos uma série
+de experimentos nesse sentido.
 
 Preprocessamentos e diferentes tipos de PCAs com ou sem linhas, diferentes 
 faixas espectrais, com dados normalizados ou não. (importante!!!)
@@ -37,4 +73,4 @@ Correlacionando os resultados do PCA com as propriedades do starlight (tipo de
 engenharia reversa)
 
 Linhas telúricas - remover ou não... bad pixels... mascarar ou não linhas de 
-emissão.
+emissão
