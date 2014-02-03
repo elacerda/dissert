@@ -46,11 +46,16 @@ calculando os autovetores e autovalores ($\mathbf{e}{}_k$ e $\lambda_k$) que
 maximizam o valor de $\mathbf{e}{}_k^T \cdot \mathbf{C}{}_{cov} \cdot
 \mathbf{e}{}_k$ (ver Eq. \ref{eq:PCA:covMatrix}) sujeito a restrição de que um
 autovetor deve ser ortogonal a qualquer outro da base ($\mathbf{e}{}_i^T
-\mathbf{e}{}_j = 0$) e que todos devem ser normalizados ($\mathbf{e}{}_i^T
-\mathbf{e}{}_i = 1$) \citep[][p. 5-6]{JolliffePCA1986}. Para esse cálculo usamos
-a biblioteca científica \texttt{SciPy}\footnote{\url{http://scipy.org/}}
-(\ref{fig:PCA:covMatrix}), que encontra os autovetores e autovalores da matriz
-de correlação.
+\mathbf{e}{}_j = 0$) e que todos devem ser normalizados ($\mathbf{e}{}_i{}^T
+\mathbf{e}{}_i = 1$) \citep[][p. 5-6]{JolliffePCA1986}. No caso caso de PCA com
+espectros, cada um pode ser represtado como um ponto num espaço
+$\lambda$-dimensional. Vários espectros formam uma núvem de pontos. Assim,
+encontramos quais são os eixos mais significativos desse espaço em relação à
+variância, sujeitos às restrições acima. Fazemos esse cálculo encontrando os
+autovetores e autovalores da matriz de correlação desse espaço (a matriz tem
+dimensão $\lambda \time \lambda$) usando a biblioteca científica
+\texttt{SciPy}\footnote{\url{http://scipy.org/}} (\ref{fig:PCA:covMatrix}), que
+encontra os autovetores e autovalores da matriz de correlação.
 
 \subsection{PCA das galáxias do CALIFA}
 
@@ -58,10 +63,7 @@ Conforme a Seção \ref{sec:CALePyC:PyCASSO} vimos que o cubo de espectros das
 galáxias do CALIFA estão acessíveis no PyCASSO separados por zonas. Os espectros
 observados estão armazenados em forma de uma matriz $(n \times m)$ com $n$ zonas
 e $m$ comprimentos de onda (\texttt{f\_obs}\footnote{No PyCASSO está amostrado
-de forma transposta ($\lambda \times z$) a usada.} no PyCASSO). No PCA que
-estamos aplicando, cada espectro de uma zona pode ser represtado como um ponto
-num espaço $m-dimensional$. Encontramos então quais são os eixos mais
-significativos desse espaço em relação à variância. 
+de forma transposta ($\lambda \times z$) a usada.} no PyCASSO). 
 
 \begin{equation}
     \label{eq:PCA:fluxMatrix}
