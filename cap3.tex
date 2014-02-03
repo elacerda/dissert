@@ -54,11 +54,14 @@ de correlação.
 
 \subsection{PCA das galáxias do CALIFA}
 
-Conforme a Seção \ref{sec:CALePyC:PyCASSO} vimos que os dados das galáxias estão
-acessíveis no PyCASSO separados por zonas. Os espectros observados estão
-armazenados em forma de uma matriz $(n \times m)$ com $n$ zonas e $m$
-comprimentos de onda (\texttt{f\_obs}\footnote{No PyCASSO está amostrado de
-forma transposta ($\lambda \times z$) a usada.} no PyCASSO).
+Conforme a Seção \ref{sec:CALePyC:PyCASSO} vimos que o cubo de espectros das
+galáxias do CALIFA estão acessíveis no PyCASSO separados por zonas. Os espectros
+observados estão armazenados em forma de uma matriz $(n \times m)$ com $n$ zonas
+e $m$ comprimentos de onda (\texttt{f\_obs}\footnote{No PyCASSO está amostrado
+de forma transposta ($\lambda \times z$) a usada.} no PyCASSO). No PCA que
+estamos aplicando, cada espectro de uma zona pode ser represtado como um ponto
+num espaço $m-dimensional$. Encontramos então quais são os eixos mais
+significativos desse espaço em relação à variância. 
 
 \begin{equation}
     \label{eq:PCA:fluxMatrix}
