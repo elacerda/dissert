@@ -32,20 +32,22 @@ desenvolvimento não se torne uma ``caixa preta'' inacessível.
 
 Como o PCA é uma técnica em qual calcula-se os eixos que, através da variância,
 melhor expandem sua base de dados, é natural que qualquer pré-processamento que
-altere a variância dos dados resultará num conjunto diferente de PCs. Estudando
-os cubos de dados do CALIFA estamos buscando variâncias espaciais nos espectros.
-Durante nossas investigações fizemos uma série de testes com pré-processamentos
-nos espectros, mas dois deles são constantes em todos os estudos. Primeiro todos
-os espectros são limitados ao intervalo de $3800$ a $6850$ \AA. Após essa
-limitação, são removidas todas as linhas telúricas\footnote{Linhas de absorção
-referentes à atmosfera.} e então é feito uma estatística com todos os {\em bad
-pixels} de cada cubo e todos aqueles que estão presentes em $90\%$ dos espectros
-são removídos. Todas as informações de {\em flags}\footnote{Marcações.} em {\em
-bad pixels} e linhas telúricas estão contidas em um pipeline de
-pré-processamento dos cubos de dados do CALIFA chamado {\sc qbick}. Esse
-pipeline, além disso, prepara os dados para o PyCASSO. Todas as informações de
-erros, {\em flags}, reamostragem do {\sc qbick} são herdadas pelo PyCASSO.
-\fixme \textcolor{red}{ARRUMAR CÓDIGO PCALIFA E GERAR GRÁFICOS OU TABELA}
+altere a variância dos dados resultará num conjunto diferente de PCs. 
+
+Estamos buscando variâncias espaciais nos espectros quando aplicamos o PCA aos
+cubos. Durante nossas investigações fizemos uma série de testes com
+pré-processamentos nos espectros, mas dois deles são constantes em todos os
+estudos. Primeiro todos os espectros são limitados ao intervalo de $3800$ a
+$6850$ \AA. Após essa limitação, são removidas todas as linhas
+telúricas\footnote{Linhas de absorção referentes à atmosfera.} e então é feito
+uma estatística com todos os {\em bad pixels} de cada cubo e todos aqueles que
+estão presentes em $90\%$ dos espectros são removídos. Todas as informações de
+{\em flags}\footnote{Marcações.} em {\em bad pixels} e linhas telúricas estão
+contidas em um pipeline de pré-processamento dos cubos de dados do CALIFA
+chamado {\sc qbick}. Esse pipeline, além disso, prepara os dados para o PyCASSO.
+Todas as informações de erros, {\em flags}, reamostragem do {\sc qbick} são
+herdadas pelo PyCASSO. \fixme \textcolor{red}{ARRUMAR CÓDIGO PCALIFA E GERAR
+GRÁFICOS OU TABELA}
 
 \subsection{Normalização}
 \label{sec:UsoPCA:PCAlidades:norm}
