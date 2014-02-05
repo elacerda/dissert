@@ -16,7 +16,7 @@
 %                                                               %
 %***************************************************************%
 
-\chapter{Uso do PCA}
+\chapter{PCA nos espectros}
 \label{sec:UsoPCA}
 
 O uso de métodos estatísticos já se estende por séculos em praticamente todas
@@ -24,53 +24,99 @@ O uso de métodos estatísticos já se estende por séculos em praticamente toda
 existam cada vez mais estudos sobre estudos, ou {\em metaestudos}\footnote{Em
 alusão a metadados, que são dados sobre dados.}. Precisamos saber de que maneira
 os pré-processamentos de nossa amostra afetam os dados e, principalmente, o
-resultado após a aplicação de determinada técnica, para que dessa
-forma, o desenvolvimento não se torne uma ``caixa preta'' inacessível.
+resultado após a aplicação de determinada técnica, para que dessa forma, o
+desenvolvimento não se torne uma ``caixa preta'' inacessível.
 
 \section{Pré-processamento dos cubos}
 \label{sec:UsoPCA:PCAlidades}
 
-Durante a construção deste trabalho, podemos ver que cada mudança no
-pré-processamento no cubo de dados original gerava resultados diferente na
-técnica de PCA e, consequentemente, na Tomografia PCA. Iclusive fizemos
-comparações usando o cubo de espectros observados e o de espectros modelados pelo \starlight
-\citep{CidFernandes2013I}.
-
 Como o PCA é uma técnica em qual calcula-se os eixos que, através da variância,
 melhor expandem sua base de dados, é natural que qualquer pré-processamento que
-altere a variância dos dados resultará num conjunto diferente de PCs.
-Modificações de caráter físico também podem ser feitas nos espectros, como, por
-exemplo, a correção de cinemática ou a remoção de linhas espectrais de emissão
-(ou absorção). Um outro exemplo de pré-processamento apenas de específicos
-intervalos na SED, procurando variâncias em linhas espectrais ou regiões de
-interesse com diferentes linhas ou {\em line-ratios}. O importante é,
-sabendo que isso ocorre, tentar entender e manipular as consequências de cada
-pre-processamento.
+altere a variância dos dados resultará num conjunto diferente de PCs. Estudando
+os cubos de dados do CALIFA estamos buscando variâncias espaciais nos espectros.
+Durante nossas investigações fizemos uma série de testes com pré-processamentos
+nos espectros, mas dois deles são constantes em todos os estudos. Primeiro todos
+os espectros são limitados ao intervalo de $3800$ a $6850$ \AA. Após essa
+limitação, são removidas todas as linhas telúricas\footnote{Linhas de absorção
+referentes à atmosfera.} e então é feito uma estatística com todos os {\em bad
+pixels} de cada cubo e todos aqueles que estão presentes em $90\%$ dos espectros
+são removídos. Todas as informações de {\em flags}\footnote{Marcações.} em {\em
+bad pixels} e linhas telúricas estão contidas em um pipeline de
+pré-processamento dos cubos de dados do CALIFA chamado {\sc qbick}. Esse
+pipeline, além disso, prepara os dados para o PyCASSO. Todas as informações de
+erros, {\em flags}, reamostragem do {\sc qbick} são herdadas pelo PyCASSO.
+\fixme \textcolor{red}{ARRUMAR CÓDIGO PCALIFA E GERAR GRÁFICOS OU TABELA}
 
- saber que a cada
-pré-processamento nos dados pode alterar (algumas vezes muito) os resultados.
+\subsection{Normalização}
+\label{sec:UsoPCA:PCAlidades:norm}
 
+Após esses dois pré-processamentos constantes em todos os cubos podemos fazer
+uma normalização nos espectros. No caso do CALIFA, o cubo de espectros inclui um
+{\em FoV} que abrange praticamente toda a galáxia. Isso gera uma variância
+indevida entres as zonas devido a luminosidade mais intensa nas zonas centrais
+da galáxia em comparação com as mais afastadas. Indevidas pois não trazem
+informação nova para a nossa análise. Cada espectro é então normalizado pelo seu
+fluxo em $5635$ \AA. Podemos ver um exemplo da diferença nas PCs na figura
+\fixme \textcolor{red}{GERAR GRÁFICOS}.
 
+\subsection{Fluxos observados e sintéticos}
+\label{sec:UsoPCA:PCAlidades:flux}
 
+\fixme \textcolor{red}{Isso não é um pré-processamento\ldots aonde colocar???}
 
+Com o PyCASSO, temos o resultado da síntese de populações estelares já
+organizado para as galáxias do CALIFA. Com isso realizamos o PCA no cubo de
+espectros observados e no de espectros sintéticos, com e sem normalização. A
+grande diferença é que nos espectros sintéticos estão contidas apenas as
+informações sobre populações estelares\footnote{Suavização, correções por
+poeira e cinemática também são feitas nos espectros no processo de síntese. Mais
+detalhes em \citet{CidFernandes2005}}.
 
-\ojo A Filosofia desse capítulo é aprender/testar
-como operar o PCA para que ele reflita isso ou aquilo... descrevemos uma série
-de experimentos nesse sentido.
+\subsection{Linhas de emissão e intervalos específicos em comprimento de onda}
+\label{sec:UsoPCA:PCAlidades:emlin}
 
-Preprocessamentos e diferentes tipos de PCAs com ou sem linhas, diferentes 
+Nos espectros, além dos {\em bad pixels} e linhas telúricas, podemos mascarar
+regiões desnecessárias para determinada investigação científica. Nosso foco é o
+estudo das populações estelares, portanto necessitamos que as linhas de emissão,
+geralmente associadas ao gás presente nas galáxias \fixme sejam removidas do
+espectro. Dessa forma podemos fazer correlações entre os resultados do PCA e as
+propriedades físicas obtidas pela síntese.
+
+Podemos também executar o PCA apenas em intervalos específicos do espectro. Isso
+pode ser feito de várias formas, por exemplo utilizando todos os pontos do(s)
+intervalo(s) em $\lambda$, ou utilizando apenas o fluxo integrado, ou apenas
+larguras equivalentes de linhas, ou FWHM das linhas. Um exemplo aplicado é fazer
+o PCA apenas das regiões que abrangem $\oIII/\Hbeta$ em conjunto com
+$\nII/\Halpha$ ou então $\mathrm{H}\delta$ e D$4000$ para estudar a variância
+espacil desses ratios.
+
+Nas nossas análises no próximo capítulo \ref{sec:result} são mascaradas também
+todas as regiões que são removidas na síntese ($\mathrm{H}\epsilon$: de $3960$ a
+$3980$ \AA; $\mathrm{H}\delta$: de $4092$ a $4112$ \AA; $\mathrm{H}\gamma$: de
+$4330$ a $4350$ \AA; \Hbeta: de $4848$ a $4874$ \AA; \oIII: de $4940$ a $5028$
+\AA; $\mathrm{He\,\textsc{i}}$ e $\mathrm{NaD}$: de $5866$ a $5916$ \AA; \Halpha
+e \nII: de $6528$ a $6608$ \AA; $\mathrm{S\,\textsc{ii}}$: de $6696$ a $6752$
+\AA).
+
+\ldots \dots \ldots \ldots
+
+\textcolor{red}{DAQUI PRA BAIXO AINDA É O ESQUELETO}
+\ojo A Filosofia desse capítulo é aprender/testar como operar o PCA para que ele
+reflita isso ou aquilo... descrevemos uma série de experimentos nesse sentido.
+
+Preprocessamentos e diferentes tipos de PCAs com ou sem linhas, diferentes
 faixas espectrais, com dados normalizados ou não. (importante!!!)
 
-Vamos nos limitar a no-emission lines analysis, descrever a máscara de linhas 
-de emissão, etc. Isso para facilitar a coisa e pq queremos correlar o 
-resultado do PCA com os dados do Starlight (PyCASSO).
+Vamos nos limitar a no-emission lines analysis, descrever a máscara de linhas de
+emissão, etc. Isso para facilitar a coisa e pq queremos correlar o resultado do
+PCA com os dados do Starlight (PyCASSO).
 
-Simulações para ajudar a decifrar os resultador, população jovem + velha + 
-modelo de distribuição espacial - ver efeitos de estratégias de 
+Simulações para ajudar a decifrar os resultador, população jovem + velha +
+modelo de distribuição espacial - ver efeitos de estratégias de
 preprocessamento.
 
-Correlacionando os resultados do PCA com as propriedades do starlight (tipo de 
+Correlacionando os resultados do PCA com as propriedades do starlight (tipo de
 engenharia reversa)
 
-Linhas telúricas - remover ou não... bad pixels... mascarar ou não linhas de 
+Linhas telúricas - remover ou não... bad pixels... mascarar ou não linhas de
 emissão

@@ -27,7 +27,7 @@ pensar as galáxias no nosso universo de forma que entendamos melhor a nossa tam
 
 Com a massiva quantidade de dados obtidos, resultado direto de um projeto de
 ciência de ponta, vem também a dificuldade da interpretação dos dados. No caso
-do CALIFA, através da {\em pipeline} PyCASSO \citep{CidFernandes2013I}, a
+do CALIFA, através da {\em pipeline} PyCASSO \citep{CidFernandes2013}, a
 programação investigativa se torna simples e ao mesmo tempo robusta, facilitando
 a construção de todo tipo de resultados, sejam eles \ojo matemáticos ou físicos.
 
@@ -111,7 +111,7 @@ outra parte do V$500$. Os espectros foram reamostrados no mesmo FWHM do V$500$.
 Após os dados passarem pelo CALIFA {\em Pipeline} v$1.3$c, os parâmetros físicos
 aqui usados vêm do PyCASSO que organiza as saídas da síntese de populações
 estelares resultantes da execução de cada espectro do IFU pelo \starlight
-\citep{CidFernandes2005} como descrito em \citet{CidFernandes2013I} e também na
+\citep{CidFernandes2005} como descrito em \citet{CidFernandes2013} e também na
 próxima seção.
 
 %***************************************************************%
@@ -133,15 +133,15 @@ devido a \ojo {\em seeing} do céu e ao processo de observação. Como nas regi�
 mais afastadas do núcleo da galáxia o brilho superficial é menor, há uma queda
 na relação sinal-ruído (S/N) dos dados. De maneira que haja S/N constante, é
 feito um agrupamento de pixels (zonificação de Voronoi) nas regiões mais
-afetadas (ver \citep[][sec. 3]{CidFernandes2013I}. Vale aqui frisar que a grande
+afetadas (ver \citep[][sec. 3]{CidFernandes2013}. Vale aqui frisar que a grande
 maioria das zonas comporta um pixel apenas. Para a galáxia NGC 2916, por
 exemplo, $93\%$ das zonas possuem apenas $1$ pixel e $\sim 3\%$ com mais de $10$
 pixeis agrupados, mesmo com a imposição de relaçao S/N em $20$ (veja Tabela
 \ref{tab:pixelZones}). Portanto o cubo original e transformado numa matriz de
 zonas e comprimentos de onda. Com esses dados é então possível realizar a
 síntese de populações estelares com o \starlight, resolvendo espacialmente as
-propriedades físicas estelares das galáxias \citep{CidFernandes2013I,
-CidFernandes2013II, GonzalezDelgado2013}.
+propriedades físicas estelares das galáxias \citep{CidFernandes2013,
+CidFernandes2014, GonzalezDelgado2013}.
 
 \begin{table}
 	\caption[Relação de pixels e zonas em algumas galáxias do CALIFA]
@@ -288,8 +288,8 @@ plt.plot(bin_center, at_rad)
 	\label{fig:perfRad}
 \end{figure}
 
-Já existem vários artigos utilizando o PyCASSO \citep{CidFernandes2013I,
-CidFernandes2013II, Perez2013, GonzalezDelgado2013}, também há alguns usando
+Já existem vários artigos utilizando o PyCASSO \citep{CidFernandes2013,
+CidFernandes2014, Perez2013, GonzalezDelgado2013}, também há alguns usando
 indiretamente \citep{Husemann2013, IglesiasParamo2013} e uma tese de doutorado
 em curso. São mais de $10$ pessoas utilizando a biblioteca em nossa colaboração.
 

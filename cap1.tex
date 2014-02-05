@@ -71,7 +71,7 @@ galáxia observada. Outros {\em mega-surveys} IFS estão por vir (veja a seção
 
 Com esses cubos de dados em mão, podemos assim executar o \starlight para
 cada {\em spaxel} e então obtemos propriedades físicas em função da posição na
-galáxia \citep{CidFernandes2013I}. Uma ferramenta menos astrofísica, mas não
+galáxia \citep{CidFernandes2013}. Uma ferramenta menos astrofísica, mas não
 menos utilizada, é o PCA ({\em Principal Component Analysis}) e no presente
 trabalho fazemos seu uso juntamente com uma técnica criada por
 \citet{Steiner2009} chamada de Tomografia PCA, onde une-se imageamento e
@@ -94,18 +94,27 @@ principalmente em reconhecimento de padrões, computação visual e filtragem e
 compactação de dados \citep{Kamruzzaman2010, Borcea2012}. Podemos ver exemplos
 também em medicina \citep{Balakrishnan2013}. Na astrofísica o PCA passeia por
 diversas ramificações da área. A luz de um objeto até nossos telescópios sofre
-influência de muito ruído, devido a inúmeros problemas (atenuações,
+influência de muito ruído, devido a inúmeros problemas como: atenuações,
 avermelhamento por poeira, contaminação ótica através de objetos que estejam no
-mesmo FoV, entre outros) e por isso necessita uma boa filtragem. Junto com
-outras técnicas (tomogramas, wavelets, Fourier), o PCA trabalha como um ótimo
-filtro, sendo muito usado para filtragem de dados, principalmente cubos de dados
-advindos de IFS, retirando dados espúrios devido a grande complexidade dos
-instrumentos de medição \citep{Riffel2011}. Outro exemplo de uso de PCA aparece
-no artigo IV do grupo SEAGal/\starlight \citep{Mateus2007} auxiliando no estudo
-da dependência ambiental de algumas propriedades físicas (idade estelar média
-ponderada pela luz, massa estelar, metalicidade estelar e {\em mass-to-light
-ratio} ($M_\star / L$)) em uma amostra de galáxias do \SDSS DR4.
-\citet{Chen2012}
+mesmo FoV, entre outros; a diversa quantidade de instrumentos e suas
+complexidades também geram diversas assinaturas indesejadas; por todos esses
+motivos fica claro que os dados geralmente necessitam de uma boa filtragem.
+Junto com outras técnicas (tomogramas, wavelets, Fourier), o PCA vem sendo muito
+utilizado para filtragem de dados, principalmente cubos de dados advindos de IFS
+que possuem muitas dessas assinaturas instrumentais \citep{Riffel2011}. Outro
+exemplo de uso de PCA aparece no artigo IV do grupo SEAGal/\starlight
+\citep{Mateus2007} auxiliando no estudo da dependência ambiental de algumas
+propriedades físicas (idade estelar média ponderada pela luz, massa estelar,
+metalicidade estelar e {\em mass-to-light ratio} ($M_\star / L$)) em uma amostra
+de galáxias do \SDSS DR4. Em \citet{Chen2012} é criado uma biblioteca com $25$
+mil modelos de espectros de galáxias com diferentes idades, metalicidades,
+velocidade de disperção, SFH ({\em star formation history}), extinção por poeira
+e aplicado PCA em cima dessa biblioteca. Usando uma minimização quadrática
+encontram quais os coeficientes e qual o número ótimo de PCs que melhor estimam
+os parâmetros físicos dos espectros modelo. Então projetam os espectros
+observados pelo SDSS DR7 \citep{Abazajian2009} e pelo Baryon Oscillation
+Spectroscopic Survey \citep[BOSS][]{Ahn2012} para galáxias massivas com $z \sim
+0.6$ até o presente, atribuindo um sentido físico a cada PC.
 
 Com a criação da técnica de Tomografia PCA citada anteriormente temos, além da
 análise das componentes principais, uma imagem formada pela matriz de
@@ -136,7 +145,7 @@ de mais variadas dificuldade sejam fácil para que até um programador de nível
 iniciante possa fazer. André L. de Amorim, colaborador de nosso grupo,
 juntamente com outros colaboradores de nosso grupo e do projeto CALIFA construiu
 o PyCASSO ({\em Python CALIFA \starlight Synthesis Organizer})
-\citep[][ cap. 4]{CidFernandes2013I} que faz a organização dos dados que vêm
+\citep[][ cap. 4]{CidFernandes2013} que faz a organização dos dados que vêm
 do {\em survey} juntamente com a síntese de populações estelares feitas com o
 \starlight, facilitando, e muito, o trabalho de quem usa estes dados. Sem a
 ajuda deste organizador, este trabalho seria muito mais difícil e acredito que
