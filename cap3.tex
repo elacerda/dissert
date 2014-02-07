@@ -64,7 +64,6 @@ galáxias do CALIFA estão acessíveis no PyCASSO separados por zonas. Os espect
 observados estão armazenados em forma de uma matriz $(n \times m)$ com $n$ zonas
 e $m$ comprimentos de onda (\texttt{f\_obs}\footnote{No PyCASSO está amostrado
 de forma transposta ($\lambda \times z$) a usada.} no PyCASSO). 
-
 \begin{equation}
     \label{eq:PCA:fluxMatrix}
     \textbf{F}{}_{z \lambda} = \left[
@@ -77,27 +76,23 @@ de forma transposta ($\lambda \times z$) a usada.} no PyCASSO).
     \end{array} 
     \right]
 \end{equation}
-
 Calculamos então o espectro médio de uma galáxia através da equação $\langle
 \textbf{F}{}_\lambda \rangle = (1 / n) \sum_{i=0}^{n} f_{z_i}{}_{\lambda}$ e
 então subtraímos a média de todos os espectros ($\textbf{I}{}_{z \lambda} =
 \textbf{F}{}_{z \lambda} - \langle \textbf{F}{}_\lambda \rangle$) para o cálculo
 da matriz de covariâncias usando um conjunto de dados com média zero. Vemos que
 a matriz de covariância possui dimensão $\lambda \times \lambda$. 
-
 \begin{equation}
 	\label{eq:PCA:covMatrix}
 	\mathbf{C}{}_{cov} = \frac{[\mathbf{I}{}_{z \lambda}]^T \cdot \mathbf{I}{}_{z
 	\lambda}}{n - 1}
 \end{equation}
-
 Agora calculamos os autovalores e autovetores da matriz de covariância. Neste
 trabalho usamos o nome autoespectro para designar esses autovetores pois são de
 uma matriz de covariâncias entre espectros de cada zona. Então ordenamos-os
 decrescentemente pelo valor de seus autovalores. Os autoespectros são as PCs e
 os autovalores as variâncias. Isso feito, temos então o que necessitamos para
 iniciar o cálculo do Tomograma PCA.
-
 \begin{figure}
 \begin{python}
 # Carregar arquivo FITS com os dados.
@@ -125,7 +120,6 @@ w, e = linalg.eigh(covMat__ll)
 S = sp.argsort(w)[::-1]
 eigval = W[S]
 eigvect = e[:, S]
- 
 \end{python}
 	\caption[Exemplo de cálculo de PCA usando o PyCASSO e SciPy] {Cálculo do
 	procedimento completo de PCA para os espectros observados de uma galáxia do
@@ -134,7 +128,6 @@ eigvect = e[:, S]
 	autovalores e autovetores ordenados em forma decrescente.}
 	\label{fig:PCA:covMatrix}
 \end{figure}
-
 Muitas figuras de PCs e suas utilizações e diferenças nos pré-processamentos
 serão mostradas nos Capítulos \ref{sec:UsoPCA} e \ref{sec:result}, juntamente
 com a Tomografia PCA e as comparações com os parâmetros físicos da sintese de
@@ -152,12 +145,10 @@ populações estelar.
 Na técnica de PCA procuramos os autoespectros (PCs) da matriz de correlação,
 ordenados pela variância, formam uma base ($\mathbf{E}{}_{\lambda k}$) onde 
 podemos projetar os nossos dados através da transformação:
-
 \begin{equation}
 	\label{eq:TomoPCA:tomogram2D}
 	\mathbf{T}{}_{z k} = \mathbf{I}{}_{z \lambda} \cdot \mathbf{E}{}_{\lambda k}
 \end{equation}
-
 Projetamos nossa matriz de observáveis com a média subtraida ($\mathbf{I}{}_{z
 \lambda}$) na base das PCs ($\mathbf{E}{}_{\lambda k}$). Na posse dessa nova
 matriz transformada e de um mapa que leve de zona para uma par de coordenada ($z
@@ -187,7 +178,7 @@ juntamente com a Tomografia PCA, fazem esse papel da subtração das populaçõe
 estelares sem haver nenhuma parametrização.
 
 Foram estudados os primeiros 8 autoespectros escolhidos através de um {\em scree
-test} (\ref{fig:TomoPCA:scree}), no qual se verifica a variância de cada PC e
+test} (Figura \ref{fig:TomoPCA:scree}), no qual se verifica a variância de cada PC e
 toma-se as mais relevantes. O autoespectro com mais variância (no artigo tratado
 com E1) possui $99.74\%$ da variância e reproduz comportamento do gás e da
 população estelar somados (Figura \ref{fig:TomoPCA:eigspec1}). O segundo
@@ -202,7 +193,6 @@ Com isso em mãos podemos estudar a Tomografia PCA nas galáxias do CALIFA. Temo
 disponíveis várias galáxias com os cubos de dados COMBO e aplicaremos essa
 técnica às galáxias presentes na Tabela \ref{tab:pixelZones} no Capítulo
 \ref{sec:result}.
-
 \begin{figure}
     \includegraphics[width=0.7\textwidth]{figuras/figSteiner2009fig1.pdf}
     \caption[{\em Scree test} na galáxia NGC 4736.]
@@ -210,7 +200,6 @@ técnica às galáxias presentes na Tabela \ref{tab:pixelZones} no Capítulo
     central da galáxia NGC 4736. Retirado de \citet[][fig. 1]{Steiner2009}.}
     \label{fig:TomoPCA:scree}
 \end{figure}
-
 \begin{figure}
     \includegraphics[width=0.9\textwidth]{figuras/figSteiner2009figA1.pdf}
     \caption[Tomograma e autoespectro 1 da galáxia NGC 4736.]
@@ -218,7 +207,6 @@ técnica às galáxias presentes na Tabela \ref{tab:pixelZones} no Capítulo
     A1]{Steiner2009}.}
     \label{fig:TomoPCA:eigspec1}
 \end{figure}
-
 \begin{figure}
     \includegraphics[width=0.9\textwidth]{figuras/figSteiner2009figA2.pdf}
     \caption[Tomograma e autoespectro 2 da galáxia NGC 4736.]
@@ -226,7 +214,6 @@ técnica às galáxias presentes na Tabela \ref{tab:pixelZones} no Capítulo
     A2]{Steiner2009}.}
     \label{fig:TomoPCA:eigspec2}
 \end{figure}
-
 \begin{figure}
     \includegraphics[width=0.9\textwidth]{figuras/figSteiner2009figA3.pdf}
     \caption[Tomograma e autoespectro 3 da galáxia NGC 4736.]
