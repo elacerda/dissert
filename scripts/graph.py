@@ -5,7 +5,7 @@ import pylab
 from pylab import sqrt
 from matplotlib import cm
 from atpy import Table
-import numpy as np 
+import numpy as np
 
 outformat = 'pdf'
 
@@ -60,24 +60,24 @@ from pycasso import fitsQ3DataCube
 K = fitsQ3DataCube('/home/lacerda/CALIFA/gal_fits/K0277/K0277_synthesis_eBR_v20_q036.d13c512.ps03.k2.mC.CCM.Bgsd61.fits')
 
 # Converter zonas para imagem.
-at_image = K.zoneToYX(K.at_flux__z, extensive=False)
+at_image = K.zoneToYX(K.at_flux__z, extensive = False)
 
 # Desenhar o mapa.
 import matplotlib.pyplot as plt
-pylab.imshow(at_image, origin='lower', interpolation='nearest')
+pylab.imshow(at_image, origin = 'lower', interpolation = 'nearest')
 cb = pylab.colorbar()
 cb.set_label(r'$\langle \log\ t\rangle_L [anos]$')
 pylab.xlabel(r'Pixels')
 pylab.title(r'NGC\ 2916')
-pylab.savefig('at_flux_zone.' + outformat, format=outformat)
+pylab.savefig('../figuras/at_flux_zone.' + outformat, format = outformat)
 
 bins = np.arange(0, 26, 1)
 bin_center = 0.5 * (bins[1:] + bins[:-1])
-at_rad = K.radialProfile(at_image, bins, rad_scale=1.0)
+at_rad = K.radialProfile(at_image, bins, rad_scale = 1.0)
 
 pylab.clf()
 pylab.plot(bin_center, at_rad)
 pylab.ylabel(r'$\langle \log\ t\rangle_L [anos]$')
 pylab.xlabel(r'radius [arcsec]')
 pylab.title(r'NGC\ 2916')
-pylab.savefig('at_flux_radprof.' + outformat, format=outformat)
+pylab.savefig('../figuras/at_flux_radprof.' + outformat, format = outformat)

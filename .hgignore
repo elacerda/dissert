@@ -1,7 +1,6 @@
 
 syntax: glob
 *.cut
-syntax: glob
 .*
-syntax: glob
 copy/*
+tmp/*
