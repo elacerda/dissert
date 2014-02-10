@@ -8,6 +8,13 @@ import matplotlib.gridspec as gridspec
 
 fitsfile = sys.argv[1]
 
+if len(sys.argv) > 2:
+    output_dir = sys.argv[2]
+else:
+    output_dir = '../figuras'
+
+print('Output directory: %s' % output_dir)
+
 P = PCA.PCAlifa(fitsFile = fitsfile, quantilQFlag = 0.95, lc = [3800, 6850])
 P.setStarlightMaskFile('/home/lacerda/CALIFA/Mask.mC')
 
@@ -21,7 +28,7 @@ K = P.K
 nfig = 4
 hfig = nfig * 5
 
-f = plt.figure(figsize = (15, 5))
+f = plt.figure(figsize = (15, 5), dpi = 100)
 gs = gridspec.GridSpec(2, 2, width_ratios = [4, 7])
 ax1 = plt.subplot(gs[:, 0])
 ax2 = plt.subplot(gs[0, 1])
@@ -41,7 +48,7 @@ histo, bin_edges = np.histogram(K.fobs_norm / 1.e-16, bins = 50)
 ax3.plot(bin_edges[:-1], histo)
 ax3.grid()
 f.tight_layout()
-f.savefig('../figuras/K0277-fobs_norm.pdf')
+f.savefig('%s/K0277-fobs_norm.pdf' % output_dir)
 
 f = plt.figure(figsize = (15, hfig))
 gs = gridspec.GridSpec(nfig, 2, width_ratios = [4, 7])
@@ -50,8 +57,13 @@ for i in range(nfig):
     tn = i + 1
     gsi = 2 * i
 
-    tomo_pc = P.tomo_obs__kyx[i, :, :]
-    pc = P.eigVec_obs__lk[:, i]
+#     if i == 2:
+#         tomo_pc = P.tomo_obs__kyx[i, :, :]
+#         pc = P.eigVec_obs__lk[:, i]
+#     else:
+    tomo_pc = -1. * P.tomo_obs__kyx[i, :, :]
+    pc = -1. * P.eigVec_obs__lk[:, i]
+
     eval = P.eigVal_obs__k[i]
     evals = P.eigVal_obs__k
     f_obs_mean = P.ms_obs__l
@@ -87,15 +99,20 @@ for i in range(nfig):
         ax2.axvline(x = xmin, ls = ':', c = 'grey')
 
 f.tight_layout()
-f.savefig('../figuras/K0277-tomo1a4.pdf')
+f.savefig('%s/K0277-tomo1a4.pdf' % output_dir)
 f.clf()
 
 for i in range(nfig):
     tn = i + 1
     gsi = 2 * i
 
-    tomo_pc = P.tomo_obs_norm__kyx[i, :, :]
-    pc = P.eigVec_obs_norm__lk[:, i]
+    if i == 2:
+        tomo_pc = P.tomo_obs_norm__kyx[i, :, :]
+        pc = P.eigVec_obs_norm__lk[:, i]
+    else:
+        tomo_pc = -1. * P.tomo_obs_norm__kyx[i, :, :]
+        pc = -1. * P.eigVec_obs_norm__lk[:, i]
+
     eval = P.eigVal_obs_norm__k[i]
     evals = P.eigVal_obs_norm__k
     f_obs_mean = P.ms_obs_norm__l
@@ -127,4 +144,4 @@ for i in range(nfig):
         ax2.axvline(x = xmin, ls = ':', c = 'grey')
 
 f.tight_layout()
-f.savefig('../figuras/K0277-tomo1a4-norm.pdf')
+f.savefig('%s/K0277-tomo1a4-norm.pdf' % output_dir)

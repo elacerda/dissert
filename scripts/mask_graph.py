@@ -7,7 +7,9 @@ from matplotlib import pyplot as plt
 
 fitsfile = sys.argv[1]
 scinot = 1e-17
-if len(sys.argv) == 3:
+output_dir = '../figuras'
+
+if len(sys.argv) > 2:
     zone = np.int(sys.argv[2])
 else:
     zone = 0
@@ -55,4 +57,4 @@ ax1.grid()
 ax2.grid()
 ax3.grid()
 f.subplots_adjust(hspace = 0)
-f.savefig('../figuras/%s-constant_inital_mask-%d.%s' % (K.califaID, zone, outformat))
+f.savefig('%s/%s-constant_inital_mask-%d.%s' % (output_dir, K.califaID, zone, outformat))
