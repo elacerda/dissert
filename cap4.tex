@@ -29,7 +29,7 @@ desenvolvimento não se torne uma ``caixa preta'' inacessível.
 \label{sec:UsoPCA:PCAlidades}
 
 Antes dos espectros chegarem ao PyCASSO, todas as informações de {\em flags}\footnote{Marcações.} em {\em bad pixels} e
-linhas telúricas\footnote{Linhas de absorção referentes à atmosfera.} são criadas em um {\em pipeline} de
+linhas telúricas\footnote{Linhas de emissão ou absorção referentes à atmosfera.} são criadas em um {\em pipeline} de
 pré-processamento chamado {\sc qbick}. Esse {\em pipeline} também prepara os cubos para a execução do \starlight, e para
 organização deles pelo PyCASSO, definindo as zonas de Voronoi, a reamostragem em $\lambda$ e colocando os espectros em
 repouso usando o {\em redshift} calculado dentro dos $5"$ centrais da galáxia. Todas essas informações e
@@ -43,9 +43,10 @@ dos dados, resultará num conjunto diferente de PCs. Quando aplicamos o PCA aos 
 variâncias espaciais nos espectros. Durante nossas investigações fizemos uma série de testes com pré-processamentos nos
 espectros. Dois deles são constantes em todos os estudos. Primeiro todos os espectros são limitados ao intervalo de
 $3800$ a $6850$ \AA. Após essa limitação, fazemos uma estatística com todos os {\em bad pixels} e linhas telúricas de
-cada cubo e aqueles que estão presentes em $95\%$ dos espectros são removídos. Cabe aqui lembrar que todos os espectros
-precisam ter os mesmos pontos em $\lambda$ pois precisamos construir a matriz de covariância. Podemos ver o efeito
-desses pré-processamentos nos espectros através dos 2 espectros mais acima, na Figura \ref{fig:UsoPCA:checkmask}.
+cada cubo e removemos qualquer um que esteja presente em mais de $5\%$ dos espectros. Cabe aqui lembrar que todos os
+espectros precisam ter os mesmos pontos em $\lambda$ pois precisamos construir a matriz de covariância. Podemos ver o
+efeito desses pré-processamentos nos espectros através dos primeiro e segundo espectros na Figura
+\ref{fig:UsoPCA:checkmask}.
 
 \begin{figure}
     %\includegraphics[height=0.5\textwidth]{figuras/figHusemann2013Fig2.pdf}
@@ -68,7 +69,7 @@ desses pré-processamentos nos espectros através dos 2 espectros mais acima, na
 \end{figure}
 
 \subsection{Normalização}
-\label{sec:UsoPCA:PCAlidades:norm}
+\label{sec	:UsoPCA:PCAlidades:norm}
 
 Imagine uma galáxia composta inteiramente pela mesma população estelar, em repouso, distribuídas da mesma maneira no
 espaço. Ou seja, em qualquer ponto da galáxia o espectro é o mesmo. Um PCA nessa galáxia hipotética nos mostraria apenas
@@ -114,47 +115,61 @@ análises daqui para frente consideremos que cada espectro do cubo é normalizad
 Usando novamente a ideia da galáxia hipotética com apenas uma população estelar, imagine agora que elas estão
 distribuídas uniformemente, mas estão em rotação com a galáxia. Da mesma forma o espectro de todas será igual salvo por
 deslocamentos em $\lambda$ no espectro. Esses efeitos cinemáticos não estão nos trazendo informação alguma para o estudo
-das populações estelares e causam um grande disperdício de variâncias, sempre aparecendo nas primeiras PCs, além de
-existirem métodos mais eficazes e direcionados para a determinação de propriedades cinemáticas.
+das populações estelares. Causam um grande disperdício de variâncias, sempre aparecendo nas primeiras PCs. Também é
+importante lembrar que existem métodos mais eficazes e direcionados para a determinação de tais propriedades
+cinemáticas. Nas galáxias presentes no CALIFA não poderia ser diferente, portanto os espectros aparecem com linhas
+deslocadas para o azul ({\em blue-shifted}) ou para o vermelho ({\em red-shifted}) dependendo da velocidade de rotação
+projetada. A disperção de velocidades em cada ponto da galáxia também pode causar alargamento ou estreitamento das
+linhas.
 
-Pelo amplo {\em FoV} que as observações do CALIFA são feitas é normal que esse efeito apareça também, portanto os
-espectros aparecem com linhas deslocadas para o azul ({\em blue-shifted}) ou para o vermelho ({\em red-shifted})
-dependendo da velocidade de rotação projetada. A disperção de velocidades em cada ponto da galáxia também pode causar
-alargamento ou estreitamento das linhas. Podemos ver um padrão bem claro de rotação na PC2 da Figura
-\ref{fig:UsoPCA:K277tomofobsnorm}. Da mesma forma, na PC3 da Figura \ref{fig:UsoPCA:K277tomofobs}. Nesta última, fizemos
-alguns ajustes na saturação das cores de modo que ficasse mais evidente o padrão de rotação, mas como não há a
-normalização ainda vemos algum efeito de intensidades misturado nessa PC, diferentemente da PC2 do PCA com normalização.
+Podemos ver um padrão bem claro de rotação na PC2 da Figura \ref{fig:UsoPCA:K277tomofobsnorm}. Da mesma forma, na PC3 da
+Figura \ref{fig:UsoPCA:K277tomofobs}. Nesta última, fizemos alguns ajustes na saturação das cores de modo que diminuisse
+o efeito do fator de escala ainda presente, de modo que ficasse mais evidente o padrão de rotação. É claro que como não
+há a normalização, ou seja, ainda há uma mistura de variância pelas intensidades misturado nessa PC, o padrão de rotação
+não é tão evidente, diferentemente da PC2 do PCA com normalização.
 
 \subsection{Linhas de emissão e intervalos específicos em comprimento de onda}
 \label{sec:UsoPCA:PCAlidades:emlin}
 
-Nos espectros, além dos {\em bad pixels} e linhas telúricas, podemos mascarar regiões desnecessárias para determinada
-investigação científica. Nosso foco é o estudo das populações estelares, portanto necessitamos que as linhas de emissão,
-geralmente associadas ao gás presente nas galáxias \fixme sejam removidas do espectro. Dessa forma podemos fazer
-correlações entre os resultados do PCA e as propriedades físicas obtidas pela síntese.
-
 Podemos também executar o PCA apenas em intervalos específicos do espectro. Isso pode ser feito de várias formas, por
 exemplo utilizando todos os pontos do(s) intervalo(s) em $\lambda$, ou utilizando apenas o fluxo integrado, ou apenas
 larguras equivalentes de linhas, ou FWHM das linhas. Um exemplo aplicado é fazer o PCA apenas das regiões que abrangem
-$\oIII/\Hbeta$ em conjunto com $\nII/\Halpha$ ou então $\mathrm{H}\delta$ e D$4000$ para estudar a variância espacil
+$\oIII/\Hbeta$ em conjunto com $\nII/\Halpha$ ou então $\mathrm{H}\delta$ e D$4000$ para estudar a variância espacial
 desses ratios.
 
-Nas nossas análises no próximo capítulo \ref{sec:result} são mascaradas também todas as regiões que são removidas na
-síntese ($\mathrm{H}\epsilon$: de $3960$ a $3980$ \AA; $\mathrm{H}\delta$: de $4092$ a $4112$ \AA; $\mathrm{H}\gamma$:
-de $4330$ a $4350$ \AA; \Hbeta: de $4848$ a $4874$ \AA; \oIII: de $4940$ a $5028$ \AA; $\mathrm{He\,\textsc{i}}$ e
-$\mathrm{NaD}$: de $5866$ a $5916$ \AA; \Halpha e \nII: de $6528$ a $6608$ \AA; $\mathrm{S\,\textsc{ii}}$: de $6696$ a
-$6752$ \AA).
+\section{Comparando as PCs com o \starlight: engenharia reversa}
+\label{sec:UsoPCA:EngRev}
+
+Nos espectros, além dos {\em bad pixels} e linhas telúricas, podemos mascarar regiões desnecessárias para determinada
+investigação científica. Nosso foco é o estudo das populações estelares, portanto necessitamos que as linhas de emissão,
+geralmente associadas ao gás presente nas galáxias \fixme sejam removidas do espectro. Dessa forma podemos fazer
+correlações entre os resultados do PCA e as propriedades físicas obtidas pela síntese.Em nossas análises no próximo
+capítulo \ref{sec:result} são mascaradas também todas as regiões que são removidas na síntese ($\mathrm{H}\epsilon$: de
+$3960$ a $3980$ \AA; $\mathrm{H}\delta$: de $4092$ a $4112$ \AA; $\mathrm{H}\gamma$: de $4330$ a $4350$ \AA; \Hbeta: de
+$4848$ a $4874$ \AA; \oIII: de $4940$ a $5028$ \AA; $\mathrm{He\,\textsc{i}}$ e $\mathrm{NaD}$: de $5866$ a $5916$ \AA;
+\Halpha e \nII: de $6528$ a $6608$ \AA; $\mathrm{S\,\textsc{ii}}$: de $6696$ a $6752$ \AA). O espectro após todas
+máscaras pode ser visto no terceiro espectro (o mais abaixo) da Figura \ref{fig:UsoPCA:checkmask}.
 
 \subsection{Fluxos observados e sintéticos}
-\label{sec:UsoPCA:PCAlidades:flux}
-
-\fixme \textcolor{red}{Isso não é um pré-processamento\ldots aonde colocar???}
+\label{sec:UsoPCA:EngRev:ObsvsSyn}
 
 Com o PyCASSO, temos o resultado da síntese de populações estelares já organizado para as galáxias do CALIFA. Com isso
 realizamos o PCA no cubo de espectros observados e no de espectros sintéticos, com e sem normalização. A grande
 diferença é que nos espectros sintéticos estão contidas apenas as informações sobre populações
 estelares\footnote{Suavização, correções por poeira e cinemática também são feitas nos espectros no processo de síntese.
-Mais detalhes em \citet{CidFernandes2005}}.
+Mais detalhes em \citet{CidFernandes2005}}. Como os espectros sintéticos não possuem as assinaturas dos equipamentos
+observacionais, de todo o processo de redução e afins, quando analisadas pela técnica de PCA vemos que as informações se
+condensam em menos PCs, ou seja, o número de PCs relevantes é menor para o caso dos espectros sintéticos. Podemos ver
+isso comparando os dois {/em scree tests} na Figura \fixme. 
+
+Caso as grandezas físicas analisadas em uma galáxia fossem
+não-correlacionadas seria muito mais fácil fazer uma comparação entre PCs e grandezas físicas, mas geralmente não é o
+que ocorre. A forma que temos para recolher informações de galáxias é ou com imagens ou com espectros. E, em ambas
+formas, diferentes efeitos físicos causam efeitos semelhantes nas cores (imagem) ou nos espectros. Esses efeitos são
+extremamente correlacionados e a muito tenta-se descorrelacioná-los \ojo \citneed \textcolor{red}{Gostaria de adicionar
+aqui algumas referências como alguns dos papers do SEAGal/Starlight que fala sobre as degenerescencias de idade e
+metalicidade e algumas outras grandezas correlacionadas. Coloquei essa parte aqui pensando naquela crítica que o cara me
+fez lá no México sobre as grandezas em astrofísica serem extremamente correlacionadas.}.
 
 \ldots \dots \ldots \ldots
 
