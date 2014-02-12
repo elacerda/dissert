@@ -16,48 +16,21 @@
 %                                                               %
 %***************************************************************%
 
-\chapter{PCA nos espectros}
+\chapter{PCA em IFS - (different flavors?!?! FIXME PLEASE)}
 \label{sec:UsoPCA}
 
-O uso de métodos estatísticos já se estende por séculos em praticamente todas (senão todas) as áreas de conhecimento.
-Esse fato cria uma necessidade de que existam cada vez mais estudos sobre estudos, ou {\em metaestudos}\footnote{Em
-alusão a metadados, que são dados sobre dados.}. Precisamos saber de que maneira os pré-processamentos de nossa amostra
-afetam os dados e, principalmente, o resultado após a aplicação de determinada técnica, para que dessa forma o
-desenvolvimento não se torne uma ``caixa preta'' inacessível.
+\fixme Com o cubo de espectros já manipulados pelo {\sc qbick} e com as limitações em comprimeiro de onda à mão, estamos
+preparados para executar a Tomografia PCA. Como o PCA é uma técnica em qual calcula-se os eixos que, através da
+variância, melhor expandem sua base de dados, é natural que qualquer alteração na variância entre os espectros,
+resultará num conjunto diferente de PCs. Durante nossas investigações fizemos uma série de testes com pré-processamentos
+e manipulações nos espectros (normalização, remoção de cinemática, janelas diferentes em comprimento de onda, larguras
+equivalentes e FWHM de linhas, logarítmo do fluxo, entre outros), verificando suas implicações no resultado. Neste
+Capítulo comentaremos alguns {\em insights} que tivemos ao ponto de alguns pré-processamentos serem de extrema
+necessidade para interpretação dos resultados. Por fim faremos uma espécie de engenharia reversa buscando o sentido
+físico das principais componentes resultantes.
 
-\section{Pré-processamento dos cubos}
-\label{sec:UsoPCA:PCAlidades}
-
-Antes dos espectros chegarem ao PyCASSO, todas as informações de {\em flags}\footnote{Marcações.} em {\em bad pixels} e
-linhas telúricas\footnote{Linhas de emissão ou absorção referentes à atmosfera.} são criadas em um {\em pipeline} de
-pré-processamento chamado {\sc qbick}. Esse {\em pipeline} também prepara os cubos para a execução do \starlight, que
-posteriormente serão organizados pelo PyCASSO, definindo as zonas de Voronoi, a reamostragem em $\lambda$ e colocando os
-espectros em repouso usando o {\em redshift} calculado dentro dos $5"$ centrais da galáxia. Todas essas informações e
-pré-processamentos provenientes do {\sc qbick} são herdadas pelo PyCASSO e já estão contidadas em seus cubos de
-espectros.
-
-Apesar desses pré-processamentos supracitados, não é sobre eles vamos falar aqui, e sim sobre aqueles que são feitos nos
-espectros contidos no PyCASSO antes da aplicação do PCA. Como o PCA é uma técnica em qual calcula-se os eixos que,
-através da variância, melhor expandem sua base de dados, é natural que qualquer pré-processamento que altere a variância
-dos dados, resultará num conjunto diferente de PCs. Quando aplicamos o PCA aos cubos do CALIFA estamos buscando
-variâncias espaciais nos espectros. Durante nossas investigações fizemos uma série de testes com pré-processamentos nos
-espectros. Dois deles são constantes em todos os estudos. Primeiro todos os espectros são limitados ao intervalo de
-$3800$ a $6850$ \AA. Após essa limitação, fazemos uma estatística com todos os {\em bad pixels} e linhas telúricas de
-cada cubo e removemos qualquer um que esteja presente em mais de $5\%$ dos espectros. Cabe aqui lembrar que todos os
-espectros precisam ter os mesmos pontos em $\lambda$ pois precisamos construir a matriz de covariância. Podemos ver o
-efeito desses pré-processamentos nos espectros através dos primeiro e segundo espectros na Figura
-\ref{fig:UsoPCA:checkmask}.
-
-\begin{figure}
-    %\includegraphics[height=0.5\textwidth]{figuras/figHusemann2013Fig2.pdf}
-    \includegraphics[width=1.0\textwidth]{figuras/K0277-constant_inital_mask-399.pdf}
-    \caption[Exemplo de máscaras em um espectro do cubo de dados.]
-    {Espectro da zona 399 da galáxia NGC 2916 (CALIFA 277). Acima está o espectro completo. No segundo vemos o espectro
-    com linhas telúricas e bad-pixels removidos, além do limite de intervalo em comprimendo de onda de $3800$ a $6850$
-    \AA. No espectro mais abaixo, além das partes removidas no segundo, estão foram removidas também as mesmas linhas de
-    emissão mascaradas na síntese de populações estelares.}
-    \label{fig:UsoPCA:checkmask}
-\end{figure}
+\section{Normalização}
+\label{sec:UsoPCA:norm}
 
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0277-fobs_norm.pdf}
@@ -68,27 +41,33 @@ efeito desses pré-processamentos nos espectros através dos primeiro e segundo 
     \label{fig:UsoPCA:K277fobsnorm}
 \end{figure}
 
-\subsection{Normalização}
-
-Como exemplo inicial apresentamos as quatro primeiras PCs e seus respectivos tomogramas do cubo de espectros observados
+Como exemplo inicial apresentamos as cinco primeiras PCs e seus respectivos tomogramas do cubo de espectros observados
 da galáxia NGC 2916 (Figura \ref{fig:UsoPCA:K277tomofobs}). O tomograma é formado pelo ``peso'' da PC em cada pixel (no
 nosso caso zona). A primeira PC é praticamente o espectro médio, que fica evidente comparando com o espectro médio em
 cinza no segundo eixo vertial (à direita). O segundo autoespectro se assemelha com um espectro de população muito jovem.
-Com o auxilio de seu tomgorama vemos que para as zonas mais internas da galáxia (\fixme onde se presume que as
-populações sejam mais velhas \citneed) o seu peso é negativo. De forma contrária, em regiões mais afastadas do núcleo,
-sobre os braços espirais, onde, para essa galáxia, parecem existir algumas regiões HII, vemos que seu peso é positivo. A
-terceira componente mostra um padrão de rotação, ao mesmo tempo misturado com um fator de escala, falaremos mais dela no
-fim dessa seção. A quarta componente se assemelha a média também, mas fica mais complicado dizer o que ela representa.
-No final desse capítulo e no próximo vamos falar mais sobre como melhor interpretar as PCs fisicamente.
+Com o auxilio de seu tomograma vemos que para as zonas mais internas da galáxia (onde se presume que as populações sejam
+mais velhas \citneed) o seu peso é negativo. De forma contrária, em regiões mais afastadas do núcleo, sobre os braços
+espirais, onde, para essa galáxia, parecem existir algumas regiões HII, vemos que seu peso é positivo. A terceira
+componente parece mostrar um padrão de rotação, ao mesmo tempo misturado com um fator de escala. Para que esse padrão de
+rotação ficasse visível tivemos que fazer um certo tratamento no tomograma, mas falaremos mais sobre isso no final
+dessa seção. A quarta componente se assemelha a média também, mas fica mais complicado dizer o que ela representa. No
+final desse capítulo e no próximo vamos falar mais sobre como melhor interpretar as PCs fisicamente.
 
-Da mesma forma, fazemos o PCA para o mesmo cubo de dados, mas normalizados da forma que comentamos em \fixme ({\it
-\textcolor{red}{Preciso saber aonde colocar um texto sobre essa parte de como é feita a normalização dos espectros.
-Acredito que vá para o Cap. 2 mas vou esperar pra juntar com o que tu fizeste nos cap 1, 2 e 3}}) (Figura
-\ref{fig:UsoPCA:K277tomofobsnorm}). Podemos ver que se assemelha muito ao PCA feito com os dados sem normalização
-deslocando uma componente acima, ou seja, o mesmo PCA mas sem a primeira componente. A PC de maior variância no caso sem
-normalização não adiciona informação alguma a análise das populações, funciona como um fator de escala. O espectro médio
-já é a informação necessária que precisaríamos, portanto a primeira componente para o caso sem normalização não trás
-informação adicional. Veremos a seguir que seu tomograma também não trás maiores informações.
+Da mesma forma, fazemos o PCA para o mesmo cubo, mas com os espectros normalizados da forma que comentamos em \fixme
+(Capítulo 2) (Figura \ref{fig:UsoPCA:K277tomofobsnorm}). À primeira vista os resultados podem ser parecidos com o
+anterior deslocando uma componente acima, ou seja, o mesmo PCA mas sem a primeira PC. Mas essa é só uma primeira
+impressão. As propriedades físicas de uma galáxia geralmente possuem simetria radial ou axial, sendo assim extremamente
+correlacionadas. Matemáticamente, a maior variância nos espectros espacialmente é sua amplitude, aparecendo na forma de
+componente principal como visto na análise feita sem normalização. Essa componente, quando não suprimida,
+correlaciona-se com as propriedades físicas da galáxia, portanto, deixa sua assinatura através de todas as PCs. Essa
+amplitude, que gera a primeira PC no caso sem normalização não adiciona informação alguma a análise das populações,
+funciona como um fator de escala apenas, afetando as componentes seguintes. Esses vestígios de amplitude aparecem de
+forma mais evidente quando comparamos a PC3 no caso sem normalização com a PC2 no caso com normalização. Podemos ver um
+padrão de rotação na PC2 da Figura \ref{fig:UsoPCA:K277tomofobsnorm}. Com uma saturação na escala de cores no tomograma
+da PC3 da Figura \ref{fig:UsoPCA:K277tomofobs} diminuímos o efeito do fator de escala ainda presente nessa componente,
+de modo que ficasse mais evidente o padrão de rotação. O espectro médio já é a informação necessária que precisaríamos
+para entender esse fator de escala nas amplitudes dos espectros, portanto a primeira componente para o caso sem
+normalização não trás informação adicional. Veremos a seguir que seu tomograma também não trás maiores informações.
 
 Imagine uma galáxia composta inteiramente pela mesma população estelar, em repouso, distribuídas da mesma maneira no
 espaço. Ou seja, em qualquer ponto da galáxia o espectro é o mesmo. Um PCA nessa galáxia hipotética nos mostraria apenas
@@ -96,13 +75,13 @@ uma componente relevante. Adicione então a essa galáxia uma função de densid
 que de uma posição para outra a quantidade dessa determinada população se altera (mudando o brilho superficial da
 região). Uma componente nova irá surgir na sua análise PCA, mostrando que existe uma variância agora numa componente de
 escala (amplitude) nos espectros. Mas o que essa componente de escala nos diz sobre a física da população estelar
-existente? Essa componente seria um disperdício de variância para uma análise de populações estelares de uma galáxia.
+existente? Essa componente seria um desperdício de variância para uma análise de populações estelares de uma galáxia.
 
 No caso do CALIFA, com um {\em FoV} abrangendo praticamente toda a galáxia, esse efeito de amplitude se acentua muito
-devido ao brilho superficial \ojo mais intenso nas zonas centrais da galáxia em comparação com as mais afastadas, assim
+devido ao brilho superficial mais intenso nas zonas centrais da galáxia em comparação com as mais afastadas, assim
 adicionando uma grande variância descartável entres as zonas. Descartável pois não trazem informação nova para a nossa
-análise. Essas diferenças em amplitude não nos dizem nada sobre as populações estelares. Comparemos agora a primeira
-PC do caso sem normalização (Figuras \ref{fig:UsoPCA:K277tomofobs}) e a imagem mais à esquerda na Figura
+análise. Essas diferenças em amplitude não nos dizem nada sobre as populações estelares. Comparemos agora a primeira PC
+do caso sem normalização (Figuras \ref{fig:UsoPCA:K277tomofobs}) e a imagem mais à esquerda na Figura
 \ref{fig:UsoPCA:K277fobsnorm} formada pelos fluxo para normalização por zona. Podemos notar que o primeiro autoespectro
 (e seu respectivo tomograma) no caso sem normalização mostra exatamente esse fator de escala. Seu tomograma mostra que
 ela é claramente um fator de escala (que pode ser considerado um fator de brilho, ou de amplitude, nos espectros). Por
@@ -110,22 +89,44 @@ esse motivo, em nossas análises daqui para frente, usaremos o cubo com os espec
 
 \begin{figure}
     %\includegraphics[height=0.5\textwidth]{figuras/figHusemann2013Fig2.pdf}
-    \includegraphics[width=1.\textwidth]{figuras/K0277-tomo1a4.pdf}
-    \caption[Tomogramas de 1 a 4 da gal\'axia NGC 2916 - $F_{obs}$.]
-    {Quatro primeiros PCs (e seus respectivos tomogramas) do PCA aplicado aos espectros sem normalização da galáxia
-    NGC 2916.}
+    \includegraphics[height=1.\textheight]{figuras/K0277-tomo-obs.pdf}
+    \caption[Tomogramas de 1 a 5 da gal\'axia NGC 2916 - $F_{obs}$.]
+    {Cinco primeiras PCs (e seus respectivos tomogramas) resultantes da Tomografia PCA aplicado aos espectros sem
+    normalização da galáxia NGC 2916.}
     \label{fig:UsoPCA:K277tomofobs}
 \end{figure}
 \begin{figure}
     %\includegraphics[height=0.5\textwidth]{figuras/figHusemann2013Fig2.pdf}
-    \includegraphics[width=1.\textwidth]{figuras/K0277-tomo1a4-norm.pdf}
-    \caption[Tomogramas de 1 a 4 da gal\'axia NGC 2916 - $F_{obs} / F_{\lambda 5365}$.]
-    {Quatro primeiros PCs (e seus respectivos tomogramas) do PCA aplicado aos espectros com normalização da galáxia
-    NGC 2916.}
+    \includegraphics[height=1.\textheight]{figuras/K0277-tomo-obs-norm.pdf}
+    \caption[Tomogramas de 1 a 5 da gal\'axia NGC 2916 - $F_{obs} / F_{\lambda 5365}$.]
+    {Cinco primeiras PCs (e seus respectivos tomogramas) resultantes da Tomografia PCA aplicado aos espectros com
+    normalização da galáxia NGC 2916.}
     \label{fig:UsoPCA:K277tomofobsnorm}
 \end{figure}
 
-\subsection{Cinemática}
+\section{Fluxos observados e sintéticos}
+\label{sec:UsoPCA:OBSxSYN}
+
+Com o resultado da síntese de populações estelares já organizado para as galáxias do CALIFA, realizamos o PCA no cubo de
+espectros observados e no de espectros sintéticos. A grande diferença é que nos espectros sintéticos estão contidas
+apenas as informações sobre populações estelares\footnote{Suavização, correções por poeira e cinemática também são
+feitas nos espectros no processo de síntese. Mais detalhes em \citet{CidFernandes2005}}. Como os espectros sintéticos
+não possuem as assinaturas dos equipamentos observacionais, dos processos para subtração do céu, ruídos e afins, quando
+analisadas pela técnica de PCA vemos que as informações se condensam em menos PCs. Comparando os dois {\em scree tests}
+na Figura \ref{fig:UsoPCA:K0277scree} vemos que para o caso com os espectros sintéticos a curva converge mais rápido ao
+zero de variância, mostrando que temos as informações mais compactadas nas primeiras PCs quando comparadas ao caso com
+os espectros observados. Observando o caso sem normalização, plotado no gráfico com linha pontilhada, vemos que o efeito
+causado pelo fator de escala (PC1) diminui a ``importância'' (i.e., variância) das demais PCs. As cinco primeiras PCs e
+seus tomogramas provenientes do cubo com os fluxos sintéticos normalizados da galáxia NGC 2916 aparecem na Figura
+\ref{fig:UsoPCA:K277tomofsynnorm}.
+
+Comparando os dois vemos que os resultdos para os espectros sintéticos parecem ser mais ``limpos'', pois não existem
+ruídos. Como são espectros gerados a partir de uma base teórica para diferentes idades e metalicidades de populações
+estelares, também não possuem nenhuma assinatura instrumental. Por esse fato acabamos descobrindo uma assinatura
+presente em quase todas as componentes geradas pelo PCA usando os dados observados. Como comentamos no Capítulo
+\ref{sec:CALePyC:Apresent} utilizamos o cubo de dados COMBO, gerado a partir da união do V500 com o V1200. Como os
+espectros V1200 possuem espectros com maior resolução do que os do V500 (V1200 - FWHM $\sim 2.3$ \AA; V500 - FWHM $\sim
+6$ \AA), o processo de criação do COMBO deixa vestígios. Na PC5 da figura XXXX 
 
 Usando novamente a ideia da galáxia hipotética com apenas uma população estelar, imagine agora que elas estão
 distribuídas uniformemente, mas estão em rotação com a galáxia. Da mesma forma o espectro de todas será igual salvo por
@@ -136,12 +137,6 @@ cinemáticas. Nas galáxias presentes no CALIFA não poderia ser diferente, port
 deslocadas para o azul ({\em blue-shifted}) ou para o vermelho ({\em red-shifted}) dependendo da velocidade de rotação
 projetada. A disperção de velocidades em cada ponto da galáxia também pode causar alargamento ou estreitamento das
 linhas.
-
-Podemos ver um padrão bem claro de rotação na PC2 da Figura \ref{fig:UsoPCA:K277tomofobsnorm}. Da mesma forma, na PC3 da
-Figura \ref{fig:UsoPCA:K277tomofobs}. Nesta última, fizemos alguns ajustes na saturação das cores de modo que diminuisse
-o efeito do fator de escala ainda presente, de modo que ficasse mais evidente o padrão de rotação. É claro que como não
-há a normalização, ou seja, ainda há uma mistura de variância pelas intensidades misturado nessa PC, o padrão de rotação
-não é tão evidente, diferentemente da PC2 do PCA com normalização.
 
 \section{Comparando as PCs com o \STARLIGHT: engenharia reversa}
 \label{sec:UsoPCA:EngRev}
@@ -155,21 +150,6 @@ a $3980$ \AA; $\mathrm{H}\delta$: de $4092$ a $4112$ \AA; $\mathrm{H}\gamma$: de
 a $4874$ \AA; \oIII: de $4940$ a $5028$ \AA; $\mathrm{He\,\textsc{i}}$ e $\mathrm{NaD}$: de $5866$ a $5916$ \AA; \Halpha
 e \nII: de $6528$ a $6608$ \AA; $\mathrm{S\,\textsc{ii}}$: de $6696$ a $6752$ \AA). O espectro após todas máscaras pode
 ser visto no terceiro espectro (o mais abaixo) da Figura \ref{fig:UsoPCA:checkmask}.
-
-\subsection{Fluxos observados e sintéticos}
-
-Com o resultado da síntese de populações estelares já organizado para as galáxias do CALIFA, realizamos o PCA no cubo de
-espectros observados e no de espectros sintéticos. A grande diferença é que nos espectros sintéticos estão contidas
-apenas as informações sobre populações estelares\footnote{Suavização, correções por poeira e cinemática também são
-feitas nos espectros no processo de síntese. Mais detalhes em \citet{CidFernandes2005}}. Como os espectros sintéticos
-não possuem as assinaturas dos equipamentos observacionais, de todo o processo de redução e afins, quando analisadas
-pela técnica de PCA vemos que as informações se condensam em menos PCs. Comparando os dois {/em scree tests} na Figura
-\ref{fig:UsoPCA:K0277scree} vemos que para o caso com os espectros sintéticos a curva converge mais rápido ao zero de
-variância, mostrando que temos as informações mais compactadas nas primeiras PCs quando comparadas ao caso com os
-espectros observados. Observando o caso sem normalização, plotado no gráfico com linha pontilhada, vemos que o efeito
-causado pelo fator de escala (PC1) diminui a ``importância'' das demais PCs. As quatro primeiras PCs e seus tomogramas
-provenientes do cubo com os fluxos sintéticos normalizados da galáxia NGC 2916, aparece na Figura
-\ref{fig:UsoPCA:K277tomofsynnorm}. Vemos que ela se assemelha muito àqueles da Figura \ref{fig:UsoPCA:K277tomofobsnorm}.
 
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0277-screetest.pdf}
@@ -185,13 +165,25 @@ provenientes do cubo com os fluxos sintéticos normalizados da galáxia NGC 2916
 \begin{figure}
     %\includegraphics[height=0.5\textwidth]{figuras/figHusemann2013Fig2.pdf}
     \includegraphics[width=1.\textwidth]{figuras/K0277-tomo1a4-syn-norm.pdf}
-    \caption[Tomogramas de 1 a 4 da gal\'axia NGC 2916 - $F_{syn} / F_{\lambda 5365}$ .]
-    {Quatro primeiros PCs (e seus respectivos tomogramas) do PCA aplicado aos espectros sintéticos normalizados da
-    galáxia NGC 2916.}
+    \caption[Tomogramas de 1 a 5 da gal\'axia NGC 2916 - $F_{syn} / F_{\lambda 5365}$ .]
+    {Cinco primeiras PCs (e seus respectivos tomogramas) resultantes da Tomografia PCA aplicado aos espectros
+    sintéticos normalizados da galáxia NGC 2916.}
     \label{fig:UsoPCA:K277tomofsynnorm}
 \end{figure}
 
 \subsection{Correla\c{c}\~oes}
+
+Para uma melhor visualização do sentido físico de cada PC, analisamos as correlações existentes entre as PCs e
+propriedades físicas obtidas através do \starlight. \fixme
+
+\begin{figure}
+    \includegraphics[width=1.5\textwidth, angle=-90]{figuras/correl-f_obs_norm-PCvsPhys2.pdf}
+    \caption[um teste]
+    {teste legal}
+    \label{fig:UsoPCA:correlat}
+\end{figure}
+
+\ldots \dots \ldots \ldots
 
 Caso as grandezas físicas analisadas em uma galáxia fossem não-correlacionadas seria muito mais fácil fazer uma
 comparação entre PCs e grandezas físicas, mas geralmente não é o que ocorre. Para colhermos informações sobre os objetos
@@ -204,6 +196,35 @@ astrofísica serem extremamente correlacionadas, mas não sei até que ponto é 
 estamos analisando as coisas via correlação\ldots talvez essa discussão possa ficar mais pro Cap 6 nas conclusões.}.
 
 \ldots \dots \ldots \ldots
+
+\fixme {\bf VAI PRO CAP 2}
+Antes dos espectros chegarem ao PyCASSO, todas as informações de {\em flags}\footnote{Marcações.} em {\em bad pixels} e
+linhas telúricas\footnote{Linhas de emissão ou absorção referentes à atmosfera.} são criadas em um {\em pipeline} de
+pré-processamento chamado {\sc qbick}. Esse {\em pipeline} também prepara os cubos para a execução do \starlight, que
+posteriormente serão organizados pelo PyCASSO, definindo as zonas de Voronoi, a reamostragem em $\lambda$ e colocando os
+espectros em repouso usando o {\em redshift} calculado dentro dos $5"$ centrais da galáxia. Todas essas informações e
+pré-processamentos provenientes do {\sc qbick} são herdadas pelo PyCASSO e já estão contidadas em seus cubos de
+espectros.
+
+
+Primeiro todos os espectros são limitados ao intervalo de $3800$ a $6850$ \AA. Após essa limitação, fazemos uma
+estatística com todos os {\em bad pixels} e linhas telúricas de cada cubo e removemos qualquer um que esteja presente em
+mais de $5\%$ dos espectros. Cabe aqui lembrar que todos os espectros precisam ter os mesmos pontos em comprimento de
+onda pois precisamos construir a matriz de covariância. Podemos ver o efeito desses pré-processamentos nos espectros
+através dos primeiro e segundo espectros na Figura \ref{fig:UsoPCA:checkmask}.
+
+\begin{figure}
+    %\includegraphics[height=0.5\textwidth]{figuras/figHusemann2013Fig2.pdf}
+    \includegraphics[width=1.0\textwidth]{figuras/K0277-constant_inital_mask-399.pdf}
+    \caption[Exemplo de máscaras em um espectro do cubo de dados.]
+    {Espectro da zona 399 da galáxia NGC 2916 (CALIFA 277). Acima está o espectro completo. No segundo vemos o espectro
+    com linhas telúricas e bad-pixels removidos, além do limite de intervalo em comprimendo de onda de $3800$ a $6850$
+    \AA. No espectro mais abaixo, além das partes removidas no segundo, estão foram removidas também as mesmas linhas de
+    emissão mascaradas na síntese de populações estelares.}
+    \label{fig:UsoPCA:checkmask}
+\end{figure}
+
+
 
 \textcolor{red}{DAQUI PRA BAIXO AINDA É O ESQUELETO}
 \ojo A Filosofia desse capítulo é aprender/testar como operar o PCA para que ele
