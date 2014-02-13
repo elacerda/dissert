@@ -47,6 +47,8 @@ hfig = nPCs * 5
 
 f = plt.figure(figsize = (15, hfig))
 gs = gridspec.GridSpec(nPCs, 2, width_ratios = [5, 8])
+#f = plt.figure(figsize = (30, hfig))
+#gs = gridspec.GridSpec(3, 4, width_ratios = [5, 8, 5, 8])
 
 for i in range(nPCs):
     tn = i + 1
