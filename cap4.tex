@@ -19,30 +19,32 @@
 \chapter{PCA em IFS - (different flavors?!?! FIXME PLEASE)}
 \label{sec:cap4}
 
-\fixme Com o cubo de espectros já manipulados pelo {\sc qbick} e com as limitações em comprimento de onda à mão, estamos
-preparados para executar a Tomografia PCA. Como o PCA é uma técnica em qual calcula-se os eixos que, através da
-variância, melhor expandem sua base de dados, é natural que qualquer alteração na variância entre os espectros,
-resultará num conjunto diferente de PCs. Durante nossas investigações fizemos uma série de testes com pré-processamentos
-e manipulações nos espectros (normalização, remoção de cinemática, janelas diferentes em comprimento de onda, larguras
-equivalentes e FWHM de linhas, logarítmo do fluxo, entre outros), verificando suas implicações no resultado. Neste
-Capítulo comentaremos alguns {\em insights} que tivemos ao ponto de alguns pré-processamentos serem de extrema
-necessidade para interpretação dos resultados. Por fim faremos uma espécie de engenharia reversa, que nos auxilia na
-busca do sentido físico das principais componentes resultantes.
+\fixme Com o cubo de espectros já preparados pelo {\sc qbick} e com as limitações em comprimento de onda à mão, estamos
+prontos para executar a Tomografia PCA. Como o PCA é uma técnica em qual calcula-se os eixos que, através da variância,
+melhor expandem sua base de dados, é natural que qualquer alteração na variância entre os espectros, resultará num
+conjunto diferente de PCs. Durante nossas investigações fizemos uma série de testes com pré-processamentos e
+manipulações nos espectros (normalização, remoção de cinemática, janelas diferentes em comprimento de onda, PCA das
+linhas de emissão, logarítmo do fluxo, entre outros), verificando suas implicações no resultado. Neste Capítulo
+comentaremos alguns {\em insights} que tivemos ao ponto de alguns pré-processamentos serem de extrema necessidade para
+interpretação dos resultados. Por fim faremos uma espécie de engenharia reversa, que nos auxilia na busca do sentido
+físico das principais componentes resultantes. Neste Capítulo todos as análises serão feitos usando a galáxia NGC 2916
+($z \sim 0.01244$ {\em Hubble Type} - Sbc). Mais dados sobre elas as outras galáxias usadas nesse trabalho virão no
+Capítulo \ref{sec:result}.
 
 \section{Normalização}
 \label{sec:cap4:norm}
 
 Como exemplo inicial apresentamos as cinco primeiras PCs e seus respectivos tomogramas do cubo de espectros observados
-da galáxia NGC 2916 (Figura \ref{fig:cap4:K277tomofobs}). O tomograma é formado pelo ``peso'' da PC em cada pixel (no
-nosso caso zona). A primeira PC é praticamente o espectro médio, que fica evidente comparando com o espectro médio em
-cinza no segundo eixo vertical (à direita). O segundo autoespectro se assemelha com um espectro de população muito
-jovem. Com o auxilio de seu tomograma vemos que para as zonas mais internas da galáxia (onde se presume que as
-populações sejam mais velhas \citneed) o seu peso é negativo. De forma contrária, em regiões mais afastadas do núcleo,
-sobre os braços espirais, onde, para essa galáxia, parecem existir algumas regiões HII, vemos que seu peso é positivo. A
-terceira componente parece mostrar um padrão de rotação, ao mesmo tempo misturada com um fator de escala. Para que esse
-padrão de rotação ficasse visível tivemos que fazer um certo tratamento no tomograma, mas falaremos mais sobre isso no
-final dessa seção. Da quarta componente em diante fica mais complicado dizer o que cada uma representa. No final desse
-capítulo e no próximo vamos falar mais sobre como melhor interpretar as PCs fisicamente.
+da galáxia NGC 2916 (Figura \ref{fig:cap4:K277tomofobs}). O tomograma é formado pelo ``peso'' da PC em cada zona. A
+primeira PC é praticamente o espectro médio, que fica evidente comparando com o espectro médio em cinza no segundo eixo
+vertical (à direita). O segundo autoespectro se assemelha com um espectro de população muito jovem. Com o auxilio de seu
+tomograma vemos que para as zonas mais internas da galáxia (onde se presume que as populações sejam mais velhas
+\citneed) o seu peso é negativo. De forma contrária, em regiões mais afastadas do núcleo, sobre os braços espirais,
+onde, para essa galáxia, parecem existir algumas regiões HII, vemos que seu peso é positivo. A terceira componente
+parece mostrar um padrão de rotação, ao mesmo tempo misturada com um fator de escala. Para que esse padrão de rotação
+ficasse visível tivemos que fazer um certo tratamento no tomograma, mas falaremos mais sobre isso no final dessa seção.
+Da quarta componente em diante fica mais complicado dizer o que cada uma representa. No final desse capítulo e no
+próximo vamos falar mais sobre como melhor interpretar as PCs fisicamente.
 
 Da mesma forma, fazemos o PCA para o mesmo cubo, mas com os espectros normalizados da forma que comentamos em \fixme
 (Capítulo 2) (Figura \ref{fig:cap4:K277tomofobsnorm}). À primeira vista os resultados podem ser parecidos com o anterior
@@ -167,40 +169,75 @@ linhas.
 \section{Comparando as PCs com o \STARLIGHT: engenharia reversa}
 \label{sec:cap4:EngRev}
 
-Descobrir o sentido físico de cada PC não é uma tarefa fácil. Como comentamos anteriormente, o PCA te dá a resposta, mas
+Descobrir o sentido físico de cada PC não é tarefa fácil. Como comentamos anteriormente, o PCA te dá a resposta, mas
 você geralmente não sabe qual a pergunta. Uma forma de buscar sentido físico nas componentes é analisar as correlações
 com propriedades físicas da galáxia. Com o resultado da síntese de populações estelares obtido pelo \starlight e
-organizado pelo PyCASSO fica simples fazermos as correlações entre os dados na base gerada pelo PCA. Nas Figuras
-\ref{fig:cap4:K0277correfobsnorm} e \ref{fig:cap4:K0277correfsynorm} vemos as correlações entre vários parâmetros
-físicos e o peso de cada PC por zona (tomograma versus parâmetro físico).
+organizado pelo PyCASSO fica simples correlacionarmos os dados na base gerada pelo PCA. Nas Figuras
+\ref{fig:cap4:K0277correfobsnorm} e \ref{fig:cap4:K0277correfsynorm} vemos as correlações entre alguns parâmetros
+físicos ($\log$ t, $\log$ $Z / Z_{\odot}$, $A_V$, $v_{\star}$, $\sigma_{\star}$) e o peso de cada PC por zona (tomograma
+versus parâmetro físico) para a galáxia NGC 2916. O número presente em cada gráfico é o coeficiente de correlação por
+{\em rank} de Spearman. Escolhemos o coeficiente de Spearman pois este é aparamétrico e, ao contrário do coeficiente de
+Pearson, não pressupõe nenhuma relação linear.
 
-A Figura \ref{fig:cap4:K0277correfobs} mostra também o efeito que a falta de normalização faz com o resultado do PCA.
-Esse fator de amplitude que não é removido pela normalização se concentra principalmente na primeira PC, mas ainda
-deixa vestígios se misturando com as outras PCs fazendo com que haja correlação entre as PCs e os parâmetros físicos
-estudados.
+Em cada coluna temos uma quantidade física e na última coluna temos o autovetor representado por aqueles pontos. tanto
+para os dados observados quanto sintéticos vemos que a primeira PC representa basicamente um fator de idade. Possui
+correlação também com a metalicidade. A segunda PC também em ambos os casos representa uma forte correlação com a
+velocidade estelar. A terceira PC com os dados observados parece ser um bom sensor para o padrão global de extinção
+($A_V$). Essa PC parece se dissolver em duas no caso do espectro sintético (PC3 e 4). As PC4 e PC5 no caso observado não
+parecem ter correlação com nenhum desses parâmetros físicos comparados, salvo pequenas correlações com $A_V$ e $v_\star$
+na PC5. Essa última, para o caso sintético, parece estar correlacionada com $A_V$ também, mas de forma mais fraca.
+Também possui um padrão de correlação com $v_\star$. Por fim, a PC6 no caso observado parece ter uma mistura de idade,
+metalicidade, extinção e com a disperção de velocidades. Para o caso sintético existe uma correlação com a metalicidade
+e a dispersão de velocidades. Um padrão de rotação também aparece mas com um coeficiente de spearmann baixo.
+
+Outra forma de se observar essas correlações é graficando os dados nos eixos das PCs, colorindo os pontos por
+determinado parâmetro físico. No Apêndice estarão todos os gráficos com todos os parâmetros físicos. Como exemplo aqui
+deixamos as Figuras \ref{fig:cap4:K0277correfobsnormPCvsPC:AV} e \ref{fig:cap4:K0277correfsynnormPCvsPC:AV} que mostram
+as PCs para o caso observado e sintético, coloridos pelo $A_V$.
 
 \begin{figure}
-    \includegraphics[width=1.4\textwidth, angle=-90]{figuras/K0277-correl-f_obs_norm-PCvsPhys.pdf}
+    \includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0277-correl-f_obs_norm-PCvsPhys.pdf}
 	\caption[Correlações PCs vs. par\^ametros f\'isicos - $F_{obs}$ norm.]
     {Correlações entre os pesos por zona das seis primeiras PCs do PCA feito para o cubo com os dados observados
     normalizados e cinco parâmetros físicos.q Pela ordem de colunas da esquerda para direita temos $\log$ t, $\log$ $Z /
     Z_{\odot}$, $A_V$, $v_{\star}$, $\sigma_{\star}$. Na última coluna temos o autoespectro para ajudar na visualização.
-    A linha em vermelho no gráfico do autoespectro serve para identificar o zero.}
+    A linha em vermelho no gráfico do autoespectro serve para identificar o zero. O número dentro de cada gráfico é o
+    coeficiente de correlação de Spearman.}
     \label{fig:cap4:K0277correfobsnorm}
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=1.4\textwidth, angle=-90]{figuras/K0277-correl-f_syn_norm-PCvsPhys.pdf}
+    \includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0277-correl-f_syn_norm-PCvsPhys.pdf}
 	\caption[Correlações PCs vs. par\^ametros f\'isicos - $F_{syn}$ norm.]
     {Correlações entre os pesos por zona das seis primeiras PCs do PCA feito para o cubo com os dados sintéticos
     normalizados e cinco parâmetros físicos.q Pela ordem de colunas da esquerda para direita temos $\log$ t, $\log$ $Z /
     Z_{\odot}$, $A_V$, $v_{\star}$, $\sigma_{\star}$. Na última coluna temos o autoespectro para ajudar na visualização.
-    A linha em vermelho no gráfico do autoespectro serve para identificar o zero.}
+    A linha em vermelho no gráfico do autoespectro serve para identificar o zero. O número dentro de cada gráfico é o
+    coeficiente de correlação de Spearman.}
     \label{fig:cap4:K0277correfsynorm}
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=1.4\textwidth, angle=-90]{figuras/K0277-correl-f_obs-PCvsPhys.pdf}
+	\includegraphics[width=1.4\textwidth, angle=-90]{figuras/K0277-f_obs_norm-corre_PCxPC_AV.pdf}
+	\caption[Dados no espaço das PCs vs AV- $F_{obs}$ norm.]
+    {Dados das zonas no espaço das PCs (com espectros observados) coloridos pela extinção ($A_V$).}
+    \label{fig:cap4:K0277correfobsnormPCvsPC:AV}	
+\end{figure}
+
+\begin{figure}
+	\includegraphics[width=1.4\textwidth, angle=-90]{figuras/K0277-f_syn_norm-corre_PCxPC_AV.pdf}
+	\caption[Dados no espaço das PCs vs AV- $F_{syn}$ norm.]
+    {Dados das zonas no espaço das PCs (com espectros sintéticos) coloridos pela extinção ($A_V$).}
+    \label{fig:cap4:K0277correfsynnormPCvsPC:AV}	
+\end{figure}
+
+A Figura \ref{fig:cap4:K0277correfobs} mostra também o efeito que a falta de normalização faz com o resultado do PCA.
+Esse fator de amplitude que não é removido pela normalização se concentra principalmente na primeira PC, mas ainda
+deixa vestígios se misturando com as outras PCs fazendo com que haja correlação entre cada PCs e quase todos os
+parâmetros físicos.
+
+\begin{figure}
+    \includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0277-correl-f_obs-PCvsPhys.pdf}
 	\caption[Correlações PCs vs. par\^ametros f\'isicos - $F_{obs}$.]
     {Correlações entre os pesos por zona das seis primeiras PCs do PCA feito para o cubo com os dados observados e cinco
     parâmetros físicos.q Pela ordem de colunas da esquerda para direita temos $\log$ t, $\log$ $Z / Z_{\odot}$, $A_V$,
@@ -208,6 +245,7 @@ estudados.
     vermelho no gráfico do autoespectro serve para identificar o zero.}
     \label{fig:cap4:K0277correfobs}
 \end{figure}
+
 
 \ldots \dots \ldots \ldots
 
