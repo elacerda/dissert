@@ -48,7 +48,7 @@ ax.imshow(galimg)
 
 ax = axArr[1,0]
 ax.set_axis_on()
-fobs_norm__yx = K.zoneToYX(K.fobs_norm, extensive = False)
+fobs_norm__yx = K.zoneToYX(K.fobs_norm / 1.e-16, extensive = False)
 ax.set_title(r'$F_{\lambda 5635}\ [10^{-16} erg/s/cm^2/\AA]$')
 im = ax.imshow(fobs_norm__yx, origin = 'lower', interpolation = 'nearest', aspect = 'auto', cmap = 'hot_r')
 f.colorbar(ax = ax, mappable = im, use_gridspec = True)
@@ -86,7 +86,8 @@ ax.set_axis_on()
 p_i = 4
 ax.set_title(prop['label'][p_i])
 prc = np.percentile(K.v_d, 98.)
-im = ax.imshow(prop['arr'][p_i], origin = 'lower', interpolation = 'nearest', aspect = 'auto', cmap = 'hot_r', vmax = prc)
+print prc
+im = ax.imshow(prop['arr'][p_i], origin = 'lower', interpolation = 'nearest', aspect = 'auto', cmap = 'hot_r', vmin = 0, vmax = prc)
 f.colorbar(ax = ax, mappable = im, use_gridspec = True)
 
 plt.suptitle(r'%s - %s' % (K.galaxyName, K.califaID))

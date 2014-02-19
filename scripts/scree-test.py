@@ -27,14 +27,17 @@ maxPCs = 15
 
 f = plt.figure(figsize = (8, 5), dpi = 100)
 
+PCs = np.linspace(1, maxPCs, maxPCs)
+
 eigval_obs = 100. * P.eigVal_obs__k / P.eigVal_obs__k.sum()
 eigval_obs_norm = 100. * P.eigVal_obs_norm__k / P.eigVal_obs_norm__k.sum()
 eigval_syn_norm = 100. * P.eigVal_syn_norm__k / P.eigVal_syn_norm__k.sum()
-plt.plot(eigval_obs[:maxPCs], 'k+--', label = '$F_{obs}$')
-plt.plot(eigval_obs_norm[:maxPCs], 'k^-', label = '$F_{obs}$ norm.')
-plt.plot(eigval_syn_norm[:maxPCs], 'k*-', label = '$F_{syn}$ norm.')
+plt.plot(PCs, eigval_obs[:maxPCs], 'k+--', label = '$F_{obs}$')
+plt.plot(PCs, eigval_obs_norm[:maxPCs], 'k^-', label = '$F_{obs}$ norm.')
+plt.plot(PCs, eigval_syn_norm[:maxPCs], 'k*-', label = '$F_{syn}$ norm.')
 plt.legend()
 plt.ylim([0, eigval_obs_norm[1] * 1.1])
+plt.xlim([1, maxPCs])
 plt.xticks(range(1,maxPCs + 1))
 plt.title(r'%s - %s' % (K.galaxyName, K.califaID))
 plt.xlabel(r'PC')

@@ -74,4 +74,4 @@ for i in range(nPCs):
         ax2.axvline(x = xmin, ls = ':', c = 'grey')
 
 f.tight_layout()
-f.savefig('%s/K0277-tomo-syn-norm.pdf' % output_dir)
+f.savefig('%s/%s-tomo-syn-norm.pdf' % (output_dir, K.califaID))

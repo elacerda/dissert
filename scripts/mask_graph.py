@@ -7,7 +7,7 @@ from matplotlib import pyplot as plt
 
 fitsfile = sys.argv[1]
 scinot = 1e-17
-output_dir = '../figuras'
+output_dir = '.'
 
 if len(sys.argv) > 2:
     zone = np.int(sys.argv[2])

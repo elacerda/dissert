@@ -17,7 +17,7 @@
 %***************************************************************%
 
 \chapter{PCA em IFS - (different flavors?!?! FIXME PLEASE)}
-\label{sec:cap4}
+\label{sec:PCAemIFS}
 
 \fixme Com o cubo de espectros já preparados pelo {\sc qbick} e com as limitações em comprimento de onda à mão, estamos
 prontos para executar a Tomografia PCA. Como o PCA é uma técnica em qual calcula-se os eixos que, através da variância,
@@ -32,10 +32,10 @@ físico das principais componentes resultantes. Neste Capítulo todos as anális
 Capítulo \ref{sec:result}.
 
 \section{Normalização}
-\label{sec:cap4:norm}
+\label{sec:PCAemIFS:norm}
 
 Como exemplo inicial apresentamos as cinco primeiras PCs e seus respectivos tomogramas do cubo de espectros observados
-da galáxia NGC 2916 (Figura \ref{fig:cap4:K277tomofobs}). O tomograma é formado pelo ``peso'' da PC em cada zona. A
+da galáxia NGC 2916 (Figura \ref{fig:K277tomofobs}). O tomograma é formado pelo ``peso'' da PC em cada zona. A
 primeira PC é praticamente o espectro médio, que fica evidente comparando com o espectro médio em cinza no segundo eixo
 vertical (à direita). O segundo autoespectro se assemelha com um espectro de população muito jovem. Com o auxilio de seu
 tomograma vemos que para as zonas mais internas da galáxia (onde se presume que as populações sejam mais velhas
@@ -47,7 +47,7 @@ Da quarta componente em diante fica mais complicado dizer o que cada uma represe
 próximo vamos falar mais sobre como melhor interpretar as PCs fisicamente.
 
 Da mesma forma, fazemos o PCA para o mesmo cubo, mas com os espectros normalizados da forma que comentamos em \fixme
-(Capítulo 2) (Figura \ref{fig:cap4:K277tomofobsnorm}). À primeira vista os resultados podem ser parecidos com o anterior
+(Capítulo 2) (Figura \ref{fig:K277tomofobsnorm}). À primeira vista os resultados podem ser parecidos com o anterior
 deslocando uma componente acima, ou seja, o mesmo PCA mas sem a primeira PC. Mas essa é só uma primeira impressão. As
 propriedades físicas de uma galáxia geralmente possuem simetria radial ou axial, sendo assim extremamente
 correlacionadas no espaço. Matemáticamente, a maior variância nos espectros espacialmente é sua amplitude, aparecendo na
@@ -56,8 +56,8 @@ correlaciona-se com as propriedades físicas da galáxia, portanto, deixa sua as
 amplitude, que gera a primeira PC no caso sem normalização não adiciona informação alguma a análise das populações,
 funciona como um fator de escala apenas, afetando as componentes seguintes. Esses vestígios de amplitude aparecem de
 forma mais evidente quando comparamos a PC3 no caso sem normalização com a PC2 no caso com normalização. Podemos ver um
-padrão de rotação na PC2 da Figura \ref{fig:cap4:K277tomofobsnorm}. Com uma saturação na escala de cores no tomograma da
-PC3 da Figura \ref{fig:cap4:K277tomofobs} diminuímos o efeito do fator de escala ainda presente nessa componente, de
+padrão de rotação na PC2 da Figura \ref{fig:K277tomofobsnorm}. Com uma saturação na escala de cores no tomograma da
+PC3 da Figura \ref{fig:K277tomofobs} diminuímos o efeito do fator de escala ainda presente nessa componente, de
 modo que ficasse mais evidente o padrão de rotação. O espectro médio já é a informação necessária que precisaríamos para
 entender esse fator de escala nas amplitudes dos espectros, portanto a primeira componente para o caso sem normalização
 não trás informação adicional. Veremos a seguir que seu tomograma também não trás maiores informações.
@@ -74,8 +74,8 @@ No caso do CALIFA, com um {\em FoV} abrangendo praticamente toda a galáxia, ess
 devido ao brilho superficial mais intenso nas zonas centrais da galáxia em comparação com as mais afastadas, assim
 adicionando uma grande variância descartável entres as zonas. Descartável pois não trazem informação nova para a nossa
 análise. Essas diferenças em amplitude não nos dizem nada sobre as populações estelares. Comparemos agora a primeira PC
-do caso sem normalização (Figuras \ref{fig:cap4:K277tomofobs}) e a imagem mais à esquerda na Figura
-\ref{fig:cap4:K277fobsnorm} formada pelos fluxo para normalização por zona. Podemos notar que o primeiro autoespectro
+do caso sem normalização (Figuras \ref{fig:K277tomofobs}) e a imagem mais à esquerda na Figura
+\ref{fig:K277fobsnorm} formada pelos fluxo para normalização por zona. Podemos notar que o primeiro autoespectro
 (e seu respectivo tomograma) no caso sem normalização mostra exatamente esse fator de escala. Seu tomograma mostra que
 ela é claramente um fator de escala (que pode ser considerado um fator de brilho, ou de amplitude, nos espectros). Por
 esse motivo, em nossas análises daqui para frente, usaremos o cubo com os espectros normalizados.
@@ -85,14 +85,14 @@ esse motivo, em nossas análises daqui para frente, usaremos o cubo com os espec
     \caption[Tomogramas de 1 a 5 da gal\'axia NGC 2916 - $F_{obs}$.]
     {Cinco primeiras PCs (e seus respectivos tomogramas) resultantes da Tomografia PCA aplicado aos espectros sem
     normalização da galáxia NGC 2916.}
-    \label{fig:cap4:K277tomofobs}
+    \label{fig:K277tomofobs}
 \end{figure}
 \begin{figure}
     \includegraphics[width=0.9\textwidth]{figuras/K0277-tomo-obs-norm.pdf}
     \caption[Tomogramas de 1 a 5 da gal\'axia NGC 2916 - $F_{obs}$ norm.]
     {Cinco primeiras PCs (e seus respectivos tomogramas) resultantes da Tomografia PCA aplicado aos espectros
     observados com normalização da galáxia NGC 2916.}
-    \label{fig:cap4:K277tomofobsnorm}
+    \label{fig:K277tomofobsnorm}
 \end{figure}
 
 \begin{figure}
@@ -101,11 +101,11 @@ esse motivo, em nossas análises daqui para frente, usaremos o cubo com os espec
     {A imagem à esquerda e a superior direita, mostram o fluxo usado para a normalização de cada espectro em
     cada pixel (à esquerda) ou zona (superior direita). Na imagem inferior direita temos um histograma para valores do
     fluxo de normalização.}
-    \label{fig:cap4:K277fobsnorm}
+    \label{fig:K277fobsnorm}
 \end{figure}
 
 \section{Fluxos observados e sintéticos}
-\label{sec:cap4:OBSxSYN}
+\label{sec:PCAemIFS:OBSxSYN}
 
 Com o resultado da síntese de populações estelares já organizado para as galáxias do CALIFA, realizamos o PCA no cubo de
 espectros observados e no de espectros sintéticos. A grande diferença é que nos espectros sintéticos estão contidas
@@ -113,12 +113,12 @@ apenas as informações sobre populações estelares\footnote{Suavização, corr
 feitas nos espectros no processo de síntese. Mais detalhes em \citet{CidFernandes2005}}. Como os espectros sintéticos
 não possuem as assinaturas dos equipamentos observacionais, dos processos para subtração do céu, ruídos e afins, quando
 analisadas pela técnica de PCA vemos que as informações se condensam em menos PCs. Comparando os dois {\em scree tests}
-na Figura \ref{fig:cap4:K0277scree} vemos que para o caso com os espectros sintéticos a curva converge mais rápido ao
+na Figura \ref{fig:K0277scree} vemos que para o caso com os espectros sintéticos a curva converge mais rápido ao
 zero de variância, mostrando que temos as informações mais compactadas nas primeiras PCs quando comparadas ao caso com
 os espectros observados. Observando o caso sem normalização, plotado no gráfico com linha pontilhada, vemos que o efeito
 causado pelo fator de escala (PC1) diminui a ``importância'' (i.e., variância) das demais PCs. As cinco primeiras PCs e
 seus tomogramas provenientes do cubo com os fluxos sintéticos normalizados da galáxia NGC 2916 aparecem na Figura
-\ref{fig:cap4:K277tomofsynnorm}.
+\ref{fig:K277tomofsynnorm}.
 
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0277-screetest.pdf}
@@ -127,7 +127,7 @@ seus tomogramas provenientes do cubo com os fluxos sintéticos normalizados da g
     resultantes do PCA com os espectros observados normalizados. As variâncias das PCs marcadas com estrela representam
     o PCA com os espectros sintéticos normalizados. Para comparação plotamos as PCs do caso sem normalização usando
     linha pontilhada.}
-    \label{fig:cap4:K0277scree}
+    \label{fig:K0277scree}
 \end{figure}
 
 Comparando os dois vemos que os resultados para os espectros sintéticos parecem ser mais ``limpos'', pois não existem
@@ -138,7 +138,7 @@ Capítulo \ref{sec:CALePyC:Apresent} utilizamos o cubo de dados COMBO, gerado a 
 os espectros V1200 possuem espectros com maior resolução do que os do V500 (V1200 - FWHM $\sim 2.3$ \AA; V500 - FWHM
 $\sim 6$ \AA), o processo de criação do COMBO deixa vestígios. Para essa galáxia, a junção entre os dois cubos (V500 e
 V1200) para a formação do COMBO acontece exatamente nesse intervalo de comprimento de onda ($\sim 4550$ \AA). A PC5 da
-Figura \ref{fig:cap4:K277tomofobsnorm} mostra um degrau grande entre $4500$ e $4600$ \AA o qual parece mostrar essa
+Figura \ref{fig:K277tomofobsnorm} mostra um degrau grande entre $4500$ e $4600$ \AA o qual parece mostrar essa
 diferença de comportamento entre as duas versões originais antes da formação do COMBO. Nessa componente fica mais
 evidente, mas traçando uma linha imaginária verticamente por esse comprimento de onda fica mais fácil de perceber uma
 diferença de comportamento nos dados. Já nas componentes sintéticas\footnote{Componentes geradas pelo PCA nos cubos de
@@ -163,17 +163,17 @@ linhas.
     \caption[Tomogramas de 1 a 5 da gal\'axia NGC 2916 - $F_{syn}$ norm.]
     {Cinco primeiras PCs (e seus respectivos tomogramas) resultantes da Tomografia PCA aplicado aos espectros
     sintéticos normalizados da galáxia NGC 2916.}
-    \label{fig:cap4:K277tomofsynnorm}
+    \label{fig:K277tomofsynnorm}
 \end{figure}
 
 \section{Comparando as PCs com o \STARLIGHT: engenharia reversa}
-\label{sec:cap4:EngRev}
+\label{sec:PCAemIFS:EngRev}
 
 Descobrir o sentido físico de cada PC não é tarefa fácil. Como comentamos anteriormente, o PCA te dá a resposta, mas
 você geralmente não sabe qual a pergunta. Uma forma de buscar sentido físico nas componentes é analisar as correlações
 com propriedades físicas da galáxia. Com o resultado da síntese de populações estelares obtido pelo \starlight e
 organizado pelo PyCASSO fica simples correlacionarmos os dados na base gerada pelo PCA. Nas Figuras
-\ref{fig:cap4:K0277correfobsnorm} e \ref{fig:cap4:K0277correfsynorm} vemos as correlações entre alguns parâmetros
+\ref{fig:K0277correfobsnorm} e \ref{fig:K0277correfsynorm} vemos as correlações entre alguns parâmetros
 físicos ($\log$ t, $\log$ $Z / Z_{\odot}$, $A_V$, $v_{\star}$, $\sigma_{\star}$) e o peso de cada PC por zona (tomograma
 versus parâmetro físico) para a galáxia NGC 2916. O número presente em cada gráfico é o coeficiente de correlação por
 {\em rank} de Spearman. Escolhemos o coeficiente de Spearman pois este é aparamétrico e, ao contrário do coeficiente de
@@ -192,7 +192,7 @@ e a dispersão de velocidades. Um padrão de rotação também aparece mas com u
 
 Outra forma de se observar essas correlações é graficando os dados nos eixos das PCs, colorindo os pontos por
 determinado parâmetro físico. No Apêndice estarão todos os gráficos com todos os parâmetros físicos. Como exemplo aqui
-deixamos as Figuras \ref{fig:cap4:K0277correfobsnormPCvsPC:AV} e \ref{fig:cap4:K0277correfsynnormPCvsPC:AV} que mostram
+deixamos as Figuras \ref{fig:K0277correfobsnormPCvsPC:AV} e \ref{fig:K0277correfsynnormPCvsPC:AV} que mostram
 as PCs para o caso observado e sintético, coloridos pelo $A_V$.
 
 \begin{figure}
@@ -203,7 +203,7 @@ as PCs para o caso observado e sintético, coloridos pelo $A_V$.
     Z_{\odot}$, $A_V$, $v_{\star}$, $\sigma_{\star}$. Na última coluna temos o autoespectro para ajudar na visualização.
     A linha em vermelho no gráfico do autoespectro serve para identificar o zero. O número dentro de cada gráfico é o
     coeficiente de correlação de Spearman.}
-    \label{fig:cap4:K0277correfobsnorm}
+    \label{fig:K0277correfobsnorm}
 \end{figure}
 
 \begin{figure}
@@ -214,24 +214,24 @@ as PCs para o caso observado e sintético, coloridos pelo $A_V$.
     Z_{\odot}$, $A_V$, $v_{\star}$, $\sigma_{\star}$. Na última coluna temos o autoespectro para ajudar na visualização.
     A linha em vermelho no gráfico do autoespectro serve para identificar o zero. O número dentro de cada gráfico é o
     coeficiente de correlação de Spearman.}
-    \label{fig:cap4:K0277correfsynorm}
+    \label{fig:K0277correfsynorm}
 \end{figure}
 
 \begin{figure}
 	\includegraphics[width=1.4\textwidth, angle=-90]{figuras/K0277-f_obs_norm-corre_PCxPC_AV.pdf}
 	\caption[Dados no espaço das PCs vs AV- $F_{obs}$ norm.]
     {Dados das zonas no espaço das PCs (com espectros observados) coloridos pela extinção ($A_V$).}
-    \label{fig:cap4:K0277correfobsnormPCvsPC:AV}	
+    \label{fig:K0277correfobsnormPCvsPC:AV}	
 \end{figure}
 
 \begin{figure}
 	\includegraphics[width=1.4\textwidth, angle=-90]{figuras/K0277-f_syn_norm-corre_PCxPC_AV.pdf}
 	\caption[Dados no espaço das PCs vs AV- $F_{syn}$ norm.]
     {Dados das zonas no espaço das PCs (com espectros sintéticos) coloridos pela extinção ($A_V$).}
-    \label{fig:cap4:K0277correfsynnormPCvsPC:AV}	
+    \label{fig:K0277correfsynnormPCvsPC:AV}	
 \end{figure}
 
-A Figura \ref{fig:cap4:K0277correfobs} mostra também o efeito que a falta de normalização faz com o resultado do PCA.
+A Figura \ref{fig:K0277correfobs} mostra também o efeito que a falta de normalização faz com o resultado do PCA.
 Esse fator de amplitude que não é removido pela normalização se concentra principalmente na primeira PC, mas ainda
 deixa vestígios se misturando com as outras PCs fazendo com que haja correlação entre cada PCs e quase todos os
 parâmetros físicos.
@@ -243,7 +243,7 @@ parâmetros físicos.
     parâmetros físicos.q Pela ordem de colunas da esquerda para direita temos $\log$ t, $\log$ $Z / Z_{\odot}$, $A_V$,
     $v_{\star}$, $\sigma_{\star}$. Na última coluna temos o autoespectro para ajudar na visualização. A linha em
     vermelho no gráfico do autoespectro serve para identificar o zero.}
-    \label{fig:cap4:K0277correfobs}
+    \label{fig:K0277correfobs}
 \end{figure}
 
 
@@ -274,7 +274,7 @@ Primeiro todos os espectros são limitados ao intervalo de $3800$ a $6850$ \AA. 
 estatística com todos os {\em bad pixels} e linhas telúricas de cada cubo e removemos qualquer um que esteja presente em
 mais de $5\%$ dos espectros. Cabe aqui lembrar que todos os espectros precisam ter os mesmos pontos em comprimento de
 onda pois precisamos construir a matriz de covariância. Podemos ver o efeito desses pré-processamentos nos espectros
-através dos primeiro e segundo espectros na Figura \ref{fig:cap4:checkmask}.
+através dos primeiro e segundo espectros na Figura \ref{fig:checkmask}.
 
 \begin{figure}
     %\includegraphics[height=0.5\textwidth]{figuras/figHusemann2013Fig2.pdf}
@@ -284,7 +284,7 @@ através dos primeiro e segundo espectros na Figura \ref{fig:cap4:checkmask}.
     com linhas telúricas e bad-pixels removidos, além do limite de intervalo em comprimendo de onda de $3800$ a $6850$
     \AA. No espectro mais abaixo, além das partes removidas no segundo, estão foram removidas também as mesmas linhas de
     emissão mascaradas na síntese de populações estelares.}
-    \label{fig:cap4:checkmask}
+    \label{fig:checkmask}
 \end{figure}
 
 \ldots \dots \ldots \ldots
@@ -297,7 +297,7 @@ espectros também são mascaradas todas as regiões do espectro que não entram 
 a $3980$ \AA; $\mathrm{H}\delta$: de $4092$ a $4112$ \AA; $\mathrm{H}\gamma$: de $4330$ a $4350$ \AA; \Hbeta: de $4848$
 a $4874$ \AA; \oIII: de $4940$ a $5028$ \AA; $\mathrm{He\,\textsc{i}}$ e $\mathrm{NaD}$: de $5866$ a $5916$ \AA; \Halpha
 e \nII: de $6528$ a $6608$ \AA; $\mathrm{S\,\textsc{ii}}$: de $6696$ a $6752$ \AA). O espectro após todas máscaras pode
-ser visto no terceiro espectro (o mais abaixo) da Figura \ref{fig:cap4:checkmask}.
+ser visto no terceiro espectro (o mais abaixo) da Figura \ref{fig:checkmask}.
 
 
 \textcolor{red}{DAQUI PRA BAIXO AINDA É O ESQUELETO}
