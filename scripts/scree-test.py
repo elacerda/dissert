@@ -1,9 +1,12 @@
 #!/usr/bin/python
 import sys
 import numpy as np
-import PCAlifa as PCA
 import matplotlib as mpl
+mpl.use('Agg')
 from matplotlib import pyplot as plt
+import PCAlifa as PCA
+
+output_fmt = 'png'
 
 fitsfile = sys.argv[1]
 
@@ -32,6 +35,7 @@ PCs = np.linspace(1, maxPCs, maxPCs)
 eigval_obs = 100. * P.eigVal_obs__k / P.eigVal_obs__k.sum()
 eigval_obs_norm = 100. * P.eigVal_obs_norm__k / P.eigVal_obs_norm__k.sum()
 eigval_syn_norm = 100. * P.eigVal_syn_norm__k / P.eigVal_syn_norm__k.sum()
+
 plt.plot(PCs, eigval_obs[:maxPCs], 'k+--', label = '$F_{obs}$')
 plt.plot(PCs, eigval_obs_norm[:maxPCs], 'k^-', label = '$F_{obs}$ norm.')
 plt.plot(PCs, eigval_syn_norm[:maxPCs], 'k*-', label = '$F_{syn}$ norm.')
@@ -43,4 +47,4 @@ plt.title(r'%s - %s' % (K.galaxyName, K.califaID))
 plt.xlabel(r'PC')
 plt.ylabel(r'Var. [$\%%$]')
 plt.grid()
-f.savefig('%s/%s-screetest.pdf' % (output_dir, K.califaID))
+f.savefig('%s/%s-screetest.%s' % (output_dir, K.califaID, output_fmt))

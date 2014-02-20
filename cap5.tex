@@ -31,6 +31,12 @@ problemáticos, subtração de poeira, em determinado espectro ou cubo.
 \section{Apresentação das galáxias}
 \label{sec:result:apres}
 
+Dentre as galáxias já observadas pelo projeto CALIFA, escolhemos quatro espirais (NGC 0001, NGC 2916, NGC 0776 e
+NGC4210), duas galáxias {\em early-type} (NGC 1167 e NGC 6515) e dois {\em mergers} (NGC 2623 e ARP 220). Omitimos nesse
+capítulo as imagens referentes a análise da galáxia NGC 2916 pois já se encontram no capitulo anterior. \fixme
+\textcolor{red}{Imagem de apresentação da K0277 no cap anterior.} Elas estão listadas na Tabela
+\ref{tab:amostraGalaxias} na ordem que aparecerão neste capítulo.
+
 \begin{table}
 	\caption[Relação de galáxias do CALIFA usadas neste trabalho.]
 	{Tabela contendo a relação de galáxias que vamos estudar nesse capítulo, juntamente com sua classificação morfológica
@@ -52,10 +58,6 @@ problemáticos, subtração de poeira, em determinado espectro ou cubo.
 
 \section{Galáxias espirais}
 \label{sec:result:spirals}
-
-Dentre as galáxias já observadas pelo projeto CALIFA, escolhemos quatro espirais (NGC 0001, NGC 2916, NGC 0776,
-NGC4210). Omitimos aqui as imagens referentes a análise da galáxia NGC 2916 pois já se encontram no capitulo anterior.
-\fixme \textcolor{red}{Imagem de apresentação da K0277 no cap anterior.}
 
 \subsection{NGC 0001 - CALIFA 8}
 
@@ -83,7 +85,8 @@ com o $A_V$ na PC4 para o caso observado. Já no caso sintético ela aparece mel
 $A_V$, como índices maiores de correlação. Observado a imagem da velocidade estelar (Figura \ref{K0008apresent}, segunda
 imagem na última linha) podemos ver que essa galáxia não possui um padrão muito claro de rotação, mas na análise das
 correlações para os dados sintéticos vemos que a PC4 se correlaciona de maneira formidável com $v_\star$ ($s\ =\ 0.88$).
-Para o caso observado vemos que a rotação aparece, mesmo que com uma correlação mais fraca que no caso sintético, na PC3.
+Para o caso observado vemos que a rotação aparece, mesmo que com uma correlação mais fraca que no caso sintético, na
+PC3.
 
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0008-apresent.pdf}
@@ -145,6 +148,15 @@ Para o caso observado vemos que a rotação aparece, mesmo que com uma correlaç
 
 \subsection{NGC 0776 - CALIFA 73}
 
+A galáxia NGC 0776, apresentada na Figura \ref{fig:K0073apresent}, é uma espiral que possui uma diferente $v_\star$ para
+cada zona de uma forma mais suave e quase constante, diferentemente das duas já apresentadas até agora (NGC 2916 e NGC
+0001).
+
+A análise da variância percentual de cada componente segue o mesmo padrão de todas apresentadas até agora, sempre com a
+convergência ao zero de variância seguindo a ordem primeiro $F_{obs}$, depois $F_{syn}$ normalizado e por último
+$F_{obs}$ normalizado. Veremos que todos os scree-tests avaliados seguem esse mesmo padrão, independentemente do tipo
+morfológico da galáxia.
+
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0073-apresent.pdf}
     \caption[Propriedades f\'isicas da gal\'axia NGC 0776.]
@@ -189,6 +201,29 @@ Para o caso observado vemos que a rotação aparece, mesmo que com uma correlaç
 
 \subsection{NGC 4210 - CALIFA 518}
 
+A galáxia NGC 4210, também é uma espiral com uma barra bem notável, assim como a NGC 0776 (Figura
+\ref{fig:K0518apresent}). Pelas figuras podemos notar que existem problemas com algumas zonas e esses problemas passaram
+para a síntese, fazendo com que os resultados dessas zonas ficasse díspares ao todo. Esses problemas passaram para o
+cubo final mesmo passando pelos {\em pipelines} de redução, marcação de zonas defeituosas e extensiva revisão à olho.
+
+O {\em scree test} (Figura \ref{fig:K0518scree}) apesar de seguir o mesmo padrão das demais parece ter uma distribuição
+de variâncias mais parecida entre as PCs para casos diferentes, mas como falamos a seguir, essa galáxia é um caso à
+parte.
+
+A tomografia PCA (Figuras \ref{fig:K0518tomofobsnorm} e \ref{fig:K0518tomofsynnorm}) foi capaz de identificar esses
+problemas isolando-os nas duas primeiras PCs principalmente, pela extrema variância que eles impõe sobre os espectros.
+Na quinta PC vemos também um exemplo de ``linha larga'' que também foi causado por defeitos em zonas com espectros
+defeituosos em determinados comprimentos de onda. Apesar desses problemas, vemos que para os espectros sintéticos
+parte deles já desapareceram (veja PC2 em \ref{fig:K0518tomofobsnorm} e compare com a PC2 em
+\ref{fig:K0518tomofsynnorm}). 
+
+Com esses problemas, o surgimento dessa PC2 no caso observado faz com que fique um pouco mais complicado estudar o
+sentido físico dessas PCs, mas olhando as correlações para o PCA com os espectros observados normalizados (Figura
+\ref{fig:K0518correfobsnorm}) vemos que a PC4 é uma boa medida da velocidade ($s\ =\ 0.80$). Através das correlações
+usando o resultado para os espectros sintéticos (Figura \ref{fig:K0518correfsynnorm}) podemos ver que segue o padrão
+para outras galáxias espirais, onde a PC1 está geralmente fortemente correlacionada a idade. A PC4, da mesma forma que o
+observado, reproduz $v_\star$ e a PC5 mais próximo de $A_V$.
+
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0518-apresent.pdf}
     \caption[Propriedades f\'isicas da gal\'axia NGC 4210.]
@@ -200,7 +235,7 @@ Para o caso observado vemos que a rotação aparece, mesmo que com uma correlaç
     \includegraphics[height=0.33\textheight]{figuras/K0518-screetest.pdf}
     \caption[Scree test comparativo entre 3 PCAs - NGC 4210.]
 	{Igual a Figura \ref{fig:K0008scree} para a galáxia NGC 4210.}
-    \label{fig:K00518scree}
+    \label{fig:K0518scree}
 \end{figure}
 
 \begin{figure}
@@ -231,10 +266,28 @@ Para o caso observado vemos que a rotação aparece, mesmo que com uma correlaç
     \label{fig:K0518correfsynnorm}
 \end{figure}
 
-\section{Gal\'axias el\'ipticas}
+\section{Gal\'axias {\em early-type}}
 \ref{sec:result:elipt}
 
 \subsection{NGC 1167 - CALIFA 119}
+
+Pela apresentação das propriedades físicas dessa galáxia (Figura \ref{fig:K0119apresent}), cores na imagem SDSS,
+distribuição de idades, e grande disperção de velocidades no centro, já mostram o quanto essa galáxia é diferente de
+todas que exploramos até agora.
+
+No {\em scree test} o comrportamento assintótico é o mesmo para as outras galáxias, com a variância mais distribuída
+entre as primeiras PCs no caso sintético. A segunda componente do caso sintético nem aparece no gráfico, mas pelo seu
+tomograma (Figura \ref{fig:K0119tomofsynnorm}) vemos que ela possui $\sim 35\%$ da variância.
+
+Vemos que a PC1 dos dois casos (Figuras \ref{fig:K0119tomofobsnorm} e \ref{fig:K0119tomofsynnorm}) são bem diferentes e
+no caso sintético ela não é correlacionada com alguma propriedade específica. Já no caso observado tem uma ótima
+correlação com $A_V$ e com a metalicidade (\ojo \textcolor{red}{até agora não falei de metalicidade em lugar algum, mas
+não lembro de ver uma correlação tão grande com metalicidade}). No sintético $A_V$ aparece principalmente na PC2, também
+misturada com a metalicidade. A PC5 do caso observado também correlaciona bem com $A_V$. O padrão de velocidades aparece
+de forma muito clara para ambos os casos na PC3, com um inclível índice de Spearmann de 0.98 para o caso sintético.
+Vemos que a disperção de velocidades ($\sigma_\star$) aparece correlacionando fracamente com quase todas as principais
+PCs, mas no caso sintético vemos uma correlação maior ($s\ =\ 0.53$). (\ojo \textcolor{red}{olhar a metalicidade e
+idade na PC5 do caso sintético, correlação com metalicidade = 0.56.})
 
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0119-apresent.pdf}
@@ -280,6 +333,15 @@ Para o caso observado vemos que a rotação aparece, mesmo que com uma correlaç
 
 \subsection{NGC 6515 - CALIFA 864}
 
+A primeira coisa que chama atenção nas imagens produzidas pelas propriedades físicas dessa galáxia é o número de zonas
+faltantes na análise. Existem muitos objetos no {\em FoV} de observação dessa galáxia, portanto esses espaços são
+causados pelas máscaras espaciais criadas pelo qbick conforme apresentado na Seção \ref{sec:CALePyC:PyCASSO}. O {\em
+scree test} possui o mesmo resultado assintótico das outras galáxias, mas mostra uma variância percentual bem alta mesmo
+para componentes mais afastadas das cinco principais.
+
+Analisando os tomogramas e PCs para o caso observado (Figura \ref{fig:K0864tomofobsnorm}) não parecem refletir
+comportamentos físicos bem definidos. Isso pode ser visto pelas correlações (Figura \ref{fig:K0864correfobsnorm}) que
+não deixam claro nenhuma correlação singular. A PC1 correlaciona um pouco melhor com $A_V$
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0864-apresent.pdf}
     \caption[Propriedades f\'isicas da gal\'axia NGC 6515.]

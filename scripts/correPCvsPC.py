@@ -3,10 +3,21 @@
 import sys
 import numpy as np
 import matplotlib as mpl
-mpl.use('PDF')
 from matplotlib import pyplot as plt
 from scipy import stats as st
 import PCAlifa as PCA
+
+output_fmt = 'png'
+
+fitsfile = sys.argv[1]
+
+if len(sys.argv) > 2:
+    output_dir = sys.argv[2]
+else:
+    output_dir = '../figuras'
+
+print('Output directory: %s' % output_dir)
+
 
 ###############################################################################
 ###############################################################################
@@ -74,19 +85,10 @@ def corr_PCvsPC(tomo__zk, nPCs, title, fnamepref):
             axArr[0, i].set_title('PC%d' % (i + 2))
 
         plt.suptitle(r'%s' % title)
-        f.savefig('%scorre_PCxPC_%s.pdf' % (fnamepref, prop['fname'][p_i]))
+        f.savefig('%scorre_PCxPC_%s.%s' % (fnamepref, prop['fname'][p_i], output_fmt))
 
 ###############################################################################
 ###############################################################################
-
-fitsfile = sys.argv[1]
-
-if len(sys.argv) > 2:
-    output_dir = sys.argv[2]
-else:
-    output_dir = '../figuras'
-
-print('Output directory: %s' % output_dir)
 
 P = PCA.PCAlifa(fitsFile = fitsfile, quantilQFlag = 0.95, lc = [3800, 6850])
 P.setStarlightMaskFile('/home/lacerda/CALIFA/Mask.mC')

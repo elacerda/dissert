@@ -18,10 +18,10 @@ for g in $GAL
 do
     FITSFILE=${FITSDIR}/${g}/${g}${FITSUFFIX}
 
-    time ./apres_gal.py $FITSFILE $OUTPUTDIR
+#    time ./apres_gal.py $FITSFILE $OUTPUTDIR
 #    time ./correPCvsPC.py $FITSFILE $OUTPUTDIR
 #    time ./correPCvsPhys.py $FITSFILE $OUTPUTDIR
 #    time ./tomo_obs_norm.py $FITSFILE $OUTPUTDIR
 #    time ./tomo_syn_norm.py $FITSFILE $OUTPUTDIR
-#    time ./scree-test.py $FITSFILE $OUTPUTDIR
+    time ./scree-test.py $FITSFILE $OUTPUTDIR
 done

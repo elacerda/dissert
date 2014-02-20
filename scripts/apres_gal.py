@@ -3,13 +3,14 @@
 import sys
 import numpy as np
 import matplotlib as mpl
-mpl.use('PDF')
 from matplotlib import pyplot as plt
 from scipy import stats as st
 import PCAlifa as PCA
 
 galimg_dir = '/home/lacerda/CALIFA/images'
 galimg_fmt = 'jpg'
+
+output_fmt = 'png'
 
 fitsfile = sys.argv[1]
 
@@ -91,4 +92,4 @@ im = ax.imshow(prop['arr'][p_i], origin = 'lower', interpolation = 'nearest', as
 f.colorbar(ax = ax, mappable = im, use_gridspec = True)
 
 plt.suptitle(r'%s - %s' % (K.galaxyName, K.califaID))
-f.savefig('%s/%s-apresent.pdf' % (output_dir, K.califaID))
+f.savefig('%s/%s-apresent.%s' % (output_dir, K.califaID, output_fmt))

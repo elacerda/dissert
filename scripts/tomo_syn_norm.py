@@ -6,6 +6,8 @@ import matplotlib as mpl
 from matplotlib import pyplot as plt
 import matplotlib.gridspec as gridspec
 
+output_fmt = 'png'
+
 fitsfile = sys.argv[1]
 
 if len(sys.argv) > 2:
@@ -74,4 +76,4 @@ for i in range(nPCs):
         ax2.axvline(x = xmin, ls = ':', c = 'grey')
 
 f.tight_layout()
-f.savefig('%s/%s-tomo-syn-norm.pdf' % (output_dir, K.califaID))
+f.savefig('%s/%s-tomo-syn-norm.%s' % (output_dir, K.califaID, output_fmt))

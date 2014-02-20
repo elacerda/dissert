@@ -3,10 +3,21 @@
 import sys
 import numpy as np
 import matplotlib as mpl
-mpl.use('PDF')
 from matplotlib import pyplot as plt
 from scipy import stats as st
 import PCAlifa as PCA
+
+output_fmt = 'png'
+
+fitsfile = sys.argv[1]
+
+if len(sys.argv) > 2:
+    output_dir = sys.argv[2]
+else:
+    output_dir = '../figuras'
+
+print('Output directory: %s' % output_dir)
+
 
 ###############################################################################
 ###############################################################################
@@ -35,15 +46,6 @@ def plot_evec_ax(l, evec, ax, *kwargs):
 
 ###############################################################################
 ###############################################################################
-
-fitsfile = sys.argv[1]
-
-if len(sys.argv) > 2:
-    output_dir = sys.argv[2]
-else:
-    output_dir = '../figuras'
-
-print('Output directory: %s' % output_dir)
 
 P = PCA.PCAlifa(fitsFile = fitsfile, quantilQFlag = 0.95, lc = [3800, 6850])
 P.setStarlightMaskFile('/home/lacerda/CALIFA/Mask.mC')
@@ -99,7 +101,7 @@ for i in range(nCols):
     axArr[0, i].set_title(prop['label'][i])
 
 f.suptitle(u'Correlações $F_{obs}$ norm.', fontsize=16)
-f.savefig('%s/%s-correl-f_obs_norm-PCvsPhys.pdf' % (output_dir, K.califaID))
+f.savefig('%s/%s-correl-f_obs_norm-PCvsPhys.%s' % (output_dir, K.califaID, output_fmt))
 f.clf()
 
 ################################################################################
@@ -147,7 +149,7 @@ for i in range(nCols):
     axArr[0, i].set_title(prop['label'][i])
 
 f.suptitle(u'Correlações $F_{syn}$ norm.', fontsize=16)
-f.savefig('%s/%s-correl-f_syn_norm-PCvsPhys.pdf' % (output_dir, K.califaID))
+f.savefig('%s/%s-correl-f_syn_norm-PCvsPhys.%s' % (output_dir, K.califaID, output_fmt))
 
 ###############################################################################
 ###############################################################################
@@ -193,5 +195,5 @@ for i in range(nCols):
     axArr[0, i].set_title(prop['label'][i])
 
 f.suptitle(u'Correlações $F_{obs}$', fontsize=16)
-f.savefig('%s/%s-correl-f_obs-PCvsPhys.pdf' % (output_dir, K.califaID))
+f.savefig('%s/%s-correl-f_obs-PCvsPhys.%s' % (output_dir, K.califaID, output_fmt))
 

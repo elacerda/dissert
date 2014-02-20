@@ -6,6 +6,8 @@ import matplotlib as mpl
 from matplotlib import pyplot as plt
 import matplotlib.gridspec as gridspec
 
+output_fmt = 'png'
+
 fitsfile = sys.argv[1]
 
 if len(sys.argv) > 2:
@@ -40,7 +42,7 @@ ax2.set_ylabel(r'$F_{\lambda 5635}\ [10^{-16} erg/s/cm^2/\AA]$')
 ax2.set_xlabel(r'zona')
 ax2.grid()
 f.tight_layout()
-f.savefig('%s/K0277-fobs_norm.pdf' % output_dir)
+f.savefig('%s/K0277-fobs_norm.%s' % (output_dir, output_fmt))
 
 nPCs = 5
 hfig = nPCs * 5
@@ -92,4 +94,4 @@ for i in range(nPCs):
         ax2.axvline(x = xmin, ls = ':', c = 'grey')
 
 f.tight_layout()
-f.savefig('%s/K0277-tomo-obs.pdf' % output_dir)
+f.savefig('%s/K0277-tomo-obs.%s' % (output_dir, output_fmt))
