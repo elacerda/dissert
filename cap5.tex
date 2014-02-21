@@ -34,8 +34,10 @@ problemáticos, subtração de poeira, em determinado espectro ou cubo.
 Dentre as galáxias já observadas pelo projeto CALIFA, escolhemos quatro espirais (NGC 0001, NGC 2916, NGC 0776 e
 NGC4210), duas galáxias {\em early-type} (NGC 1167 e NGC 6515) e dois {\em mergers} (NGC 2623 e ARP 220). Omitimos nesse
 capítulo as imagens referentes a análise da galáxia NGC 2916 pois já se encontram no capitulo anterior. \fixme
-\textcolor{red}{Imagem de apresentação da K0277 no cap anterior.} Elas estão listadas na Tabela
-\ref{tab:amostraGalaxias} na ordem que aparecerão neste capítulo.
+\textcolor{red}{Imagem de apresentação da K0277 no cap anterior.} A sessão com mergers colocamos para pura ``diversão''.
+Esses lindos objetos, produtos de algum grande encontro (ou alguns) de galáxias, são extremamente difícieis de serem
+estudados e altamente complexos. Todas as galáxias aqui estudadas estão listadas na Tabela \ref{tab:amostraGalaxias} na
+ordem que aparecerão neste capítulo.
 
 \begin{table}
 	\caption[Relação de galáxias do CALIFA usadas neste trabalho.]
@@ -152,10 +154,19 @@ A galáxia NGC 0776, apresentada na Figura \ref{fig:K0073apresent}, é uma espir
 cada zona de uma forma mais suave e quase constante, diferentemente das duas já apresentadas até agora (NGC 2916 e NGC
 0001).
 
-A análise da variância percentual de cada componente segue o mesmo padrão de todas apresentadas até agora, sempre com a
-convergência ao zero de variância seguindo a ordem primeiro $F_{obs}$, depois $F_{syn}$ normalizado e por último
-$F_{obs}$ normalizado. Veremos que todos os scree-tests avaliados seguem esse mesmo padrão, independentemente do tipo
-morfológico da galáxia.
+A análise da variância percentual de cada componente através do {\em scree test} (Figura \ref{fig:K0073scree}) segue o
+mesmo padrão de todas apresentadas até agora, sempre com a convergência ao zero de variância seguindo a ordem primeiro
+$F_{obs}$, depois $F_{syn}$ normalizado e por último $F_{obs}$ normalizado. Veremos que todos os {\em scree
+tests} avaliados seguem esse mesmo padrão assintótico, independentemente do tipo morfológico da galáxia.
+
+Ambas análises para diferentes configurações resultam na primeira PC muito semelhante (Figuras
+\ref{fig:K0073tomofobsnorm} e \ref{fig:K0073tomofsynnorm}) que correlaciona de maneira forte com a idade média (Figuras
+\ref{fig:K0073correfobsnorm} e \ref{fig:K0073correfsynnorm}). A segunda componente para o caso sintético parece
+carregar informação da série de Balmer (também vista na PC4) e correlacionar com $A_V$. Já para o caso observado possui
+melhor correlação com a velocidade estelar. A informação sobre $A_V$ parece estar melhor representada pela PC3 para o
+caso observado, diferentemente do caso sintético que parece conter essa informação de maneira um pouco mais clara na
+PC4. Vale a pena ressaltar que apesar dessa galáxia não ter um campo de velocidades muito distribuído, a PC5 para o caso
+sintético parece ser uma boa sonda dessa propriedade.
 
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0073-apresent.pdf}
@@ -261,7 +272,7 @@ observado, reproduz $v_\star$ e a PC5 mais próximo de $A_V$.
 
 \begin{figure}
     \includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0518-correl-f_syn_norm-PCvsPhys.pdf}
-	\caption[Correlações PCs vs. par\^ametros f\'isicos - $F_{syn}$ norm. - NGC 4210.]
+	\caption[Correlações PCs vs. par\^ametros f\'isicos -um padrão de velocidades $F_{syn}$ norm. - NGC 4210.]
 	{Igual a Figura \ref{fig:K0008correfsynnorm} para a galáxia NGC 4210.}
     \label{fig:K0518correfsynnorm}
 \end{figure}
@@ -287,7 +298,9 @@ misturada com a metalicidade. A PC5 do caso observado também correlaciona bem c
 de forma muito clara para ambos os casos na PC3, com um inclível índice de Spearmann de 0.98 para o caso sintético.
 Vemos que a disperção de velocidades ($\sigma_\star$) aparece correlacionando fracamente com quase todas as principais
 PCs, mas no caso sintético vemos uma correlação maior ($s\ =\ 0.53$). (\ojo \textcolor{red}{olhar a metalicidade e
-idade na PC5 do caso sintético, correlação com metalicidade = 0.56.})
+idade na PC5 do caso sintético, correlação com metalicidade = 0.56.}) A idade média estelar fica mais distribuída entre
+as PC5 e PC6 no caso sintético, mas mesmo assim com correlações não tão gritantes quanto para as galáxias espirais. Já
+no caso observado correlaciona um pouco com a PC2 mas nada muito evidente também.
 
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0119-apresent.pdf}
@@ -336,12 +349,21 @@ idade na PC5 do caso sintético, correlação com metalicidade = 0.56.})
 A primeira coisa que chama atenção nas imagens produzidas pelas propriedades físicas dessa galáxia é o número de zonas
 faltantes na análise. Existem muitos objetos no {\em FoV} de observação dessa galáxia, portanto esses espaços são
 causados pelas máscaras espaciais criadas pelo qbick conforme apresentado na Seção \ref{sec:CALePyC:PyCASSO}. O {\em
-scree test} possui o mesmo resultado assintótico das outras galáxias, mas mostra uma variância percentual bem alta mesmo
-para componentes mais afastadas das cinco principais.
+scree test} (Figura \ref{fig:K0864scree}) possui o mesmo resultado assintótico das outras galáxias, mas mostra uma
+variância percentual alta mesmo para componentes mais afastadas das cinco principais.
 
 Analisando os tomogramas e PCs para o caso observado (Figura \ref{fig:K0864tomofobsnorm}) não parecem refletir
-comportamentos físicos bem definidos. Isso pode ser visto pelas correlações (Figura \ref{fig:K0864correfobsnorm}) que
-não deixam claro nenhuma correlação singular. A PC1 correlaciona um pouco melhor com $A_V$
+comportamentos físicos bem definidos. Podemos ver através das correlações (Figura \ref{fig:K0864correfobsnorm}) que não
+está claro que exista alguma correlação singular, salvo PC1 e talvez a PC3. A PC1 correlaciona com $A_V$ e a PC3 com a
+dispersão de velocidades ($\sigma_\star$), mas nada muito notável. Para o caso sintético (tomogramas e PCs na Figura
+\ref{fig:K0864tomofobsnorm} e correlações na Figura \ref{fig:K0864correfsynnorm}) temos uma correlação da PC1 com $A_V$
+também, mas temos umas correlações mais fortes. A PC3 correlaciona com quase tudo, o que mostra que ela deve ser um tipo
+de fator de escala que segue o mesmo gradiente das demais propriedades físicas. Nessa PC ainda podemos ver que para a
+disperção de velocidades a correlação é um pouco mais alta ($s\ =\ 0.62$). A PC4 possui o mesmo padrão de correlações
+distribuidas entre as propriedades, mas é mais notável a correlação com a velocidade estelar ($v_\star$), o que fica
+claro também observando a PC (autoespectro) que possui um padrão de oscilação em torno do zero. Detalhe para a PC6 que
+possui forte correlação com idade e metalicidade.
+
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0864-apresent.pdf}
     \caption[Propriedades f\'isicas da gal\'axia NGC 6515.]
@@ -389,6 +411,22 @@ não deixam claro nenhuma correlação singular. A PC1 correlaciona um pouco mel
 
 \subsection{NGC 2623 - CALIFA 213}
 
+Quando olhamos a figura de apresentação da imagem e das propriedades da galáxia NGC 2623 (Figura
+\ref{fig:K0213apresent}) fica evidente a natureza irregular e a diferença na distribuição radial da idade média das
+populações estelares. Seu {\em scree test} (Figura \ref{fig:K0213scree}) possui o mesmo comportamento com as
+variâncias indo a zero mais rápido no caso sintético, mas surpreende pela alta concentração de informação em variância
+nas 4 primeiras componentes para o caso sintético.
+
+As duas primeiras PCs e tomogramas são muito semelhantes nos dois casos (Figuras \ref{fig:K0213tomofobsnorm} e
+\ref{fig:K0213tomofsynnorm}) mas começam a diferir a partir do terceiro autovetor. A PC1 para os dois casos correlaciona
+muito bem com $A_V$ e a segunda componente com correlação com todas as propriedades, mas de uma maneira mais forte com a
+idade (Figuras \ref{fig:K0213correfobsnorm} e \ref{fig:K0213correfsynnorm}). A PC3 para o caso sintético não parece ter
+correlação com nenhuma das propriedades avaliadas. Já no caso observado vemos uma pequena correlação com a metalicidade.
+Chama atenção a sequência de balmer aparecendo na PC4 do caso sintético, mas tanto no caso sintético quanto no observado
+não parece correlacionar com nada. A quinta componente no caso observado parece ter algum vestígio de idade e
+metalicidade em ambos os casos, mas mais fortemente para o caso sintético. Com uma correlação um pouco maior, a
+velocidade estelar aparece na PC6 do caso sintético, mas não na do caso observado.
+
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0213-apresent.pdf}
     \caption[Propriedades f\'isicas da gal\'axia NGC 2623.]
@@ -432,6 +470,21 @@ não deixam claro nenhuma correlação singular. A PC1 correlaciona um pouco mel
 \end{figure}
 
 \subsection{ARP 220 - CALIFA 802}
+
+Esse objeto peculiar é a ULIRG ({\em Ultraluminous infrared galaxy}) mais próxima da Terra. Como a NGC 2623, possui uma
+densa núvem de poeira no centro (Figura \ref{fig:K0802apresent}). Repete o mesmo comportamento assintótico de todos
+os {\em scree tests} (Figura \ref{fig:K0802scree}) anteriores e possui $\sim 99\%$ da variância contida nas primeiras 5
+PCs para o caso observado ($\sim 99.7\%$ para o caso sintético).
+
+Também como a NGC 2623, possui as duas primeiras PCs muito semelhantes (Figuras \ref{fig:K0802tomofobsnorm} e
+\ref{fig:K0802tomofsynnorm}). Comparando as correlações (Figuras \ref{fig:K0802correfobsnorm} e
+\ref{fig:K0802correfsynnorm}) vemos que a primeira PC correlaciona fortemente com $A_V$ e de maneira mais fraca com a
+idade. A segunda, apesar de ter uma leve correlação com todos as propriedades, a metalicidade se ressalta em ambos os
+casos. Para o caso observado a PC3 correlaciona melhor com a velocidade estelar. No caso sintético vemos vestígios da
+sequencia de Balmer tanto na PC3 (que não correlaciona fortemente com nada) quanto na PC4 (que parece ser uma boa
+medida de $v_\star$). Ainda no caso sintético, vemos que a velocidade aparece fortemente também na PC5, mas divide
+espaço (em correlação) com idade e metalicidade. de maneira mais fraca. Já para o caso observado nenhuma delas (PC4,
+PC5) paracem ter correlação com nenhum dos parâmetros físicos comparados. O mesmo para a PC6 em ambos os casos.
 
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0802-apresent.pdf}
