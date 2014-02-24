@@ -18,18 +18,19 @@
 \chapter{O projeto CALIFA e o {\em pipeline} PyCASSO}
 \label{sec:CALePyC}
 
-As observações do universo modificaram completamente o nosso modo de viver,
-pensar, compreender-se. Aprendemos a contar os dias, desenvolvemos um sistema de
-meses, estações do ano, movimentos das marés, entre outras coisas que já são
-parte do senso comum, mas que um dia foram o estado da arte da ciência. É assim
-que surge o CALIFA: um projeto que está modificando nossa maneira de ver e
-pensar as galáxias no nosso universo de forma que entendamos melhor a nossa também.
+As observações do universo modificaram completamente o nosso modo de viver, pensar, compreender-se. Aprendemos a contar
+os dias, desenvolvemos um sistema de meses, estações do ano, movimentos das marés, entre outras coisas que já são parte
+do senso comum, mas que um dia foram o estado da arte da ciência. É assim que surge o CALIFA: um projeto que está
+modificando nossa maneira de ver e pensar as galáxias no nosso universo de forma que entendamos melhor a nossa também.
+{\bf\ojo Hmmmm ... viagem demais!!!!!!}
 
-Com a massiva quantidade de dados obtidos, resultado direto de um projeto de
-ciência de ponta, vem também a dificuldade da interpretação dos dados. No caso
-do CALIFA, através da {\em pipeline} PyCASSO \citep{CidFernandes2013}, a
-programação investigativa se torna simples e ao mesmo tempo robusta, facilitando
-a construção de todo tipo de resultados, sejam eles \ojo matemáticos ou físicos.
+Com a enorme quantidade de dados obtidos, resultado direto de um projeto de ciência de ponta, vem também a dificuldade
+da interpretação dos dados. No caso do CALIFA, através da {\em pipeline} PyCASSO \citep{CidFernandes2013I}, a
+programação investigativa se torna simples e ao mesmo tempo robusta, facilitando a construção de todo tipo de
+resultados, sejam eles \ojo matemáticos ou físicos.
+
+{\bf \ojo Cara: a filosofia desses preambulos é introduzir/resumir o que será dto no capitulo. Isso que está acima nao é isso :-( A intro do cap 3 é um bom exemplo de como deve ser:-)!
+}
 
 %***************************************************************%
 %                                                               %
@@ -40,79 +41,68 @@ a construção de todo tipo de resultados, sejam eles \ojo matemáticos ou físi
 \section{O survey CALIFA}
 \label{sec:CALePyC:Apresent}
 
-No sul da Espanha, mais precisamente em {\em Sierra de Los Filabres}
-(Andalucía), está situado o germano-espânico {\em Calar Alto Observatory}. O
-projeto CALIFA está sendo possível através de observações pelo maior de seus $3$
-telescópios ($3.5$m) ao longo de $250$ noites. Em comparação com o \SDSS, o
-CALIFA terá a mesma ordem de número de espectros para estudo ($\sim10^6$), mas,
-apesar de um número menor de galáxias, graças ao IFU será o com melhor
-completeza por objeto. Existem alguns poucos surveys IFU e todos com, além de
-poucos objetos e FoV menor, focos de estudo muito estreitos, dificultando o
-legado do survey para outras pequisas científicas mais abrangentes
-\citep[SAURON; ][região central de 72 galáxias com $z < 0.01$.]{de-Zeeuw2002}
-\citep[PINGS; ][algumas galáxias muito próximas ($\sim 10$ Mpc) e o estudo atual
-de 70 (U)LIRGs com $z <0.26$]{RosalesOrtega2010} \citep[VENGA; ][$30$ galáxias
-espirais]{Blanc2010}. Apesar de ser primariamente construído para o estudo da
-física bariônica da evolução de galáxias, o CALIFA está projetado para que seu
-legado seja bem abrangente, possibilitando diversos tipos de estudos em diversas
-áreas. Outros surveys IFU ainda estão por vir, como SAMI \citep{Croom2012} e
+No sul da Espanha, mais precisamente em {\em Sierra de Los Filabres} (Andalucía), está situado Observatório Astronômico
+Hispano-Alemão de {\em Calar Alto}. O projeto CALIFA está sendo possível através de observações pelo maior de seus $3$
+telescópios ($3.5$m) ao longo de $250$ noites. Em comparação com o \SDSS, o CALIFA terá a mesma ordem de número de
+espectros para estudo ($\sim10^6$), mas, apesar de um número muito menor de galáxias, graças ao IFU será o com melhor
+completeza por objeto. Existem alguns poucos surveys IFU e todos com, além de poucos objetos e FoV menor, focos de
+estudo mais estreitos, dificultando o legado do survey para outras pequisas científicas mais abrangentes \citep[SAURON;
+][região central de 72 galáxias com $z < 0.01$.]{de-Zeeuw2002} \citep[PINGS; ][algumas galáxias muito próximas ($\sim
+10$ Mpc) e o estudo atual de 70 (U)LIRGs com $z <0.26$]{RosalesOrtega2010} \citep[VENGA; ][$30$ galáxias
+espirais]{Blanc2010}. O CALIFA foi concebido para que seu legado seja  abrangente, possibilitando diversos tipos de
+estudos em diversas áreas. Outros surveys IFU ainda estão por vir, como SAMI \citep{Croom2012} e
 MaNGA\footnote{\url{http://www.sdss3.org/future/manga.php}}
 
-\subsection{A ``{\em colméia}'' de fibras - os dados do CALIFA usados neste
-trabalho}
+%\subsection{A ``{\em colméia}'' de fibras - os dados do CALIFA usados neste trabalho}
 
-A amostra-mãe do projeto comporta $939$ galáxias (das quais $\sim 600$ serão
-observadas) com {\em redshifts} entre $0.005 < z < 0.03$ que distribuídas cobrem
-o diagrama cor-magnitude com $M_r < -18$ (Figura \ref{fig:cm-uzMz}) em uma ampla
-variedade de tipos morfologicos, massa em estrelas, condições do gás ionizante.
-Para melhor aproveitar o {\em FoV} ({\em field-of-view}\footnote{campo de
-visão}) do instrumento de IFU é feito também um corte em dimensão ($\sim1'$ em
-diâmetro). No telescópio usado para o projeto está instalado o equipamento
-Potsdam Multi Aperture Spectrograph \citep[PMAS; ][]{Roth2005} no modo PPAK
-\citep{Verheijen2004, Kelz2006} formando um espectrofotômetro de campo integrado
-com um {\em bundle} de $382$ fibras (Figura \ref{fig:BundlePPAK}), das quais,
-$331$ são para observação dos objetos, outras $36$ para \ojo
-\textcolor{blue}{\em sky background sample} e outras $15$ para calibração. As
-{\em science fibers} ($331$) cobrem um campo de visão hexagonal de $74"$ x $64"$
-que, através de uma técnica de três pontos de dithering \ojo torna possível a
-observação de $100\%$ do campo.
+A amostra-mãe do projeto comporta $939$ galáxias (das quais $\sim 600$ serão observadas) com {\em redshifts} entre
+$0.005 < z < 0.03$ que distribuídas cobrem o diagrama cor-magnitude com $M_r < -18$ (Figura \ref{fig:cm-uzMz}) em uma
+ampla variedade de tipos morfologicos, massa em estrelas, condições do gás ionizado.
+Para melhor aproveitar o {\em FoV} ({\em field-of-view}\footnote{campo de visão}) do instrumento de IFU é feito também
+um corte em dimensão ($\sim1'$ em diâmetro). No telescópio usado para o projeto está instalado o equipamento Potsdam
+Multi Aperture Spectrograph \citep[PMAS; ][]{Roth2005} no modo PPAK \citep{Verheijen2004, Kelz2006} formando um
+espectrofotômetro de campo integrado com um {\em bundle} de $382$ fibras (Figura \ref{fig:BundlePPAK}), das quais, $331$
+são para observação dos objetos, outras $36$ para \ojo \textcolor{blue}{\em sky background sample} e outras $15$ para
+calibração. As {\em science fibers} ($331$) cobrem um campo de visão hexagonal de $74"$ x $64"$ que, através de uma
+técnica de três pontos de dithering \ojo torna possível a observação de $100\%$ do campo.
 
 \begin{figure}
     \includegraphics[height=0.5\textwidth]{figuras/figHusemann2013Fig2.pdf}
     \caption[Diagrama cor-magnitude para as galáxias do CALIFA.]
-    {Distribui\c{c}\~ao das galáxias do CALIFA no diagrama $u-z$ vs. $M_z$. 
+    {Distribui\c{c}\~ao das galáxias do CALIFA no diagrama cor magnitude $u-z$ vs. $M_z$. 
     {\em Painel superior}: Em pontos pretos est\~ao as galáxias pertencente a
     amostra-m\~ae e em cores as galáxias presente no CALIFA DR1. As diferentes
     cores representam os diferentes tipos morfológicos. {\em Painel inferor}: A
     fra\c{c}\~ao de galáxias observadas pelo DR1 em rela\c{c}\~ao a
-    amostra-m\~ae. Retirado de \citet{Husemann2013}, figura $2$.}
+    amostra-m\~ae. Retirado de \citet{Husemann2013}.}
     \label{fig:cm-uzMz}
 \end{figure}
 
-Os dados são reduzidos utilizando o programa CALIFA Pipeline versão 1.3c,
-descrito em \citet{Husemann2013}. Os espectros vêm em duas configurações: a
-V$500$ cobrindo de $\sim3700$ até $7000$ \AA\ com resolução de $\sim6$ \AA\ 
-de largura à meia altura (FWHM) e a V$1200$ ($\sim3650-4600$ \AA\  FWHM
-$\sim2.3$ \AA). A cobertura do V$500$ sería ideal para os propósitos de ciência feita pelo
-\starlight mas por problemas com {\em vignetting} com a parte azul dessa
-configuração, os dados são reamostrados numa combinação das duas, criando uma
-que chamamos de COMBO. A parte com $\lambda < 4600$ \AA\  vem do V$1200$ e a
-outra parte do V$500$. Os espectros foram reamostrados no mesmo FWHM do V$500$.
+Os dados são reduzidos utilizando a CALIFA Pipeline versão 1.3c, descrito em \citet{Husemann2013}. Os espectros vêm em
+duas configurações de rede: a V$500$ cobrindo de $\sim3700$ até $7000$ \AA\ com resolução de $\sim6$ \AA\ de largura à
+meia altura (FWHM) e a V$1200$ ($\sim3650-4600$ \AA\  FWHM $\sim2.3$ \AA). A cobertura espectral da V$500$ é ideal para
+os propósitos de ciência feita pelo \starlight, mas por problemas com {\em vignetting} com a parte azul dessa
+configuração, os dados são reamostrados numa combinação das duas redes, criando cubos que chamamos de COMBO: A parte com
+$\lambda < 4600$ \AA\  vem da V$1200$ e o resto da V$500$. Nessa montagem os espectros da V1200 foram suavizados à mesma
+resolucao espectral da V500 (FWHM $= 6$ \AA).
+Como outros cubos do CALIFA, os cubos COMBO provêm, para cada posicao e comprimento de onda,  o fluxo
+($F_{\lambda,x,y}$), seu erro ($\epsilon_{\lambda,x,y}$) e uma flag ($b_{\lambda,x,y}$) que sinaliza pixeis defeituosos.
+
+
+{\bf \ojo falta dizer que os cubos sao reduzidos de modo que cada pix tenha 1 x 1 arcsec!!!!}
+
+
+Nesse trabalho usaremos exclusivamente dados dos cubos COMBO. Na verdade, não analisarermos exatamente esses dados em
+sua forma original, mas os provenientes de duas outras pipelines desenvolvidas por nossa equipe e descritas a seguir.
 
 \begin{figure}
     \includegraphics[height=0.5\textwidth]{figuras/figVerheijen2004Fig5.pdf}
     \caption[Configura\c{c}\~ao do {\em bundle} de fibras do PPMAS/PPAK.]
     {Este é o esquema com o {\em bundle} hexagonal com as 331 fibras de
-    observação e mais 36 de amostra de céu. Retirado de \citet{Verheijen2004},
-    figura $5$.}
+    observação e mais 36 de amostra de céu. Retirado de \citet{Verheijen2004}.}
     \label{fig:BundlePPAK}
 \end{figure}
 
-Após os dados passarem pelo CALIFA {\em Pipeline} v$1.3$c, os parâmetros físicos
-aqui usados vêm do PyCASSO que organiza as saídas da síntese de populações
-estelares resultantes da execução de cada espectro do IFU pelo \starlight
-\citep{CidFernandes2005} como descrito em \citet{CidFernandes2013} e também na
-próxima seção.
 
 %***************************************************************%
 %                                                               %
@@ -120,28 +110,89 @@ próxima seção.
 %                                                               %
 %***************************************************************%
 
-\section{O {\em pipeline} PyCASSO}
+\section{As  {\em pipelines} QBICK e PyCASSO}
 \label{sec:CALePyC:PyCASSO}
 
-A beleza da espectroscopia de campo integral é poder unir imageamento e
-espectroscopia, obtendo-se assim a galáxia vista como um cubo de dados  $(x, y,
-\lambda)$; para cada $\lambda$ temos uma imagem, e para cada par de ascenção
-reta e declinação $(x, y)$ temos um espectro. \ojo \textcolor{blue}{Pedir uma
-imagem chique de cubo para o André.} Apesar de cada espectro poder ser analizado
-individualmente, nos cubos do CALIFA existe uma correlação entre pixels vizinhos
-devido a \ojo {\em seeing} do céu e ao processo de observação. Como nas regiões
-mais afastadas do núcleo da galáxia o brilho superficial é menor, há uma queda
-na relação sinal-ruído (S/N) dos dados. De maneira que haja S/N constante, é
-feito um agrupamento de pixels (zonificação de Voronoi) nas regiões mais
-afetadas (ver \citep[][sec. 3]{CidFernandes2013}. Vale aqui frisar que a grande
-maioria das zonas comporta um pixel apenas. Para a galáxia NGC 2916, por
-exemplo, $93\%$ das zonas possuem apenas $1$ pixel e $\sim 3\%$ com mais de $10$
-pixeis agrupados, mesmo com a imposição de relaçao S/N em $20$ (veja Tabela
-\ref{tab:pixelZones}). Portanto o cubo original e transformado numa matriz de
-zonas e comprimentos de onda. Com esses dados é então possível realizar a
-síntese de populações estelares com o \starlight, resolvendo espacialmente as
-propriedades físicas estelares das galáxias \citep{CidFernandes2013,
-CidFernandes2014, GonzalezDelgado2013}.
+{\bf\ojo REVISAR BEM ESSA SEC! FIZ UMA COLAGEM MEIO DESCUIDADA...}
+
+CFet al 13 descrevem duas outras pipelines usadas na análise dos cubos COMBO: O QBICK e o PyCASSO. Abaixo revisamos
+essas pipelines, ambas muito importantes nesse trabalho.
+
+\subsection{QBICK}
+
+A primeira é a QBICK, desenvolvida por Rubén García-Benito, do IAA, e explicada em detalhe em CF13. Resumidamente, esta
+pipeline:
+
+\begin{enumerate}
+
+\item Cria máscaras espaciais que removem regiões extrenas de baixo S/N, e objetos indesejáveis no FoV (estrelas ou
+galáxias).
+
+\item Introduz flags espectrais que indicam janelas contendo linhas telúricas, cuja remoção imperfeita pode afetar os
+espectros das regiões de menor fluxo.
+
+\item Desloca o espectro para o referencial de repouso (usando o {\em redshift} calculado dentro dos $5^{\prime\prime}$
+centrais da galáxia) e o reamostra a 2 \AA.
+
+\item Define zonas de Voronoi, tal que o espectro total dessas zonas tem uma razao S/N $\ge 20$ em uma janela espectral
+de 90 \AA\ de largeura e centrada em 5635 \AA, e extrai os espectros correspondentes.
+
+\end{enumerate}
+
+A Fig.\ \ref{fig:checkmask} ilustra as máscaras espectrais utilizadas, tomando como exemplo a zona 399 para a galáxia
+NGC 2916 (CALIFA 277). O paniel superior mostra o espectro original. No painel do meio as janelas mascaradas pelo QBICK
+são removidas do espectro. Essas janelas correspondem a a regioes contendo linhas telúricas\footnote{Linhas de emissão
+ou absorção referentes à atmosfera.}, as quais dificilmente sao perfeitamente removidas na reducao. Pixeis identificados
+como problematicos durante a reducao dos dados sao igualmente mascarados. Em nossa análise fazemos uma estatística com
+todos os {\em bad pixels} de cada cubo e removemos qualquer um que esteja presente em mais de $5\%$ dos espectros. Cabe
+aqui lembrar que todos os espectros precisam ter os mesmos pontos em comprimento de onda pois precisamos construir a
+matriz de covariância.
+                                                                                                                                                                                                                                                                               
+Além dos {\em bad pixels} e linhas telúricas, podemos mascarar regiões desnecessárias para determinada investigação
+científica. Nosso foco é o estudo das populações estelares, e portanto optamos por mascarar as linhas de emissão.
+Escolhemos mascarar as seguintes janelas: $\mathrm{H}\epsilon$: de $3960$ a $3980$ \AA; $\mathrm{H}\delta$: de $4092$ a
+$4112$ \AA; $\mathrm{H}\gamma$: de $4330$ a $4350$ \AA; \Hbeta: de $4848$ a $4874$ \AA; \oIII: de $4940$ a $5028$ \AA;
+$\mathrm{He\,\textsc{i}}$ e $\mathrm{NaD}$: de $5866$ a $5916$ \AA; \Halpha e \nII: de $6528$ a $6608$ \AA;
+$\mathrm{S\,\textsc{ii}}$: de $6696$ a $6752$ \AA. Essas máscaras são na verdade introduzidas em uma etapa posterior ao
+QBICK, quando os espectros sao procesados com o \starlight. Também nessa etapa os espectros são cortados entre 3800 e
+6850 \AA. O espectro após todas máscaras pode ser visto no painel inferior da Figura \ref{fig:checkmask}.
+
+
+
+\begin{figure}
+    %\includegraphics[height=0.5\textwidth]{figuras/figHusemann2013Fig2.pdf}
+    \includegraphics[width=1.0\textwidth]{figuras/K0277-constant_inital_mask-399.pdf}
+    \caption[Exemplo de máscaras em um espectro do cubo de dados.]
+    {Espectro da zona 399 da galáxia NGC 2916 (CALIFA 277). Acima está o espectro completo. No segundo vemos o espectro
+    com linhas telúricas e bad-pixels removidos, além do limite de intervalo em comprimendo de onda de $3800$ a $6850$
+    \AA. No espectro mais abaixo, além das partes removidas no segundo, estão foram removidas também as mesmas linhas de
+    emissão mascaradas na síntese de populações estelares.}
+    \label{fig:checkmask}
+\end{figure}
+
+
+
+
+O efeito do agraupamento em zonas de Voronoi é ilustrado na Figura \ref{fig:Fig1DeCF13} para a galáxia NGC 2916 cujos
+??? pixeis úteis (ie, não mascarados espacialmente) são agrupados em $N_z = 16??$ zonas. Como esperado, o efeito é maio
+nas partes externas. Vale aqui frisar que a grande maioria das zonas comporta um pixel apenas. Para a galáxia NGC 2916,
+por exemplo, $93\%$ das zonas possuem apenas $1$ pixel e $\sim 3\%$ com mais de $10$ pixeis agrupados, mesmo com a
+imposição de relaçao S/N $\ge 20$ em $\lambda = 5635$ \AA, nosso comprimento de onda de referência (veja Tabela
+\ref{tab:pixelZones}, que também mostra dados para outras galáxias estudadas esse trabalho). Portanto o cubo original é
+transformado numa matriz de zonas e comprimentos de onda.
+
+\begin{figure}
+    \caption[\ojo]
+    {\ojo FIG 1 DE CF13..... {\em (a)} imagend sdss... {\em (b)} blabla ...{\em (c)} ...
+{\em (a) SDSS stamp for NGC 2916 (CALIFA 277). As in other images throughout this paper, the circles mark $R = 1$ and 2 Half Light Radius (HLR). (b) CALIFA image in the rest-frame $5635 \pm 45$ \AA\ interval after applying the spatial mask. (c) Map of the S /N at 5635 \AA. (d) S /N map after the Voronoi binning. (e) Number of spaxels in each Voronoi zone. Note that no spatial binning ($N_z = 1$) was necessary throughout the inner $\sim 1$ HLR. (f) Percentage of bad pixels in the 3800--6850 \AA\ range. North is up and east is towards the left in all images.    }
+    Retirado de \citet{!!!}.}
+	\label{fig:Fig1DeCF13}
+\end{figure}
+
+A motivação para a "zonificacao"  do cubo é garantir espectros de qualidade boa o suficiente para análise com o
+\starlight. Nossa análise PCA poderia ser realizada sobre os cubos de dados originais, mas a realizaremos sobre as zonas
+produzidas pelo QBICK. A razao para isso é que queremos comparar os resultados de nossa análise com os parâmetros
+extraídos pelo \starlight, o que servirá de auxílio a interpretacao dos resultados da PCA.
 
 \begin{table}
 	\caption[Relação de pixels e zonas em algumas galáxias do CALIFA]
@@ -166,30 +217,49 @@ CidFernandes2014, GonzalezDelgado2013}.
 	\label{tab:pixelZones}
 \end{table}
 
-\subsection{E/S de dados no PyCASSO}
+Todas informações e pré-processamentos provenientes do {\sc qbick} são herdadas pelo PyCASSO e já estão contidas em seus
+cubos de espectros.
 
-O PyCASSO é uma biblioteca desenvolvida em Python para organizar os dados da
-sintese feita pelo \starlight. A versão usada neste trabalho é a
-$0.9.3$\footnote{\url{http://minerva.ufsc.br/~andre/PyCASSO-0.9.3/}}. Para um
-acesso mais rápido e reutilizável do código e dos dados em qualquer ambiente,
-organiza os cubos em formatos FITS ou HDF5. Em outra camada, várias matrizes e
-cubos são armazenados para acesso com nomes próprio (um exemplo, \texttt{popx},
-representa a fração de luz distribuída pelas populações estelares) de forma que
-a programação exploratória não precise se preocupar com as características de
-cada formato de armazenamento de dados. Por fim, existe uma camada construída
-para análise, com funções que retornam a indexação de cada zona para um par $(x,
-y)$, cálculos de perfis radiais e azimutais, geometria, entre outras rotinas. Um
-programador facilmente pode adicionar mais rotinas como essas.
+\subsection{PyCASSO}
 
-\subsection{Exemplos de utilização}
+Os espectros extraídos pelo QBICK são processados pelo \starlight, produzindo, no caso de CALIFA 277, 1639 arquivos
+ASCII como output. Dado o grande número de informações contidas em cada um desses arquivos (história de formacao estelar
+em luz e massa, extincao, parametros conematicos, figuras de merito do ajuste, etc.), necessitamos de um {\em pipeline}
+que faça a organização de todos os dados para que cálculos e gráficos de mais variadas dificuldade sejam fácil para que
+até um programador de nível iniciante possa fazer. André L. de Amorim, juntamente com outros colaboradores de nosso
+grupo e do projeto CALIFA construiu o PyCASSO ({\em Python CALIFA \starlight Synthesis Organizer}) \citep[][ cap.
+4]{CidFernandes2013I} que faz a organização dos dados que vêm do QBICK e das etapas inicais de reducao juntamente com a
+síntese de populações estelares feitas com o \starlight, facilitando, e muito, o trabalho de quem usa estes dados. Sem a
+ajuda deste organizador, este trabalho seria muito mais difícil, além de infactível no tempo de um mestrado.
 
-Ler um arquivo FITS é fácil com o PyCASSO, assim como o acesso aos dados. Na
-Figura \ref{fig:dataAccess} temos um exemplo de leitura de arquivo FITS e um
-cálculo da idade estelar média da galáxia a partir da idade média ponderada pela
-luminosidade, por zona (\texttt{at\_flux\_\_z}). A idade estelar média é
-calculada usando a expressão $ \langle \log t \rangle^{gal}_L = \sum_z \langle
-\log t \rangle_{L,z} L_z /\sum_z L_z$ onde $L_Z $ é a luminosidade e $ \langle
-\log t \rangle_L $ é a idade estelar média, ambas por zona.
+O PyCASSO é uma biblioteca desenvolvida em Python para organizar os dados da sintese feita pelo \starlight. A versão
+usada neste trabalho é a $0.9.3$\footnote{\url{http://minerva.ufsc.br/~andre/PyCASSO-0.9.3/}}. Para um acesso mais
+rápido e reutilizável do código e dos dados em qualquer ambiente, organiza os cubos em formatos FITS ou HDF5. Em outra
+camada, várias matrizes e cubos são armazenados para acesso com nomes próprio (um exemplo, \texttt{popx}, representa a
+fração de luz distribuída pelas populações estelares da base usada na síntese espectral com o \starlight) de forma que a
+programação exploratória não precise se preocupar com as características de cada formato de armazenamento de dados. Por
+fim, existe uma camada construída para análise, com funções que retornam a indexação de cada zona para um par $(x, y)$,
+cálculos de perfis radiais e azimutais, geometria, entre outras rotinas. Um programador facilmente pode adicionar mais
+rotinas como essas. Todo os programas desenvolvidos nessa dissertação foram escritos de forma compatível com o PyCASSO.
+
+{\bf \ojo NAO SEI ONDE ENCAIXAR ISSO...  A PRIMEIRA FRASE ATEH QUE PODERI SER UTILIZADA LAH NA INTRO DO CAP. ...
+A beleza da espectroscopia de campo integral é poder unir imageamento e espectroscopia, obtendo-se assim a galáxia vista
+como um cubo de dados  $(x, y, \lambda)$; para cada $\lambda$ temos uma imagem, e para cada par de ascenção reta e
+declinação $(x, y)$ temos um espectro. \ojo \textcolor{blue}{Pedir uma imagem chique de cubo para o André.} Apesar de
+cada espectro poder ser analizado individualmente, nos cubos do CALIFA existe uma correlação entre pixels vizinhos
+devido a \ojo {\em seeing} do céu, ao tamanho das fibras (??? de diametro) e ao processo de observação e reducao.
+Huseman ey al 2013 estimam que a resolucao espacial do CALIFA é de 3.7 arcsec (correspondendo a tipicamente ??? kpc para
+as galaxias da amostra), mas estudos posteriores indicam que ela é um pouco melhor que isso.}
+
+
+\subsection{Exemplos de utilização do PyCASSO}
+
+Ler um arquivo FITS é fácil com o PyCASSO, assim como o acesso aos dados. Na Figura \ref{fig:dataAccess} temos um
+exemplo de leitura de arquivo FITS e um cálculo da idade estelar média da galáxia a partir da idade média ponderada pela
+luminosidade, por zona (\texttt{at\_flux\_\_z}). A idade estelar média é calculada usando a expressão $ \langle \log t
+\rangle^{gal}_L = \sum_z \langle \log t \rangle_{L,z} L_z /\sum_z L_z$ onde $L_Z $ é a luminosidade e $ \langle \log t
+\rangle_L $ é a idade estelar média, ambas por zona.  A passagem de coordenadas $z \to (x, y)$ exemplificada na Figura
+\ref{fig:mapaIdade} é feita através da função de \texttt{zoneToYX} dentro do PyCASSO.
 
 \begin{figure}
 \begin{python}
@@ -210,11 +280,6 @@ print 'Idade media da galaxia K0277: \%.2f' \% at_total
 	\label{fig:dataAccess}
 \end{figure}
 
-Usando o \texttt{matplotlib}\footnote{\url{http://matplotlib.org}} podemos fazer
-gráficos facilmente acessando as matrizes e vetores do PyCASSO, como pode ser
-visto no programa na Figura \ref{fig:programaMapaIdade} e sua imagem gerada
-(Figura \ref{fig:mapaIdade}). Os cálculos necessários para o PCA e também para a
-Tomografia PCA se tornam simples contas usando pacotes matemáticos de python.
 
 \begin{figure}
 \begin{python}
@@ -232,6 +297,7 @@ plt.xlabel('Pixels')
 cb = plt.colorbar()
 cb.set_label(r'\langle \log t \langle_L [anos]')
 plt.title(r'\langle \log t \langle_{L z}')
+
 \end{python}
 	\caption[Programa idade estelar média]
 	{Programa para desenhar o mapa de idade	estelar média ponderada pela 
@@ -243,14 +309,15 @@ plt.title(r'\langle \log t \langle_{L z}')
 	\includegraphics{figuras/at_flux_zone.pdf}
 	\caption[Mapa da idade estelar média da galáxia NGC 2916] 
 	{Mapa de idade estelar média ponderada pela luminosidade da galáxia NGC 2916
-	(CALIFA 277) gerado pelo programa da Figura \ref{fig:programaMapaIdade}.}
+	(CALIFA 277) gerado pelo programa da Figura \ref{fig:programaMapaIdade}.{\bf\ojo Será que nao vale a pena botar umas
+	imagens de AV e ev0, p ex, para ilustrar mais? Pode servir de contraponto aos tomogramas. Acho uma boa ideia! Enfim,
+	pensa ai nessa possibilidade.} }
 	\label{fig:mapaIdade}
 \end{figure}
 
-Gerar perfis radiais ou axiais também são de fundamental importância para o
-estudo de diversas propriedades galáticas. Podemos ver na Figura
-\ref{fig:programaPerfRad} (e em sua imagem gerada \ref{fig:perfRad}) um exemplo
-de perfil radia executado através da função \texttt{radialProfile}.
+Perfis radiais ou axiais também são importantes para o estudo de diversas propriedades galáticas. Podemos ver na Figura
+\ref{fig:programaPerfRad} (e em sua imagem gerada \ref{fig:perfRad}) um exemplo de perfil radial executado através da
+função \texttt{radialProfile} do PyCASSO.
 
 \begin{figure}
 \begin{python}
@@ -272,6 +339,7 @@ plt.xlabel('radius [arcsec]')
 plt.ylabel(r'\langle \log t \langle_L [anos]')
 cb = plt.colorbar()
 plt.plot(bin_center, at_rad)
+
 \end{python}
 	\caption[Exemplo de programa para perfil radial]
 	{Programa para desenhar o perfil radial da idade estelar média ponderada pela
@@ -287,9 +355,14 @@ plt.plot(bin_center, at_rad)
 	\label{fig:perfRad}
 \end{figure}
 
-Dentro de nossa colaboração já existem mais de dez pessoas utilizando a
-biblioteca PyCASSO, com alguns artigos já publicados \citep{CidFernandes2013,
-CidFernandes2014, Perez2013, GonzalezDelgado2013}. Também há alguns usando
-indiretamente \citep{Husemann2013, IglesiasParamo2013}, uma tese de doutorado
-em curso e o presente trabalho.
+Já existem vários artigos utilizando o PyCASSO \citep{CidFernandes2013, CidFernandes2014, Perez2013,
+GonzalezDelgado2013}, também há alguns usando indiretamente \citep{Husemann2013, IglesiasParamo2013} e três teses de
+doutorado em curso (uma na USC e duas no IAA). São mais de 10 pessoas utilizando a biblioteca em nossa colaboração.
+
+Usando o \texttt{matplotlib}\footnote{\url{http://matplotlib.org}} podemos fazer gráficos facilmente acessando as
+matrizes e vetores do PyCASSO, como pode ser visto no programa na Figura \ref{fig:programaMapaIdade} e sua imagem gerada
+(Figura \ref{fig:mapaIdade}). Os cálculos necessários para o PCA e também para a Tomografia PCA se tornam simples contas
+usando pacotes matemáticos de python. Todo software dessenvolvido nesta dissertacao (por ora apelidado de "PCAlifa") foi
+feito de forma compativel com o PyCASSO, visando futuramente integrá-lo como um novo módulo dessa ferramenta.
+
 % End of this chapter
