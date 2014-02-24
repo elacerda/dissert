@@ -30,32 +30,32 @@
 Cientistas hoje, em sua maioria, encontram-se emaranhados em meio a um labirinto de informações. Grandes corredores com
 bilhões de intersecções interligadas que funcionam como uma fantástica e infinita biblioteca de dados. Um dia formada
 por livros, hoje formada de 0s e 1s que, através de infinitas combinações, juntos abarcam o combustível para o
-desenvolvimento do conhecimento da huminadade. Tal qual seja sua área, você tem, já teve, ou terá um dia que recorrer a
+desenvolvimento do conhecimento da humanidade. Tal qual seja sua área, você tem, já teve, ou terá um dia que recorrer a
 algum banco de dados de qualquer espécie pois hoje são parte fundamental no futuro da pesquisa científica.
 
 Os primeiros {\em surveys}\footnote{Um {\em survey} astronômico é um levantamento de informações ou mapeamento de
 regiões do céu utilizando telescópios e detetores.} astronômicos surgem com a inata curiosidade do homem de observar
 tudo a sua volta e registrar suas observações. O crescimento desses catálogos é produto direto da evolução dos
 equipamentos usados nestas investigações. No início da década de 80 \citet{Huchra1983} constroem um {\em
-redshift-survey} que coletou espectros para 2500 galaxias dando início a produção sistemática de dados na astronomia extragalática. Esse
-trabalho também foi seguidos por outros trabalhos \citep[e.g., ][]{Huchra1988, DaCosta1988} e de lá para cá a
-quantidade (e a qualidade) de dados só aumentou. Com a criação dos {\em mega-surveys} \citep[\SDSS; ][]{York2000}
-\citep[2dFGRS;][]{Colless1999} \citep[2MASS;][]{Skrutskie2006}, alguns já terminados, outros ainda começando ou por
-terminar \citep[LSST; ][]{Ivezic2008} \citep[J-PAS;][]{Benitez2009}, ultrapassou-se o patamar do humanamente impossível
-de se analisar individualmente cada objeto, necessitando assim a ajuda de máquinas e métodos computacionais cada vez
-mais eficientes. Com esse crescimento exponencial na quantidade de dados, precisamos cada vez mais de ferramentas
-matemáticas/estatísticas, e essa dissertação trata precisamente disso.
+redshift-survey} que coletou espectros para 2500 galaxias dando início a produção sistemática de dados na astronomia
+extragalática. Esse trabalho também foi seguidos por outros trabalhos \citep[e.g., ][]{Huchra1988, DaCosta1988} e de lá
+para cá a quantidade (e a qualidade) de dados só aumentou. Com a criação dos {\em mega-surveys} \citep[\SDSS;
+][]{York2000} \citep[2dFGRS;][]{Colless1999} \citep[2MASS;][]{Skrutskie2006}, alguns já terminados, outros ainda
+começando ou por terminar \citep[LSST; ][]{Ivezic2008} \citep[J-PAS;][]{Benitez2009}, ultrapassou-se o patamar do
+humanamente impossível de se analisar individualmente cada objeto, necessitando assim a ajuda de máquinas e métodos
+computacionais cada vez mais eficientes. Com esse crescimento exponencial na quantidade de dados, precisamos cada vez
+mais de ferramentas matemáticas/estatísticas, e essa dissertação trata precisamente disso.
 
 Um tipo de clássico de ferramenta de análise são os programas que ajustam os dados segundo algum modelo, extraíndo dessa
 análise informações de valor astrofísico. No contexto de espectros de galáxias, tema desta dissertação, uma ferramenta
 deste estilo é o código \starlight, desenvolvido por \citet{CidFernandes2005}, que decompõe o espectro observado em
 termos de populações estelares de distintas idades e metalicidades em um processo conhecido como síntese espectral.
-A aplicação desse método a quase um milhão de espectros de galáxias do SDSS gerou uma série de resultados \ojo (e.g.,
-algumas REFS!!). O \starlight, assim como várias outras ferramentas similares \ojo (Panter et al ..., Gallazzi ....,
-Ocvirk ...), propõe uma pergunta bem definida ("qual a história de formação de uma dada galáxia") e a respondem através
-de parâmetros extraídos do ajuste dos dados (i.e., da síntese espectral). O mapeamento do espaço de observáveis em um
-espaço de parâmetros envolve uma série de questões matemáticas e estatísticas complexas. Mesmo assim, este método é
-essencialmente calcado em princípios físicos.
+A aplicação desse método a quase um milhão de espectros de galáxias do SDSS gerou uma série de resultados \citep[e.g.,
+][]{Asari2007, Asari2009, CidFernandes2007, Mateus2007}. O \starlight, assim como várias outras ferramentas similares
+\citep{Panter2003, Gallazzi2005, Ocvirk2006} propõe uma pergunta bem definida (``qual a história de formação de
+uma dada galáxia'') e a respondem através de parâmetros extraídos do ajuste dos dados (i.e., da síntese espectral). O
+mapeamento do espaço de observáveis em um espaço de parâmetros envolve uma série de questões matemáticas e estatísticas
+complexas. Mesmo assim, este método é essencialmente calcado em princípios físicos.
 
 Outros métodos são de natureza mais puramente matemática, buscando no espaço de dados observados estruturas e
 correlações que possivelmente revelem (ou pelo menos nos dêem pistas sobre) os fenômenos subjacentes. Aqui, a pergunta é
@@ -63,17 +63,17 @@ bem definida em um sentido matemático, e o desafio é interpretar a resposta em
 \citet{SanchezAlmeida2010}, por exemplo, categorizam espectros de galáxias do SDSS/DR7 em termos de clusters formados
 pelas distâncias euclidianas entre os pontos formados pelo espectro de cada galáxia em um espaço de dimensão
 $N_\lambda$. Cada cluster desse foi caracterizado por um espectro médio chamado de {\em K-mean} e é usado para posterior
-comparação com outros espectros. Um método bem mais popular e tradicional nessa mesma linha é a análise de componentes
-principais (PCA - {\em Principal Component Analisys}).
+comparação com outros espectros. 
 
-A técnica de PCA é simples, não-paramétrica, e nos ajuda a extrair informações de conjuntos de dados com muitas
-variáveis. Resumidamente, a PCA parte de uma tabela de $N$ linhas (objetos) por $M$ colunas (contendo propriedades
-observadas para cada objeto) e reorganiza as colunas tranformando as propriedades originais em combinações delas mesmas
-de forma que as diferenças (a variância) entre os objetos  esteja concentrada nas primeiras colunas, reduzindo assim
-dimensionalidade do problema (mais detalhes em \ref{sec:PCAeTomoPCA:PCA}). A tabela pode conter quaisquer tipos de
-dados, como cores, tamanho, dispersão de velocidade, luminosidade, etc. No caso de espectros de diferentes galáxias, as
-propriedades são as medidas de fluxo para cada comprimento de onda: $F_{gl} = F_g(\lambda_l)$, com $l = 1 \ldots M$,
-para cada galáxia $g = 1 \ldots N$.
+Um método bem mais popular e tradicional nessa mesma linha é a análise de componentes principais (PCA - {\em Principal
+Component Analisys}). A técnica de PCA é simples, não-paramétrica, e nos ajuda a extrair informações de conjuntos de
+dados com muitas variáveis. Resumidamente, a PCA parte de uma tabela de $N$ linhas (objetos) por $M$ colunas (contendo
+propriedades observadas para cada objeto) e reorganiza as colunas transformando as propriedades originais em combinações
+delas mesmas de forma que as diferenças (a variância) entre os objetos  esteja concentrada nas primeiras colunas,
+reduzindo assim dimensionalidade do problema (mais detalhes em \ref{sec:PCAeTomoPCA:PCA}). A tabela pode conter
+quaisquer tipos de dados, como cores, tamanho, dispersão de velocidade, luminosidade, etc. No caso de espectros de
+diferentes galáxias, as propriedades são as medidas de fluxo para cada comprimento de onda: $F_{gl} = F_g(\lambda_l)$,
+com $l = 1 \ldots M$, para cada galáxia $g = 1 \ldots N$.
 
 Hoje, PCA é utilizada exaustivamente em várias áreas de conhecimento, principalmente em reconhecimento de padrões,
 computação visual, filtragem e compactação de dados \citep{Kamruzzaman2010, Borcea2012}. Podemos ver exemplos também em
@@ -125,22 +125,22 @@ Com esses cubos de dados, cada galáxia passa a ser uma grande amostra de espect
 galáxia a galáxia pode agora ser feito para diferentes regioes de uma mesma galáxia. Podemos assim executar o \starlight
 para cada {\em spaxel} e então obtemos propriedades físicas das populações estelares em função da posição na galáxia.
 Este tipo de análise vem sendo realizado por pesquisadores do IAA (Enrique Pérez, Rosa González Delgado, Rubén
-García-Benito) e da UFSC (Roberto Cid Fernandes, André Luiz de Amorim, Natália Vale Asari). Aspectos técnicos e
-incertezas são discutidos em \ojo \citep{CidFernandes2013, CidFernandes2014}, enquanto \citep{Perez2013}, e
-\ref{GonzalezDelgado2013} apresentam resultados astrofísicos dessa análise. Neste trabalho explorarenos os mesmo dados
-através da técnica de PCA.
+García-Benito) e da UFSC (André Luiz de Amorim, Natália Vale Asari, Roberto Cid Fernandes). Aspectos técnicos e
+incertezas são discutidos em \citep[][CF13 e CF14 daqui pra frente]{CidFernandes2013, CidFernandes2014}, enquanto
+\citep{Perez2013}, e \citep{GonzalezDelgado2013} apresentam resultados astrofísicos dessa análise. Neste trabalho
+explorarenos os mesmo dados através da técnica de PCA.
 
-A aplicação de PCA a cubos de dados foi realizada pela primeira vez por \citet{Steiner2009}, que cunharam o termo
-Tomografia PCA. Com essa nova técnica temos, além da análise das componentes principais, uma imagem formada pela matriz
+A aplicação de PCA a cubos de dados foi realizada pela primeira vez por \citet[][S09 daqui pra frente]{Steiner2009},
+que cunharam o termo Tomografia PCA. Com essa nova técnica temos, além da análise das componentes principais, uma imagem formada pela matriz
 de covariância (as questões matemáticas serão abordadas no Capítulo \ref{sec:PCAeTomoPCA}). Assim podemos saber o peso,
 ou relevância, de cada componente principal (daqui pra frente PC) relacionada a uma posição na galáxia, combinando as
 virtudes de espectroscopia com as de imageamento.
 
-Além do artigo de \citet{Steiner2009}, outros exemplos de uso de Tomografia PCA podem ser encontrados em
-\citet{Riffel2011} e \citet{Ricci2011}. Cumpre salientar que todas essas aplicações dessa nova técnica são baseadas em
-dados que cobrem apenas a \ojo região central das galáxias, 3 '' x 5 '' ou \ldots.  Esta é naturalemente uma região rica
-em fenomenologia e portanto interessante de ser estudada com IFS, como ilustram os próprios resultados dos artigos
-supracitados \ojo (ver tb sec ???).
+Além de S09, outros exemplos de uso de Tomografia PCA podem ser encontrados em \citet{Riffel2011} e \citet{Ricci2011}.
+Cumpre salientar que todas essas aplicações dessa nova técnica são baseadas em dados que cobrem apenas a região um campo
+de \ojo $3^{\prime\prime} \times 5^{\prime\prime}$ correspondendo algumas centenas de parsecs centrais. Esta é
+naturalemente uma região rica em fenomenologia e portanto interessante de ser estudada com IFS, como ilustram os
+próprios resultados dos artigos supracitados (ver também Seção \ref{sec:PCAeTomoPCA:TomoPCA}).
 
 \section{Este trabalho}
 \label{sec:Intro:ThisWork}
@@ -168,7 +168,7 @@ dados.
 É importante notar, no entanto, que existe uma grande diferença entre esses trabalhos anteriores e esse estudo.  Nossos
 cubos de dados cobrem uma escala completamente diferente. De fato, o CALIFA foi desenhado para observar galáxias
 inteiras. O campo do instrumento utilizado é de aproximadamente 1 arcmin$^2$. Em comparação com os estudos de Steiner e
-colaboradores, temos uma resolucao espacial muito "pior", mas em compensação mapeamos estruturas muito diferentes, como
+colaboradores, temos uma resolucao espacial muito ``pior'', mas em compensação mapeamos estruturas muito diferentes, como
 o bojo, disco, braços e regiões HII a muitos kpc do núcleo. Como veremos, esta diferença nos levou a tratar os dados
 de formas que diferem daquelas empregadas por Steiner e seus colaboradores. De fato, até onde temos conhecimento, este
 trabalho é o primeiro a aplicar a técnica de tomografa PCA à galáxias interias.
@@ -185,8 +185,8 @@ de tipificar diferentes pré-processamentos ou conjuntos dos dados antes da exec
 juntamente com suas implicações aos resultados das análises. As diversas escolhas relativas à etapas de
 pré-processamento dos dados são discutidas de forma exemplificada.
 
-Com todo o arcabouço teórico em mãos, no capítulo cinco temos um estudo de caso para $8$ objetos do CALIFA, escolhidos
-para abarcar "de tudo um pouco". São galáxias $4$ espirais, $2$ {\em early-type} e $2$ objetos compostos (mergers). Como
+Com todo o arcabouço teórico em mãos, no capítulo cinco temos um estudo de caso para 8 objetos do CALIFA, escolhidos
+para abarcar "de tudo um pouco". São galáxias 4 espirais, 2 {\em early-type} e 2 objetos compostos (mergers). Como
 forma de compação com os resultados da síntese de populações estelares executadas pelo \starlight nesses objetos também
 é feito uma espécie de engenharia reversa através de correlações e comparações.
 
