@@ -19,9 +19,11 @@
 \label{sec:CALePyC}
 
 Nesse cenário de crescimento exponencial na quantidade de dados alavancados por novas tecnologias surge o CALIFA: um
-projeto que está modificando nossa maneira de ver e pensar as galáxias no nosso universo de forma que entendamos melhor
-a nossa também. Na primeira seção deste capítulo iremos apresentar o survey CALIFA e suas diferenças sobre os surveys
-atuais. 
+projeto de IFS que está modificando nossa maneira de ver e pensar as galáxias no nosso universo. A beleza da
+espectroscopia de campo integral é poder unir imageamento e espectroscopia, obtendo-se assim a galáxia vista como um
+cubo de dados $(x, y, \lambda)$; para cada $\lambda$ temos uma imagem, e para cada par de ascenção reta e declinação
+$(x, y)$ temos um espectro. Na primeira seção deste capítulo iremos apresentar o survey CALIFA, que possibilita que este
+trabalho seja pioneiro na execução de análise PCA em cubos de espectros abrangendo o {\em FoV} de uma galáxia completa.
 
 Com a enorme quantidade de dados obtidos, resultado direto de um projeto de ciência de ponta, vem também a dificuldade
 da organizaçao dos dados para futuras investigações científicas. Dois {\em pipelines} nos ajudam na preparação dos dados
@@ -91,8 +93,8 @@ propósitos de ciência feita pelo \starlight, mas por problemas com {\em vignet
 os dados são reamostrados numa combinação das duas redes, criando cubos que chamamos de COMBO: A parte com $\lambda <
 4600$ \AA\ vem da V1200 e o resto da V500. Nessa montagem os espectros da V1200 foram suavizados à mesma resolucao
 espectral da V500 (FWHM $= 6$ \AA). Como outros cubos do CALIFA, os cubos COMBO provêm, para cada posição e comprimento
-de onda, o fluxo ($F_{\lambda,x,y}$), seu erro ($\epsilon_{\lambda,x,y}$) e uma flag ($b_{\lambda,x,y}$) que sinaliza
-pixeis defeituosos.
+de onda, o fluxo ($F_{\lambda,x,y}^{orig}$), seu erro ($\epsilon_{\lambda,x,y}$) e uma flag ($b_{\lambda,x,y}$) que
+sinaliza pixeis defeituosos.
 
 Nesse trabalho usaremos exclusivamente dados dos cubos COMBO. Por alguns motivos que veremos na próxima seção não
 analisarermos exatamente esses dados em sua forma original, mas os provenientes de duas outras pipelines desenvolvidas
@@ -129,7 +131,7 @@ espectral de 90 \AA\ de largura e centrada em 5635 \AA, e, por fim, extrai os es
 A Figura \ref{fig:checkmask} ilustra as máscaras espectrais utilizadas, tomando como exemplo a zona 399 para a galáxia
 NGC 2916 (CALIFA 277). O paniel superior mostra o espectro original. No painel do meio as janelas mascaradas pelo {\sc
 qbick} são removidas do espectro. Essas janelas correspondem a regiões contendo linhas telúricas\footnote{Linhas de
-emissão ou absorção referentes à atmosfera.}, as quais dificilmente sao perfeitamente removidas na redução. Pixeis
+emissão ou absorção referentes à atmosfera.}, as quais dificilmente são perfeitamente removidas na redução. Pixeis
 identificados como problematicos durante a reducao dos dados são igualmente mascarados. Em nossa análise fazemos uma
 estatística com todos os {\em bad pixels} de cada cubo e removemos qualquer um que esteja presente em mais de $5\%$ dos
 espectros. Cabe aqui lembrar que todos os espectros precisam ter os mesmos pontos em comprimento de onda pois precisamos
@@ -154,50 +156,46 @@ $\mathrm{S\,\textsc{ii}}$: de 6696 a 6752 \AA. Essas máscaras são na verdade i
     \label{fig:checkmask}
 \end{figure}
 
-O efeito do agraupamento em zonas de Voronoi é ilustrado na Figura \ref{fig:Fig1DeCF13} para a galáxia NGC 2916 cujos
-??? pixeis úteis (ie, não mascarados espacialmente) são agrupados em $N_z = 16??$ zonas. Como esperado, o efeito é maio
+O efeito do agrupamento em zonas de Voronoi é ilustrado na Figura \ref{fig:zonesfig1CF13} para a galáxia NGC 2916 cujos
+pixeis úteis (i.e., não mascarados espacialmente) são agrupados em $N_z = 1638$ zonas. Como esperado, o efeito é maior
 nas partes externas. Vale aqui frisar que a grande maioria das zonas comporta um pixel apenas. Para a galáxia NGC 2916,
-por exemplo, $93\%$ das zonas possuem apenas $1$ pixel e $\sim 3\%$ com mais de $10$ pixeis agrupados, mesmo com a
-imposição de relaçao S/N $\ge 20$ em $\lambda = 5635$ \AA, nosso comprimento de onda de referência (veja Tabela
-\ref{tab:pixelZones}, que também mostra dados para outras galáxias estudadas esse trabalho). Portanto o cubo original é
-transformado numa matriz de zonas e comprimentos de onda.
+por exemplo, $93\%$ das zonas possuem apenas 1 píxel e $\sim 3\%$ com mais de 10 pixeis agrupados, mesmo com a imposição
+de relaçao S/N $\ge 20$ na janela de $5635 \pm 45$ \AA, nosso janela de comprimento de onda usada como referência.
+Podemos ver na Tabela \ref{tab:pixelZones} esses dados as galáxias estudadas nesse trabalho. Portanto o cubo original é
+transformado numa matriz de zonas e comprimentos de onda ($F_{zl}$ com z indo de 0 até $N_z$ e l de 3800 a 6850 \AA).
 
 \begin{figure}
-    \caption[\ojo]
-    {\ojo FIG 1 DE CF13..... {\em (a)} imagend sdss... {\em (b)} blabla ...{\em (c)} ...
-    {\em (a) SDSS stamp for NGC 2916 (CALIFA 277). As in other images throughout this paper, the circles mark $R = 1$
-    and 2 Half Light Radius (HLR). (b) CALIFA image in the rest-frame $5635 \pm 45$ \AA\ interval after applying the
-    spatial mask. (c) Map of the S /N at 5635 \AA. (d) S /N map after the Voronoi binning. (e) Number of spaxels in each
-    Voronoi zone. Note that no spatial binning ($N_z = 1$) was necessary throughout the inner $\sim 1$ HLR. (f)
-    Percentage of bad pixels in the 3800--6850 \AA\ range. North is up and east is towards the left in all images.}
-    Retirado de \citet{!!!}.}
-   	\label{fig:Fig1DeCF13}
+	\includegraphics[width=1.0\textwidth]{figuras/figCF13fig1.pdf}
+    \caption[Máscara espacial, zonas de Voronoi e flags para a galáxia NGC 2916.]
+    {(a) Imagem SDSS para a galáxia NGC 2916 (CALIFA 277). (b) Fluxo no intervalo de $5635 \pm 45$ \AA\ depois da
+    aplicação da máscara espacial. (c) Mapa da relação S/N em 5635 \AA. (d) Mapa da relação S/N depois da zonificação de
+    Voronoi. (e) Número de spaxels em cada zona de Voronoi. (f) Percentagem de {\em bad pixels} no intervalo
+    de 3800--6850 \AA. Retirado de CF13, fig. 1.}
+   	\label{fig:zonesfig1CF13}
 \end{figure}
 
-A motivação para a "zonificacao"  do cubo é garantir espectros de qualidade boa o suficiente para análise com o
+A motivação para a ``zonificação'' do cubo é garantir espectros de qualidade boa o suficiente para análise com o
 \starlight. Nossa análise PCA poderia ser realizada sobre os cubos de dados originais, mas a realizaremos sobre as zonas
-produzidas pelo QBICK. A razao para isso é que queremos comparar os resultados de nossa análise com os parâmetros
-extraídos pelo \starlight, o que servirá de auxílio a interpretacao dos resultados da PCA.
+produzidas pelo {\sc qbick}. A razão para isso é que queremos comparar os resultados de nossa análise com os parâmetros
+extraídos pelo \starlight, o que servirá de auxílio a interpretação dos resultados da PCA.
 
 \begin{table}
 	\caption[Relação de pixels e zonas em algumas galáxias do CALIFA]
-	{Relação entre números de pixels por zona nas galáxias do CALIFA utilizadas
-	neste trabalho. $N_z$ representa o número de zonas. $N_1$ é o numero de zonas
-	com $1$ pixel apenas e $N_{10}$ aquelas que possuem mais de $10$ pixels por
-	zona.}
-	\begin{tabular}{l l l r r r r r}
+	{Relação entre números de pixels por zona nas galáxias do CALIFA utilizadas neste trabalho. $N_z$ representa o número
+	de zonas. $N_1$ é o numero de zonas com $1$ pixel apenas e $N_{10}$ aquelas que possuem mais de $10$ pixels por zona.}
+	\begin{tabular}{l l c r r r r r}
 		Nome da galáxia & CALIFA ID & {\em Hubble Type} & $N_z$ & $N_{1}$ &
 		${}^{N_1}/_{N_z}$ & $N_{10}$ & ${}^{N_{10}}/_{N_z}$
 		\\
 		\midrule
 		NGC 0001 & K0008 & Sbc & $1132$ & $1077$ & $0.95$ & $40$ & $0.04$ \\
-		NGC 0776 & K0073 & Sb & $1733$ & $1628$ & $0.94$ & $61$ & $0.04$ \\
-		NGC 1167 & K0119 & S0 & $1879$ & $1771$ & $0.94$ & $50$ & $0.03$ \\
-		NGC 2623 & K0213 & Scd & $561$ & $530$ & $0.94$ & $19$ & $0.03$ \\
+		NGC 0776 & K0073 & Sb  & $1733$ & $1628$ & $0.94$ & $61$ & $0.04$ \\
+		NGC 1167 & K0119 & S0  & $1879$ & $1771$ & $0.94$ & $50$ & $0.03$ \\
+		NGC 2623 & K0213 & Scd & $561$  & $530$  & $0.94$ & $19$ & $0.03$ \\
 		NGC 2916 & K0277 & Sbc & $1638$ & $1528$ & $0.93$ & $53$ & $0.03$ \\
-		NGC 4210 & K0518 & Sb & $1938$ & $1847$ & $0.95$ & $38$ & $0.02$ \\
-		ARP 220 & K0802 & Sd & $1157$ & $1103$ & $0.95$ & $39$ & $0.03$ \\
-		NGC 6515 & K0864 & E3 & $887$ & $811$ & $0.91$ & $44$ & $0.05$ \\
+		NGC 4210 & K0518 & Sb  & $1938$ & $1847$ & $0.95$ & $38$ & $0.02$ \\
+		ARP 220  & K0802 & Sd  & $1157$ & $1103$ & $0.95$ & $39$ & $0.03$ \\
+		NGC 6515 & K0864 & E3  & $887$  & $811$  & $0.91$ & $44$ & $0.05$ \\
 	\end{tabular}
 	\label{tab:pixelZones}
 \end{table}
@@ -207,17 +205,17 @@ cubos de espectros.
 
 \subsection{PyCASSO}
 
-Os espectros extraídos pelo QBICK são processados pelo \starlight, produzindo, no caso de CALIFA 277, 1639 arquivos
-ASCII como output. Dado o grande número de informações contidas em cada um desses arquivos (história de formacao estelar
-em luz e massa, extincao, parametros conematicos, figuras de merito do ajuste, etc.), necessitamos de um {\em pipeline}
-que faça a organização de todos os dados para que cálculos e gráficos de mais variadas dificuldade sejam fácil para que
-até um programador de nível iniciante possa fazer. André L. de Amorim, juntamente com outros colaboradores de nosso
-grupo e do projeto CALIFA construiu o PyCASSO ({\em Python CALIFA \starlight Synthesis Organizer}) \citep[][ cap.
-4]{CidFernandes2013I} que faz a organização dos dados que vêm do QBICK e das etapas inicais de reducao juntamente com a
-síntese de populações estelares feitas com o \starlight, facilitando, e muito, o trabalho de quem usa estes dados. Sem a
-ajuda deste organizador, este trabalho seria muito mais difícil, além de infactível no tempo de um mestrado.
+Os espectros extraídos pelo {\sc qbick} são processados pelo \starlight, produzindo, no caso de CALIFA 277, 1639
+arquivos ASCII como output. Dado o grande número de informações contidas em cada um desses arquivos (e.g., história de
+formacao estelar em luz e massa, extinção, parâmetros cinemáticos, figuras de mérito do ajuste), necessitamos de um {\em
+pipeline} que faça a organização de todos os dados para que cálculos e gráficos de mais variadas dificuldade sejam fácil
+para que até um programador de nível iniciante possa fazer. André L. de Amorim, juntamente com outros colaboradores de
+nosso grupo e do projeto CALIFA construiu o PyCASSO ({\em Python CALIFA \starlight Synthesis Organizer}) (descrito na
+sec. 4 de CF13) que faz a organização dos dados que vêm do {\sc qbick} e das etapas inicais de redução juntamente com a
+síntese de populações estelares feitas com o \starlight, facilitando, e muito, o trabalho de quem usa estes dados.
+Sem a ajuda deste organizador, este trabalho seria muito mais difícil, além de infactível no tempo de um mestrado.
 
-O PyCASSO é uma biblioteca desenvolvida em Python para organizar os dados da sintese feita pelo \starlight. A versão
+O PyCASSO é uma biblioteca desenvolvida em Python para organizar os dados da síntese feita pelo \starlight. A versão
 usada neste trabalho é a $0.9.3$\footnote{\url{http://minerva.ufsc.br/~andre/PyCASSO-0.9.3/}}. Para um acesso mais
 rápido e reutilizável do código e dos dados em qualquer ambiente, organiza os cubos em formatos FITS ou HDF5. Em outra
 camada, várias matrizes e cubos são armazenados para acesso com nomes próprio (um exemplo, \texttt{popx}, representa a
@@ -225,17 +223,7 @@ fração de luz distribuída pelas populações estelares da base usada na sínt
 programação exploratória não precise se preocupar com as características de cada formato de armazenamento de dados. Por
 fim, existe uma camada construída para análise, com funções que retornam a indexação de cada zona para um par $(x, y)$,
 cálculos de perfis radiais e azimutais, geometria, entre outras rotinas. Um programador facilmente pode adicionar mais
-rotinas como essas. Todo os programas desenvolvidos nessa dissertação foram escritos de forma compatível com o PyCASSO.
-
-{\bf \ojo NAO SEI ONDE ENCAIXAR ISSO...  A PRIMEIRA FRASE ATEH QUE PODERI SER UTILIZADA LAH NA INTRO DO CAP. ...
-A beleza da espectroscopia de campo integral é poder unir imageamento e espectroscopia, obtendo-se assim a galáxia vista
-como um cubo de dados  $(x, y, \lambda)$; para cada $\lambda$ temos uma imagem, e para cada par de ascenção reta e
-declinação $(x, y)$ temos um espectro. \ojo \textcolor{blue}{Pedir uma imagem chique de cubo para o André.} Apesar de
-cada espectro poder ser analizado individualmente, nos cubos do CALIFA existe uma correlação entre pixels vizinhos
-devido a \ojo {\em seeing} do céu, ao tamanho das fibras (??? de diametro) e ao processo de observação e reducao.
-Huseman ey al 2013 estimam que a resolucao espacial do CALIFA é de 3.7 arcsec (correspondendo a tipicamente ??? kpc para
-as galaxias da amostra), mas estudos posteriores indicam que ela é um pouco melhor que isso.}
-
+rotinas como essas. Todos os códigos desenvolvidos nessa dissertação foram escritos de forma compatível com o PyCASSO.
 
 \subsection{Exemplos de utilização do PyCASSO}
 
@@ -260,11 +248,9 @@ at_total = (at * K.Lobn__z).sum() / K.Lobn__z.sum()
 print 'Idade media da galaxia K0277: \%.2f' \% at_total
 \end{python}
 	\caption[Exemplo de programa utilizando PyCASSO]
-	{Exemplo de acesso aos cubo de dados por arquivo FITS e o cálculo da idade
-	estelar média de uma galáxia.}
+	{Exemplo de acesso aos cubo de dados por arquivo FITS e o cálculo da idade estelar média de uma galáxia.}
 	\label{fig:dataAccess}
 \end{figure}
-
 
 \begin{figure}
 \begin{python}
@@ -285,18 +271,15 @@ plt.title(r'\langle \log t \langle_{L z}')
 
 \end{python}
 	\caption[Programa idade estelar média]
-	{Programa para desenhar o mapa de idade	estelar média ponderada pela 
-	luminosidade.}
+	{Programa para desenhar o mapa de idade	estelar média ponderada pela luminosidade.}
 	\label{fig:programaMapaIdade}
 \end{figure}
 
 \begin{figure}
 	\includegraphics{figuras/at_flux_zone.pdf}
 	\caption[Mapa da idade estelar média da galáxia NGC 2916] 
-	{Mapa de idade estelar média ponderada pela luminosidade da galáxia NGC 2916
-	(CALIFA 277) gerado pelo programa da Figura \ref{fig:programaMapaIdade}.{\bf\ojo Será que nao vale a pena botar umas
-	imagens de AV e ev0, p ex, para ilustrar mais? Pode servir de contraponto aos tomogramas. Acho uma boa ideia! Enfim,
-	pensa ai nessa possibilidade.} }
+	{Mapa de idade estelar média ponderada pela luminosidade da galáxia NGC 2916 (CALIFA 277) gerado pelo programa da
+	Figura \ref{fig:programaMapaIdade}.}
 	\label{fig:mapaIdade}
 \end{figure}
 
@@ -346,8 +329,9 @@ doutorado em curso (uma na USC e duas no IAA). São mais de 10 pessoas utilizand
 
 Usando o \texttt{matplotlib}\footnote{\url{http://matplotlib.org}} podemos fazer gráficos facilmente acessando as
 matrizes e vetores do PyCASSO, como pode ser visto no programa na Figura \ref{fig:programaMapaIdade} e sua imagem gerada
-(Figura \ref{fig:mapaIdade}). Os cálculos necessários para o PCA e também para a Tomografia PCA se tornam simples contas
-usando pacotes matemáticos de python. Todo software dessenvolvido nesta dissertacao (por ora apelidado de "PCAlifa") foi
-feito de forma compativel com o PyCASSO, visando futuramente integrá-lo como um novo módulo dessa ferramenta.
+(Figura \ref{fig:mapaIdade}). Os cálculos necessários para a PCA e também para a Tomografia PCA se tornam simples contas
+usando pacotes matemáticos de python. O software dessenvolvido para a PCA e Tomografia PCA desta dissertação (por ora
+apelidado de ``PCAlifa'') foi feito de forma compativel com o PyCASSO, visando futuramente integrá-lo como um novo
+módulo dessa ferramenta.
 
 % End of this chapter
