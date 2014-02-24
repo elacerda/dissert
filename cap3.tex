@@ -38,72 +38,60 @@ Através de operações relativamente simples usando álgebra linear, é feita u
 uma nova base ortonormal não correlacionada através de um conjunto de autovalores e autovetores.
 
 Existem diversas formas de se calcular essa base final. A prova matemática que você pode obter essa base é feita através
-de multiplicadores de Lagrange, calculando os autovetores ($\mathbf{e}{}_k$) e autovalores  ($\lambda_k$) {\bf\ojo ??
-Melhor usar $\Lambda_k$ pra nao confundir com comprimento de onda...]} que maximizam o valor de $\mathbf{e}{}_k^T \cdot
-\mathbf{C}{}_{cov} \cdot \mathbf{e}{}_k$ (ver Eq. \ref{eq:PCA:covMatrix}) sujeito à restrição de que um autovetor deve
-ser ortogonal a qualquer outro da base ($\mathbf{e}{}_i^T \mathbf{e}{}_j = 0$) e que todos devem ser normalizados
-($\mathbf{e}{}_i{}^T \mathbf{e}{}_i = 1$) \citep[][p. 5-6]{JolliffePCA1986}. No caso caso de PCA com espectros, cada um
-pode ser represtado como um ponto num espaço \ojo$N_\lambda$-dimensional. Vários espectros formam uma núvem de pontos
-nesse espaço. Assim, encontramos quais são os eixos mais significativos desse espaço em relação à variância, sujeitos às
-restrições acima. Fazemos esse cálculo encontrando os autovetores e autovalores da matriz de correlação {\bf \ojo
-Covariancia?]} desse espaço (a matriz tem dimensão $\lambda \time \lambda$) usando a biblioteca científica
-\texttt{SciPy}\footnote{\url{http://scipy.org/}} (\ref{fig:PCA:covMatrix}), que encontra os autovetores e autovalores da
-matriz de correlação {\bf \ojo Covariancia?]}.
+de multiplicadores de Lagrange, calculando os autovetores ($\mathbf{e}{}_k$) e autovalores ($\Lambda_k$) que maximizam o
+valor de $\mathbf{e}{}_k^T \cdot \mathbf{C}{}_{cov} \cdot \mathbf{e}{}_k$ (ver Eq. \ref{eq:PCA:covMatrix}) sujeito à
+restrição de que um autovetor deve ser ortogonal a qualquer outro da base ($\mathbf{e}{}_i^T \mathbf{e}{}_j = 0$) e que
+todos devem ser normalizados ($\mathbf{e}{}_i{}^T \mathbf{e}{}_i = 1$) \citep[][p. 5-6]{JolliffePCA1986}. No caso caso
+de PCA com espectros, cada um pode ser represtado como um ponto num espaço com dimensão $N_\lambda$. Vários espectros
+formam uma núvem de pontos nesse espaço. Assim, encontramos quais são os eixos mais significativos desse espaço em
+relação à variância, sujeitos às restrições acima. Fazemos esse cálculo encontrando os autovetores e autovalores da
+matriz de covariância desse espaço (a matriz tem dimensão $N_\lambda \times N_\lambda$) usando a biblioteca científica
+\texttt{SciPy}\footnote{\url{http://scipy.org/}} (\ref{fig:PCA:covMatrix}), que encontra os autovetores e autovalores
+dessa matriz.
 
 \subsection{PCA das galáxias do CALIFA}
 
-Conforme a Seção \ref{sec:CALePyC:PyCASSO} vimos que o cubo de espectros das galáxias do CALIFA estão acessíveis no
+Conforme a Seção \ref{sec:CALePyC:pipelines} vimos que o cubo de espectros das galáxias do CALIFA estão acessíveis no
 PyCASSO separados por zonas, muitas correspondendo a píxeis individuiais e outras a conjuntos de pixeis (zonas de
-Voronoi). Os espectros observados estão armazenados em forma de uma matriz $(n \times m)$ {\bf [\ojo Conferir notacao
-.... $n = N_z$?? $m = N_\lambda$??]} com $n$ zonas e $m$ comprimentos de onda (\texttt{f\_obs}\footnote{No PyCASSO está
-amostrado de forma transposta ($\lambda \times z$) a usada.} no PyCASSO).
+Voronoi). Os espectros observados estão armazenados em forma de uma matriz ($N_\lambda \times N_z$) com $N_\lambda$
+comprimentos de onda e $N_z$ zonas e (\texttt{f\_obs} no PyCASSO). Em nosso trabalho vamos usar a forma transposta dessa
+matriz, portanto nossa matriz de espectros está na forma $N_z \times N_\lambda$, como demonstrado na equação abaixo.
 
 \begin{equation}
     \label{eq:PCA:fluxMatrix}
     \textbf{F}{}_{z \lambda} = \left[
     \begin{array}{ccccc}
-        f_{z_0 \lambda_0} & f_{z_0 \lambda_1} & f_{z_0 \lambda_2} & ... & f_{z_0 \lambda_m} \\
-        f_{z_1 \lambda_0} & f_{z_1 \lambda_1} & f_{z_1 \lambda_2} & ... & f_{z_1 \lambda_m} \\
-        f_{z_2 \lambda_0} & f_{z_2 \lambda_1} & f_{z_2 \lambda_2} & ... & f_{z_2 \lambda_m} \\
+        F_{z_0 \lambda_0} & F_{z_0 \lambda_1} & F_{z_0 \lambda_2} & ... & F_{z_0 \lambda_{(N_\lambda - 1})} \\
+        F_{z_1 \lambda_0} & F_{z_1 \lambda_1} & F_{z_1 \lambda_2} & ... & F_{z_1 \lambda_{(N_\lambda - 1})} \\
+        F_{z_2 \lambda_0} & F_{z_2 \lambda_1} & F_{z_2 \lambda_2} & ... & F_{z_2 \lambda_{(N_\lambda - 1})} \\
         ...               & ...               & ...               & ... & ...               \\
-        f_{z_n \lambda_0} & f_{z_n \lambda_1} & f_{z_n \lambda_2} & ... & f_{z_n \lambda_m} 
+        F_{z_{(N_z - 1)} \lambda_0} & F_{z_{(N_z - 1)} \lambda_1} & F_{z_{(N_z - 1)} \lambda_2} & ... & F_{z_{(N_z - 1)}
+        \lambda_{(N_\lambda - 1)}}
     \end{array} 
     \right]
 \end{equation}
 
-Calculamos então o espectro médio de uma galáxia 
-
+Calculamos então o espectro médio de uma galáxia
 \begin{equation}
-\langle
-\textbf{F}{}_\lambda \rangle = \frac{1}{n} \sum_{i=0}^{n} f_{z_i}{}_{\lambda}
+\langle \textbf{F}{}_\lambda \rangle = \frac{1}{N_z} \sum_{i=0}^{(N_z - 1)} F_{z_i}{}_{\lambda}
 \end{equation}
-
 \noindent e então subtraímos a média de todos os espectros
-
 \begin{equation}
-\textbf{I}{}_{z \lambda} =
-\textbf{F}{}_{z \lambda} - \langle \textbf{F}{}_\lambda \rangle
+\textbf{I}{}_{z \lambda} = \textbf{F}{}_{z \lambda} - \langle \textbf{F}{}_\lambda \rangle
 \end{equation}
-
-\noindent para o cálculo
-da matriz de covariâncias usando um conjunto de dados com média zero:'
-
+\noindent para o cálculo da matriz de covariâncias usando um conjunto de dados com média zero:
 \begin{equation}
 	\label{eq:PCA:covMatrix}
-	\mathbf{C}{}_{cov} = \frac{[\mathbf{I}{}_{z \lambda}]^T \cdot \mathbf{I}{}_{z
-	\lambda}}{n - 1}
+	\mathbf{C}{}_{cov} = \frac{[\mathbf{I}{}_{z \lambda}]^T \cdot \mathbf{I}{}_{z \lambda}}{n - 1}
 \end{equation}
+\noindent Vemos que a matriz de covariância possui dimensão $N_\lambda \times N_\lambda$.
 
-\noindent Vemos que
-a matriz de covariância possui dimensão $\lambda \times \lambda$. 
-{\bf[\ojo $m \times m$?? $N_\lambda \times N_\lambda$??]}
-
-Agora calculamos os autovalores e autovetores da matriz de covariância. Neste
-trabalho usamos o nome autoespectro para designar esses autovetores pois são de
-uma matriz de covariâncias entre espectros de cada zona. Então ordenamos-os
-decrescentemente pelo valor de seus autovalores. Os autoespectros são as componentes principais (PCs) e
-os autovalores as respectivas variâncias. Isso feito, temos então o que necessitamos para
-iniciar o cálculo do Tomograma PCA.
+Agora calculamos os autovalores e autovetores da matriz de covariância. Neste trabalho usamos o nome autoespectro para
+designar esses autovetores pois são de uma matriz de covariâncias entre espectros de cada zona. Então ordenamos-os
+decrescentemente pelo valor de seus autovalores. Os autoespectros são as componentes principais (PCs) e os autovalores
+as respectivas variâncias. Isso feito, temos então o que necessitamos para iniciar o cálculo do Tomograma PCA. Um
+exemplo de programa para calcular a matriz de covariâncias e seus autovetores e autovalores usando o \texttt{SciPy} pode
+ser visto na Figura \ref{fig:programaCovMatrix}.
 
 \begin{figure}
 \begin{python}
@@ -134,20 +122,17 @@ eigval = W[S]
 eigvect = e[:, S]
  
 \end{python}
-	\caption[Exemplo de cálculo de PCA usando o PyCASSO e SciPy] {Cálculo do
-	procedimento completo de PCA para os espectros observados de uma galáxia do
-	CALIFA usando o PyCASSO e a biblioteca científica de Python chamada
-	\texttt{SciPy}. No final do código temos em eigval e eigvect os
-	autovalores e autovetores ordenados em forma decrescente.
-	{\bf\ojo O TEXTO NAO FAZ REF A ESTA "FIG"!!}
-	}
-	\label{fig:PCA:covMatrix}
+	\caption[Exemplo de cálculo de PCA usando o PyCASSO e SciPy.] 
+	{Cálculo do procedimento completo de PCA para os espectros observados de uma galáxia do CALIFA usando o PyCASSO e a
+	biblioteca científica de Python chamada \texttt{SciPy}. No final do código temos armazenado nos vetores \texttt{eigval}
+	e \texttt{eigvect} os autovalores e autovetores da matriz de covariância (\texttt{covMat\_\_ll}) ordenados
+	decrescentemente.}
+	\label{fig:programaCovMatrix}
 \end{figure}
 
-Muitas figuras de PCs e suas utilizações e diferenças nos pré-processamentos
-serão mostradas nos Capítulos \ref{sec:UsoPCA} e \ref{sec:result}, juntamente
-com a Tomografia PCA e as comparações com os parâmetros físicos da sintese de
-populações estelares com o \starlight.
+Muitas figuras de PCs e suas utilizações e diferenças nos pré-processamentos serão mostradas nos Capítulos
+\ref{sec:PCAaplic} e \ref{sec:result}, juntamente com a Tomografia PCA e as comparações com os parâmetros físicos da
+sintese de populações estelares com o \starlight.
 
 %***************************************************************%
 %                                                               %
@@ -158,58 +143,44 @@ populações estelares com o \starlight.
 \section{Tomografia PCA}
 \label{sec:PCAeTomoPCA:TomoPCA}
 
-Na técnica de PCA procuramos os autoespectros (PCs) da matriz de correlação,
-ordenados pela variância, formam uma base ($\mathbf{E}{}_{\lambda k}$) onde 
-podemos projetar os nossos dados através da transformação:
+Os autoespectros ($e_k$) da matriz de covariância (PCs) ordenados pela sua variância ($\Lambda_k$) formam uma matriz
+($\mathbf{E}{}_{\lambda k}$, de dimensão $N_\lambda \times N_k$, onde $N_k$ é o número de PCs) que serve como base onde
+projetamos nossa matriz de observáveis com a média subtraida ($\mathbf{I}{}_{z \lambda}$) através da transformação:
 
 \begin{equation}
 	\label{eq:TomoPCA:tomogram2D}
 	\mathbf{T}{}_{z k} = \mathbf{I}{}_{z \lambda} \cdot \mathbf{E}{}_{\lambda k}
 \end{equation}
 
-Projetamos nossa matriz de observáveis com a média subtraida ($\mathbf{I}{}_{z
-\lambda}$) na base das PCs ($\mathbf{E}{}_{\lambda k}$). Na posse dessa nova
-matriz transformada e de um mapa que leve de zona para uma par de coordenada ($z
-\to (x, y)$), podemos montar assim uma imagem. Cada imagem funciona como uma
-``fatia'' de um cubo de dados expandido na nova base, assim formando a
-Tomografia PCA\footnote{\url{http://www.astro.iag.usp.br/~pcatomography/}},
-criada e assim batizada por \citet{Steiner2009}, que em seu artigo faz um
-paralelo com fatias de um espaço tridimensional (tomograma do corpo humano, por
-exemplo) ou no espaço de velocidades (Tomografia Doppler). Cada ``fatia'' possui
-um autoespectro relacionado que, em conjunto, trazem novas perspectivas e ideias
-para a interpretação de ambos. 
-
-
-
+Na posse dessa nova matriz transformada e de um mapa que faça a transformação de zona para uma par de coordenada ($z \to
+(x, y)$), podemos montar assim uma imagem. Cada imagem funciona como uma ``fatia'' de um cubo de dados expandido na nova
+base, assim formando a Tomografia PCA\footnote{\url{http://www.astro.iag.usp.br/~pcatomography/}}, criada e assim
+batizada por Steiner em S09, que em seu artigo faz um paralelo com fatias de um espaço tridimensional (tomograma do
+corpo humano, por exemplo) ou no espaço de velocidades (Tomografia Doppler). Cada ``fatia'' possui um autoespectro (PC)
+relacionado que, em conjunto, trazem novas perspectivas e ideias para a interpretação de ambos.
 
 \section{Exemplos de resultado da Tomagrafia PCA}
 
-Para ilustrar o potencial da tecniva de tomog PCA, ilustramos os resultados obtidos em 2 artigos.
+Para ilustrar o potencial da tecnica de Tomografia PCA, ilustramos os resultados obtidos em 2 artigos.
 
 \subsection{Descoberta de linhas largas em um LINER}
 
-No artigo citado anteriormente, através do estudo dos autoespectros e suas
-respectivas imagens do núcleo da galáxia LINER ({\em Low Ionizations Nuclear
-Emission-line Region}) NGC 4736, foram encontradas evidências de linhas largas. Quando temos uma fonte que é capaz de
-produzir linhas largas no espectro é sinal da existência de um SMBH ({\em Super
-Massive Black Hole}). \citet{CidFernandes2004} mostram que, pelo menos em alguns casos, a subtração 
-detalhada das populações estelares nos espectros ajuda a encontrar linhas largas
-mais fracas em Seyferts 2, que são aquelas que (por definição)  possuem apenas linhas estreitas,
-ajudando assim na classificação desses objetos como tipo 1 ou 2. O PCA,
-juntamente com a Tomografia PCA, fazem esse papel da subtração das populações
-estelares sem haver nenhuma parametrização.
+No artigo citado anteriormente, através do estudo dos autoespectros e suas respectivas imagens do núcleo da galáxia
+LINER ({\em Low Ionizations Nuclear Emission-line Region}) NGC 4736, foram encontradas evidências de linhas largas.
+Quando temos uma fonte que é capaz de produzir linhas largas no espectro é sinal da existência de um SMBH ({\em Super
+Massive Black Hole}). \citet{CidFernandes2004} mostram que, pelo menos em alguns casos, a subtração detalhada das
+populações estelares nos espectros ajuda a encontrar linhas largas mais fracas em Seyferts 2, que são aquelas que (por
+definição) possuem apenas linhas estreitas, ajudando assim na classificação desses objetos como tipo 1 ou 2. A PCA,
+juntamente com a Tomografia PCA, fazem esse papel da subtração das populações estelares sem haver nenhuma
+parametrização.
 
-Steiner et al .... estudaram os 8 primeiros autoespectros, escolhidos através de um {\em scree
-test} (\ref{fig:TomoPCA:scree}), no qual se verifica a variância de cada PC e
-toma-se as mais relevantes. O autoespectro com mais variância (no artigo tratado
-com E1) possui $99.74\%$ da variância e reproduz comportamento do gás e da
-população estelar somados (Figura \ref{fig:TomoPCA:eigspec1}). O segundo
-contribui com $0.088\%$ para a variância e tem um claro padrão de rotação, tanto
-nas linhas do autoespectro quanto na imagem da tomografia (Figura
-\ref{fig:TomoPCA:eigspec2}). É no terceiro ($0.032\%$ da variância) que
-mostra evidência clara de uma emissão larga de \Halpha (Figura
-\ref{fig:TomoPCA:eigspec3}). Essa assinatura é uma evidência tipica de AGNs de tipo 1.
-
+Em S09 estudaram os 8 primeiros autoespectros, escolhidos através de um {\em scree test} (\ref{fig:TomoPCA:scree}), no
+qual se verifica a variância de cada PC e toma-se as mais relevantes. O autoespectro com mais variância (no artigo
+tratado com E1) possui $99.74\%$ da variância e reproduz comportamento do gás e da população estelar somados (Figura
+\ref{fig:TomoPCA:eigspec1}). O segundo contribui com $0.088\%$ para a variância e tem um claro padrão de rotação, tanto
+nas linhas do autoespectro quanto na imagem da tomografia (Figura \ref{fig:TomoPCA:eigspec2}). É no terceiro ($0.032\%$
+da variância) que mostra evidência clara de uma emissão larga de \Halpha (Figura \ref{fig:TomoPCA:eigspec3}). Essa
+assinatura é uma evidência tipica de AGNs de tipo 1.
 
 \begin{figure}
     \includegraphics[width=0.7\textwidth]{figuras/figSteiner2009fig1.pdf}
@@ -244,25 +215,35 @@ mostra evidência clara de uma emissão larga de \Halpha (Figura
     \label{fig:TomoPCA:eigspec3}
 \end{figure}
 
-
 \subsection{Reflexao da luz de um AGN escondido em NGC 7097}
 
 {\bf\ojo A FAZER!! \ojo Ricci et al 2011. Figs 3 e 5. vais precisar da minha ajuda para entender esse assunto de reflexao ... le o paper e depois falamos}
 
 
+\section{\ojo Tomografia PCA para dados CALIFA: diferenças com respeito a trabalhos anteriores}
 
+Os exemplos acima nos motivam a aplicar esta mesma técnica aos cubos de dados do CALIFA, e o resto desta dissertação
+apresenta nossos experimentos nesse sentido. Cumpre ressaltar, contudo, que o tipo de dados que analisaremos difere
+bastante dos dados analisados até agora com essa nova ferramenta.
 
-\section{Tomografia PCA para dados CALIFA: diferenças com respeito a trabalhos anteriores}
+Essas diferenças são tanto de caracter observacional, como metodologico e físico. Para começo de conversa, Steiner e
+colaboradores trabalham com dados do Gemini (8m) com ?? min de integracao, enquanto nossos dados vêm de integracoes de
+tipicamente ?? min no telescópio de 3.5m do observatório de Calar Alto.
 
-Os exemplos acima nos motivam a aplicar esta mesma técnica aos cubos de dados do CALIFA, e o resto desta dissertacao apresenta nossos expeimentos nesse sentido. Cumpre ressaltar, contudo, que o tipo de dados que analisaremos difere bastante dos dados analisados até agora com essa nova ferramenta. 
+Além disso, os trabalhos de ?? e ?? aplicam tecnicas de deconvolucao das imagens com o algoritmo de Richardson-Lucy.
+Dado o pequeno FoV do IFU do Gemini, o ganho com tais técnicas é perceptível. Nao aplicaremos isso no nosso caso pq
+nosso FoV é muito maior, e não esperamos grandes ganhos em resolucao espacial com a aplicacao dessa técnica de
+deconvolucao espacial.
 
+Como dito na sec ???, a escala e resolucao espacial de nossos dados difere brutalmente daquelas nos trabalhos acima
+resumidos: 3 x 5 arcsec e resolucao de ?? arcsec no Gemini contra ?? x ?? e resolcao de 3.7 arcsec no CALIFA. Portanto,
+o FoV estudado por Steiner e colaboradores equivalen a aproximadamente 2 elementos de resolucao do CALIFA! Isto de cara
+mostra que a ciencia que podemos obter com Tomografia PCA + CALIFA  nao será a mesma que aquela estudade por Steiner et
+al.
 
-Essas diferenças são tanto de caracter observacional, como metodologico e físico. Para começo de conversa, Steiner e colaboradores trabalham com dados do Gemini (8m) com ?? min de integracao, enquanto nossos dados vêm de integracoes de tipicamente ?? min no telescópio de 3.5m do observatório de Calar Alto. 
-
-Além disso, os trabalhos de ?? e ?? aplicam tecnicas de deconvolucao das imagens com o algoritmo de Richardson-Lucy. Dado o pequeno FoV do IFU do Gemini, o ganho com tais técnicas é perceptível. Nao aplicaremos isso no nosso caso pq nosso FoV é muito maior, e não esperamos grandes ganhos em resolucao espacial com a aplicacao dessa técnica de deconvolucao espacial.
-
-Como dito na sec ???, a escala e resolucao espacial de nossos dados difere brutalmente daquelas nos trabalhos acima resumidos: 3 x 5 arcsec e resolucao de ?? arcsec no Gemini contra ?? x ?? e resolcao de 3.7 arcsec no CALIFA. Portanto, o FoV estudado por Steiner e colaboradores equivalen a aproximadamente 2 elementos de resolucao do CALIFA! Isto de cara mostra que a ciencia que podemos obter com Tomografia PCA + CALIFA  nao será a mesma que aquela estudade por Steiner et al.
-
-Em resumo, apesar de inspirado diretamente pelos resultados de Steiner et al, este estudo difere muito dos trabalhos deles. Estas diferencas ficarao evidentes já a partir do próximo capítulo, onde apresentamod nossos primeiros resultados e discutimos algumas variacoes com respeito ao processamento de Steuer et al que decidimos fazer para melhor se adequar ao contexto de dados CALIFA.
+Em resumo, apesar de inspirado diretamente pelos resultados de Steiner et al, este estudo difere muito dos trabalhos
+deles. Estas diferencas ficarao evidentes já a partir do próximo capítulo, onde apresentamod nossos primeiros resultados
+e discutimos algumas variacoes com respeito ao processamento de Steuer et al que decidimos fazer para melhor se adequar
+ao contexto de dados CALIFA.
 
 %% End of this chapter
