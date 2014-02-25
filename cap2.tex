@@ -61,8 +61,8 @@ projeto está instalado o equipamento Potsdam Multi Aperture Spectrograph \citep
 \citep{Verheijen2004, Kelz2006} formando um espectrofotômetro de campo integrado com um {\em bundle} de 382 fibras
 (Figura \ref{fig:BundlePPAK}), das quais, 331 são para observação dos objetos, outras 36 que fazem amostras para a
 sutração do céu e outras 15 para calibração. Cada uma das {\em science fibers} (331) possui $2.7^{\prime\prime}$ de
-diâmetro, formando um campo de visão hexagonal de $74^{\prime\prime} \times 64^{\prime\prime}$ ($\sim1.3^\prime$) que,
-através de uma técnica de três pontos de {\em dithering} torna possível a observação de $100\%$ do campo.
+diâmetro, formando um campo de visão hexagonal de $74^{\prime\prime} \times 64^{\prime\prime}$ ($\sim1.3$ arcmin$^2$)
+que, através de uma técnica de três pontos de {\em dithering} torna possível a observação de 100\% do campo.
 
 \begin{figure}
     \includegraphics[height=0.5\textwidth]{figuras/figHusemann2013Fig2.pdf}
@@ -82,9 +82,9 @@ através de uma técnica de três pontos de {\em dithering} torna possível a ob
     \label{fig:BundlePPAK}
 \end{figure}
 
-Os dados são reduzidos utilizando a CALIFA Pipeline versão 1.3c, descrito em \citet{Husemann2013}. Com as 331 {\em
+Os dados são reduzidos utilizando o CALIFA Pipeline versão 1.3c, descrito em \citet{Husemann2013}. Com as 331 {\em
 science fibers} e o processo de {\em dithering} em 3 posições, temos 993 espectros independentes por objeto observado.
-\citet{Husemann2013} estimam que a resolução espacial de cada fibra é $\sim3.7^{\prime\prime}$. Com a reamostragem do
+\citet{Husemann2013} estimam que a resolução espacial final é $\sim3.7^{\prime\prime}$ (FWHM). Com a reamostragem do
 cubo de espectros de forma que cada spaxel tenha área de $1^{\prime\prime} \times 1^{\prime\prime}$ obtêm-se mais de
 4000 espectros por galáxia. Isto, somado ao {\em seeing} do céu e o processo de observação e redução, implica que cada
 píxel do cubo final não seja completamente independente, ou seja, numa automática correlação entre os píxeis vizinhos.
@@ -144,7 +144,7 @@ Escolhemos mascarar as seguintes janelas: $\mathrm{H}\epsilon$: de 3960 a 3980 \
 \AA; $\mathrm{H}\gamma$: de 4330 a 4350 \AA; \Hbeta: de 4848 a 4874 \AA; \oIII: de 4940 a 5028 \AA;
 $\mathrm{He\,\textsc{i}}$ e $\mathrm{Na\,\textsc{i}\ D}$\footnote{Na {\sc i} D não é uma linha de emissão, mas
 mascaramos esse dubleto porque ele pode conter uma componente de absorção devida a presença de gás neutro no meio
-interestelar}:de 5866 a 5916 \AA; \Halpha e \nII: de 6528 a 6608 \AA; $\mathrm{S\,\textsc{ii}}$: de 6696 a 6752 \AA.
+interestelar.}:de 5866 a 5916 \AA; \Halpha e \nII: de 6528 a 6608 \AA; $\mathrm{S\,\textsc{ii}}$: de 6696 a 6752 \AA.
 Essas máscaras são na verdade introduzidas em uma etapa posterior ao {\sc qbick}, quando os espectros são procesados com
 o \starlight. Também nessa etapa os espectros são cortados entre 3800 e 6850 \AA. O espectro após todas máscaras pode
 ser visto no painel inferior da Figura \ref{fig:checkmask}.
@@ -170,7 +170,7 @@ transformado numa matriz de zonas e comprimentos de onda ($F_{zl}$ com $z$ indo 
 
 \begin{figure}
 	\includegraphics[width=1.0\textwidth]{figuras/figCF13fig1.pdf}
-    \caption[Máscara espacial, zonas de Voronoi e flags para a galáxia NGC 2916.]
+    \caption[Máscara espacial, zonas de Voronoi e flags para a galáxia NGC 2916 (CALIFA 277).]
     {(a) Imagem SDSS para a galáxia NGC 2916 (CALIFA 277). (b) Fluxo no intervalo de $5635 \pm 45$ \AA\ depois da
     aplicação da máscara espacial. (c) Mapa da relação S/N em 5635 \AA. (d) Mapa da relação S/N depois da zonificação de
     Voronoi. (e) Número de spaxels em cada zona de Voronoi. (f) Percentagem de {\em bad pixels} no intervalo
@@ -184,7 +184,7 @@ produzidas pelo {\sc qbick}. A razão para isso é que queremos comparar os resu
 extraídos pelo \starlight, o que servirá de auxílio a interpretação dos resultados da PCA.
 
 \begin{table}
-	\caption[Relação de pixels e zonas em algumas galáxias do CALIFA]
+	\caption[Relação de pixels e zonas em algumas galáxias do CALIFA.]
 	{Relação entre números de pixels por zona nas galáxias do CALIFA utilizadas neste trabalho. $N_z$ representa o número
 	de zonas. $N_1$ é o numero de zonas com $1$ pixel apenas e $N_{10}$ aquelas que possuem mais de $10$ pixels por zona.}
 	\begin{tabular}{l l c r r r r r}
@@ -204,20 +204,20 @@ extraídos pelo \starlight, o que servirá de auxílio a interpretação dos res
 	\label{tab:pixelZones}
 \end{table}
 
-Todas informações e pré-processamentos provenientes do {\sc qbick} são herdadas pela {\em pipeline} apresentada a
-seguir: o PyCASSO.
+Todas informações e pré-processamentos provenientes do {\sc qbick} são herdadas pelo {\em pipeline} apresentado a
+seguir.
 
 \subsection{PyCASSO}
 
 Os espectros extraídos pelo {\sc qbick} são processados pelo \starlight, produzindo, no caso de CALIFA 277, 1639
 arquivos ASCII como output. Dado o grande número de informações contidas em cada um desses arquivos (e.g., história de
 formacao estelar em luz e massa, extinção, parâmetros cinemáticos, figuras de mérito do ajuste), necessitamos de um {\em
-pipeline} que faça a organização de todos os dados para que cálculos e gráficos de mais variadas dificuldades sejam
-fácil para que até um programador de nível iniciante possa fazer. André L. de Amorim, juntamente com outros colaboradores de
-nosso grupo e do projeto CALIFA construiu o PyCASSO ({\em Python CALIFA \starlight Synthesis Organizer}) (descrito na
-sec. 4 de CF13) que faz a organização dos dados que vêm do {\sc qbick} e das etapas inicais de redução juntamente com a
-síntese de populações estelares feitas com o \starlight, facilitando, e muito, o trabalho de quem usa estes dados.
-Sem a ajuda deste organizador, este trabalho seria muito mais difícil, além de infactível no tempo de um mestrado.
+pipeline} que faça a organização de todos os dados para que cálculos e gráficos sejam fácil para que até um programador
+de nível iniciante possa fazer. André L. de Amorim, juntamente com outros colaboradores de nosso grupo e do projeto
+CALIFA construiu o PyCASSO ({\em Python CALIFA \starlight Synthesis Organizer}) (descrito na sec. 4 de CF13) que faz a
+organização dos dados que vêm do {\sc qbick} e das etapas inicais de redução juntamente com a síntese de populações
+estelares feitas com o \starlight, facilitando, e muito, o trabalho de quem usa estes dados. Sem a ajuda deste
+organizador, este trabalho seria muito mais difícil, além de infactível no tempo de um mestrado.
 
 O PyCASSO é uma biblioteca desenvolvida em Python para organizar os dados da síntese feita pelo \starlight. A versão
 usada neste trabalho é a $0.9.3$\footnote{\url{http://minerva.ufsc.br/~andre/PyCASSO-0.9.3/}}. Para um acesso mais
@@ -251,7 +251,7 @@ at = K.at_flux__z
 at_total = (at * K.Lobn__z).sum() / K.Lobn__z.sum()
 print 'Idade media da galaxia K0277: \%.2f' \% at_total
 \end{python}
-	\caption[Exemplo de programa utilizando PyCASSO]
+	\caption[Exemplo de programa utilizando PyCASSO.]
 	{Exemplo de acesso aos cubo de dados por arquivo FITS e o cálculo da idade estelar média de uma galáxia.}
 	\label{fig:dataAccess}
 \end{figure}
@@ -274,14 +274,14 @@ cb.set_label(r'\langle \log t \langle_L [anos]')
 plt.title(r'\langle \log t \langle_{L z}')
 
 \end{python}
-	\caption[Programa idade estelar média]
+	\caption[Programa idade estelar média.]
 	{Programa para desenhar o mapa de idade	estelar média ponderada pela luminosidade.}
 	\label{fig:programaMapaIdade}
 \end{figure}
 
 \begin{figure}
 	\includegraphics{figuras/at_flux_zone.pdf}
-	\caption[Mapa da idade estelar média da galáxia NGC 2916] 
+	\caption[Mapa da idade estelar média da galáxia NGC 2916 (CALIFA 277).] 
 	{Mapa de idade estelar média ponderada pela luminosidade da galáxia NGC 2916 (CALIFA 277) gerado pelo programa da
 	Figura \ref{fig:programaMapaIdade}.}
 	\label{fig:mapaIdade}
@@ -313,7 +313,7 @@ cb = plt.colorbar()
 plt.plot(bin_center, at_rad)
 
 \end{python}
-	\caption[Exemplo de programa para perfil radial]
+	\caption[Exemplo de programa para perfil radial.]
 	{Programa para desenhar o perfil radial da idade estelar média ponderada pela
 	luminosidade.}
 	\label{fig:programaPerfRad}
@@ -321,7 +321,7 @@ plt.plot(bin_center, at_rad)
 
 \begin{figure}
 	\includegraphics{figuras/at_flux_radprof.pdf}
-	\caption[Perfil radial da idade estelar média da galáxia NGC 2916]
+	\caption[Perfil radial da idade estelar média da galáxia NGC 2916 (CALIFA 277).]
 	{Perfil radial da idade estelar média ponderada pela luminosidade da galáxia
 	NGC 2916 (CALIFA 277) gerado pelo programa da Figura \ref{fig:programaPerfRad}.}
 	\label{fig:perfRad}

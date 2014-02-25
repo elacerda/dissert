@@ -20,7 +20,7 @@
 
 De medidas fisiológicas, como pulsação e respiração, até reconhecimento de padrões em sistemas complexos como
 reconhecimento facial e criptografia, passando por compactação de imagem, neurosciência e redução de ruídos em dados,
-podemos ver atuação de técnicas de PCA. Neste capítulo revisamos os fundamentos matemáticos do PCA e de sua versao para
+podemos ver atuação de técnicas de PCA. Neste capítulo revisamos os fundamentos matemáticos da PCA e de sua versão para
 cubos de dados (Tomografia PCA).
 
 %***************************************************************% 
@@ -46,8 +46,7 @@ de PCA com espectros, cada um pode ser represtado como um ponto num espaço com 
 formam uma núvem de pontos nesse espaço. Assim, encontramos quais são os eixos mais significativos desse espaço em
 relação à variância, sujeitos às restrições acima. Fazemos esse cálculo encontrando os autovetores e autovalores da
 matriz de covariância desse espaço (a matriz tem dimensão $N_\lambda \times N_\lambda$) usando a biblioteca científica
-\texttt{SciPy}\footnote{\url{http://scipy.org/}} (\ref{fig:PCA:covMatrix}), que encontra os autovetores e autovalores
-dessa matriz.
+\texttt{SciPy}\footnote{\url{http://scipy.org/}}.
 
 \subsection{PCA das galáxias do CALIFA}
 
@@ -61,19 +60,19 @@ matriz, portanto nossa matriz de espectros está na forma $N_z \times N_\lambda$
     \label{eq:PCA:fluxMatrix}
     \textbf{F}{}_{z \lambda} = \left[
     \begin{array}{ccccc}
-        F_{z_0 \lambda_0} & F_{z_0 \lambda_1} & F_{z_0 \lambda_2} & ... & F_{z_0 \lambda_{(N_\lambda - 1})} \\
-        F_{z_1 \lambda_0} & F_{z_1 \lambda_1} & F_{z_1 \lambda_2} & ... & F_{z_1 \lambda_{(N_\lambda - 1})} \\
-        F_{z_2 \lambda_0} & F_{z_2 \lambda_1} & F_{z_2 \lambda_2} & ... & F_{z_2 \lambda_{(N_\lambda - 1})} \\
+        F_{z_1 \lambda_1} & F_{z_1 \lambda_2} & F_{z_1 \lambda_3} & ... & F_{z_1 \lambda_{N_\lambda}} \\
+        F_{z_2 \lambda_1} & F_{z_2 \lambda_2} & F_{z_2 \lambda_3} & ... & F_{z_2 \lambda_{N_\lambda}} \\
+        F_{z_3 \lambda_1} & F_{z_3 \lambda_2} & F_{z_3 \lambda_3} & ... & F_{z_3 \lambda_{N_\lambda}} \\
         ...               & ...               & ...               & ... & ...               \\
-        F_{z_{(N_z - 1)} \lambda_0} & F_{z_{(N_z - 1)} \lambda_1} & F_{z_{(N_z - 1)} \lambda_2} & ... & F_{z_{(N_z - 1)}
-        \lambda_{(N_\lambda - 1)}}
+        F_{z_{N_z} \lambda_1} & F_{z_{N_z} \lambda_2} & F_{z_{N_z} \lambda_3} & ... & F_{z_{N_z}
+        \lambda_{(N_\lambda)}}
     \end{array} 
     \right]
 \end{equation}
 
 Calculamos então o espectro médio de uma galáxia
 \begin{equation}
-\langle \textbf{F}{}_\lambda \rangle = \frac{1}{N_z} \sum_{i=0}^{(N_z - 1)} F_{z_i}{}_{\lambda}
+\langle \textbf{F}{}_\lambda \rangle = \frac{1}{N_z} \sum_{i=1}^{N_z} F_{z_i}{}_{\lambda}
 \end{equation}
 \noindent e então subtraímos a média de todos os espectros
 \begin{equation}
@@ -90,8 +89,8 @@ Agora calculamos os autovalores e autovetores da matriz de covariância. Neste t
 designar esses autovetores pois são de uma matriz de covariâncias entre espectros de cada zona. Então ordenamos-os
 decrescentemente pelo valor de seus autovalores. Os autoespectros são as componentes principais (PCs) e os autovalores
 as respectivas variâncias. Isso feito, temos então o que necessitamos para iniciar o cálculo do Tomograma PCA. Um
-exemplo de programa para calcular a matriz de covariâncias e seus autovetores e autovalores usando o \texttt{SciPy} pode
-ser visto na Figura \ref{fig:programaCovMatrix}.
+exemplo de programa para calcular a matriz de covariâncias e seus autovetores e autovalores usando o PyCASSO e o
+\texttt{SciPy} pode ser visto na Figura \ref{fig:programaCovMatrix}.
 
 \begin{figure}
 \begin{python}
@@ -143,7 +142,7 @@ sintese de populações estelares com o \starlight.
 \section{Tomografia PCA}
 \label{sec:PCAeTomoPCA:TomoPCA}
 
-Os autoespectros ($e_k$) da matriz de covariância (PCs) ordenados pela sua variância ($\Lambda_k$) formam uma matriz
+Os autoespectros ($\mathbf{e}_k$) da matriz de covariância (PCs) ordenados pela sua variância ($\Lambda_k$) formam uma matriz
 ($\mathbf{E}{}_{\lambda k}$, de dimensão $N_\lambda \times N_k$, onde $N_k$ é o número de PCs) que serve como base onde
 projetamos nossa matriz de observáveis com a média subtraida ($\mathbf{I}{}_{z \lambda}$) através da transformação:
 
@@ -152,12 +151,12 @@ projetamos nossa matriz de observáveis com a média subtraida ($\mathbf{I}{}_{z
 	\mathbf{T}{}_{z k} = \mathbf{I}{}_{z \lambda} \cdot \mathbf{E}{}_{\lambda k}
 \end{equation}
 
-Na posse dessa nova matriz transformada e de um mapa que faça a transformação de zona para uma par de coordenada ($z \to
+De posse dessa nova matriz transformada e de um mapa que faça a transformação de zona para uma par de coordenada ($z \to
 (x, y)$), podemos montar assim uma imagem. Cada imagem funciona como uma ``fatia'' de um cubo de dados expandido na nova
 base, assim formando a Tomografia PCA\footnote{\url{http://www.astro.iag.usp.br/~pcatomography/}}, criada e assim
-batizada por Steiner em S09, que em seu artigo faz um paralelo com fatias de um espaço tridimensional (tomograma do
-corpo humano, por exemplo) ou no espaço de velocidades (Tomografia Doppler). Cada ``fatia'' possui um autoespectro (PC)
-relacionado que, em conjunto, trazem novas perspectivas e ideias para a interpretação de ambos.
+batizada por S09, que fazem um paralelo com fatias de um espaço tridimensional (tomograma do corpo humano, por exemplo)
+ou no espaço de velocidades (Tomografia Doppler). Cada ``fatia'' possui um autoespectro (PC) relacionado que, em
+conjunto, trazem novas perspectivas e ideias para a interpretação de ambos.
 
 \section{Exemplos de resultado da Tomagrafia PCA}
 
@@ -174,50 +173,47 @@ definição) possuem apenas linhas estreitas, ajudando assim na classificação 
 juntamente com a Tomografia PCA, fazem esse papel da subtração das populações estelares sem haver nenhuma
 parametrização.
 
-Em S09 estudaram os 8 primeiros autoespectros, escolhidos através de um {\em scree test} (\ref{fig:TomoPCA:scree}), no
-qual se verifica a variância de cada PC e toma-se as mais relevantes. O autoespectro com mais variância (no artigo
+S09 estudaram os 8 primeiros autoespectros, escolhidos através de um {\em scree test} (Figura \ref{fig:S09scree}),
+no qual se verifica a variância de cada PC e toma-se as mais relevantes. O autoespectro com mais variância (no artigo
 tratado com E1) possui $99.74\%$ da variância e reproduz comportamento do gás e da população estelar somados (Figura
-\ref{fig:TomoPCA:eigspec1}). O segundo contribui com $0.088\%$ para a variância e tem um claro padrão de rotação, tanto
-nas linhas do autoespectro quanto na imagem da tomografia (Figura \ref{fig:TomoPCA:eigspec2}). É no terceiro ($0.032\%$
-da variância) que mostra evidência clara de uma emissão larga de \Halpha (Figura \ref{fig:TomoPCA:eigspec3}). Essa
+\ref{fig:S09eigspec1}). O segundo contribui com $0.088\%$ para a variância e tem um claro padrão de rotação, tanto
+nas linhas do autoespectro quanto na imagem da tomografia (Figura \ref{fig:S09eigspec2}). É o terceiro ($0.032\%$
+da variância) que mostra evidência clara de uma emissão larga de \Halpha (Figura \ref{fig:S09eigspec3}). Essa
 assinatura é uma evidência tipica de AGNs de tipo 1.
 
 \begin{figure}
     \includegraphics[width=0.7\textwidth]{figuras/figSteiner2009fig1.pdf}
     \caption[{\em Scree test} na galáxia NGC 4736.]
-    {Scree test das primeiras 16 PCs do cubo de espectros da região
-    central da galáxia NGC 4736. 
-    Retirado de \citet[][fig. 1]{Steiner2009}.}
-    \label{fig:TomoPCA:scree}
+    {Scree test das primeiras 16 PCs do cubo de espectros da região central da galáxia NGC 4736. Retirado de
+    S09.}
+    \label{fig:S09scree}
 \end{figure}
 
 \begin{figure}
     \includegraphics[width=0.9\textwidth]{figuras/figSteiner2009figA1.pdf}
     \caption[Tomograma e autoespectro 1 da galáxia NGC 4736.]
-    {Autoespectro 1 e seu respectivo tomograma. Retirado de \citet[][fig.
-    A1]{Steiner2009}.}
-    \label{fig:TomoPCA:eigspec1}
+    {Autoespectro 1 e seu respectivo tomograma. Retirado de S09.}
+    \label{fig:S09eigspec1}
 \end{figure}
 
 \begin{figure}
     \includegraphics[width=0.9\textwidth]{figuras/figSteiner2009figA2.pdf}
     \caption[Tomograma e autoespectro 2 da galáxia NGC 4736.]
-    {Autoespectro 2 e seu respectivo tomograma. Retirado de \citet[][fig.
-    A2]{Steiner2009}.}
-    \label{fig:TomoPCA:eigspec2}
+    {Autoespectro 2 e seu respectivo tomograma. Retirado de S09.}
+    \label{fig:S09eigspec2}
 \end{figure}
 
 \begin{figure}
     \includegraphics[width=0.9\textwidth]{figuras/figSteiner2009figA3.pdf}
     \caption[Tomograma e autoespectro 3 da galáxia NGC 4736.]
-    {Autoespectro 2 e seu respectivo tomograma. Retirado de \citet[][fig.
-    A3]{Steiner2009}.}
-    \label{fig:TomoPCA:eigspec3}
+    {Autoespectro 2 e seu respectivo tomograma. Retirado de S09.}
+    \label{fig:S09eigspec3}
 \end{figure}
 
 \subsection{Reflexao da luz de um AGN escondido em NGC 7097}
 
-{\bf\ojo A FAZER!! \ojo Ricci et al 2011. Figs 3 e 5. vais precisar da minha ajuda para entender esse assunto de reflexao ... le o paper e depois falamos}
+{\bf\ojo A FAZER!! Ricci et al 2011. Figs 3 e 5. vais precisar da minha ajuda para entender esse assunto de
+reflexao ... le o paper e depois falamos}
 
 \section{Tomografia PCA para dados CALIFA: diferen\c{c}as com respeito a trabalhos anteriores}
 
@@ -227,7 +223,7 @@ bastante dos dados analisados até agora com essa nova ferramenta.
 
 Essas diferenças são tanto de caráter observacional, como metodologico e físico. Para começo de conversa, S09 trabalham
 com dados do Gemini (8m) com $3 \times 20$ min de integração, enquanto nossos dados vêm de integrações de tipicamente
-?? min no telescópio de 3.5m do observatório de Calar Alto.
+\ojo ?? min no telescópio de 3.5m do observatório de Calar Alto.
 
 Além disso, eles aplicam técnicas de deconvolução das imagens com o algorítmo de Richardson-Lucy. Dado o pequeno {\em
 FoV} do IFU do Gemini, o ganho com tais técnicas é perceptível. Não aplicaremos isso no nosso caso porque nosso {\em
@@ -236,12 +232,11 @@ deconvolução espacial.
 
 Como dito na Seção \ref{sec:CALePyC:Apresent} a escala e resolução espacial de nossos dados difere brutalmente daquelas
 nos trabalhos acima resumidos: $3^{\prime\prime} \times 5^{\prime\prime}$ e resolução de $0.47^{\prime\prime}$ no Gemini
-contra $74^{\prime\prime} x 64^{\prime\prime}$ e resolução de $\sim3.7^{\prime\prime}$ no CALIFA. Portanto, o {\em FoV}
-estudado por Steiner e colaboradores equivalem a aproximadamente $\sim2$ elementos de resolução do CALIFA! Isto de cara
-mostra que a ciência que podemos obter com Tomografia PCA aplicada aos dados do CALIFA não será a mesma que aquela
-estudade por S09.
+contra $74^{\prime\prime} \times 64^{\prime\prime}$ e resolução de $\sim3.7^{\prime\prime}$ no CALIFA. Portanto, o {\em
+FoV} estudado por S09 equivalem a aproximadamente $\sim2$ elementos de resolução do CALIFA! Isto de cara mostra que a
+ciência que podemos obter com Tomografia PCA aplicada aos dados do CALIFA não será a mesma que aquela estudade por S09.
 
-Em resumo, apesar de inspirado diretamente pelos resultados de S09l, este estudo difere muito dos trabalhos deles. Estas
+Em resumo, apesar de inspirado diretamente pelos resultados de S09, este estudo difere muito dos trabalhos deles. Estas
 diferenças ficarão evidentes já a partir do próximo capítulo, onde apresentamos nossos primeiros resultados e discutimos
 algumas variações com respeito ao processamento de S09, que decidimos fazer para melhor se adequar ao contexto de dados
 do CALIFA.
