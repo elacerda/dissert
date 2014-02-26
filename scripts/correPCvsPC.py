@@ -27,6 +27,7 @@ def corr_PCvsPC(tomo__zk, nPCs, title, fnamepref):
         'arr'   : [ P.K.at_flux__z, np.log10(P.K.aZ_flux__z / 0.019), P.K.A_V, P.K.v_0, P.K.v_d ],
         'label' : [ r'$\log\ t\ [yr]$', r'$\log\ Z\ [Z_\odot]$', r'$A_V\ [mag]$', r'$v_\star\ [km/s]$', r'$\sigma_\star\ [km/s]$' ],
         'fname' : [ 'at_flux', 'aZ_flux', 'AV', 'v0', 'vd' ]
+        'cmap'  : [ 'hot_r', 'hot_r', 'hot_r', 'spectral', 'spectral' ]
     }
 
     for p_i, p in enumerate(prop['arr']):
@@ -64,9 +65,9 @@ def corr_PCvsPC(tomo__zk, nPCs, title, fnamepref):
 
                 if (prop['fname'])[p_i] == 'vd' :
                     prc = np.percentile(p, 98.)
-                    im = ax.scatter(x, y, c = z, edgecolor = 'None', s = 3, cmap = 'hot_r', vmax = prc)
+                    im = ax.scatter(x, y, c = z, edgecolor = 'None', marker = 'o', s = 0.1, cmap = prop['cmap'][p_i], vmax = prc)
                 else:
-                    im = ax.scatter(x, y, c = z, edgecolor = 'None', s = 3, cmap = 'hot_r')
+                    im = ax.scatter(x, y, c = z, edgecolor = 'None', marker = 'o', s = 0.1, cmap = prop['cmap'][p_i])
 
                 plt.setp(ax.get_yticklabels(), visible = False)
 
