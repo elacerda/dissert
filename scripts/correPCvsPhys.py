@@ -7,7 +7,7 @@ from matplotlib import pyplot as plt
 from scipy import stats as st
 import PCAlifa as PCA
 
-output_fmt = 'png'
+output_fmt = 'pdf'
 
 fitsfile = sys.argv[1]
 
@@ -100,7 +100,7 @@ plt.setp([a.get_yticklabels() for a in f.axes[::nCols]], visible = True)
 for i in range(nCols):
     axArr[0, i].set_title(prop['label'][i])
 
-f.suptitle(u'Correlações $F_{obs}$ norm.', fontsize=16)
+f.suptitle(u'Correlações $f_{obs}$', fontsize=16)
 f.savefig('%s/%s-correl-f_obs_norm-PCvsPhys.%s' % (output_dir, K.califaID, output_fmt))
 f.clf()
 
@@ -148,7 +148,7 @@ plt.setp([a.get_yticklabels() for a in f.axes[::nCols]], visible = True)
 for i in range(nCols):
     axArr[0, i].set_title(prop['label'][i])
 
-f.suptitle(u'Correlações $F_{syn}$ norm.', fontsize=16)
+f.suptitle(u'Correlações $f_{syn}$', fontsize=16)
 f.savefig('%s/%s-correl-f_syn_norm-PCvsPhys.%s' % (output_dir, K.califaID, output_fmt))
 
 ###############################################################################

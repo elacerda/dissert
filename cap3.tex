@@ -93,7 +93,7 @@ exemplo de programa para calcular a matriz de covariâncias e seus autovetores e
 \texttt{SciPy} pode ser visto na Figura \ref{fig:programaCovMatrix}.
 
 \begin{figure}
-\begin{python}
+	\begin{python}
 # Carregar arquivo FITS com os dados.
 from pycasso import fitsQ3DataCube
 K = fitsQ3DataCube('K0277_synthesis_suffix.fits')
@@ -119,8 +119,7 @@ w, e = linalg.eigh(covMat__ll)
 S = sp.argsort(w)[::-1]
 eigval = W[S]
 eigvect = e[:, S]
- 
-\end{python}
+	\end{python}
 	\caption[Exemplo de cálculo de PCA usando o PyCASSO e SciPy.] 
 	{Cálculo do procedimento completo de PCA para os espectros observados de uma galáxia do CALIFA usando o PyCASSO e a
 	biblioteca científica de Python chamada \texttt{SciPy}. No final do código temos armazenado nos vetores \texttt{eigval}
@@ -145,7 +144,6 @@ sintese de populações estelares com o \starlight.
 Os autoespectros ($\mathbf{e}_k$) da matriz de covariância (PCs) ordenados pela sua variância ($\Lambda_k$) formam uma matriz
 ($\mathbf{E}{}_{\lambda k}$, de dimensão $N_\lambda \times N_k$, onde $N_k$ é o número de PCs) que serve como base onde
 projetamos nossa matriz de observáveis com a média subtraida ($\mathbf{I}{}_{z \lambda}$) através da transformação:
-
 \begin{equation}
 	\label{eq:TomoPCA:tomogram2D}
 	\mathbf{T}{}_{z k} = \mathbf{I}{}_{z \lambda} \cdot \mathbf{E}{}_{\lambda k}
@@ -158,7 +156,7 @@ batizada por S09, que fazem um paralelo com fatias de um espaço tridimensional 
 ou no espaço de velocidades (Tomografia Doppler). Cada ``fatia'' possui um autoespectro (PC) relacionado que, em
 conjunto, trazem novas perspectivas e ideias para a interpretação de ambos.
 
-\section{Exemplos de resultado da Tomagrafia PCA}
+\section{Exemplos de resultado da Tomografia PCA}
 
 Para ilustrar o potencial da tecnica de Tomografia PCA, ilustramos os resultados obtidos em 2 artigos.
 
@@ -206,16 +204,16 @@ assinatura é uma evidência tipica de AGNs de tipo 1.
 \begin{figure}
     \includegraphics[width=0.9\textwidth]{figuras/figSteiner2009figA3.pdf}
     \caption[Tomograma e autoespectro 3 da galáxia NGC 4736.]
-    {Autoespectro 2 e seu respectivo tomograma. Retirado de S09.}
+    {Autoespectro 3 e seu respectivo tomograma. Retirado de S09.}
     \label{fig:S09eigspec3}
 \end{figure}
 
-\subsection{Reflexao da luz de um AGN escondido em NGC 7097}
+%\subsection{Reflexao da luz de um AGN escondido em NGC 7097}
 
-{\bf\ojo A FAZER!! Ricci et al 2011. Figs 3 e 5. vais precisar da minha ajuda para entender esse assunto de
-reflexao ... le o paper e depois falamos}
+%{\bf\ojo A FAZER!! Ricci et al 2011. Figs 3 e 5. vais precisar da minha ajuda para entender esse assunto de
+%reflexao ... le o paper e depois falamos}
 
-\section{Tomografia PCA para dados CALIFA: diferen\c{c}as com respeito a trabalhos anteriores}
+\section{Diferen\c{c}as com respeito a trabalhos anteriores}
 
 Os exemplos acima nos motivam a aplicar esta mesma técnica aos cubos de dados do CALIFA, e o resto desta dissertação
 apresenta nossos experimentos nesse sentido. Cumpre ressaltar, contudo, que o tipo de dados que analisaremos difere

@@ -6,7 +6,7 @@ import matplotlib as mpl
 from matplotlib import pyplot as plt
 import matplotlib.gridspec as gridspec
 
-output_fmt = 'png'
+output_fmt = 'pdf'
 
 fitsfile = sys.argv[1]
 

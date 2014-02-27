@@ -31,20 +31,20 @@ Cientistas hoje, em sua maioria, encontram-se emaranhados em meio a um labirinto
 bilhões de intersecções interligadas que funcionam como uma fantástica e infinita biblioteca de dados. Um dia formada
 por livros, hoje formada de 0s e 1s que, através de infinitas combinações, juntos abarcam o combustível para o
 desenvolvimento do conhecimento da humanidade. Qualquer que seja sua área, você tem, já teve, ou terá um dia que
-recorrer a algum banco de dados de qualquer espécie pois hoje são parte fundamental no futuro da pesquisa científica.
+recorrer a algum banco de dados de qualquer espécie pois hoje são parte fundamental no futuro da pesquisa científica. Na
+Astrofísica tais informações hoje são reunidas através de grandes projetos chamados {\em surveys}.   
 
-Os primeiros {\em surveys}\footnote{Um {\em survey} astronômico é um levantamento de informações ou mapeamento de
-regiões do céu utilizando telescópios e detetores.} astronômicos surgem com a inata curiosidade do homem de observar
-tudo a sua volta e registrar suas observações. O crescimento desses catálogos é produto direto da evolução dos
-equipamentos usados nestas investigações. No início da década de 80 \citet{Huchra1983} constroem um {\em
-redshift-survey} que coletou espectros para 2500 galaxias dando início a produção sistemática de dados na astronomia
-extragalática. Esse trabalho também foi seguidos por outros trabalhos \citep[e.g., ][]{Huchra1988, DaCosta1988} e de lá
-para cá a quantidade (e a qualidade) de dados só aumentou. Com a criação dos {\em mega-surveys} \citep[\SDSS, 2dFGRS,
-2MASS; ][]{York2000, Colless1999, Skrutskie2006}, alguns já terminados, outros ainda começando ou por terminar
-\citep[LSST, JPAS; ][]{Ivezic2008, Benitez2009}, ultrapassou-se o patamar do humanamente impossível de
-se analisar individualmente cada objeto, necessitando assim a ajuda de máquinas e métodos computacionais cada vez mais
-eficientes. Com esse crescimento exponencial na quantidade de dados, precisamos cada vez mais de ferramentas
-matemáticas/estatísticas, e essa dissertação trata precisamente disso.
+Um {\em survey} astronômico é um levantamento de informações ou mapeamento de regiões do céu utilizando telescópios e
+detetores. Primordialmente surgem com a inata curiosidade do homem de observar tudo a sua volta e registrar suas
+observações. O crescimento desses catálogos é produto direto da evolução dos equipamentos usados nestas investigações.
+No início da década de 80 \citet{Huchra1983} constroem um {\em redshift-survey} que coletou espectros para 2500 galaxias
+dando início a produção sistemática de dados na astronomia extragalática. Esse trabalho também foi seguidos por outros
+trabalhos \citep[e.g., ][]{Huchra1988, DaCosta1988} e de lá para cá a quantidade (e a qualidade) de dados só aumentou.
+Com a criação dos {\em mega-surveys} \citep[\SDSS, 2dFGRS, 2MASS; ][]{York2000, Colless1999, Skrutskie2006}, alguns já
+terminados, outros ainda começando ou por terminar \citep[LSST, JPAS; ][]{Ivezic2008, Benitez2009}, ultrapassou-se o
+patamar do humanamente impossível de se analisar individualmente cada objeto, necessitando assim a ajuda de máquinas e
+métodos computacionais cada vez mais eficientes. Com esse crescimento exponencial na quantidade de dados, precisamos
+cada vez mais de ferramentas matemáticas/estatísticas, e essa dissertação trata precisamente disso.
 
 Um tipo de clássico de ferramenta de análise são os programas que ajustam os dados segundo algum modelo, extraíndo dessa
 análise informações de valor astrofísico. No contexto de espectros de galáxias, tema desta dissertação, uma ferramenta
@@ -91,8 +91,8 @@ disperção, SFH ({\em star formation history}), extinção por poeira e aplicad
 \ref{fig:Chen2012fig2}). Usando uma minimização quadrática encontram quais os coeficientes e qual o número ótimo de PCs
 que melhor estimam os parâmetros físicos dos espectros modelo. Então projetam os espectros observados pelo SDSS DR7
 \citep{Abazajian2009} e pelo Baryon Oscillation Spectroscopic Survey \citep[BOSS][]{Ahn2012}, atribuindo um sentido
-físico a cada PC. Os trabalhos de \citet{Ferreras2006, Wild2006, Rogers1997} exemplificam a aplicação de PCA a espectros
-do SDSS.
+físico a cada PC. Os trabalhos de \citet{Ferreras2006, Wild2006, Rogers2007} exemplificam a aplicação de PCA a
+espectros do SDSS.
 
 \begin{figure}
     \includegraphics[height=1.\textwidth]{figuras/figChen2012fig2.pdf}
@@ -105,12 +105,12 @@ do SDSS.
 \section{A nova ferramenta - Tomografia PCA}
 \label{sec:Intro:TomoPCA}
 
-Todos exemplos acima relatam análises de espectros integrados de galáxias, i.e., espectros que contém toda (ou pelo
-menos boa parte) da luz da galáxia inteira. Análises como a síntese espectral ou PCA comparam galáxias inteiras umas com as
-outras, ordenando-as em termos de propriedades físicas (e.g., a massa estelar ou a idade média das estrelas) ou
-matemáticas (e.g, suas componentes principais). Existem também exemplos de análises PCA ou de síntese espectral baseadas
-em espectros nucleares \citep[e.g., ][]{Trager2000I, CidFernandes2004}. Assim como espectros integrados, tais estudos
-não possuem resolução espacial, ou seja, cada galáxia é representada por apenas um espectro.
+Todos exemplos acima relatam análises de espectros integrados de galáxias, i.e., espectros que contém toda luz (ou pelo
+menos boa parte) da galáxia. Análises como a síntese espectral ou PCA comparam galáxias inteiras umas com as outras,
+ordenando-as em termos de propriedades físicas (e.g., a massa estelar ou a idade média das estrelas) ou matemáticas
+(e.g, suas componentes principais). Existem também exemplos de análises PCA ou de síntese espectral baseadas em
+espectros nucleares \citep[e.g., ][]{Trager2000I, CidFernandes2004}. Assim como espectros integrados, tais estudos não
+possuem resolução espacial, ou seja, cada galáxia é representada por apenas um espectro.
 
 Hoje, com o uso de painéis de fibras óticas apontadas para as galáxias, temos os {\em surveys} de IFS ({\em Integral
 Field Spectroscopy}) onde passamos a reunir de dezenas até milhares de espectros cobrindo um {\em FoV} ({\em
@@ -122,7 +122,7 @@ Calar Alto Legacy Integral Field spectroscopy Area survey\footnote{\url{http://w
 estão por vir (veja a seção \ref{sec:CALePyC:Apresent}).
 
 Com esses cubos de dados, cada galáxia passa a ser uma grande amostra de espectros, de modo que o que antes era feito
-galáxia a galáxia pode agora ser feito para diferentes regioes de uma mesma galáxia. Podemos assim executar o \starlight
+galáxia a galáxia pode agora ser feito para diferentes regiões de uma mesma galáxia. Podemos assim executar o \starlight
 para cada {\em spaxel} e então obtemos propriedades físicas das populações estelares em função da posição na galáxia.
 Este tipo de análise vem sendo realizado por pesquisadores do IAA (Enrique Pérez, Rosa González Delgado, Rubén
 García-Benito) e da UFSC (André Luiz de Amorim, Natália Vale Asari, Roberto Cid Fernandes). Aspectos técnicos e
@@ -154,7 +154,7 @@ objetos. Embora outros surveys de IFS estejam completos ou em andamento (ver Se�
 é o que podemos chamar de {\em estado da arte} em surveys de espectroscopia de campo integrado (IFS).
 
 Como já citado, pesquisadores do IAA e da UFSC vêm aplicando o \starlight aos cubos do CALIFA e com isso mapeando as
-propriedades das populacoes estelares nessas galáxias. Mais de 300 cubos de dados já foram analisados, embora os
+propriedades das populações estelares nessas galáxias. Mais de 300 cubos de dados já foram analisados, embora os
 resultados publicados até agora se restrinjam a pouco mais que 100 galáxias, de espirais tardias até elípticas,
 incluindo alguns sistemas em interação. Ferramentas desenvolvidas nesses trabalhos anteriores serão utilizadas nessa
 dissertação, como veremos mais adiante.
@@ -167,11 +167,11 @@ dados.
 
 É importante notar, no entanto, que existe uma grande diferença entre esses trabalhos anteriores e esse estudo.  Nossos
 cubos de dados cobrem uma escala completamente diferente. De fato, o CALIFA foi desenhado para observar galáxias
-inteiras. O campo do instrumento utilizado é de aproximadamente 1 arcmin$^2$. Em comparação com os estudos de Steiner e
-colaboradores, temos uma resolucao espacial muito ``pior'', mas em compensação mapeamos estruturas muito diferentes, como
-o bojo, disco, braços e regiões HII a muitos kpc do núcleo. Como veremos, esta diferença nos levou a tratar os dados
-de formas que diferem daquelas empregadas por Steiner e seus colaboradores. De fato, até onde temos conhecimento, este
-trabalho é o primeiro a aplicar a técnica de tomografa PCA à galáxias interias.
+inteiras. O campo do instrumento utilizado é de aproximadamente 1.3 arcmin$^2$. Em comparação com os estudos de Steiner
+e colaboradores, temos uma resolução espacial muito ``pior'', mas em compensação mapeamos estruturas muito diferentes,
+como o bojo, disco, braços e regiões H{\sc ii} a muitos kpc do núcleo. Como veremos, esta diferença nos levou a tratar
+os dados de formas que diferem daquelas empregadas por Steiner e seus colaboradores. De fato, até onde temos conhecimento,
+este trabalho é o primeiro a aplicar a técnica de tomografa PCA à galáxias interias.
 
 \subsection{Organização deste trabalho}
 

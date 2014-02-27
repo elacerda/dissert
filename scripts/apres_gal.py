@@ -10,7 +10,7 @@ import PCAlifa as PCA
 galimg_dir = '/home/lacerda/CALIFA/images'
 galimg_fmt = 'jpg'
 
-output_fmt = 'png'
+output_fmt = 'pdf'
 
 fitsfile = sys.argv[1]
 
@@ -23,6 +23,7 @@ print('Output directory: %s' % output_dir)
 
 P = PCA.PCAlifa(fitsFile = fitsfile, quantilQFlag = 0.95, lc = [3800, 6850])
 P.setStarlightMaskFile('/home/lacerda/CALIFA/Mask.mC')
+P.setImgSuffix(output_fmt)
 
 K = P.K
 
@@ -50,8 +51,8 @@ ax.imshow(galimg)
 ax = axArr[1,0]
 ax.set_axis_on()
 fobs_norm__yx = K.zoneToYX(K.fobs_norm / 1.e-16, extensive = False)
-ax.set_title(r'$F_{\lambda 5635}\ [10^{-16} erg/s/cm^2/\AA]$')
-im = ax.imshow(fobs_norm__yx, origin = 'lower', interpolation = 'nearest', aspect = 'auto', cmap = 'hot_r')
+ax.set_title(r'$\log\ F_{\lambda 5635}\ [10^{-16} erg/s/cm^2/\AA]$')
+im = ax.imshow(np.log10(fobs_norm__yx), origin = 'lower', interpolation = 'nearest', aspect = 'auto', cmap = 'hot_r')
 f.colorbar(ax = ax, mappable = im, use_gridspec = True)
 
 ax = axArr[1,1]
@@ -92,4 +93,4 @@ im = ax.imshow(prop['arr'][p_i], origin = 'lower', interpolation = 'nearest', as
 f.colorbar(ax = ax, mappable = im, use_gridspec = True)
 
 plt.suptitle(r'%s - %s' % (K.galaxyName, K.califaID))
-f.savefig('%s/%s-apresent.%s' % (output_dir, K.califaID, output_fmt))
+f.savefig('%s/%s-apresent.%s' % (output_dir, K.califaID, P.imgSuffix))

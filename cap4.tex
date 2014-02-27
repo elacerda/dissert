@@ -16,7 +16,7 @@
 %                                                               %
 %***************************************************************%
 
-\chapter{Aplicação a cubos de dados CALIFA}
+\chapter{Aplicação a cubos de dados do CALIFA}
 \label{sec:PCAaplic}
 
 Com os dados e ferramentas apresentados nos capítulos anteriores estamos prontos para aplicar a Tomografia PCA a
@@ -26,13 +26,13 @@ entre eles e portanto resulte num conjunto diferente de PCs.
 
 Durante nossas investigações fizemos uma série de testes com pré-processamentos e manipulações nos espectros
 (normalização, remoção de cinemática, janelas diferentes em comprimento de onda, PCA das linhas de emissão, logarítmo do
-fluxo, entre outros), verificando suas implicações no resultado. Neste Capítulo comentaremos alguns {\em insights} que
+fluxo, entre outros), verificando suas implicações no resultado. Neste capítulo comentaremos alguns {\em insights} que
 tivemos nesse processo, e definiremos operações que julgamos adequadas a análise PCA de galáxias inteiras. Por fim
 faremos uma espécie de engenharia reversa, estudando correlações entra PCs e propriedades derivadas da síntese de
 populações estelares, o que nos auxilia na busca do sentido físico das PCs resultantes.
 
 Todas as análises neste capítulo serão feitas usando a galáxia NGC 2916 (CALIFA 277), uma espiral de tipo Sbc (Figura
-\ref{fig:K0277apresent}. A discussão detalhada desse caso particular serve de guia para os resultados para outras
+\ref{fig:K0277apresent}). A discussão detalhada desse caso particular serve de guia para os resultados para outras
 galáxias de nossa amostra, apresentados no Capítulo \ref{sec:result}.
 
 \section{PCA dos espectros observados: Efeitos de amplitude}
@@ -40,7 +40,8 @@ galáxias de nossa amostra, apresentados no Capítulo \ref{sec:result}.
 
 Como exemplo inicial apresentamos as cinco primeiras PCs e seus respectivos tomogramas do cubo de espectros observados
 da galáxia NGC 2916. Imagens SDSS e CALIFA dessa galáxia espiral podem ser vistas na Figura \ref{fig:K0277apresent},
-enquanto a a Figura \ref{fig:K0277ExampleSpectra} mostra alguns dos espectros CALIFA desse objeto. 
+enquanto a a Figura \ref{fig:K0277ExampleSpectraFill} mostra o fluxo mínimo e máximo por comprimento de onda, dos
+espectros observados desse objeto. No painel direito vemos o mesmo mas para os espectros observados normalizados.
 
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0277-apresent.pdf}
@@ -53,15 +54,16 @@ enquanto a a Figura \ref{fig:K0277ExampleSpectra} mostra alguns dos espectros CA
 \end{figure}
 
 \begin{figure}
-	\includegraphics[width=1.\textwidth]{figuras/K0277-exampleSpectra-crop.pdf}
-    \caption[Exemplos de espectros da gal\'axia NGC 2916 (CALIFA 277).]
-    {Alguns espectros do cubo de dados de NGC 2916. Os painéis à esquerda mostram os espectros originais, enquanto os
-    painéis à direita mostra os mesmos espectros normalizados pelo fluxo mediano na janela de $5635 \pm 45$. Todos os
-    espectros aqui mostrados já estão mascarados da mesma forma que o terceiro painel da Figura \ref{fig:checkmask}}
-    \label{fig:K0277ExampleSpectra}
+	\includegraphics[width=1.\textwidth]{figuras/K0277-exampleSpectraFill.pdf}
+    \caption[Máximo e mínimo de fluxo dos espectros da gal\'axia NGC 2916 (CALIFA 277).] 
+    {Fluxo máximo e mínimo por comprimento de onda para o cubo de espectros da galáxia NGC 2916 (CALIFA 277). O painel à
+    esquerda é para os espectros observados e o a direita para os espectros observados e normalizados pelo fluxo mediano
+    na janela de $5635 \pm 45$ \AA. Todos os espectros do cubo já estão mascarados da mesma forma que o terceiro painel
+    da Figura \ref{fig:checkmask}}
+    \label{fig:K0277ExampleSpectraFill}
 \end{figure}
 
-A Figura \ref{fig:K0277tomofobs}) apresenta os resultados da tomografia PCA para esse cubo de dados. O tomograma é
+A Figura \ref{fig:K0277tomofobs} apresenta os resultados da tomografia PCA para esse cubo de dados. O tomograma é
 formado pelo ``peso'' da PC em cada zona (ver Equação \ref{eq:TomoPCA:tomogram2D}). O primeiro autoespectro lembra o
 espectro médio (linha em cinza claro nos painéis à direita), embora muito mais azul. O segundo autoespectro se assemelha
 com um espectro de população muito jovem. Com o auxilio de seu tomograma vemos que para as zonas mais internas da
@@ -74,8 +76,7 @@ complicado dizer o que cada uma representa. No final desse capítulo falaremos m
 fisicamente.
 
 Da mesma forma, fazemos a PCA para o mesmo cubo, mas com os espectros normalizados da forma que comentamos na Seção
-\ref{sec:CALePyC:pipelines}. Exemplos de espectros normalizados são mostrados nos painel direito da Figura
-\ref{fig:K0277ExampleSpectra}. A tomografia PCA desse cubo normalizado é mostrada na Figura \ref{fig:K0277tomofobsnorm}.
+\ref{sec:CALePyC:pipelines}. A tomografia PCA desse cubo normalizado é mostrada na Figura \ref{fig:K0277tomofobsnorm}.
 À primeira vista os resultados podem ser parecidos com o anterior deslocando uma componente acima, ou seja, a mesma PCA
 mas sem a primeira PC. Mas essa é só uma primeira impressão. As propriedades físicas de uma galáxia geralmente possuem
 simetria radial ou axial, sendo assim extremamente correlacionadas no espaço. Matematicamente, a maior fonte de
@@ -116,7 +117,7 @@ CALIFA, contudo, os efeitos de amplitude são muito maiores, e complicam a inter
 motivo, em nossas análises daqui para frente usaremos o cubo com os espectros normalizados.
 
 \begin{figure}
-    \includegraphics[width=0.9\textwidth]{figuras/K0277-tomo-obs.pdf}
+    \includegraphics[width=0.8\textwidth]{figuras/K0277-tomo-obs.pdf}
     \caption[Tomogramas de 1 a 5 da gal\'axia NGC 2916 - $F_{obs}$.]
     {Cinco primeiras PCs (e seus respectivos tomogramas) resultantes da Tomografia PCA aplicado aos espectros sem
     normalização da galáxia NGC 2916.}
@@ -124,8 +125,8 @@ motivo, em nossas análises daqui para frente usaremos o cubo com os espectros n
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=0.9\textwidth]{figuras/K0277-tomo-obs-norm.pdf}
-    \caption[Tomogramas de 1 a 5 da gal\'axia NGC 2916 - $F_{obs} / F_{\lambda 5365}$.]
+    \includegraphics[width=0.8\textwidth]{figuras/K0277-tomo-obs-norm.pdf}
+    \caption[Tomogramas de 1 a 5 da gal\'axia NGC 2916 - $f_{obs}$.]
     {Cinco primeiras PCs (e seus respectivos tomogramas) resultantes da Tomografia PCA aplicado aos espectros com
     normalização da galáxia NGC 2916.}
     \label{fig:K0277tomofobsnorm}
@@ -134,7 +135,7 @@ motivo, em nossas análises daqui para frente usaremos o cubo com os espectros n
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0277-fobs_norm.pdf}
     \caption[Fluxos de normalização para cada zona da galáxia K0277.]
-    {Fluxo usado para a normalização de cada espectro, mostrado tanto na forma de imagem (à esquerda) como em funcao do numero da zona (direita).}
+    {Fluxo usado para a normalização de cada espectro, mostrado tanto na forma de imagem (à esquerda) como em ção do numero da zona (direita).}
     \label{fig:K0277fobsnorm}
 \end{figure}
 

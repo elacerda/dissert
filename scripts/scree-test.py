@@ -6,7 +6,7 @@ mpl.use('Agg')
 from matplotlib import pyplot as plt
 import PCAlifa as PCA
 
-output_fmt = 'png'
+output_fmt = 'pdf'
 
 fitsfile = sys.argv[1]
 
@@ -37,13 +37,13 @@ eigval_obs_norm = 100. * P.eigVal_obs_norm__k / P.eigVal_obs_norm__k.sum()
 eigval_syn_norm = 100. * P.eigVal_syn_norm__k / P.eigVal_syn_norm__k.sum()
 
 plt.plot(PCs, eigval_obs[:maxPCs], 'k+--', label = '$F_{obs}$')
-plt.plot(PCs, eigval_obs_norm[:maxPCs], 'k^-', label = '$F_{obs}$ norm.')
-plt.plot(PCs, eigval_syn_norm[:maxPCs], 'k*-', label = '$F_{syn}$ norm.')
+plt.plot(PCs, eigval_obs_norm[:maxPCs], 'k^-', label = '$f_{obs}$')
+plt.plot(PCs, eigval_syn_norm[:maxPCs], 'k*-', label = '$f_{syn}$')
 plt.legend()
 plt.ylim([0, eigval_obs_norm[1] * 1.1])
 plt.xlim([1, maxPCs])
 plt.xticks(range(1,maxPCs + 1))
-plt.title(r'%s - %s' % (K.galaxyName, K.califaID))
+plt.title(r'%s - %s ($\Lambda\ =$ %.2f)' % (K.galaxyName, K.califaID, P.eigVal_obs_norm__k.sum()))
 plt.xlabel(r'PC')
 plt.ylabel(r'Var. [$\%%$]')
 plt.grid()

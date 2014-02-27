@@ -7,7 +7,7 @@ from matplotlib import pyplot as plt
 from scipy import stats as st
 import PCAlifa as PCA
 
-output_fmt = 'png'
+output_fmt = 'pdf'
 
 fitsfile = sys.argv[1]
 
@@ -18,7 +18,6 @@ else:
 
 print('Output directory: %s' % output_dir)
 
-
 ###############################################################################
 ###############################################################################
 
@@ -26,8 +25,8 @@ def corr_PCvsPC(tomo__zk, nPCs, title, fnamepref):
     prop = {
         'arr'   : [ P.K.at_flux__z, np.log10(P.K.aZ_flux__z / 0.019), P.K.A_V, P.K.v_0, P.K.v_d ],
         'label' : [ r'$\log\ t\ [yr]$', r'$\log\ Z\ [Z_\odot]$', r'$A_V\ [mag]$', r'$v_\star\ [km/s]$', r'$\sigma_\star\ [km/s]$' ],
-        'fname' : [ 'at_flux', 'aZ_flux', 'AV', 'v0', 'vd' ]
-        'cmap'  : [ 'hot_r', 'hot_r', 'hot_r', 'spectral', 'spectral' ]
+        'fname' : [ 'at_flux', 'aZ_flux', 'AV', 'v0', 'vd' ],
+        'cmap'  : [ 'hot_r', 'hot_r', 'hot_r', 'spectral', 'spectral' ],
     }
 
     for p_i, p in enumerate(prop['arr']):
@@ -102,8 +101,8 @@ corr_PCvsPC(P.tomo_obs__zk, nPCs, r'$F_{obs}$.', '%s/%s-f_obs-' % (output_dir, P
 
 P.PCA_obs_norm()
 P.tomograms_obs_norm()
-corr_PCvsPC(P.tomo_obs_norm__zk, nPCs, r'$F_{obs}$ norm.', '%s/%s-f_obs_norm-' % (output_dir, P.K.califaID))
+corr_PCvsPC(P.tomo_obs_norm__zk, nPCs, r'$f_{obs}$', '%s/%s-f_obs_norm-' % (output_dir, P.K.califaID))
 
 P.PCA_syn_norm()
 P.tomograms_syn_norm()
-corr_PCvsPC(P.tomo_syn_norm__zk, nPCs, r'$F_{syn}$ norm.', '%s/%s-f_syn_norm-' % (output_dir, P.K.califaID))
+corr_PCvsPC(P.tomo_syn_norm__zk, nPCs, r'$f_{syn}$', '%s/%s-f_syn_norm-' % (output_dir, P.K.califaID))

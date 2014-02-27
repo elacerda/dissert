@@ -6,7 +6,7 @@ import matplotlib as mpl
 from matplotlib import pyplot as plt
 import matplotlib.gridspec as gridspec
 
-output_fmt = 'png'
+output_fmt = 'pdf'
 
 fitsfile = sys.argv[1]
 
@@ -61,7 +61,7 @@ for i in range(nPCs):
     eval_perc = 100. * eval / evals.sum()
 
     if i == 0:
-        ax2.set_title(r'PCA com $F_{obs} / F_{\lambda 5365}$. - var: $%.2f\ \%%$' % eval_perc)
+        ax2.set_title(r'PCA com $f_{obs}$. - var: $%.2f\ \%%$' % eval_perc)
     else:
         ax2.set_title(r'var: $%.2f\ \%%$' % eval_perc)
 
