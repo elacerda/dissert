@@ -6,7 +6,7 @@ mpl.use('Agg')
 from matplotlib import pyplot as plt
 import PCAlifa as PCA
 
-output_fmt = 'pdf'
+output_fmt = 'png'
 
 fitsfile = sys.argv[1]
 
@@ -43,7 +43,7 @@ plt.legend()
 plt.ylim([0, eigval_obs_norm[1] * 1.1])
 plt.xlim([1, maxPCs])
 plt.xticks(range(1,maxPCs + 1))
-plt.title(r'%s - %s ($\Lambda\ =$ %.2f)' % (K.galaxyName, K.califaID, P.eigVal_obs_norm__k.sum()))
+plt.title(r'%s - %s ($\Lambda\ =$ %.4f)' % (K.galaxyName, K.califaID, P.eigVal_obs_norm__k.mean()))
 plt.xlabel(r'PC')
 plt.ylabel(r'Var. [$\%%$]')
 plt.grid()
