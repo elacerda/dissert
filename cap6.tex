@@ -25,15 +25,50 @@
 %***************************************************************%
 
 \section{Este trabalho}
-\ojo
-%***************************************************************%
-%                                                               %
-%                  Conclusao - trabalhos futuros                %
-%                                                               %
-%***************************************************************%
+
+O objetivo principal deste trabalho foi explorar os cubos de espectros das galáxias do {\em survey} CALIFA utilizando a
+técnica de Tomografia PCA. Talvez pela primeira vez em IFS de galáxias inteiras, mas com certeza pela primeira vez com
+os dados deste {\em survey}, que cobrem $\sim100\%$ da luz de uma galáxia, reamostrada em spaxels de 1 arcsec$^2$,
+formando um cubo de espectros $\mathbf{F}_{x,y,\lambda}$.
+
+A descoberta de linhas largas (elementos típicos de AGNs tipo 1) na galáxia NGC 4736 classificada como LINER, através
+da técnica de tomografia PCA desenvolvida no trabalho de S09, usando dados de IFS do Gemini da região central da galáxia
+($\sim100$ pc) serviram de base teórica para nosso trabalho.
+
+Desenvolvemos um programa, por ora apelidado de ``PCAlifa'', utilizando linguagem Python e os {\em pipelines} {\sc
+qbick} e PyCASSO, ambos construidos pela colaboração entre o projeto CALIFA e o GAS-UFSC, que serviu de base para todo
+nosso estudo exploratório. Estudo este sobre 4 galáxias espirais: NGC 0001 (CALIFA 8), NGC 0776 (CALIFA 73), NGC 2916
+CALIFA 277) e NGC 4210 (CALIFA 518); 2 galáxias {\em early-type}: NGC 1167 (CALIFA 119) e NGC 6515 (CALIFA 864); 2 {\em
+mergers}: NGC 2623 (CALIFA 213) e ARP 220 (CALIFA 802). 
+
+Encontramos diversas correlações entre as primeiras PCs (autoespectros) e propriedades físicas de populações estelares
+obtidos através da síntese para os cubos de espectros das galáxias do CALIFA, feito por CF13 utilizando o \starlight.
+Essas correlações formam uma certa engenharia reversa no sentido de buscar os parâmetros que mais ``importantes'' (em
+variância) dos dados e as propriedades físicas, de uma forma não-paramétrica. Por fim, especulamos que o parâmetro
+$\Lambda$ pode ser uma medida de complexidade do sistema estudado dando uma ideia do tamanho da núvem de pontos no
+espaço $N_\lambda$ dimensional.
 
 \section{Trabalhos futuros}
 
+{\bf\ojo ISSO VAI PARA O CAP 6 / PERSPECTIVAS / FUTURE-WORK: 
+
+(Algumas das cousas a fazer)
+
+Aplicar a cubos da versão 1.4 da pipeline de reducao do CALIFA. Esta nova versão ficou pronta há poucos meses, e apenas
+em Janeiro foi testada por nossos colaboradores. Pode-se perceber que esta nova reducao produz espectros melhor
+calibrados. Por exemplo, os resíduos espectrais dos ajustes com o \starlight\ mostrados na fig ??? de CF13 para a v1.3
+ficaram bem melhores com a 1.4.
+
+Em todo esse estudo trabalhamos com os cubos rearranjados em zonas de Voronoi. Essa escolha se baseia única e
+exclusivamente em nosso desejo de comparar as PCs com os resultados do \starlight, que requer um $S/N$ para ter
+resultados fiáveis. Porém, esse esquema acaba por deteriorar muito a qualidade das imagens para zonas externas, que
+ficam muito gordas... e perdemos resolucao espacial. Seria interessante fazer o PCA com o cubo original, não zonificado.
+Isto tvz produza tomogramas que revelem melhor as estruturas como braços espirais e regioes HII nas partes externas das
+galáxias.
+
+Outras técnicas como ICA, wavelets, e etc poderiam tvz trazer melhorias a nossa análise. Ricci et al ??? usam algumas
+dessas técnicas, mas nós sequer tocamos nisso. É uma possível linha de trabalho para o futuro.
+}
 \subsection{Linhas de emissão e intervalos específicos em comprimento de onda}
 \label{sec:UsoPCA:PCAlidades:emlin}
 

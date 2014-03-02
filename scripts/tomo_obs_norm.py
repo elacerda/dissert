@@ -5,19 +5,39 @@ import PCAlifa as PCA
 import matplotlib as mpl
 from matplotlib import pyplot as plt
 import matplotlib.gridspec as gridspec
+import argparse as ap
 
-output_fmt = 'pdf'
+def parser_args():
+    parser = ap.ArgumentParser(description = '%s' % sys.argv[0])
+    parser.add_argument('--fitsfile', '-f',
+                        help = 'The file must be named KXXXX*.fits',
+                        metavar = 'PyCASSO FITS FILE',
+                        type = str,
+                        default = None)
+    parser.add_argument('--lc', '-l',
+                        help = 'Lambda constrains',
+                        metavar = 'LAMBDA',
+                        type = int,
+                        nargs = 2,
+    parser.add_argument('--outputimgsuffix', '-o',
+                        help = 'Suffix of image file. Sometimes denote the image type. (Ex.: image.png)',
+                        type = str,
+                        default = 'png')
+                        default = [3800, 6850])
+    parser.add_argument('--outputdir', '-o',
+                        help = 'Image output directory',
+                        metavar = 'DIR',
+                        type = str,
+                        default = 'png')
 
-fitsfile = sys.argv[1]
+    return parser.parse_args()
 
-if len(sys.argv) > 2:
-    output_dir = sys.argv[2]
-else:
-    output_dir = '../figuras'
+args = parser_args()
 
-print('Output directory: %s' % output_dir)
+print args.lc
+exit 1
 
-P = PCA.PCAlifa(fitsFile = fitsfile, quantilQFlag = 0.95, lc = [3800, 6850])
+P = PCA.PCAlifa(fitsFile = fitsfile, quantilQFlag = 0.95, lc = args.lc)
 P.setStarlightMaskFile('/home/lacerda/CALIFA/Mask.mC')
 
 P.PCA_obs_norm()
@@ -78,4 +98,4 @@ for i in range(nPCs):
         ax2.axvline(x = xmin, ls = ':', c = 'grey')
 
 f.tight_layout()
-f.savefig('%s/%s-tomo-obs-norm.%s' % (output_dir, K.califaID, output_fmt))
+f.savefig('%s/%s-tomo-obs-norm.%s' % (args.outputdir, K.califaID, args.outputimgsuffix))

@@ -1,4 +1,5 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
 import sys
 import numpy as np
 import matplotlib as mpl
@@ -17,7 +18,10 @@ else:
 
 print('Output directory: %s' % output_dir)
 
-P = PCA.PCAlifa(fitsFile = fitsfile, quantilQFlag = 0.95, lc = [3800, 6850])
+lc = [3800, 6850]
+#lc = [3840, 6840]
+
+P = PCA.PCAlifa(fitsFile = fitsfile, quantilQFlag = 0.95, lc = lc)
 P.setStarlightMaskFile('/home/lacerda/CALIFA/Mask.mC')
 
 P.PCA_obs()
@@ -36,6 +40,11 @@ eigval_obs = 100. * P.eigVal_obs__k / P.eigVal_obs__k.sum()
 eigval_obs_norm = 100. * P.eigVal_obs_norm__k / P.eigVal_obs_norm__k.sum()
 eigval_syn_norm = 100. * P.eigVal_syn_norm__k / P.eigVal_syn_norm__k.sum()
 
+var__z = ((P.f_obs_norm__zl - P.f_obs_norm__zl.mean(axis = 0)) ** 2.0).sum(axis = 1) / (K.N_zone - 1)
+euclid_dist__z = np.sqrt(np.abs(var__z)) # desvio padrão
+
+print '%s ed__z.mean():%.5f\teigVal__k.sum(): %.5f\tsqrt(eigVal_k).mean(): %.5f' % (K.califaID, euclid_dist__z.mean(), P.eigVal_obs_norm__k.sum(), (np.sqrt(np.abs(P.eigVal_obs_norm__k))).mean())
+
 plt.plot(PCs, eigval_obs[:maxPCs], 'k+--', label = '$F_{obs}$')
 plt.plot(PCs, eigval_obs_norm[:maxPCs], 'k^-', label = '$f_{obs}$')
 plt.plot(PCs, eigval_syn_norm[:maxPCs], 'k*-', label = '$f_{syn}$')
@@ -43,7 +52,8 @@ plt.legend()
 plt.ylim([0, eigval_obs_norm[1] * 1.1])
 plt.xlim([1, maxPCs])
 plt.xticks(range(1,maxPCs + 1))
-plt.title(r'%s - %s ($\Lambda\ =$ %.4f)' % (K.galaxyName, K.califaID, P.eigVal_obs_norm__k.mean()))
+plt.title(r'%s - %s' % (K.galaxyName, K.califaID))
+#plt.title(r'%s - %s ($\Lambda\ =$ %.4f)' % (K.galaxyName, K.califaID, Lambda))
 plt.xlabel(r'PC')
 plt.ylabel(r'Var. [$\%%$]')
 plt.grid()

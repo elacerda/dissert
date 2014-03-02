@@ -124,17 +124,18 @@ estão por vir (veja a seção \ref{sec:CALePyC:Apresent}).
 Com esses cubos de dados, cada galáxia passa a ser uma grande amostra de espectros, de modo que o que antes era feito
 galáxia a galáxia pode agora ser feito para diferentes regiões de uma mesma galáxia. Podemos assim executar o \starlight
 para cada {\em spaxel} e então obtemos propriedades físicas das populações estelares em função da posição na galáxia.
-Este tipo de análise vem sendo realizado por pesquisadores do IAA (Enrique Pérez, Rosa González Delgado, Rubén
-García-Benito) e da UFSC (André Luiz de Amorim, Natália Vale Asari, Roberto Cid Fernandes). Aspectos técnicos e
-incertezas são discutidos em \citet[][CF13 daqui pra frente]{CidFernandes2013} e \citet{CidFernandes2014}, enquanto
-\citet{Perez2013}, e \citet{GonzalezDelgado2014} apresentam resultados astrofísicos dessa análise. Neste trabalho
-explorarenos os mesmo dados através da técnica de PCA.
+Este tipo de análise vem sendo realizado por pesquisadores do Instituto de Astrofísica de Andalucía, na Espanha (IAA;
+Enrique Pérez, Rosa González Delgado, Rubén García-Benito) e do Grupo de Astrofísica da Universidade Federal de Santa
+Catarina (GAS-UFSC; André Luiz de Amorim, Natália Vale Asari, Roberto Cid Fernandes). Aspectos técnicos e incertezas são
+discutidos em \citet[][CF13 daqui pra frente]{CidFernandes2013} e \citet{CidFernandes2014}, enquanto \citet{Perez2013},
+e \citet{GonzalezDelgado2014} apresentam resultados astrofísicos dessa análise. Neste trabalho explorarenos os mesmo
+dados através da técnica de PCA.
 
-A aplicação de PCA a cubos de dados foi realizada pela primeira vez por \citet[][S09 daqui pra frente]{Steiner2009},
-que cunharam o termo Tomografia PCA. Com essa nova técnica temos, além da análise das componentes principais, uma imagem formada pela matriz
-de covariância (as questões matemáticas serão abordadas no Capítulo \ref{sec:PCAeTomoPCA}). Assim podemos saber o peso,
-ou relevância, de cada componente principal (daqui pra frente PC) relacionada a uma posição na galáxia, combinando as
-virtudes de espectroscopia com as de imageamento.
+A aplicação de PCA a cubos de dados foi realizada pela primeira vez por \citet[][S09 daqui pra frente]{Steiner2009}, que
+cunharam o termo Tomografia PCA. Com essa nova técnica temos, além da análise das componentes principais, uma imagem
+formada pela matriz de covariância (as questões matemáticas serão abordadas no Capítulo \ref{sec:PCAeTomoPCA}). Assim
+podemos saber o peso, ou relevância, de cada componente principal (daqui pra frente PC) relacionada a uma posição na
+galáxia, combinando as virtudes de espectroscopia com as de imageamento.
 
 Além de S09, outros exemplos de uso de Tomografia PCA podem ser encontrados em \citet{Riffel2011} e \citet{Ricci2011}.
 Cumpre salientar que todas essas aplicações dessa nova técnica são baseadas em dados que cobrem apenas a região um campo
@@ -145,9 +146,8 @@ dos artigos supracitados (ver também Seção \ref{sec:PCAeTomoPCA:TomoPCA}).
 \section{Este trabalho}
 \label{sec:Intro:ThisWork}
 
-Através da colaboração do Grupo de Astrofísica da Universidade Federal de Santa Catarina (GAS-UFSC) com o grupo de
-pesquisadores do projeto CALIFA temos a oportunidade de trabalhar com os dados de IFS das galáxias observadas por esse
-projeto, que ainda está em andamento. O seu primeiro {\em Data
+Através da colaboração do GAS-UFSC com o grupo de pesquisadores do projeto CALIFA temos a oportunidade de trabalhar com
+os dados de IFS das galáxias observadas por esse projeto, que ainda está em andamento. O seu primeiro {\em Data
 Release\footnote{\url{http://www.caha.es/CALIFA/public_html/?q=content/califa-dr1}}} \citep[][DR1]{Husemann2013} possui
 $100$ objetos e por volta de $400$ mil espectros. A previsão é que ao término do projeto serão observadas até $600$
 objetos. Embora outros surveys de IFS estejam completos ou em andamento (ver Seção \ref{sec:CALePyC:Apresent}), o CALIFA

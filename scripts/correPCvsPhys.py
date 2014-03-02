@@ -7,7 +7,7 @@ from matplotlib import pyplot as plt
 from scipy import stats as st
 import PCAlifa as PCA
 
-output_fmt = 'pdf'
+output_fmt = 'png'
 
 fitsfile = sys.argv[1]
 
@@ -18,6 +18,8 @@ else:
 
 print('Output directory: %s' % output_dir)
 
+#lc = [3800, 6850]
+lc = [3840, 6840]
 
 ###############################################################################
 ###############################################################################
@@ -47,7 +49,7 @@ def plot_evec_ax(l, evec, ax, *kwargs):
 ###############################################################################
 ###############################################################################
 
-P = PCA.PCAlifa(fitsFile = fitsfile, quantilQFlag = 0.95, lc = [3800, 6850])
+P = PCA.PCAlifa(fitsFile = fitsfile, quantilQFlag = 0.95, lc = lc)
 P.setStarlightMaskFile('/home/lacerda/CALIFA/Mask.mC')
 
 P.PCA_obs_norm()

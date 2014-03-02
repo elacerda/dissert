@@ -6,7 +6,7 @@ import matplotlib as mpl
 from matplotlib import pyplot as plt
 import matplotlib.gridspec as gridspec
 
-output_fmt = 'pdf'
+output_fmt = 'png'
 
 fitsfile = sys.argv[1]
 
@@ -16,6 +16,9 @@ else:
     output_dir = '../figuras'
 
 print('Output directory: %s' % output_dir)
+
+#lc = [3800, 6850]
+lc = [3840, 6840]
 
 P = PCA.PCAlifa(fitsFile = fitsfile, quantilQFlag = 0.95, lc = [3800, 6850])
 P.setStarlightMaskFile('/home/lacerda/CALIFA/Mask.mC')
