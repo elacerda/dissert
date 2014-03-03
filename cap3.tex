@@ -41,12 +41,11 @@ Existem diversas formas de se calcular essa base final. A prova matemática que 
 de multiplicadores de Lagrange, calculando os autovetores ($\mathbf{e}{}_k$) e autovalores ($\Lambda_k$) que maximizam o
 valor de $\mathbf{e}{}_k^T \cdot \mathbf{C}{}_{cov} \cdot \mathbf{e}{}_k$ (ver Eq. \ref{eq:PCA:covMatrix}) sujeito à
 restrição de que um autovetor deve ser ortogonal a qualquer outro da base ($\mathbf{e}{}_i^T \mathbf{e}{}_j = 0$) e que
-todos devem ser normalizados ($\mathbf{e}{}_i{}^T \mathbf{e}{}_i = 1$) \citep[][p. 5-6]{JolliffePCA1986}. No caso caso
-de PCA com espectros, cada um pode ser represtado como um ponto num espaço com dimensão $N_\lambda$. Vários espectros
-formam uma núvem de pontos nesse espaço. Assim, encontramos quais são os eixos mais significativos desse espaço em
-relação à variância, sujeitos às restrições acima. Fazemos esse cálculo encontrando os autovetores e autovalores da
-matriz de covariância desse espaço (a matriz tem dimensão $N_\lambda \times N_\lambda$) usando a biblioteca científica
-\texttt{SciPy}\footnote{\url{http://scipy.org/}}.
+todos devem ser normalizados ($\mathbf{e}{}_i{}^T \mathbf{e}{}_i = 1$) \citep[][p. 5-6]{JolliffePCA1986}. No caso de PCA
+com espectros, o fluxo em cada comprimento de onda varia através das zonas. Encontramos então quais são os eixos mais
+significativos desse espaço em relação à variância, sujeitos às restrições acima. Fazemos esse cálculo encontrando os
+autovetores e autovalores da matriz de covariância (a matriz tem dimensão $N_\lambda \times N_\lambda$) usando a
+biblioteca científica \texttt{SciPy}\footnote{\url{http://scipy.org/}}.
 
 \subsection{PCA das galáxias do CALIFA}
 
