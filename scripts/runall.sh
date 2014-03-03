@@ -23,7 +23,7 @@ do
 #    time ./correPCvsPhys.py $FITSFILE $OUTPUTDIR
 #    time ./tomo_obs_norm.py $FITSFILE $OUTPUTDIR
 #    time ./tomo_syn_norm.py $FITSFILE $OUTPUTDIR
-    time ./scree-test.py $FITSFILE $OUTPUTDIR
+    time ./scree-test.py -f $FITSFILE -d $OUTPUTDIR -o png
 #    time ./exampleSpectra.py $FITSFILE $OUTPUTDIR
 #    time ./pixels_zone.py $FITSFILE
 

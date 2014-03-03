@@ -50,9 +50,9 @@ biblioteca científica \texttt{SciPy}\footnote{\url{http://scipy.org/}}.
 \subsection{PCA das galáxias do CALIFA}
 
 Conforme a Seção \ref{sec:CALePyC:pipelines} vimos que o cubo de espectros das galáxias do CALIFA estão acessíveis no
-PyCASSO separados por zonas, muitas correspondendo a píxeis individuiais e outras a conjuntos de pixeis (zonas de
+\pycasso separados por zonas, muitas correspondendo a píxeis individuiais e outras a conjuntos de pixeis (zonas de
 Voronoi). Os espectros observados estão armazenados em forma de uma matriz ($N_\lambda \times N_z$) com $N_\lambda$
-comprimentos de onda e $N_z$ zonas e (\texttt{f\_obs} no PyCASSO). Em nosso trabalho vamos usar a forma transposta dessa
+comprimentos de onda e $N_z$ zonas e (\texttt{f\_obs} no \pycasso). Em nosso trabalho vamos usar a forma transposta dessa
 matriz, portanto nossa matriz de espectros está na forma $N_z \times N_\lambda$, como demonstrado na equação abaixo.
 
 \begin{equation}
@@ -75,7 +75,8 @@ Calculamos então o espectro médio de uma galáxia
 \end{equation}
 \noindent e então subtraímos a média de todos os espectros
 \begin{equation}
-\textbf{I}{}_{z \lambda} = \textbf{F}{}_{z \lambda} - \langle \textbf{F}{}_\lambda \rangle
+	\label{eq:PCA:Izl}
+	\textbf{I}{}_{z \lambda} = \textbf{F}{}_{z \lambda} - \langle \textbf{F}{}_\lambda \rangle
 \end{equation}
 \noindent para o cálculo da matriz de covariâncias usando um conjunto de dados com média zero:
 \begin{equation}
@@ -88,7 +89,7 @@ Agora calculamos os autovalores e autovetores da matriz de covariância. Neste t
 designar esses autovetores pois são de uma matriz de covariâncias entre espectros de cada zona. Então ordenamos-os
 decrescentemente pelo valor de seus autovalores. Os autoespectros são as componentes principais (PCs) e os autovalores
 as respectivas variâncias. Isso feito, temos então o que necessitamos para iniciar o cálculo do Tomograma PCA. Um
-exemplo de programa para calcular a matriz de covariâncias e seus autovetores e autovalores usando o PyCASSO e o
+exemplo de programa para calcular a matriz de covariâncias e seus autovetores e autovalores usando o \pycasso e o
 \texttt{SciPy} pode ser visto na Figura \ref{fig:programaCovMatrix}.
 
 \begin{figure}
@@ -119,8 +120,8 @@ S = sp.argsort(w)[::-1]
 eigval = W[S]
 eigvect = e[:, S]
 	\end{python}
-	\caption[Exemplo de cálculo de PCA usando o PyCASSO e SciPy.] 
-	{Cálculo do procedimento completo de PCA para os espectros observados de uma galáxia do CALIFA usando o PyCASSO e a
+	\caption[Exemplo de cálculo de PCA usando o \pycasso e SciPy.] 
+	{Cálculo do procedimento completo de PCA para os espectros observados de uma galáxia do CALIFA usando o \pycasso e a
 	biblioteca científica de Python chamada \texttt{SciPy}. No final do código temos armazenado nos vetores \texttt{eigval}
 	e \texttt{eigvect} os autovalores e autovetores da matriz de covariância (\texttt{covMat\_\_ll}) ordenados
 	decrescentemente.}

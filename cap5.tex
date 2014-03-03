@@ -34,7 +34,7 @@ NGC4210), duas galáxias {\em early-type} (NGC 1167 e NGC 6515) e dois {\em merg
 capítulo as imagens referentes a análise da galáxia NGC 2916, pois essas já se encontram no capitulo anterior. Todas as
 galáxias aqui estudadas estão listadas na Tabela \ref{tab:amostraGalaxias} na ordem que aparecerão neste capítulo.
 
-Para cada galáxia, apresentaremos inicialmente sua imagem SDSS acompahanda de produtos do {\sc qbick} e PyCASSO: mapas
+Para cada galáxia, apresentaremos inicialmente sua imagem SDSS acompahanda de produtos do {\sc qbick} e \pycasso: mapas
 do fluxo em 5635 \AA, a idade média ponderada pelo fluxo nesse comprimento de onda ($\langle \log t \rangle_L$), a
 metalicidade média ponderada pelo fluxo ($\langle Z \rangle_L$), a extinção estelar ($A_V$), o campo de velocidades na
 linha de visada ($v_\star$) e a dispersão de velocidades ($\sigma_\star$). Em seguida, apresentamos o {\em scree test}
@@ -87,17 +87,20 @@ discutido em \ref{sec:PCAaplic:OBSxSYN}, onde o resultado do PCA para $f_{syn}$ 
 variância. É interessante notar também que apesar da quinta componente ainda ter 2\% da variância para o caso $f_{obs}$,
 através da nossa análise dos tomogramas as componentes daí pra frente não parecem ter mais informações ``decifráveis''.
 
-Como a NGC 2916, a primeira PC, e seu respectivo tomograma (Figuras \ref{fig:K0008tomofobsnorm} e
-\ref{fig:K0008tomofsynnorm}), parece ser relacionada a uma população muito azul, tanto para a PCA com os dados
-observados, quanto sintéticos, correlacionando geralmente com a idade. Mas, vemos nas correlações (Figuras
-\ref{fig:K0008correfobsnorm} e \ref{fig:K0008correfsynnorm}), que a primeira componente, para essa galáxia, se
-correlaciona praticamente com todas as quantidades avaliadas, salvo $v_\star$. A idade média aparece mais definida junto
-com o $A_V$ na PC4 para o caso observado. Já no caso sintético ela aparece melhor na PC6, juntamente com metalicidade e
-$A_V$, como índices maiores de correlação. Observado a imagem da velocidade estelar (Figura \ref{fig:K0008apresent},
-segunda imagem na última linha) podemos ver que essa galáxia não possui um padrão muito claro de rotação, mas na análise das
-correlações para os dados sintéticos vemos que a PC4 se correlaciona de maneira formidável com $v_\star$ ($s\ =\ 0.88$).
-Para o caso observado vemos que a rotação aparece, mesmo que com uma correlação mais fraca que no caso sintético, na
-PC3.
+Através da análise das PCs para o caso observado dessa galáxia (Figura \ref{fig:K0008tomofobsnorm}), notamos que a parte
+inicial (os primeros $\sim40$ \AA) e a parte final (os últimos $\sim10$ \AA) dos autoespectros chamam atenção e, através
+de uma revisão dos espectros do cubo, vimos que elas, na verdade, evidenciam a existência problemas com o fluxo nesses
+comprimentos de onda em alguns espectros. Mesmo assim, seguimos com nossa análise. Como a NGC 2916, a primeira PC, e seu
+respectivo tomograma (Figuras \ref{fig:K0008tomofobsnorm} e \ref{fig:K0008tomofsynnorm}), parece ser relacionada a uma
+população muito azul, tanto para a PCA com os dados observados, quanto sintéticos, correlacionando geralmente com a
+idade. Mas, vemos nas correlações (Figuras \ref{fig:K0008correfobsnorm} e \ref{fig:K0008correfsynnorm}), que a primeira
+componente, para essa galáxia, se correlaciona praticamente com todas as quantidades avaliadas, salvo $v_\star$. A idade
+média aparece mais definida junto com o $A_V$ na PC4 para o caso observado. Já no caso sintético ela aparece melhor na
+PC6, juntamente com metalicidade e $A_V$, como índices maiores de correlação. Observado a imagem da velocidade estelar
+(Figura \ref{fig:K0008apresent}, segunda imagem na última linha) podemos ver que essa galáxia não possui um padrão muito
+claro de rotação, mas na análise das correlações para os dados sintéticos vemos que a PC4 se correlaciona de maneira
+formidável com $v_\star$ ($s\ =\ 0.88$). Para o caso observado vemos que a rotação aparece, mesmo que com uma correlação
+mais fraca que no caso sintético, na PC3.
 
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0008-apresent.pdf}
@@ -553,6 +556,55 @@ ter correlação com nenhum dos parâmetros físicos comparados. O mesmo para a 
 
 \section{Considerações gerais}
 
-\ojo Cada caso é um caso, mas certas tendências emergiram desse estudo exploratório....
+Nesse capítulo exploramos algumas galáxias do CALIFA utilizando a Tomografia PCA para os espectros, observados e
+sintéticos, normalizados. Fomos capazes de encontrar diversas características nas componentes, sejam correlacionadas com
+efeitos físicos ou com problemas nos espectros originais.
+
+Os {\em scree tests} mostram um comportamento assintótico semelhante em todos os casos, com a informação em variância
+mais comprimida nas primeiras PCs para o caso $F_{obs}$, seguido por $f_{syn}$ e $f_{obs}$. Cabe aqui ressaltar que mesmo com
+o mesmo comportamento assintótico, o número de componentes que ``explicam'' cada galáxia difere muito. Podemos ver isso
+na Tabela \ref{tab:resultLambda} que apresenta a variância acumulada para as 6 primeiras componentes ($\Lambda_6$) e o
+número de componentes necessárias para obtermos 90\% da variância acumulada.
+
+\begin{table}
+	\caption[Variância acumulada para as galáxias análisadas.]
+	{Tabela contendo a variância acumulada pelas 6 primeiras PCs ($\Lambda_6$), o número de componentes necessárias para
+	cobrir 90\% da variância acumulada ($k_{90\%}$) e o valor total da soma de todas os autovalores ($\Lambda$). Todos os
+	valores são calculados para os casos observado e sintético, ambos normalizados.}
+	\begin{tabular}{l c c c c c c r}
+		Nome da galáxia & CALIFA ID & $\Lambda_6^{obs}\ [\%]$ & $\Lambda_6^{syn}\ [\%]$ & $k_{90\%}^{obs}$ & $k_{90\%}^{syn}$
+		& $\Lambda^{obs}$ & $\Lambda^{syn}$ \\ 
+		\midrule
+		NGC 2916 & K0277 & 89.01 & 99.81 &  12 & 1 & 14.24 & 12.43 \\
+		NGC 0001 & K0008 & 59.61 & 99.15 &  82 & 2 &  5.33 &  2.69 \\
+		NGC 0776 & K0073 & 66.24 & 99.53 &  95 & 1 &  8.07 &  4.76 \\
+		NGC 4210 & K0518 & 85.90 & 99.80 &  37 & 1 & 10.30 &  7.79 \\
+		NGC 1167 & K0119 & 45.79 & 98.47 & 161 & 3 &  3.74 &  1.04 \\
+		NGC 6515 & K0864 & 40.31 & 98.80 & 104 & 3 &  2.28 &  0.59 \\
+		NGC 2623 & K0213 & 90.79 & 99.90 &   5 & 1 & 15.47 & 13.64 \\
+		ARP 220  & K0802 & 79.76 & 99.75 &  40 & 1 & 10.98 &  8.21 \\
+	\end{tabular}
+	\label{tab:resultLambda}
+\end{table}
+
+Muita informação contida nessa tabela ainda necessita ser explorada, mas podemos ver que a soma dos autovalores das PCs
+para cada galáxia ($\Lambda$), que é igual a soma da variância de todos os comprimentos de onda através das zonas,
+parecem crescer juntamente com a ``complexidade'' da galáxia análisada. A variância acumulada para os casos observado e
+sintético parecem confirmar que a informação fica mais comprimida para as primeiras PCs para o segundo caso, em relação
+ao primeiro. 
+
+Pelo fato de que o campo do CALIFA engloba $\sim100\%$ da luz da galáxia, as estruturas mapeadas pelos cubos de
+espectros são diversas, mas não nos impediram de encontrar certas similaridades nos resultados para diferentes galáxias
+com o mesmo tipo morfológico. As galáxias espirais possuem geralmente a PC1 correlacionada com a idade, diferentemente
+das {\em early-types}, que geralmente parecem ter sua componente principal fortemente ligada à extinção estelar ($A_V$).
+Propriedades cinemáticas aparecem de forma singular, ou composta por mais de uma componente, em todos os casos para
+todas as galáxias. Já as correlações com a metalicidade aparecem geralmente misturadas com idade ou extinção.
+
+Cabe aqui também ressaltar que através da Tomografia PCA dessas galáxias pudemos encontrar problemas em alguns espectros
+das galáxias NGC 0001 e NGC 4210. Na última delas o problema parece ser um pouco mais sério e mais difícil de se
+contornar, mas para a galáxia NGC 0001 podemos realizar novamente a PCA cortando 40 \AA do lado azul e 10 \AA do lado
+vermelho do espectro. Talvez para o caso da NGC 4210 possamos reconstruir os cubos de espectros originais suprimindo
+determinandas componentes da forma que foi feita por S09 ao reconstruir o espectro do AGN da galáxia NGC 4736 e também
+proposto na Seção \ref{sec:conclusao:futWorks}.
 
 % End of this chapter

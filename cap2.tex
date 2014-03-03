@@ -207,19 +207,19 @@ extraídos pelo \starlight, o que servirá de auxílio a interpretação dos res
 Todas informações e pré-processamentos provenientes do {\sc qbick} são herdadas pelo {\em pipeline} apresentado a
 seguir.
 
-\subsection{PyCASSO}
+\subsection{\pycasso}
 
 Os espectros extraídos pelo {\sc qbick} são processados pelo \starlight, produzindo, no caso de CALIFA 277, 1639
 arquivos ASCII como output. Dado o grande número de informações contidas em cada um desses arquivos (e.g., história de
 formação estelar em luz e massa, extinção, parâmetros cinemáticos, figuras de mérito do ajuste), necessitamos de um
 {\em pipeline} que faça a organização de todos os dados para que cálculos e gráficos sejam fácil para que até um programador
 de nível iniciante possa fazer. André L. de Amorim, juntamente com outros colaboradores de nosso grupo e do projeto
-CALIFA construiu o PyCASSO ({\em Python CALIFA \starlight Synthesis Organizer}) (descrito na sec. 4 de CF13) que faz a
+CALIFA construiu o \pycasso ({\em Python CALIFA \starlight Synthesis Organizer}) (descrito na sec. 4 de CF13) que faz a
 organização dos dados que vêm do {\sc qbick} e das etapas inicais de redução juntamente com a síntese de populações
 estelares feitas com o \starlight, facilitando, e muito, o trabalho de quem usa estes dados. Sem a ajuda deste
 organizador, este trabalho seria muito mais difícil, além de infactível no tempo de um mestrado.
 
-O PyCASSO é uma biblioteca desenvolvida em Python para organizar os dados da síntese feita pelo \starlight. A versão
+O \pycasso é uma biblioteca desenvolvida em Python para organizar os dados da síntese feita pelo \starlight. A versão
 usada neste trabalho é a $0.9.3$\footnote{\url{http://minerva.ufsc.br/~andre/PyCASSO-0.9.3/}}. Para um acesso mais
 rápido e reutilizável do código e dos dados em qualquer ambiente, organiza os cubos em formatos FITS ou HDF5. Em outra
 camada, várias matrizes e cubos são armazenados para acesso com nomes próprio (um exemplo, \texttt{popx}, representa a
@@ -227,9 +227,9 @@ fração de luz distribuída pelas populações estelares da base usada na sínt
 programação exploratória não precise se preocupar com as características de cada formato de armazenamento de dados. Por
 fim, existe uma camada construída para análise, com funções que retornam a indexação de cada zona para um par $(x, y)$,
 cálculos de perfis radiais e azimutais, geometria, entre outras rotinas. Um programador facilmente pode adicionar mais
-rotinas como essas. Todos os códigos desenvolvidos nessa dissertação foram escritos de forma compatível com o PyCASSO.
+rotinas como essas. Todos os códigos desenvolvidos nessa dissertação foram escritos de forma compatível com o \pycasso.
 
-\subsection{Exemplos de utilização do PyCASSO}
+\subsection{Exemplos de utilização do \pycasso}
 
 \begin{figure}
 	\begin{python}
@@ -244,7 +244,7 @@ at = K.at_flux__z
 at_total = (at * K.Lobn__z).sum() / K.Lobn__z.sum()
 print 'Idade media da galaxia K0277: \%.2f' \% at_total
 	\end{python}
-	\caption[Exemplo de programa utilizando PyCASSO.]
+	\caption[Exemplo de programa utilizando \pycasso.]
 	{Exemplo de acesso aos cubo de dados por arquivo FITS e o cálculo da idade estelar média de uma galáxia.}
 	\label{fig:dataAccess}
 \end{figure}
@@ -279,13 +279,13 @@ plt.title(r'\langle \log t \langle_{L z}')
 	\label{fig:mapaIdade}
 \end{figure}
 
-Ler um arquivo FITS é fácil com o PyCASSO, assim como o acesso aos dados. Na Figura \ref{fig:dataAccess} temos um
+Ler um arquivo FITS é fácil com o \pycasso, assim como o acesso aos dados. Na Figura \ref{fig:dataAccess} temos um
 exemplo de leitura de arquivo FITS e um cálculo da idade estelar média da galáxia a partir da idade média ponderada pela
 luminosidade, por zona (\texttt{at\_flux\_\_z}). A idade estelar média é calculada usando a expressão $ \langle \log t
 \rangle^{gal}_L = \sum_z \langle \log t \rangle_{L,z} L_z /\sum_z L_z$ onde $L_Z $ é a luminosidade e $ \langle \log t
 \rangle_L $ é a idade estelar média, ambas por zona. A passagem de coordenadas $z \to (x, y)$ exemplificada no programa
 da Figura \ref{fig:programaMapaIdade} (e a imagem gerada na Figura \ref{fig:mapaIdade}) é feita através da função de
-\texttt{zoneToYX} dentro do PyCASSO. Os gráficos são feitos utilizando a biblioteca gráfica de Python,
+\texttt{zoneToYX} dentro do \pycasso. Os gráficos são feitos utilizando a biblioteca gráfica de Python,
 \texttt{matplotlib}\footnote{\url{http://matplotlib.org}}.
 
 \begin{figure}
@@ -325,14 +325,14 @@ plt.plot(bin_center, at_rad)
 
 Perfis radiais ou axiais também são importantes para o estudo de diversas propriedades galáticas. Podemos ver na Figura
 \ref{fig:programaPerfRad} (e a imagem gerada na Figura \ref{fig:perfRad}) um exemplo de perfil radial executado
-através da função \texttt{radialProfile} do PyCASSO.
+através da função \texttt{radialProfile} do \pycasso.
 
-Já existem vários artigos utilizando o PyCASSO \citep{CidFernandes2013, CidFernandes2014, Perez2013,
+Já existem vários artigos utilizando o \pycasso \citep{CidFernandes2013, CidFernandes2014, Perez2013,
 GonzalezDelgado2014}, também há alguns usando indiretamente \citep{Husemann2013, IglesiasParamo2013} e três teses de
 doutorado em curso (uma na UFSC e duas no IAA). São mais de 10 pessoas utilizando a biblioteca em nossa colaboração. 
 
 Os cálculos necessários para a PCA e também para a Tomografia PCA se tornam simples contas usando pacotes matemáticos de
 python. O software dessenvolvido para a PCA e Tomografia PCA desta dissertação (por ora apelidado de ``PCAlifa'') foi
-feito de forma compativel com o PyCASSO, visando futuramente integrá-lo como um novo módulo dessa ferramenta.
+feito de forma compativel com o \pycasso, visando futuramente integrá-lo como um novo módulo dessa ferramenta.
 
 % End of this chapter

@@ -19,11 +19,11 @@ def parser_args():
                         metavar = 'LAMBDA',
                         type = int,
                         nargs = 2,
+                        default = [3800, 6850])
     parser.add_argument('--outputimgsuffix', '-o',
                         help = 'Suffix of image file. Sometimes denote the image type. (Ex.: image.png)',
                         type = str,
                         default = 'png')
-                        default = [3800, 6850])
     parser.add_argument('--outputdir', '-o',
                         help = 'Image output directory',
                         metavar = 'DIR',
@@ -33,9 +33,6 @@ def parser_args():
     return parser.parse_args()
 
 args = parser_args()
-
-print args.lc
-exit 1
 
 P = PCA.PCAlifa(fitsFile = fitsfile, quantilQFlag = 0.95, lc = args.lc)
 P.setStarlightMaskFile('/home/lacerda/CALIFA/Mask.mC')
