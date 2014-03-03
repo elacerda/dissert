@@ -34,7 +34,9 @@ def parser_args():
 
 args = parser_args()
 
-P = PCA.PCAlifa(fitsFile = fitsfile, quantilQFlag = 0.95, lc = args.lc)
+print('Output directory: %s' % args.outputdir)
+
+P = PCA.PCAlifa(fitsFile = args.fitsfile, quantilQFlag = 0.95, lc = args.lc)
 P.setStarlightMaskFile('/home/lacerda/CALIFA/Mask.mC')
 
 P.PCA_obs_norm()

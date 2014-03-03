@@ -13,18 +13,19 @@ GAL="$GAL_SP $GAL_ET $GAL_ME"
 FITSUFFIX="_synthesis_eBR_v20_q036.d13c512.ps03.k2.mC.CCM.Bgsd61.fits"
 
 OUTPUTDIR=.
+OUTPUTIMGFMT=pdf
 
 for g in $GAL
 do
     FITSFILE=${FITSDIR}/${g}/${g}${FITSUFFIX}
 
 #    time ./apres_gal.py $FITSFILE $OUTPUTDIR
-#    time ./correPCvsPC.py $FITSFILE $OUTPUTDIR
-#    time ./correPCvsPhys.py $FITSFILE $OUTPUTDIR
-#    time ./tomo_obs_norm.py $FITSFILE $OUTPUTDIR
-#    time ./tomo_syn_norm.py $FITSFILE $OUTPUTDIR
-    time ./scree-test.py -f $FITSFILE -d $OUTPUTDIR -o png
-#    time ./exampleSpectra.py $FITSFILE $OUTPUTDIR
+    time ./correPCvsPC.py -f $FITSFILE -d $OUTPUTDIR -o $OUTPUTIMGFMT
+    time ./correPCvsPhys.py -f $FITSFILE -d $OUTPUTDIR -o $OUTPUTIMGFMT
+    time ./tomo_obs_norm.py -f $FITSFILE -d $OUTPUTDIR -o $OUTPUTIMGFMT
+    time ./tomo_syn_norm.py -f $FITSFILE -d $OUTPUTDIR -o $OUTPUTIMGFMT
+    time ./scree-test.py -f $FITSFILE -d $OUTPUTDIR -o $OUTPUTIMGFMT
 #    time ./pixels_zone.py $FITSFILE
+#    time ./exampleSpectra.py $FITSFILE $OUTPUTDIR
 
 done

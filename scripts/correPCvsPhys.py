@@ -6,20 +6,32 @@ import matplotlib as mpl
 from matplotlib import pyplot as plt
 from scipy import stats as st
 import PCAlifa as PCA
+import argparse as ap
 
-output_fmt = 'png'
+def parser_args():
+    parser = ap.ArgumentParser(description = '%s' % sys.argv[0])
+    parser.add_argument('--fitsfile', '-f',
+                        help = 'The file must be named KXXXX*.fits',
+                        metavar = 'PyCASSO FITS FILE',
+                        type = str,
+                        default = None)
+    parser.add_argument('--lc', '-l',
+                        help = 'Lambda constrains',
+                        metavar = 'LAMBDA',
+                        type = int,
+                        nargs = 2,
+                        default = [3800, 6850])
+    parser.add_argument('--outputimgsuffix', '-o',
+                        help = 'Suffix of image file. Sometimes denote the image type. (Ex.: image.png)',
+                        type = str,
+                        default = 'png')
+    parser.add_argument('--outputdir', '-o',
+                        help = 'Image output directory',
+                        metavar = 'DIR',
+                        type = str,
+                        default = 'png')
 
-fitsfile = sys.argv[1]
-
-if len(sys.argv) > 2:
-    output_dir = sys.argv[2]
-else:
-    output_dir = '../figuras'
-
-print('Output directory: %s' % output_dir)
-
-#lc = [3800, 6850]
-lc = [3840, 6840]
+    return parser.parse_args()
 
 ###############################################################################
 ###############################################################################
@@ -49,7 +61,11 @@ def plot_evec_ax(l, evec, ax, *kwargs):
 ###############################################################################
 ###############################################################################
 
-P = PCA.PCAlifa(fitsFile = fitsfile, quantilQFlag = 0.95, lc = lc)
+args = parser_args()
+
+print('Output directory: %s' % args.outputdir)
+
+P = PCA.PCAlifa(fitsFile = args.fitsfile, quantilQFlag = 0.95, lc = args.lc)
 P.setStarlightMaskFile('/home/lacerda/CALIFA/Mask.mC')
 
 P.PCA_obs_norm()
@@ -103,7 +119,7 @@ for i in range(nCols):
     axArr[0, i].set_title(prop['label'][i])
 
 f.suptitle(u'Correlações $f_{obs}$', fontsize=16)
-f.savefig('%s/%s-correl-f_obs_norm-PCvsPhys.%s' % (output_dir, K.califaID, output_fmt))
+f.savefig('%s/%s-correl-f_obs_norm-PCvsPhys.%s' % (args.outputdir, K.califaID, args.outputimgsuffix))
 f.clf()
 
 ################################################################################
@@ -151,7 +167,7 @@ for i in range(nCols):
     axArr[0, i].set_title(prop['label'][i])
 
 f.suptitle(u'Correlações $f_{syn}$', fontsize=16)
-f.savefig('%s/%s-correl-f_syn_norm-PCvsPhys.%s' % (output_dir, K.califaID, output_fmt))
+f.savefig('%s/%s-correl-f_syn_norm-PCvsPhys.%s' % (args.outputdir, K.califaID, args.outputimgsuffix))
 
 ###############################################################################
 ###############################################################################
@@ -197,5 +213,5 @@ for i in range(nCols):
     axArr[0, i].set_title(prop['label'][i])
 
 f.suptitle(u'Correlações $F_{obs}$', fontsize=16)
-f.savefig('%s/%s-correl-f_obs-PCvsPhys.%s' % (output_dir, K.califaID, output_fmt))
+f.savefig('%s/%s-correl-f_obs-PCvsPhys.%s' % (args.outputdir, K.califaID, args.outputimgsuffix))
 

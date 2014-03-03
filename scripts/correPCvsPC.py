@@ -6,20 +6,35 @@ import matplotlib as mpl
 from matplotlib import pyplot as plt
 from scipy import stats as st
 import PCAlifa as PCA
-
-output_fmt = 'pdf'
-
-fitsfile = sys.argv[1]
-
-if len(sys.argv) > 2:
-    output_dir = sys.argv[2]
-else:
-    output_dir = '../figuras'
-
-print('Output directory: %s' % output_dir)
+import argparse as ap
 
 ###############################################################################
 ###############################################################################
+
+def parser_args():
+    parser = ap.ArgumentParser(description = '%s' % sys.argv[0])
+    parser.add_argument('--fitsfile', '-f',
+                        help = 'The file must be named KXXXX*.fits',
+                        metavar = 'PyCASSO FITS FILE',
+                        type = str,
+                        default = None)
+    parser.add_argument('--lc', '-l',
+                        help = 'Lambda constrains',
+                        metavar = 'LAMBDA',
+                        type = int,
+                        nargs = 2,
+                        default = [3800, 6850])
+    parser.add_argument('--outputimgsuffix', '-o',
+                        help = 'Suffix of image file. Sometimes denote the image type. (Ex.: image.png)',
+                        type = str,
+                        default = 'png')
+    parser.add_argument('--outputdir', '-o',
+                        help = 'Image output directory',
+                        metavar = 'DIR',
+                        type = str,
+                        default = 'png')
+
+    return parser.parse_args()
 
 def corr_PCvsPC(tomo__zk, nPCs, title, fnamepref):
     prop = {
@@ -85,24 +100,27 @@ def corr_PCvsPC(tomo__zk, nPCs, title, fnamepref):
             axArr[0, i].set_title('PC%d' % (i + 2))
 
         plt.suptitle(r'%s' % title)
-        f.savefig('%scorre_PCxPC_%s.%s' % (fnamepref, prop['fname'][p_i], output_fmt))
+        f.savefig('%scorre_PCxPC_%s.%s' % (fnamepref, prop['fname'][p_i], args.outputimgsuffix))
 
 ###############################################################################
 ###############################################################################
 
-P = PCA.PCAlifa(fitsFile = fitsfile, quantilQFlag = 0.95, lc = [3800, 6850])
+args = parser_args()
+print('Output directory: %s' % args.outputdir)
+
+P = PCA.PCAlifa(fitsFile = args.fitsfile, quantilQFlag = 0.95, lc = args.lc)
 P.setStarlightMaskFile('/home/lacerda/CALIFA/Mask.mC')
 
 nPCs = 6
 
 P.PCA_obs()
 P.tomograms_obs()
-corr_PCvsPC(P.tomo_obs__zk, nPCs, r'$F_{obs}$.', '%s/%s-f_obs-' % (output_dir, P.K.califaID))
+corr_PCvsPC(P.tomo_obs__zk, nPCs, r'$F_{obs}$.', '%s/%s-f_obs-' % (args.outputdir, P.K.califaID))
 
 P.PCA_obs_norm()
 P.tomograms_obs_norm()
-corr_PCvsPC(P.tomo_obs_norm__zk, nPCs, r'$f_{obs}$', '%s/%s-f_obs_norm-' % (output_dir, P.K.califaID))
+corr_PCvsPC(P.tomo_obs_norm__zk, nPCs, r'$f_{obs}$', '%s/%s-f_obs_norm-' % (args.outputdir, P.K.califaID))
 
 P.PCA_syn_norm()
 P.tomograms_syn_norm()
-corr_PCvsPC(P.tomo_syn_norm__zk, nPCs, r'$f_{syn}$', '%s/%s-f_syn_norm-' % (output_dir, P.K.califaID))
+corr_PCvsPC(P.tomo_syn_norm__zk, nPCs, r'$f_{syn}$', '%s/%s-f_syn_norm-' % (args.outputdir, P.K.califaID))

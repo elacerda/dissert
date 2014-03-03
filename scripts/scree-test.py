@@ -96,12 +96,16 @@ a = sqN_z / len(P.l_obs)
 ed__l = P.f_obs_norm__zl.std(axis = 0) * sqN_z
 edk_mean = np.sqrt(np.abs(P.eigVal_obs_norm__k)).sum() * a
 cd__l = np.abs(P.f_obs_norm__zl - P.f_obs_norm__zl.mean(axis = 0)).max(axis = 0)
-k90_obs = ((np.cumsum(P.eigVal_obs_norm__k) / P.eigVal_obs_norm__k.sum()) <= 0.9).sum()
-k90_syn = ((np.cumsum(P.eigVal_syn_norm__k) / P.eigVal_syn_norm__k.sum()) <= 0.9).sum()
+k90_obs = ((np.cumsum(P.eigVal_obs_norm__k) / P.eigVal_obs_norm__k.sum()) <= 0.9).sum() + 1
+k90_syn = ((np.cumsum(P.eigVal_syn_norm__k) / P.eigVal_syn_norm__k.sum()) <= 0.9).sum() + 1
 
 #print '%s & %.5f & %.5f & %.5f & %.5f & %.5f & %d' % (K.califaID, a, ed__l.mean(), edk_mean, cd__l.mean(), (100. * P.eigVal_obs_norm__k[:6] / P.eigVal_obs_norm__k.sum())[:6].sum(), k90)
-print '%s & %.5f & %d & %.5f' % (K.califaID, (100. * P.eigVal_obs_norm__k[:6] / P.eigVal_obs_norm__k.sum())[:6].sum(), k90_obs, P.eigVal_obs_norm__k.sum())
-print '%s & %.5f & %d & %.5f' % (K.califaID, (100. * P.eigVal_syn_norm__k[:6] / P.eigVal_syn_norm__k.sum())[:6].sum(), k90_syn, P.eigVal_syn_norm__k.sum())
+print '%s & %.5f & %.5f & %d & %d & %.5f & %.5f' % (K.califaID, 
+                                                    (100. * P.eigVal_obs_norm__k[:6] / P.eigVal_obs_norm__k.sum())[:6].sum(), 
+                                                    (100. * P.eigVal_syn_norm__k[:6] / P.eigVal_syn_norm__k.sum())[:6].sum(), 
+                                                    k90_obs, k90_syn, 
+                                                    P.eigVal_obs_norm__k.sum(), P.eigVal_syn_norm__k.sum(),
+                                                   )
 
 f, axArr = plt.subplots(3, 1)
 f.set_size_inches((7, 9))
