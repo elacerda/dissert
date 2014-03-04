@@ -52,38 +52,46 @@ biblioteca científica \texttt{SciPy}\footnote{\url{http://scipy.org/}}.
 Conforme a Seção \ref{sec:CALePyC:pipelines} vimos que o cubo de espectros das galáxias do CALIFA estão acessíveis no
 \pycasso separados por zonas, muitas correspondendo a píxeis individuiais e outras a conjuntos de pixeis (zonas de
 Voronoi). Os espectros observados estão armazenados em forma de uma matriz ($N_\lambda \times N_z$) com $N_\lambda$
-comprimentos de onda e $N_z$ zonas e (\texttt{f\_obs} no \pycasso). Em nosso trabalho vamos usar a forma transposta dessa
+comprimentos de onda e $N_z$ zonas (\texttt{f\_obs} no \pycasso). Em nosso trabalho vamos usar a forma transposta dessa
 matriz, portanto nossa matriz de espectros está na forma $N_z \times N_\lambda$, como demonstrado na equação abaixo.
 
 \begin{equation}
     \label{eq:PCA:fluxMatrix}
-    \textbf{F}{}_{z \lambda} = \left[
+    \mathbf{F}{}_{z \lambda} = \left[
     \begin{array}{ccccc}
         F_{z_1 \lambda_1} & F_{z_1 \lambda_2} & F_{z_1 \lambda_3} & ... & F_{z_1 \lambda_{N_\lambda}} \\
         F_{z_2 \lambda_1} & F_{z_2 \lambda_2} & F_{z_2 \lambda_3} & ... & F_{z_2 \lambda_{N_\lambda}} \\
         F_{z_3 \lambda_1} & F_{z_3 \lambda_2} & F_{z_3 \lambda_3} & ... & F_{z_3 \lambda_{N_\lambda}} \\
         ...               & ...               & ...               & ... & ...               \\
         F_{z_{N_z} \lambda_1} & F_{z_{N_z} \lambda_2} & F_{z_{N_z} \lambda_3} & ... & F_{z_{N_z}
-        \lambda_{(N_\lambda)}}
+        \lambda_{N_\lambda}}
     \end{array} 
     \right]
 \end{equation}
 
 Calculamos então o espectro médio de uma galáxia
 \begin{equation}
-\langle \textbf{F}{}_\lambda \rangle = \frac{1}{N_z} \sum_{i=1}^{N_z} F_{z_i}{}_{\lambda}
+\mean{\mathbf{F}{}_\lambda} = \frac{1}{N_z} \sum_{i=1}^{N_z} F_{z_i}{}_{\lambda}
 \end{equation}
 \noindent e então subtraímos a média de todos os espectros
 \begin{equation}
 	\label{eq:PCA:Izl}
-	\textbf{I}{}_{z \lambda} = \textbf{F}{}_{z \lambda} - \langle \textbf{F}{}_\lambda \rangle
+	\mathbf{I}{}_{z \lambda} = \mathbf{F}{}_{z \lambda} - \mean{\mathbf{F}{}_\lambda}
 \end{equation}
 \noindent para o cálculo da matriz de covariâncias usando um conjunto de dados com média zero:
 \begin{equation}
 	\label{eq:PCA:covMatrix}
-	\mathbf{C}{}_{cov} = \frac{[\mathbf{I}{}_{z \lambda}]^T \cdot \mathbf{I}{}_{z \lambda}}{n - 1}
+	\mathbf{C}{}_{cov} = \frac{[\mathbf{I}{}_{z \lambda}]^T \cdot \mathbf{I}{}_{z \lambda}}{N_z - 1}
 \end{equation}
-\noindent Vemos que a matriz de covariância possui dimensão $N_\lambda \times N_\lambda$.
+\noindent Vemos que a matriz de covariância possui dimensão $N_\lambda \times N_\lambda$. Um elemento dessa matriz e
+dado por
+\begin{equation}
+	\label{eq:PCA:covMatrix}
+	\mathbf{C}{}_{i j} = \frac{\sum_{k=1}^{N_z}\ I_{z_k \lambda_i}\ I_{z_k \lambda_j}}{N_z - 1}
+\end{equation}
+\noindent e expressa a covariância entre os fluxos nos comprimentos de onda $\lambda_i$ e $\lambda_j$ para todas as
+zonas. Os elementos da diagonal ($\mathbf{C}{}_{i i}$) expressam a variância dos fluxos no comprimento de onda
+$\lambda_i$ entre todas as zonas.
 
 Agora calculamos os autovalores e autovetores da matriz de covariância. Neste trabalho usamos o nome autoespectro para
 designar esses autovetores pois são de uma matriz de covariâncias entre espectros de cada zona. Então ordenamos-os
@@ -141,7 +149,7 @@ sintese de populações estelares com o \starlight.
 \section{Tomografia PCA}
 \label{sec:PCAeTomoPCA:TomoPCA}
 
-Os autoespectros ($\mathbf{e}_k$) da matriz de covariância (PCs) ordenados pela sua variância ($\Lambda_k$) formam uma matriz
+Os autoespectros ($\mathbf{e}_k$) da matriz de covariância ordenados pela sua variância ($\Lambda_k$) formam uma matriz
 ($\mathbf{E}{}_{\lambda k}$, de dimensão $N_\lambda \times N_k$, onde $N_k$ é o número de PCs) que serve como base onde
 projetamos nossa matriz de observáveis com a média subtraida ($\mathbf{I}{}_{z \lambda}$) através da transformação:
 \begin{equation}
@@ -156,14 +164,14 @@ batizada por S09, que fazem um paralelo com fatias de um espaço tridimensional 
 ou no espaço de velocidades (Tomografia Doppler). Cada ``fatia'' possui um autoespectro (PC) relacionado que, em
 conjunto, trazem novas perspectivas e ideias para a interpretação de ambos.
 
-\section{Exemplos de resultado da Tomografia PCA}
+\section{Exemplo de resultado da Tomografia PCA}
 
-Para ilustrar o potencial da tecnica de Tomografia PCA, ilustramos os resultados obtidos em 2 artigos.
+Para ilustrar o potencial da tecnica de Tomografia PCA, ilustramos os resultados obtidos por S09.
 
 \subsection{Descoberta de linhas largas em um LINER}
 
 No artigo citado anteriormente, através do estudo dos autoespectros e suas respectivas imagens do núcleo da galáxia
-LINER ({\em Low Ionizations Nuclear Emission-line Region}) NGC 4736, foram encontradas evidências de linhas largas.
+LINER ({\em Low Ionization Nuclear Emission-line Region}) NGC 4736, foram encontradas evidências de linhas largas.
 Quando temos uma fonte que é capaz de produzir linhas largas no espectro é sinal da existência de um SMBH ({\em Super
 Massive Black Hole}). \citet{CidFernandes2004} mostram que, pelo menos em alguns casos, a subtração detalhada das
 populações estelares nos espectros ajuda a encontrar linhas largas mais fracas em Seyferts 2, que são aquelas que (por
@@ -173,7 +181,7 @@ parametrização.
 
 S09 estudaram os 8 primeiros autoespectros, escolhidos através de um {\em scree test} (Figura \ref{fig:S09scree}),
 no qual se verifica a variância de cada PC e toma-se as mais relevantes. O autoespectro com mais variância (no artigo
-tratado com E1) possui $99.74\%$ da variância e reproduz comportamento do gás e da população estelar somados (Figura
+tratado como E1) possui $99.74\%$ da variância e reproduz comportamento do gás e da população estelar somados (Figura
 \ref{fig:S09eigspec1}). O segundo contribui com $0.088\%$ para a variância e tem um claro padrão de rotação, tanto
 nas linhas do autoespectro quanto na imagem da tomografia (Figura \ref{fig:S09eigspec2}). É o terceiro ($0.032\%$
 da variância) que mostra evidência clara de uma emissão larga de \Halpha (Figura \ref{fig:S09eigspec3}). Essa
@@ -213,9 +221,9 @@ assinatura é uma evidência tipica de AGNs de tipo 1.
 %{\bf\ojo A FAZER!! Ricci et al 2011. Figs 3 e 5. vais precisar da minha ajuda para entender esse assunto de
 %reflexao ... le o paper e depois falamos}
 
-\section{Diferen\c{c}as com respeito a trabalhos anteriores}
+\section{Diferen\c{c}as com respeito ao trabalho anterior}
 
-Os exemplos acima nos motivam a aplicar esta mesma técnica aos cubos de dados do CALIFA, e o resto desta dissertação
+O exemplo acima nos motiva a aplicar esta mesma técnica aos cubos de dados do CALIFA, e o resto desta dissertação
 apresenta nossos experimentos nesse sentido. Cumpre ressaltar, contudo, que o tipo de dados que analisaremos difere
 bastante dos dados analisados até agora com essa nova ferramenta.
 
@@ -232,7 +240,7 @@ Como dito na Seção \ref{sec:CALePyC:Apresent} a escala e resolução espacial 
 nos trabalhos acima resumidos: $3^{\prime\prime} \times 5^{\prime\prime}$ e resolução de $0.47^{\prime\prime}$ no Gemini
 contra $74^{\prime\prime} \times 64^{\prime\prime}$ e resolução de $\sim3.7^{\prime\prime}$ no CALIFA. Portanto, o {\em
 FoV} estudado por S09 equivalem a aproximadamente $\sim2$ elementos de resolução do CALIFA! Isto de cara mostra que a
-ciência que podemos obter com Tomografia PCA aplicada aos dados do CALIFA não será a mesma que aquela estudade por S09.
+ciência que podemos obter com Tomografia PCA aplicada aos dados do CALIFA não será a mesma que aquela estudada por S09.
 
 Em resumo, apesar de inspirado diretamente pelos resultados de S09, este estudo difere muito dos trabalhos deles. Estas
 diferenças ficarão evidentes já a partir do próximo capítulo, onde apresentamos nossos primeiros resultados e discutimos

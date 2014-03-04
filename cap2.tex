@@ -43,15 +43,15 @@ descrição e alguns exemplos de utilização do PyCASSO.
 
 No sul da Espanha, mais precisamente em {\em Sierra de Los Filabres} (Andalucía), está situado Observatório Astronômico
 Hispano-Alemão de {\em Calar Alto}. O projeto CALIFA está sendo possível através de observações pelo maior de seus 3
-telescópios (3.5m) ao longo de 250 noites. Em comparação com o \SDSS, o CALIFA terá a mesma ordem de número de
-espectros para estudo ($\sim 10^6$), mas, apesar de um número muito menor de galáxias, graças ao IFU será o com melhor
-completeza por objeto. Existem alguns poucos surveys IFU e todos com, além de poucos objetos e {\em FoV} menor, focos de
-estudo mais estreitos, dificultando o legado do survey para outras pequisas científicas mais abrangentes \citep[SAURON;
-][região central de 72 galáxias com $z < 0.01$.]{de-Zeeuw2002} \citep[PINGS; ][algumas galáxias muito próximas ($\sim
-10$ Mpc) e o estudo atual de 70 (U)LIRGs com $z <0.26$]{RosalesOrtega2010} \citep[VENGA; ][$30$ galáxias
-espirais]{Blanc2010}. O CALIFA foi concebido para que seu legado seja abrangente, possibilitando diversos tipos de
-estudos em diversas áreas. Outros surveys IFU ainda estão por vir, como SAMI \citep{Croom2012} e
-MaNGA\footnote{\url{http://www.sdss3.org/future/manga.php}}
+telescópios (3.5m) ao longo de 250 noites. Em comparação com o \SDSS, o CALIFA terá a mesma ordem de número de espectros
+para estudo ($\sim 10^6$). Apesar de um número muito menor de galáxias, graças ao IFU será o com melhor completeza por
+objeto. Existem alguns poucos surveys IFU e todos com, além de poucos objetos e {\em FoV} menor, focos de estudo mais
+estreitos, dificultando o legado do survey para outras pequisas científicas mais abrangentes \citep[SAURON;][região
+central de 72 galáxias com $z < 0.01$.]{de-Zeeuw2002} \citep[PINGS;][algumas galáxias muito próximas ($\sim 10$ Mpc) e o
+estudo atual de 70 (U)LIRGs com $z <0.26$]{RosalesOrtega2010} \citep[VENGA;][$30$ galáxias espirais]{Blanc2010}
+\citep[ATLAS\textsuperscript{3D};][260 galáxias {\em early-type} próximas]{Cappellari2011}. O CALIFA foi concebido para
+que seu legado seja abrangente, possibilitando diversos tipos de estudos em diversas áreas. Outros surveys IFU ainda estão por vir,
+como SAMI \citep{Croom2012} e MaNGA\footnote{\url{http://www.sdss3.org/future/manga.php}}
 
 A amostra-mãe do projeto contém 939 galáxias (das quais $\sim 600$ serão observadas) com {\em redshifts} entre $0.005 <
 z < 0.03$ que distribuídas cobrem o diagrama cor-magnitude com $M_r < -18$ (Figura \ref{fig:cm-uzMz}) em uma ampla
@@ -97,9 +97,9 @@ A parte com $\lambda < 4600$ \AA\ vem da V1200 e o resto da V500. Nessa montagem
 posição e comprimento de onda, o fluxo ($F_{\lambda,x,y}^{orig}$), seu erro ($\epsilon_{\lambda,x,y}$) e uma flag
 ($b_{\lambda,x,y}$) que sinaliza pixels defeituosos.
 
-Nesse trabalho usaremos exclusivamente dados dos cubos COMBO. Por alguns motivos que veremos na próxima seção não
-analisarermos exatamente esses dados em sua forma original, mas os provenientes de dois outros {\em pipelines}
-desenvolvidas por nossa equipe.
+Nesse trabalho usaremos exclusivamente dados dos cubos COMBO. Por motivos que veremos na próxima seção não analisarermos
+exatamente esses dados em sua forma original, mas os provenientes de dois outros {\em pipelines} desenvolvidas por nossa
+equipe.
 
 %***************************************************************%
 %                                                               %
@@ -134,7 +134,7 @@ espectral de 90 \AA\ de largura e centrada em 5635 \AA, e, por fim, extrai os es
     \caption[Exemplo de máscaras em um espectro do cubo de dados.]
     {Espectro da zona 399 da galáxia NGC 2916 (CALIFA 277). Acima está o espectro completo. No segundo vemos o espectro
     com linhas telúricas e bad-pixels removidos, além do limite de intervalo em comprimendo de onda de $3800$ a $6850$
-    \AA. No espectro mais abaixo, além das partes removidas no segundo, estão foram removidas também as mesmas linhas de
+    \AA. No espectro mais abaixo, além das partes removidas no segundo, foram removidas também as mesmas linhas de
     emissão mascaradas na síntese de populações estelares.}
     \label{fig:checkmask}
 \end{figure}
@@ -214,7 +214,7 @@ arquivos ASCII como output. Dado o grande número de informações contidas em c
 formação estelar em luz e massa, extinção, parâmetros cinemáticos, figuras de mérito do ajuste), necessitamos de um
 {\em pipeline} que faça a organização de todos os dados para que cálculos e gráficos sejam fácil para que até um programador
 de nível iniciante possa fazer. André L. de Amorim, juntamente com outros colaboradores de nosso grupo e do projeto
-CALIFA construiu o \pycasso ({\em Python CALIFA \starlight Synthesis Organizer}) (descrito na sec. 4 de CF13) que faz a
+CALIFA construiu o \pycasso ({\em Python CALIFA \starlight Synthesis Organizer}, descrito na sec. 4 de CF13) que faz a
 organização dos dados que vêm do {\sc qbick} e das etapas inicais de redução juntamente com a síntese de populações
 estelares feitas com o \starlight, facilitando, e muito, o trabalho de quem usa estes dados. Sem a ajuda deste
 organizador, este trabalho seria muito mais difícil, além de infactível no tempo de um mestrado.

@@ -38,13 +38,13 @@ Um {\em survey} astronômico é um levantamento de informações ou mapeamento d
 detetores. Primordialmente surgem com a inata curiosidade do homem de observar e registrar tudo à sua volta. O
 crescimento desses catálogos é produto direto da evolução dos equipamentos usados nestas investigações. No início da
 década de 80, \citet{Huchra1983} constroem um {\em redshift-survey} que coletou espectros para 2500 galaxias dando
-início a produção sistemática de dados na astronomia extragalática. Esse trabalho também foi seguidos por outros trabalhos
-\citep[e.g., ][]{Huchra1988, DaCosta1988} e de lá para cá a quantidade (e a qualidade) de dados só aumentou. Com a
-criação dos {\em mega-surveys} \citep[\SDSS, 2dFGRS, 2MASS; ][]{York2000, Colless1999, Skrutskie2006}, alguns já
-terminados, outros ainda começando ou por terminar \citep[LSST, JPAS; ][]{Ivezic2008, Benitez2009}, ultrapassou-se o
-patamar do humanamente impossível de se analisar individualmente cada objeto, necessitando assim a ajuda de máquinas e
-métodos computacionais cada vez mais eficientes. Com esse crescimento exponencial na quantidade de dados, precisamos
-cada vez mais de ferramentas matemáticas/estatísticas, e essa dissertação trata precisamente disso.
+início a produção sistemática de dados na astronomia extragalática. Esse trabalho foi seguidos por outros \citep[e.g.,
+][]{Huchra1988, DaCosta1988} e de lá para cá a quantidade (e a qualidade) de dados só aumentou. Com a criação dos {\em
+mega-surveys} \citep[\SDSS, 2dFGRS, 2MASS; ][]{York2000, Colless1999, Skrutskie2006}, alguns já terminados, outros ainda
+começando ou por terminar \citep[LSST, JPAS; ][]{Ivezic2008, Benitez2009}, ultrapassou-se o patamar do humanamente
+impossível de se analisar individualmente cada objeto, necessitando assim a ajuda de máquinas e métodos computacionais
+cada vez mais eficientes. Com esse crescimento exponencial na quantidade de dados, precisamos cada vez mais de
+ferramentas matemáticas/estatísticas, e essa dissertação trata precisamente disso.
 
 Um tipo de clássico de ferramenta de análise são os programas que ajustam os dados segundo algum modelo, extraíndo dessa
 análise informações de valor astrofísico. No contexto de espectros de galáxias, tema desta dissertação, uma ferramenta
@@ -60,8 +60,8 @@ complexas. Mesmo assim, este método é essencialmente calcado em princípios f�
 Outros métodos são de natureza mais puramente matemática, buscando no espaço de dados observados estruturas e
 correlações que possivelmente revelem (ou pelo menos nos dêem pistas sobre) os fenômenos subjacentes. Aqui, a pergunta é
 bem definida em um sentido matemático, e o desafio é interpretar a resposta em termos físicos.
-\citet{SanchezAlmeida2010}, por exemplo, categorizam espectros de galáxias do \SDSS/DR7 em termos de clusters formados
-pelas distâncias euclidianas entre os pontos formados pelo espectro de cada galáxia em um espaço de dimensão
+\citet{SanchezAlmeida2010}, por exemplo, categorizam espectros de galáxias do \SDSS/DR7 em termos de {\em clusters}
+formados pelas distâncias euclidianas entre os pontos formados pelo espectro de cada galáxia em um espaço de dimensão
 $N_\lambda$. Cada cluster desse foi caracterizado por um espectro médio chamado de {\em K-mean} e é usado para posterior
 comparação com outros espectros. 
 
@@ -73,7 +73,8 @@ delas mesmas de forma que as diferenças (a variância) entre os objetos  esteja
 reduzindo assim dimensionalidade do problema (mais detalhes em \ref{sec:PCAeTomoPCA:PCA}). A tabela pode conter
 quaisquer tipos de dados, como cores, tamanho, dispersão de velocidade, luminosidade, etc. No caso de espectros de
 diferentes galáxias \citep[e.g., ][]{Francis1992, Sodre1994, Sodre1997}, as propriedades são as medidas de fluxo para
-cada comprimento de onda: $F_{gl} = F_g(\lambda_l)$, com $l = 1 \ldots M$, para cada galáxia $g = 1 \ldots N$.
+cada comprimento de onda: $F_{gl} = F_g(\lambda_l)$, com $l = 1 \ldots M$ comprimentos de onda, para cada galáxia $g = 1
+\ldots N$.
 
 Hoje, PCA é utilizada exaustivamente em várias áreas de conhecimento, principalmente em reconhecimento de padrões,
 computação visual, filtragem e compactação de dados \citep{Kamruzzaman2010, Borcea2012}. Podemos ver exemplos também em
@@ -91,8 +92,8 @@ disperção, SFH ({\em star formation history}), extinção por poeira e aplicad
 \ref{fig:Chen2012fig2}). Usando uma minimização quadrática encontram quais os coeficientes e qual o número ótimo de PCs
 que melhor estimam os parâmetros físicos dos espectros modelo. Então projetam os espectros observados pelo \SDSS/DR7
 \citep{Abazajian2009} e pelo {\em Baryon Oscillation Spectroscopic Survey} \citep[BOSS;][]{Ahn2012}, atribuindo um
-sentido físico a cada PC. Os trabalhos de \citet{Ferreras2006, Wild2006, Rogers2007} exemplificam a aplicação de PCA a
-espectros do SDSS.
+sentido físico a cada PC. Os trabalhos de \citet{Ferreras2006, Wild2006, Rogers2007} exemplificam outras aplicações de
+PCA a espectros do \SDSS.
 
 \begin{figure}
     \includegraphics[height=1.\textwidth]{figuras/figChen2012fig2.pdf}
@@ -114,12 +115,11 @@ integrados, tais estudos não possuem resolução espacial, ou seja, cada galáx
 
 Hoje, com o uso de painéis de fibras óticas apontadas para as galáxias, temos os {\em surveys} de IFS ({\em Integral
 Field Spectroscopy}) onde passamos a reunir de dezenas até milhares de espectros cobrindo um {\em FoV} ({\em
-field-of-view}\footnote{Campo de visão.}) de toda uma galáxia. Isso permite então que obtendo então uma ``dimensão''
-espacial também nos dados. Assim temos para cada píxel (duas dimensões espaciais) um espectro (uma dimensão espectral),
-formando assim um cubo de {\em spaxels}\footnote{spectral pixels}. Um pioneiro nessa produção em massa de dados é o {\em
-Calar Alto Legacy Integral Field spectroscopy Area survey\footnote{\url{http://www.caha.es/CALIFA/}}} \citep[CALIFA;
-][]{CALIFAPresent2012}, produzindo cerca de quatro mil espectros por galáxia observada. Outros {\em mega-surveys} IFS
-estão por vir (veja a seção \ref{sec:CALePyC:Apresent}).
+field-of-view}\footnote{Campo de visão.}) de toda uma galáxia. Assim temos para cada píxel (duas dimensões espaciais) um
+espectro (uma dimensão espectral), formando assim um cubo de {\em spaxels}\footnote{spectral pixels}. Um pioneiro nessa
+produção em massa de dados é o {\em Calar Alto Legacy Integral Field spectroscopy Area
+survey\footnote{\url{http://www.caha.es/CALIFA/}}} \citep[CALIFA; ][]{CALIFAPresent2012}, produzindo cerca de quatro mil
+espectros por galáxia observada. Outros {\em mega-surveys} IFS estão por vir (veja a seção \ref{sec:CALePyC:Apresent}).
 
 Com esses cubos de dados, cada galáxia passa a ser uma grande amostra de espectros, de modo que o que antes era feito
 galáxia a galáxia pode agora ser feito para diferentes regiões de uma mesma galáxia. Podemos assim executar o \starlight

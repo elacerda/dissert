@@ -32,8 +32,8 @@ técnica de Tomografia PCA. Talvez pela primeira vez em IFS de galáxias inteira
 dados deste {\em survey}, que cobrem $\sim100\%$ da luz de uma galáxia, reamostrada em spaxels de 1 arcsec$^2$, formando
 um cubo de espectros $\mathbf{F}_{x,y,\lambda}^{obs}$. 
 
-Através dos últimos anos a PCA vem se tornando uma técnica quase obrigatória para o estudo de conjuntos multivariados de
-dados. Através dessa redução de dimensionalidade pressupõe-se que a busca pelas características mais importantes sejam
+Ao longo dos últimos anos a PCA vem se tornando uma técnica quase obrigatória para o estudo de conjuntos multivariados
+de dados. Através dessa redução de dimensionalidade pressupõe-se que a busca pelas características mais importantes sejam
 mapeadas pelas componentes principais. A descoberta de linhas largas (elementos típicos de AGNs tipo 1) na galáxia NGC
 4736 classificada como LINER, através da técnica de tomografia PCA desenvolvida no trabalho de S09, usando dados de IFS
 do Gemini da região central da galáxia ($\sim100$ pc) corrobora essas pressuposições, servindo de base teórica para
@@ -67,7 +67,7 @@ Em todo esse estudo trabalhamos com os cubos rearranjados em zonas de Voronoi. E
 exclusivamente em nosso desejo de comparar as PCs com os resultados do \starlight, que requer um $S/N$ grande o
 suficiente para obter resultados fiáveis. Porém, esse agrupamento acaba por deteriorar muito a qualidade das imagens
 para zonas externas, que, quanto mais afastadas do núcleo, possuem mais pixels agrupados em uma zona, perdendo assim
-resolução espacial. Seria interessante fazer o PCA com a cubo original, não zonificado. Isto talvez produza tomogramas
+resolução espacial. Seria interessante fazer o PCA com o cubo original, não zonificado. Isto talvez produza tomogramas
 que revelem melhor as estruturas como braços espirais e regioes H{\sc ii} nas partes externas das galáxias.
 
 Um outra possível linha de trabalho é poder explorar as qualidades de filtro da PCA, seja para reconstruir os espectros
@@ -82,10 +82,10 @@ transformação
 \noindent assim nos permitindo reconstruir o cubo de espectros ($\mathbf{F}_{z \lambda}^{rec}$) adicionando o
 espectro médio $\langle \mathbf{F}{}_\lambda \rangle$ a $\mathbf{I}{}_{z \lambda}^{rec}$:
 \begin{equation}
-	\mathbf{F}{}_{z \lambda}^{rec} = \mathbf{I}{}_{z \lambda}^{rec} + \langle \mathbf{F}{}_\lambda \rangle
+	\mathbf{F}{}_{z \lambda}^{rec} = \mathbf{I}{}_{z \lambda}^{rec} + \mean{\mathbf{F}_\lambda}
 \end{equation}
  \noindent Por exemplo, S09 reconstroem o espectro do AGN da galáxia NGC 4736 selecionado determinadas componentes.
- Eutro exemplo é a reconstrução dos espectros com a supressão de componentes que caracterizem cinemática (PCs que
+ Outro exemplo é a reconstrução dos espectros com a supressão de componentes que caracterizem cinemática (PCs que
  correlacionam com $v_\star$ e $\sigma_\star$). Outras técnicas podem ser aliadas ao PCA, como, por exemplo, faz
  \citet{Riffel2011} utilizando Tomografia PCA juntamente com uma técnica de {\em wavelet} com o intuito de filtragem do
  cubo de espectros.

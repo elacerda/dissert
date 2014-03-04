@@ -49,7 +49,7 @@ espectros observados desse objeto. No painel direito vemos o mesmo mas para os e
     {Propriedades físicas da galáxia NGC 2916 (CALIFA 277). Na primeira linha a imagem do SDSS da galáxia. Na primeira
     imagem da segunda linha temos o valor do fluxo observado em 5635 \AA, usado para a normalização dos espectros de
     cada zona. Da segunda imagem da segunda linha em diante temos as propriedades físicas que serão correlacionadas com
-    as PCs. São elas: $\log\ t$, $\log\ Z$, $A_V$, $v_{\star}$, $\sigma_{\star}$.}
+    as PCs. São elas: \meanL{\log\ t}, $\log\ \meanL{Z}$, $A_V$, $v_{\star}$, $\sigma_{\star}$.}
     \label{fig:K0277apresent}
 \end{figure}
 
@@ -75,22 +75,27 @@ tratamento no tomograma, mas falaremos mais sobre isso no final dessa seção. D
 complicado dizer o que cada uma representa. No final desse capítulo falaremos mais sobre como melhor interpretar as PCs
 fisicamente.
 
-Da mesma forma, fazemos a PCA para o mesmo cubo, mas com os espectros normalizados da forma que comentamos na Seção
-\ref{sec:CALePyC:pipelines}. A tomografia PCA desse cubo normalizado é mostrada na Figura \ref{fig:K0277tomofobsnorm}.
-À primeira vista os resultados podem ser parecidos com o anterior deslocando uma componente acima, ou seja, a mesma PCA
-mas sem a primeira PC. Mas essa é só uma primeira impressão. As propriedades físicas de uma galáxia geralmente possuem
-simetria radial ou axial, sendo assim extremamente correlacionadas no espaço. Matematicamente, a maior fonte de
-variância nos espectros é sua amplitude, aparecendo na forma de componente principal como visto na análise feita sem
-normalização. Essa componente de escala, quando não suprimida, correlaciona-se com as propriedades físicas da galáxia,
-portanto, deixa sua assinatura através de todas as PCs. Essa amplitude, que gera a primeira PC no caso sem normalização
-não adiciona nenhuma informação qualitativa à análise das populações estelares, funcionando apenas como um fator de
-escala, afetando as componentes seguintes. Esses vestígios de amplitude aparecem de forma mais evidente quando
-comparamos a PC3 no caso sem normalização com a PC2 no caso com normalização. Podemos ver um padrão de rotação na PC2 da
-Figura \ref{fig:K0277tomofobsnorm}. Com uma saturação na escala de cores no tomograma da PC3 da Figura
-\ref{fig:K0277tomofobs} diminuímos o efeito do fator de escala ainda presente nessa componente, de modo que ficasse mais
-evidente o padrão de rotação. O espectro médio já é a informação necessária que precisaríamos para entender esse fator
-de escala nas amplitudes dos espectros, portanto a primeira componente para o caso sem normalização não trás informação
-adicional. Veremos a seguir que seu tomograma também não trás maiores informações.
+Da mesma forma, fazemos a PCA para o mesmo cubo, mas com os espectros normalizados, i.e., reescalonando cada espectro de
+modo que o fluxo médio na janela de $5590-5680$ \AA\ seja igual a 1. Daqui para frente vamos nos referir aos espectros
+normalizados utilizando a letra $f$:
+\begin{equation}
+f_{obs} = F_{obs} / F_{\lambda5635}
+\end{equation} 
+\noindent A tomografia PCA desse cubo normalizado é mostrada na Figura \ref{fig:K0277tomofobsnorm}. À primeira vista os
+resultados podem ser parecidos com o anterior deslocando uma componente acima, ou seja, a mesma PCA mas sem a primeira
+PC. Mas essa é só uma primeira impressão. As propriedades físicas de uma galáxia geralmente possuem simetria radial ou
+axial, sendo assim extremamente correlacionadas no espaço. Matematicamente, a maior fonte de variância nos espectros é
+sua amplitude, aparecendo na forma de componente principal como visto na análise feita sem normalização. Essa componente
+de escala, quando não suprimida, correlaciona-se com as propriedades físicas da galáxia, portanto, deixa sua assinatura
+através de todas as PCs. Essa amplitude, que gera a primeira PC no caso sem normalização não adiciona nenhuma informação
+qualitativa à análise das populações estelares, funcionando apenas como um fator de escala, afetando as componentes
+seguintes. Esses vestígios de amplitude aparecem de forma mais evidente quando comparamos a PC3 no caso sem normalização
+com a PC2 no caso com normalização. Podemos ver um claro padrão de rotação na PC2 da Figura \ref{fig:K0277tomofobsnorm}.
+Com uma saturação na escala de cores no tomograma da PC3 da Figura \ref{fig:K0277tomofobs} diminuímos o efeito do fator
+de escala ainda presente nessa componente, de modo que ficasse mais evidente o padrão de rotação. O espectro médio já é
+a informação necessária que precisaríamos para entender esse fator de escala nas amplitudes dos espectros, portanto a
+primeira componente para o caso sem normalização não trás informação adicional. Veremos a seguir que seu tomograma
+também não trás maiores informações.
 
 Imagine uma galáxia composta inteiramente pela mesma população estelar, em repouso, distribuídas da mesma maneira no
 espaço. Ou seja, em qualquer ponto da galáxia o espectro é o mesmo. Uma PCA nessa galáxia hipotética não identificaria
@@ -135,7 +140,8 @@ motivo, em nossas análises daqui para frente usaremos o cubo com os espectros n
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0277-fobs_norm.pdf}
     \caption[Fluxos de normalização para cada zona da galáxia K0277.]
-    {Fluxo usado para a normalização de cada espectro, mostrado tanto na forma de imagem (à esquerda) como em ção do numero da zona (direita).}
+    {Fluxo usado para a normalização de cada espectro, mostrado tanto na forma de imagem (à esquerda) como em função do
+    número da zona (direita).}
     \label{fig:K0277fobsnorm}
 \end{figure}
 
@@ -148,13 +154,13 @@ gerados pelo \starlight.
 
 A grande diferença é que nos espectros sintéticos estão contidas apenas as informações sobre populações
 estelares\footnote{Efeitos de extinção/avermelhamento e cinemática também são incluidos no processo de síntese
-(\citep{CidFernandes2005}}. Como os espectros sintéticos não possuem as assinaturas dos equipamentos observacionais, dos
-processos para subtração do céu, ruídos e afins, quando submetidas à técnica de PCA esperamos que as informação se
-condensem em menos PCs. Comparando os dois {\em scree tests} na Figura \ref{fig:K0277scree} vemos que para o caso com os
-espectros sintéticos a curva converge mais rápidamente ao zero de variância, mostrando que, como esperado, temos as
-informações mais compactadas nas primeiras PCs quando comparadas ao caso com os espectros observados. Observando o caso
-sem normalização, plotado no gráfico com linha pontilhada, vemos que o efeito causado pelo fator de escala (PC1) diminui
-a ``importância'' (i.e., variância) das demais PCs.
+\citep{CidFernandes2005}}. Como os espectros sintéticos não possuem as assinaturas dos equipamentos observacionais, dos
+processos para subtração do céu, ruídos e afins, quando submetidas à técnica de PCA esperamos que as informações mais
+relevantes se condensem em menos PCs. Comparando os dois {\em scree tests} na Figura \ref{fig:K0277scree} vemos que para
+o caso com os espectros sintéticos a curva converge mais rápidamente ao zero de variância, mostrando que, como esperado,
+temos as informações mais compactadas nas primeiras PCs quando comparadas ao caso com os espectros observados.
+Observando o caso sem normalização, plotado no gráfico com linha pontilhada, vemos que o efeito causado pelo fator de
+escala (PC1) diminui a ``importância'' (i.e., variância) das demais PCs.
 
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0277-screetest.pdf}
@@ -165,8 +171,8 @@ a ``importância'' (i.e., variância) das demais PCs.
     \label{fig:K0277scree}
 \end{figure}
 
-As cinco primeiras PCs e seus tomogramas provenientes do cubo com os fluxos sintéticos normalizados da galáxia NGC 2916
-aparecem na Figura \ref{fig:K0277tomofsynnorm}. Comparando com seu correspondente observacional na Figura
+As cinco primeiras PCs e seus tomogramas provenientes do cubo com os fluxos sintéticos normalizados ($f_{syn}$) da
+galáxia NGC 2916 aparecem na Figura \ref{fig:K0277tomofsynnorm}. Comparando com seu correspondente observacional na Figura
 \ref{fig:K0277tomofobsnorm}, vemos que os resultados para os espectros sintéticos parecem ser mais ``limpos'', pois não
 existem ruídos. Como são espectros gerados a partir de uma base teórica para diferentes idades e metalicidades de
 populações estelares, não possuem nenhuma assinatura instrumental. Por esse fato acabamos descobrindo uma assinatura
@@ -175,8 +181,8 @@ presente em quase todas as componentes geradas pelo PCA usando os dados observad
 espectros V1200 possuem espectros com maior resolução do que os do V500 (V1200 - FWHM $\sim 2.3$ \AA; V500 - FWHM $\sim
 6$ \AA), o processo de criação do COMBO deixa vestígios. Para essa galáxia, a junção entre os dois cubos (V500 e V1200)
 para a formação do COMBO acontece exatamente nesse intervalo de comprimento de onda ($\sim 4550$ \AA). O quinto
-autoespectro da Figura \ref{fig:K0277tomofobsnorm} mostra um degrau entre $4500$ e $4600$ \AA o qual parece mostrar essa
-diferença de comportamento entre as duas versões originais antes da formação do COMBO. Já nas componentes
+autoespectro da Figura \ref{fig:K0277tomofobsnorm} mostra um degrau entre $4500$ e $4600$ \AA\ o qual parece mostrar
+essa diferença de comportamento entre as duas versões originais antes da formação do COMBO. Já nas componentes
 sintéticas\footnote{Componentes geradas pela PCA nos cubos de espectros sintéticos.} não se vê essa mudança de
 comportamento no autoespectro.
 
@@ -196,8 +202,8 @@ aparecem com linhas deslocadas para o azul ({\em blue-shifted}) ou para o vermel
 velocidade de rotação projetada. 
 
 \begin{figure}
-    \includegraphics[width=0.9\textwidth]{figuras/K0277-tomo-syn-norm.pdf}
-    \caption[Tomogramas de 1 a 5 da gal\'axia NGC 2916 - $F_{syn} / F_{\lambda 5365}$ .]
+    \includegraphics[width=0.8\textwidth]{figuras/K0277-tomo-syn-norm.pdf}
+    \caption[Tomogramas de 1 a 5 da gal\'axia NGC 2916 - $f_{syn}$ .]
     {Cinco primeiras PCs (e seus respectivos tomogramas) resultantes da Tomografia PCA aplicado aos espectros
     sintéticos normalizados da galáxia NGC 2916.}
     \label{fig:K0277tomofsynnorm}
@@ -259,12 +265,12 @@ com propriedades físicas da galáxia.
 
 Com o resultado da síntese de populações estelares obtido pelo \starlight e organizado pelo \pycasso fica simples
 correlacionarmos os dados na base gerada pela PCA. Nas Figuras \ref{fig:K0277correfobsnorm} e
-\ref{fig:K0277correfsynorm} vemos as correlações entre algumas propriedades físicas ($\langle\log t \rangle$, $\log
-\langle Z \rangle$, $A_V$, $v_{\star}$, $\sigma_{\star}$) e o peso de cada PC por zona (tomograma versus propriedade
-física) para CALIFA 277. O número presente em cada gráfico é o coeficiente de correlação por {\em rank} de Spearman.
-Escolhemos o coeficiente de Spearman pois este é aparamétrico e, ao contrário do coeficiente de Pearson, não pressupõe
-nenhuma relação linear. Em cada coluna temos uma quantidade física e na última coluna temos o autovetor representado por
-aqueles pontos.
+\ref{fig:K0277correfsynorm} vemos as correlações entre algumas propriedades físicas (\meanL{\log\ t}, $\log\ \meanL{Z}$,
+$A_V$, $v_{\star}$, $\sigma_{\star}$) e o peso de cada PC por zona (tomograma versus propriedade física) para CALIFA
+277. O número presente em cada gráfico é o coeficiente de correlação por {\em rank} de Spearman. Escolhemos o
+coeficiente de Spearman pois este é aparamétrico e, ao contrário do coeficiente de Pearson, não pressupõe nenhuma
+relação linear. Em cada coluna temos uma quantidade física e na última coluna temos o autovetor representado por aqueles
+pontos.
 
 Tanto para os dados observados quanto sintéticos vemos que a primeira PC representa basicamente um fator de idade.
 Possui correlação também com a metalicidade. A segunda PC também em ambos os casos representa uma forte correlação com a
@@ -283,37 +289,37 @@ deixamos as Figuras \ref{fig:K0277correfobsnormPCvsPC:AV} e \ref{fig:K0277corref
 as PCs para o caso observado e sintético, coloridos pelo $A_V$.
 
 \begin{figure}
-    \includegraphics[width=1.3\textwidth,angle=-90]{figuras/K0277-correl-f_obs_norm-PCvsPhys.pdf}
-	\caption[Correlações PCs vs. par\^ametros f\'isicos - $F_{obs}$ norm.]
+    \includegraphics[width=1.2\textwidth,angle=-90]{figuras/K0277-correl-f_obs_norm-PCvsPhys.pdf}
+	\caption[Correlações PCs vs. par\^ametros f\'isicos - $f_{obs}$.]
     {Correlações entre os pesos por zona das seis primeiras PCs da PCA feito para o cubo com os dados observados
-    normalizados e cinco parâmetros físicos.q Pela ordem de colunas da esquerda para direita temos $\log$ t, $\log$ $Z /
-    Z_{\odot}$, $A_V$, $v_{\star}$, $\sigma_{\star}$. Na última coluna temos o autoespectro para ajudar na visualização.
-    A linha em vermelho no gráfico do autoespectro serve para identificar o zero. O número dentro de cada gráfico é o
-    coeficiente de correlação de Spearman.}
+    normalizados e cinco parâmetros físicos. Pela ordem de colunas da esquerda para direita temos $\meanL{\log\ t}$,
+    $\log\ \meanL{Z}$, $A_V$, $v_{\star}$, $\sigma_{\star}$. Na última coluna temos o autoespectro para ajudar na
+    visualização. A linha em vermelho no gráfico do autoespectro serve para identificar o zero. O número dentro de
+    cada gráfico é o coeficiente de correlação de Spearman.}
     \label{fig:K0277correfobsnorm}
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0277-correl-f_syn_norm-PCvsPhys.pdf}
-	\caption[Correlações PCs vs. par\^ametros f\'isicos - $F_{syn}$ norm.]
+    \includegraphics[width=1.2\textwidth, angle=-90]{figuras/K0277-correl-f_syn_norm-PCvsPhys.pdf}
+	\caption[Correlações PCs vs. par\^ametros f\'isicos - $f_{syn}$.]
     {Correlações entre os pesos por zona das seis primeiras PCs da PCA feito para o cubo com os dados sintéticos
-    normalizados e cinco parâmetros físicos.q Pela ordem de colunas da esquerda para direita temos $\log$ t, $\log$ $Z /
-    Z_{\odot}$, $A_V$, $v_{\star}$, $\sigma_{\star}$. Na última coluna temos o autoespectro para ajudar na visualização.
+    normalizados e cinco parâmetros físicos. Pela ordem de colunas da esquerda para direita temos $\meanL{\log\ t}$,
+    $\log\ \meanL{Z}$, $A_V$, $v_{\star}$, $\sigma_{\star}$. Na última coluna temos o autoespectro para ajudar na visualização.
     A linha em vermelho no gráfico do autoespectro serve para identificar o zero. O número dentro de cada gráfico é o
     coeficiente de correlação de Spearman.}
     \label{fig:K0277correfsynorm}
 \end{figure}
 
 \begin{figure}
-	\includegraphics[width=1.4\textwidth, angle=-90]{figuras/K0277-f_obs_norm-corre_PCxPC_AV.pdf}
-	\caption[Dados no espaço das PCs vs AV- $F_{obs}$ norm.]
+	\includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0277-f_obs_norm-corre_PCxPC_AV.pdf}
+	\caption[Dados no espaço das PCs vs AV- $f_{obs}$.]
     {Dados das zonas no espaço das PCs (com espectros observados) coloridos pela extinção ($A_V$).}
     \label{fig:K0277correfobsnormPCvsPC:AV}	
 \end{figure}
 
 \begin{figure}
-	\includegraphics[width=1.4\textwidth, angle=-90]{figuras/K0277-f_syn_norm-corre_PCxPC_AV.pdf}
-	\caption[Dados no espaço das PCs vs AV- $F_{syn}$ norm.]
+	\includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0277-f_syn_norm-corre_PCxPC_AV.pdf}
+	\caption[Dados no espaço das PCs vs AV- $f_{syn}$.]
     {Dados das zonas no espaço das PCs (com espectros sintéticos) coloridos pela extinção ($A_V$).}
     \label{fig:K0277correfsynnormPCvsPC:AV}	
 \end{figure}
@@ -324,25 +330,13 @@ vestígios se misturando com as outras PCs fazendo com que haja correlação ent
 físicos. Por mais esse motivo, deixaremos a PCA dos espectros não normalizados de lado no restante desse trabalho.
 
 \begin{figure}
-    \includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0277-correl-f_obs-PCvsPhys.pdf}
+    \includegraphics[width=1.2\textwidth, angle=-90]{figuras/K0277-correl-f_obs-PCvsPhys.pdf}
 	\caption[Correlações PCs vs. par\^ametros f\'isicos - $F_{obs}$.]
     {Correlações entre os pesos por zona das seis primeiras PCs da PCA feito para o cubo com os dados observados e cinco
-    parâmetros físicos.q Pela ordem de colunas da esquerda para direita temos $\log$ t, $\log$ $Z / Z_{\odot}$, $A_V$,
-    $v_{\star}$, $\sigma_{\star}$. Na última coluna temos o autoespectro para ajudar na visualização. A linha em
+    parâmetros físicos. Pela ordem de colunas da esquerda para direita temos $\meanL{\log\ t}$, $\log\ \meanL{Z}$,
+    $A_V$, $v_{\star}$, $\sigma_{\star}$. Na última coluna temos o autoespectro para ajudar na visualização. A linha em
     vermelho no gráfico do autoespectro serve para identificar o zero.}
     \label{fig:K0277correfobs}
 \end{figure}
-
-% \ldots \dots \ldots \ldots
-%Caso as grandezas físicas analisadas em uma galáxia fossem não-correlacionadas seria muito mais fácil fazer uma
-%comparação entre PCs e grandezas físicas, mas geralmente não é o que ocorre. Para colhermos informações sobre os
-% objetos no céu só temos duas formas: através imagens ou de espectros. Em ambas formas, diferentes efeitos físicos
-% causam efeitos semelhantes nas cores (imagem) ou nos espectros. Esses efeitos fazem com que alguns dos parâmetros
-% físicos fiquem extremamente correlacionados.\ojo \citneed \textcolor{red}{Gostaria de adicionar aqui algumas
-% referências como alguns dos papers do SEAGal/Starlight que fala sobre as degenerescencias de idade e metalicidade e
-% algumas outras grandezas correlacionadas. Coloquei essa parte aqui pensando naquela crítica que o cara me fez lá no
-% México sobre as grandezas em astrofísica serem extremamente correlacionadas, mas não sei até que ponto é legal
-% comentar sobre isso visto que estamos analisando as coisas via correlação\ldots talvez essa discussão possa ficar mais
-% pro Cap 6 nas conclusões.}.
 
 %% End of this chapter

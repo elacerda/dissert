@@ -35,17 +35,16 @@ capítulo as imagens referentes a análise da galáxia NGC 2916, pois essas já 
 galáxias aqui estudadas estão listadas na Tabela \ref{tab:amostraGalaxias} na ordem que aparecerão neste capítulo.
 
 Para cada galáxia, apresentaremos inicialmente sua imagem SDSS acompahanda de produtos do {\sc qbick} e \pycasso: mapas
-do fluxo em 5635 \AA, a idade média ponderada pelo fluxo nesse comprimento de onda ($\langle \log t \rangle_L$), a
-metalicidade média ponderada pelo fluxo ($\langle Z \rangle_L$), a extinção estelar ($A_V$), o campo de velocidades na
-linha de visada ($v_\star$) e a dispersão de velocidades ($\sigma_\star$). Em seguida, apresentamos o {\em scree test}
-para três tipos de PCA. Na sequência, apresentamos tomogramas e autoespectros para a PCA com o espectro observado
-normalizado e com o espectro sintetico normalizado (como nas Figuras \ref{fig:K0277tomofobsnorm} e
-\ref{fig:K0277tomofsynnorm} do Capítulo \ref{sec:PCAaplic}). Finalmente, apresentamos correlações entre as PCs e
-propriedades derivadas pelo \starlight (como nas Figuras \ref{fig:K0277correfobsnorm} e \ref{fig:K0277correfsynorm} do
-Capítulo \ref{sec:PCAaplic}). Referências a PCA usando espectros observados será feita através da variável $F_{obs}$,
-usando os espectros observados normalizados, $f_{obs}$ e usando os espectros sintéticos normalizados, $f_{syn}$. Algumas
-vezes nos referenciamos como caso observado e caso sintético para as análises PCA com os espectros normalizados,
-observados ou sintéticos.
+do fluxo em 5635 \AA, a idade média ponderada pelo fluxo nesse comprimento de onda (\meanL{\log\ t}), o logarítmo da
+metalicidade média ponderada pelo fluxo ($\log\ \meanL{Z}$), a extinção estelar ($A_V$), o campo de velocidades na linha
+de visada ($v_\star$) e a dispersão de velocidades ($\sigma_\star$). Em seguida, apresentamos o {\em scree test} para
+três tipos de PCA. Na sequência, apresentamos tomogramas e autoespectros para a PCA com o espectro observado normalizado
+e com o espectro sintetico normalizado (como nas Figuras \ref{fig:K0277tomofobsnorm} e \ref{fig:K0277tomofsynnorm} do
+Capítulo \ref{sec:PCAaplic}). Finalmente, apresentamos correlações entre as PCs e propriedades derivadas pelo \starlight
+(como nas Figuras \ref{fig:K0277correfobsnorm} e \ref{fig:K0277correfsynorm} do Capítulo \ref{sec:PCAaplic}).
+Referência a PCA usando espectros observados será feita através da variável $F_{obs}$, usando os espectros observados
+normalizados, $f_{obs}$ e usando os espectros sintéticos normalizados, $f_{syn}$. Algumas vezes nos referenciamos como
+caso observado e caso sintético para as análises PCA com os espectros normalizados, observados ou sintéticos.
 
 \begin{table}
 	\caption[Relação de galáxias do CALIFA usadas neste trabalho.]
@@ -73,9 +72,8 @@ observados ou sintéticos.
 
 \subsection{NGC 0001 - CALIFA 8}
 
-No capítulo passado escolhemos como exemplo a galáxia NGC 2916 pelo fato que é uma das galáxias, do projeto CALIFA, mais
-estudadas pelo nosso grupo até agora \citep{CidFernandes2013, CidFernandes2014}. Aqui começaremos falando sobre a NGC
-0001 (CALIFA 8). 
+No capítulo anterior escolhemos como exemplo a galáxia NGC 2916 pelo fato que é uma das galáxias mais estudadas pelo
+nosso grupo até agora \citep{CidFernandes2013, CidFernandes2014}. Aqui começaremos falando sobre a NGC 0001 (CALIFA 8).
 
 Podemos ver na Figura \ref{fig:K0008apresent} a imagem obtida com o SDSS para a galáxia, o fluxo em 5635 \AA, por zona,
 usado para a normalização, assim como imagens geradas a partir das propriedades físicas resolvidas zona a zona pela
@@ -108,7 +106,7 @@ mais fraca que no caso sintético, na PC3.
     {Propriedades físicas da galáxia NGC 0001. Na primeira linha a imagem do SDSS da galáxia. Na primeira imagem da
     segunda linha temos o valor do fluxo observado em 5635 \AA, usado para a normalização dos espectros de cada zona. Da
     segunda imagem da segunda linha em diante temos as propriedades físicas que serão correlacionadas com as PCs. São
-    elas: $\langle \log\ t\rangle_L$, $\log \langle Z \rangle_L$, $A_V$, $v_{\star}$, $\sigma_{\star}$.}
+    elas: $\meanL{\log\ t}$, $\log\ \meanL{Z}$, $A_V$, $v_{\star}$, $\sigma_{\star}$.}
     \label{fig:K0008apresent}
 \end{figure}
 
@@ -139,24 +137,24 @@ mais fraca que no caso sintético, na PC3.
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0008-correl-f_obs_norm-PCvsPhys.pdf}
+    \includegraphics[width=1.2\textwidth, angle=-90]{figuras/K0008-correl-f_obs_norm-PCvsPhys.pdf}
 	\caption[Correlações PCs vs. par\^ametros f\'isicos - $f_{obs}$ - NGC 0001]
     {Correlações entre os pesos por zona das seis primeiras PCs do PCA feito para o cubo com os espectros observados
-    normalizados e cinco parâmetros físicos.q Pela ordem de colunas da esquerda para direita temos $\log$ t, $\log\ Z$,
-    $A_V$, $v_{\star}$, $\sigma_{\star}$. Na última coluna temos o autoespectro para ajudar na visualização. A linha em
-    vermelho no gráfico do autoespectro serve para identificar o zero. O número dentro de cada gráfico é o coeficiente
-    de correlação de Spearman.}
+    normalizados e cinco parâmetros físicos. Pela ordem de colunas da esquerda para direita temos \meanL{\log\ t},
+    $\log\ \meanL{Z}$, $A_V$, $v_{\star}$, $\sigma_{\star}$. Na última coluna temos o autoespectro para ajudar na
+    visualização. A linha em vermelho no gráfico do autoespectro serve para identificar o zero. O número dentro de cada
+    gráfico é o coeficiente de correlação de Spearman.}
     \label{fig:K0008correfobsnorm}
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0008-correl-f_syn_norm-PCvsPhys.pdf}
+    \includegraphics[width=1.2\textwidth, angle=-90]{figuras/K0008-correl-f_syn_norm-PCvsPhys.pdf}
 	\caption[Correlações PCs vs. par\^ametros f\'isicos - $f_{syn}$ - NGC 0001]
     {Correlações entre os pesos por zona das seis primeiras PCs do PCA feito para o cubo com os espectros sintéticos
-    normalizados e cinco parâmetros físicos.q Pela ordem de colunas da esquerda para direita temos $\log$ t, $\log$ $Z /
-    Z_{\odot}$, $A_V$, $v_{\star}$, $\sigma_{\star}$. Na última coluna temos o autoespectro para ajudar na visualização.
-    A linha em vermelho no gráfico do autoespectro serve para identificar o zero. O número dentro de cada gráfico é o
-    coeficiente de correlação de Spearman.}
+    normalizados e cinco parâmetros físicos.q Pela ordem de colunas da esquerda para direita temos \meanL{\log\ t},
+    $\log\ \meanL{Z}$, $A_V$, $v_{\star}$, $\sigma_{\star}$. Na última coluna temos o autoespectro para ajudar na
+    visualização. A linha em vermelho no gráfico do autoespectro serve para identificar o zero. O número dentro de cada
+    gráfico é o coeficiente de correlação de Spearman.}
     \label{fig:K0008correfsynnorm}
 \end{figure}
 
@@ -211,14 +209,14 @@ propriedade.
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0073-correl-f_obs_norm-PCvsPhys.pdf}
+    \includegraphics[width=1.2\textwidth, angle=-90]{figuras/K0073-correl-f_obs_norm-PCvsPhys.pdf}
 	\caption[Correlações PCs vs. par\^ametros f\'isicos - $f_{obs}$ - NGC 0001]
 	{Igual a Figura \ref{fig:K0008correfobsnorm} para a galáxia NGC 0776.}
     \label{fig:K0073correfobsnorm}
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0073-correl-f_syn_norm-PCvsPhys.pdf}
+    \includegraphics[width=1.2\textwidth, angle=-90]{figuras/K0073-correl-f_syn_norm-PCvsPhys.pdf}
 	\caption[Correlações PCs vs. par\^ametros f\'isicos - $f_{syn}$ - NGC 0001]
 	{Igual a Figura \ref{fig:K0008correfsynnorm} para a galáxia NGC 0776.}
     \label{fig:K0073correfsynnorm}
@@ -280,14 +278,14 @@ mais próximo de $A_V$.
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0518-correl-f_obs_norm-PCvsPhys.pdf}
+    \includegraphics[width=1.2\textwidth, angle=-90]{figuras/K0518-correl-f_obs_norm-PCvsPhys.pdf}
 	\caption[Correlações PCs vs. par\^ametros f\'isicos - $f_{obs}$ - NGC 4210.]
 	{Igual a Figura \ref{fig:K0008correfobsnorm} para a galáxia NGC 4210.}
     \label{fig:K0518correfobsnorm}
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0518-correl-f_syn_norm-PCvsPhys.pdf}
+    \includegraphics[width=1.2\textwidth, angle=-90]{figuras/K0518-correl-f_syn_norm-PCvsPhys.pdf}
 	\caption[Correlações PCs vs. par\^ametros f\'isicos -um padrão de velocidades $f_{syn}$ - NGC 4210.]
 	{Igual a Figura \ref{fig:K0008correfsynnorm} para a galáxia NGC 4210.}
     \label{fig:K0518correfsynnorm}
@@ -351,14 +349,14 @@ caso observado correlaciona um pouco com a PC2 mas nada muito evidente também.
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0119-correl-f_obs_norm-PCvsPhys.pdf}
+    \includegraphics[width=1.2\textwidth, angle=-90]{figuras/K0119-correl-f_obs_norm-PCvsPhys.pdf}
 	\caption[Correlações PCs vs. par\^ametros f\'isicos - $f_{obs}$ - NGC 1167.]
 	{Igual a Figura \ref{fig:K0008correfobsnorm} para a galáxia NGC 1167.}
     \label{fig:K0119correfobsnorm}
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0119-correl-f_syn_norm-PCvsPhys.pdf}
+    \includegraphics[width=1.2\textwidth, angle=-90]{figuras/K0119-correl-f_syn_norm-PCvsPhys.pdf}
 	\caption[Correlações PCs vs. par\^ametros f\'isicos - $f_{syn}$ - NGC 1167.]
 	{Igual a Figura \ref{fig:K0008correfsynnorm} para a galáxia NGC 1167.}
     \label{fig:K0119correfsynnorm}
@@ -413,14 +411,14 @@ possui forte correlação com idade e metalicidade.
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0864-correl-f_obs_norm-PCvsPhys.pdf}
+    \includegraphics[width=1.2\textwidth, angle=-90]{figuras/K0864-correl-f_obs_norm-PCvsPhys.pdf}
 	\caption[Correlações PCs vs. par\^ametros f\'isicos - $f_{obs}$ - NGC 6515.]
 	{Igual a Figura \ref{fig:K0008correfobsnorm} para a galáxia NGC 6515.}
     \label{fig:K0864correfobsnorm}
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0864-correl-f_syn_norm-PCvsPhys.pdf}
+    \includegraphics[width=1.2\textwidth, angle=-90]{figuras/K0864-correl-f_syn_norm-PCvsPhys.pdf}
 	\caption[Correlações PCs vs. par\^ametros f\'isicos - $f_{syn}$ - NGC 6515.]
 	{Igual a Figura \ref{fig:K0008correfsynnorm} para a galáxia NGC 6515.}
     \label{fig:K0864correfsynnorm}
@@ -482,14 +480,14 @@ observado.
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0213-correl-f_obs_norm-PCvsPhys.pdf}
+    \includegraphics[width=1.2\textwidth, angle=-90]{figuras/K0213-correl-f_obs_norm-PCvsPhys.pdf}
 	\caption[Correlações PCs vs. par\^ametros f\'isicos - $f_{obs}$ - NGC 2623.]
 	{Igual a Figura \ref{fig:K0008correfobsnorm} para a galáxia NGC 2623.}
     \label{fig:K0213correfobsnorm}
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0213-correl-f_syn_norm-PCvsPhys.pdf}
+    \includegraphics[width=1.2\textwidth, angle=-90]{figuras/K0213-correl-f_syn_norm-PCvsPhys.pdf}
 	\caption[Correlações PCs vs. par\^ametros f\'isicos - $f_{syn}$ - NGC 2623.]
 	{Igual a Figura \ref{fig:K0008correfsynnorm} para a galáxia NGC 2623.}
     \label{fig:K0213correfsynnorm}
@@ -522,7 +520,7 @@ ter correlação com nenhum dos parâmetros físicos comparados. O mesmo para a 
 \begin{figure}
     \includegraphics[height=0.33\textheight]{figuras/K0802-screetest.pdf}
     \caption[Scree test comparativo entre 3 PCAs - ARP 220.]
-	{Igual a Figura \ref{fig:K0008} para a galáxia ARP 220.}
+	{Igual a Figura \ref{fig:K0008scree} para a galáxia ARP 220.}
     \label{fig:K0802scree}
 \end{figure}
 
@@ -541,14 +539,14 @@ ter correlação com nenhum dos parâmetros físicos comparados. O mesmo para a 
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0802-correl-f_obs_norm-PCvsPhys.pdf}
+    \includegraphics[width=1.2\textwidth, angle=-90]{figuras/K0802-correl-f_obs_norm-PCvsPhys.pdf}
 	\caption[Correlações PCs vs. par\^ametros f\'isicos - $f_{obs}$ - ARP 220.]
 	{Igual a Figura \ref{fig:K0008correfobsnorm} para a galáxia ARP 220.}
     \label{fig:K0802correfobsnorm}
 \end{figure}
 
 \begin{figure}
-    \includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0802-correl-f_syn_norm-PCvsPhys.pdf}
+    \includegraphics[width=1.2\textwidth, angle=-90]{figuras/K0802-correl-f_syn_norm-PCvsPhys.pdf}
 	\caption[Correlações PCs vs. par\^ametros f\'isicos - $f_{syn}$ - ARP 220.]
 	{Igual a Figura \ref{fig:K0008correfsynnorm} para a galáxia ARP 220.}
     \label{fig:K0802correfsynnorm}
@@ -602,7 +600,7 @@ todas as galáxias. Já as correlações com a metalicidade aparecem geralmente 
 
 Cabe aqui também ressaltar que através da Tomografia PCA dessas galáxias pudemos encontrar problemas em alguns espectros
 das galáxias NGC 0001 e NGC 4210. Na última delas o problema parece ser um pouco mais sério e mais difícil de se
-contornar, mas para a galáxia NGC 0001 podemos realizar novamente a PCA cortando 40 \AA do lado azul e 10 \AA do lado
+contornar, mas para a galáxia NGC 0001 podemos realizar novamente a PCA cortando 40 \AA\ do lado azul e 10 \AA\ do lado
 vermelho do espectro. Talvez para o caso da NGC 4210 possamos reconstruir os cubos de espectros originais suprimindo
 determinandas componentes da forma que foi feita por S09 ao reconstruir o espectro do AGN da galáxia NGC 4736 e também
 proposto na Seção \ref{sec:conclusao:futWorks}.
