@@ -8,9 +8,6 @@ from scipy import stats as st
 import PCAlifa as PCA
 import argparse as ap
 
-###############################################################################
-###############################################################################
-
 def parser_args():
     parser = ap.ArgumentParser(description = '%s' % sys.argv[0])
     parser.add_argument('--fitsfile', '-f',
@@ -28,7 +25,7 @@ def parser_args():
                         help = 'Suffix of image file. Sometimes denote the image type. (Ex.: image.png)',
                         type = str,
                         default = 'png')
-    parser.add_argument('--outputdir', '-o',
+    parser.add_argument('--outputdir', '-d',
                         help = 'Image output directory',
                         metavar = 'DIR',
                         type = str,
@@ -36,12 +33,31 @@ def parser_args():
 
     return parser.parse_args()
 
+###############################################################################
+###############################################################################
+
+args = parser_args()
+print('Output directory: %s' % args.outputdir)
+
+P = PCA.PCAlifa(fitsFile = args.fitsfile, quantilQFlag = 0.95, lc = args.lc)
+P.setStarlightMaskFile('/home/lacerda/CALIFA/Mask.mC')
+
+P.PCA_obs()
+P.tomograms_obs()
+P.PCA_obs_norm()
+P.tomograms_obs_norm()
+P.PCA_syn_norm()
+P.tomograms_syn_norm()
+
+#!xxx
+
 def corr_PCvsPC(tomo__zk, nPCs, title, fnamepref):
     prop = {
         'arr'   : [ P.K.at_flux__z, np.log10(P.K.aZ_flux__z / 0.019), P.K.A_V, P.K.v_0, P.K.v_d ],
-        'label' : [ r'$\log\ t\ [yr]$', r'$\log\ Z\ [Z_\odot]$', r'$A_V\ [mag]$', r'$v_\star\ [km/s]$', r'$\sigma_\star\ [km/s]$' ],
+        'label' : [ r'$\langle \log\ t \rangle_L\ [yr]$', r'$\log\ \langle Z \rangle_L\ [Z_\odot]$', r'$A_V\ [mag]$', r'$v_\star\ [km/s]$', r'$\sigma_\star\ [km/s]$' ],
         'fname' : [ 'at_flux', 'aZ_flux', 'AV', 'v0', 'vd' ],
-        'cmap'  : [ 'hot_r', 'hot_r', 'hot_r', 'spectral', 'spectral' ],
+#        'cmap'  : [ 'spectral', 'spectral', 'spectral', 'spectral', 'spectral' ],
+        'cmap'  : [ 'hot_r', 'hot_r', 'hot_r', 'hot_r', 'hot_r' ],
     }
 
     for p_i, p in enumerate(prop['arr']):
@@ -79,9 +95,9 @@ def corr_PCvsPC(tomo__zk, nPCs, title, fnamepref):
 
                 if (prop['fname'])[p_i] == 'vd' :
                     prc = np.percentile(p, 98.)
-                    im = ax.scatter(x, y, c = z, edgecolor = 'None', marker = 'o', s = 0.1, cmap = prop['cmap'][p_i], vmax = prc)
+                    im = ax.scatter(x, y, c = z, edgecolor = 'None', marker = 'o', s = 1, cmap = prop['cmap'][p_i], vmax = prc)
                 else:
-                    im = ax.scatter(x, y, c = z, edgecolor = 'None', marker = 'o', s = 0.1, cmap = prop['cmap'][p_i])
+                    im = ax.scatter(x, y, c = z, edgecolor = 'None', marker = 'o', s = 1, cmap = prop['cmap'][p_i])
 
                 plt.setp(ax.get_yticklabels(), visible = False)
 
@@ -102,25 +118,9 @@ def corr_PCvsPC(tomo__zk, nPCs, title, fnamepref):
         plt.suptitle(r'%s' % title)
         f.savefig('%scorre_PCxPC_%s.%s' % (fnamepref, prop['fname'][p_i], args.outputimgsuffix))
 
-###############################################################################
-###############################################################################
-
-args = parser_args()
-print('Output directory: %s' % args.outputdir)
-
-P = PCA.PCAlifa(fitsFile = args.fitsfile, quantilQFlag = 0.95, lc = args.lc)
-P.setStarlightMaskFile('/home/lacerda/CALIFA/Mask.mC')
 
 nPCs = 6
 
-P.PCA_obs()
-P.tomograms_obs()
 corr_PCvsPC(P.tomo_obs__zk, nPCs, r'$F_{obs}$.', '%s/%s-f_obs-' % (args.outputdir, P.K.califaID))
-
-P.PCA_obs_norm()
-P.tomograms_obs_norm()
 corr_PCvsPC(P.tomo_obs_norm__zk, nPCs, r'$f_{obs}$', '%s/%s-f_obs_norm-' % (args.outputdir, P.K.califaID))
-
-P.PCA_syn_norm()
-P.tomograms_syn_norm()
 corr_PCvsPC(P.tomo_syn_norm__zk, nPCs, r'$f_{syn}$', '%s/%s-f_syn_norm-' % (args.outputdir, P.K.califaID))

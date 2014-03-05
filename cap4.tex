@@ -57,9 +57,9 @@ espectros observados desse objeto. No painel direito vemos o mesmo mas para os e
 	\includegraphics[width=1.\textwidth]{figuras/K0277-exampleSpectraFill.pdf}
     \caption[Máximo e mínimo de fluxo dos espectros da gal\'axia NGC 2916 (CALIFA 277).] 
     {Fluxo máximo e mínimo por comprimento de onda para o cubo de espectros da galáxia NGC 2916 (CALIFA 277). O painel à
-    esquerda é para os espectros observados e o a direita para os espectros observados e normalizados pelo fluxo mediano
-    na janela de $5635 \pm 45$ \AA. Todos os espectros do cubo já estão mascarados da mesma forma que o terceiro painel
-    da Figura \ref{fig:checkmask}}
+    esquerda é para os espectros observados ($F_{obs}$) e o a direita para os espectros observados e
+    normalizados pelo fluxo mediano na janela de $5635 \pm 45$ \AA ($f_{obs}$). Todos os espectros do cubo já
+    estão mascarados da mesma forma que o terceiro painel da Figura \ref{fig:checkmask}}
     \label{fig:K0277ExampleSpectraFill}
 \end{figure}
 
@@ -125,15 +125,15 @@ motivo, em nossas análises daqui para frente usaremos o cubo com os espectros n
     \includegraphics[width=0.8\textwidth]{figuras/K0277-tomo-obs.pdf}
     \caption[Tomogramas de 1 a 5 da gal\'axia NGC 2916 - $F_{obs}$.]
     {Cinco primeiras PCs (e seus respectivos tomogramas) resultantes da Tomografia PCA aplicado aos espectros sem
-    normalização da galáxia NGC 2916.}
+    normalização ($F_{obs}$) da galáxia NGC 2916.}
     \label{fig:K0277tomofobs}
 \end{figure}
 
 \begin{figure}
     \includegraphics[width=0.8\textwidth]{figuras/K0277-tomo-obs-norm.pdf}
     \caption[Tomogramas de 1 a 5 da gal\'axia NGC 2916 - $f_{obs}$.]
-    {Cinco primeiras PCs (e seus respectivos tomogramas) resultantes da Tomografia PCA aplicado aos espectros com
-    normalização da galáxia NGC 2916.}
+    {Cinco primeiras PCs (e seus respectivos tomogramas) resultantes da Tomografia PCA aplicado aos espectros observados
+    normalizados ($f_{obs}$) da galáxia NGC 2916.}
     \label{fig:K0277tomofobsnorm}
 \end{figure}
 
@@ -166,8 +166,9 @@ escala (PC1) diminui a ``importância'' (i.e., variância) das demais PCs.
     \includegraphics[width=1.\textwidth]{figuras/K0277-screetest.pdf}
     \caption[Scree test comparativo entre 3 PCAs.]
     {Scree test para 3 PCAs da galáxia NGC 2916 (CALIFA 277). Com marcações de triângulos vemos as PCs resultantes
-    da PCA com os espectros observados normalizados. As variâncias das PCs marcadas com estrela representam a PCA com
-    os espectros sintéticos normalizados. Para comparação plotamos as PCs do caso sem normalização usando linha pontilhada.}
+    da PCA com os espectros observados normalizados ($f_{obs}$). As variâncias das PCs marcadas com estrela
+    representam a PCA com os espectros sintéticos normalizados ($f_{syn}$). Para comparação plotamos as PCs do
+    caso sem normalização ($F_{obs}$) usando linha pontilhada.}
     \label{fig:K0277scree}
 \end{figure}
 
@@ -205,7 +206,7 @@ velocidade de rotação projetada.
     \includegraphics[width=0.8\textwidth]{figuras/K0277-tomo-syn-norm.pdf}
     \caption[Tomogramas de 1 a 5 da gal\'axia NGC 2916 - $f_{syn}$ .]
     {Cinco primeiras PCs (e seus respectivos tomogramas) resultantes da Tomografia PCA aplicado aos espectros
-    sintéticos normalizados da galáxia NGC 2916.}
+    sintéticos normalizados ($f_{syn}$) da galáxia NGC 2916.}
     \label{fig:K0277tomofsynnorm}
 \end{figure}
 
@@ -219,7 +220,7 @@ velocidade de rotação projetada.
 %
 %Para entender melhor voltemos ao caso hipotetico de uma galaxia na qual as populacoes estelares sao iguais em todas
 %partes e na qual as estrelas estao todas paradas, de modo que nao ha deslocamentos nnem modulacoes em $\lambda$ devido
-%a efeitos de cinematica. Neste caso, as variacoes de $\textbf{F}{}_{z \lambda}$ entre as diferentes zonas vem tanto do
+%a efeitos de cinematica. Neste caso, as variacoes de $\textbfF{}_{z \lambda}$ entre as diferentes zonas vem tanto do
 %efeito de amplitude (brilho superficial) já estudado como de diferencas na profudindade optica da poeira $\tau_{z
 %\lambda}$. O efeito global de amplitude pode ser removido com nosso esquema de normalizacao, mas as variacoes de
 %$\tau_{z \lambda}$ de zona a zona afetam a forma do espectro observado.
@@ -229,7 +230,7 @@ velocidade de rotação projetada.
 %de normalizacao $\lambda_N$ obtemos
 %
 %\begin{equation}
-%\frac{\textbf{F}^o_{z \lambda} }{\textbf{F}^o_{z \lambda_N} } =
+%\frac{\textbfF^o_{z \lambda} }{\textbfF^o_{z \lambda_N} } =
 % \frac{\textbf{F}^i_{z \lambda}  }{\textbf{F}^i_{z \lambda_N} } 
 % \frac{ e^{-\tau_{z \lambda}} }{ e^{-\tau_{z \lambda_N}}}
 %\end{equation}
@@ -292,8 +293,8 @@ as PCs para o caso observado e sintético, coloridos pelo $A_V$.
     \includegraphics[width=1.2\textwidth,angle=-90]{figuras/K0277-correl-f_obs_norm-PCvsPhys.pdf}
 	\caption[Correlações PCs vs. par\^ametros f\'isicos - $f_{obs}$.]
     {Correlações entre os pesos por zona das seis primeiras PCs da PCA feito para o cubo com os dados observados
-    normalizados e cinco parâmetros físicos. Pela ordem de colunas da esquerda para direita temos $\meanL{\log\ t}$,
-    $\log\ \meanL{Z}$, $A_V$, $v_{\star}$, $\sigma_{\star}$. Na última coluna temos o autoespectro para ajudar na
+    normalizados ($f_{obs}$) e cinco parâmetros físicos. Pela ordem de colunas da esquerda para direita temos
+    $\meanL{\log\ t}$, $\log\ \meanL{Z}$, $A_V$, $v_{\star}$, $\sigma_{\star}$. Na última coluna temos o autoespectro para ajudar na
     visualização. A linha em vermelho no gráfico do autoespectro serve para identificar o zero. O número dentro de
     cada gráfico é o coeficiente de correlação de Spearman.}
     \label{fig:K0277correfobsnorm}
@@ -303,8 +304,8 @@ as PCs para o caso observado e sintético, coloridos pelo $A_V$.
     \includegraphics[width=1.2\textwidth, angle=-90]{figuras/K0277-correl-f_syn_norm-PCvsPhys.pdf}
 	\caption[Correlações PCs vs. par\^ametros f\'isicos - $f_{syn}$.]
     {Correlações entre os pesos por zona das seis primeiras PCs da PCA feito para o cubo com os dados sintéticos
-    normalizados e cinco parâmetros físicos. Pela ordem de colunas da esquerda para direita temos $\meanL{\log\ t}$,
-    $\log\ \meanL{Z}$, $A_V$, $v_{\star}$, $\sigma_{\star}$. Na última coluna temos o autoespectro para ajudar na visualização.
+    normalizados ($f_{syn}$) e cinco parâmetros físicos. Pela ordem de colunas da esquerda para direita temos
+    $\meanL{\log\ t}$, $\log\ \meanL{Z}$, $A_V$, $v_{\star}$, $\sigma_{\star}$. Na última coluna temos o autoespectro para ajudar na visualização.
     A linha em vermelho no gráfico do autoespectro serve para identificar o zero. O número dentro de cada gráfico é o
     coeficiente de correlação de Spearman.}
     \label{fig:K0277correfsynorm}
@@ -313,14 +314,14 @@ as PCs para o caso observado e sintético, coloridos pelo $A_V$.
 \begin{figure}
 	\includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0277-f_obs_norm-corre_PCxPC_AV.pdf}
 	\caption[Dados no espaço das PCs vs AV- $f_{obs}$.]
-    {Dados das zonas no espaço das PCs (com espectros observados) coloridos pela extinção ($A_V$).}
+    {Dados das zonas no espaço das PCs ($f_{obs}$) coloridos pela extinção ($A_V$).}
     \label{fig:K0277correfobsnormPCvsPC:AV}	
 \end{figure}
 
 \begin{figure}
 	\includegraphics[width=1.3\textwidth, angle=-90]{figuras/K0277-f_syn_norm-corre_PCxPC_AV.pdf}
 	\caption[Dados no espaço das PCs vs AV- $f_{syn}$.]
-    {Dados das zonas no espaço das PCs (com espectros sintéticos) coloridos pela extinção ($A_V$).}
+    {Dados das zonas no espaço das PCs ($f_{syn}$) coloridos pela extinção ($A_V$).}
     \label{fig:K0277correfsynnormPCvsPC:AV}	
 \end{figure}
 
@@ -332,10 +333,10 @@ físicos. Por mais esse motivo, deixaremos a PCA dos espectros não normalizados
 \begin{figure}
     \includegraphics[width=1.2\textwidth, angle=-90]{figuras/K0277-correl-f_obs-PCvsPhys.pdf}
 	\caption[Correlações PCs vs. par\^ametros f\'isicos - $F_{obs}$.]
-    {Correlações entre os pesos por zona das seis primeiras PCs da PCA feito para o cubo com os dados observados e cinco
-    parâmetros físicos. Pela ordem de colunas da esquerda para direita temos $\meanL{\log\ t}$, $\log\ \meanL{Z}$,
-    $A_V$, $v_{\star}$, $\sigma_{\star}$. Na última coluna temos o autoespectro para ajudar na visualização. A linha em
-    vermelho no gráfico do autoespectro serve para identificar o zero.}
+    {Correlações entre os pesos por zona das seis primeiras PCs da PCA feito para o cubo com os dados observados
+    ($F_{obs}$) e cinco parâmetros físicos. Pela ordem de colunas da esquerda para direita temos $\meanL{\log\
+    t}$, $\log\ \meanL{Z}$, $A_V$, $v_{\star}$, $\sigma_{\star}$. Na última coluna temos o autoespectro para ajudar na
+    visualização. A linha em vermelho no gráfico do autoespectro serve para identificar o zero.}
     \label{fig:K0277correfobs}
 \end{figure}
 

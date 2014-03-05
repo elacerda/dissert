@@ -6,7 +6,7 @@ import matplotlib as mpl
 from matplotlib import pyplot as plt
 
 fitsfile = sys.argv[1]
-scinot = 1e-17
+scinot = 1e-16
 output_dir = '.'
 
 if len(sys.argv) > 2:
@@ -40,7 +40,7 @@ f.set_dpi(100)
 ax1.plot(P.K.l_obs, f_obs, 'k')
 ax2.plot(P.K.l_obs, f_obs_mask, 'k')
 ax3.plot(P.K.l_obs, f_obs_maskEmLin, 'k')
-ax2.set_ylabel(r'$F_{obs}\ [10^{-17} erg/s/cm^2/\AA]$')
+ax2.set_ylabel(r'$F_{obs}\ [10^{-16} erg/s/cm^2/\AA]$')
 ax3.set_xlabel(r'$\lambda\ [\AA]$')
 ax1.set_title(r'Espectro zona %d - NGC 2916' % zone)
 plt.setp(ax2.get_yticklabels(), visible = False)

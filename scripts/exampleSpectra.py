@@ -6,8 +6,6 @@ import PCAlifa as PCA
 import matplotlib as mpl
 from matplotlib import pyplot as plt
 
-output_fmt = 'png'
-nSpec = 5
 
 fitsfile = sys.argv[1]
 
@@ -26,6 +24,9 @@ P.setStarlightMaskFile('/home/lacerda/CALIFA/Mask.mC')
 
 K = P.K
 
+#xxx
+output_fmt = 'pdf'
+nSpec = 5
 mask = P.maskQFlag & P.maskEmLines & P.maskLambdaConstrains
 
 f, axArr = plt.subplots(nSpec)
@@ -86,7 +87,7 @@ ax.fill_between(K.l_obs,
                 np.ma.masked_array(K.f_obs / K.fobs_norm, mask = ~mask2d).max(axis = 1), 
                 np.ma.masked_array(K.f_obs / K.fobs_norm, mask = ~mask2d).min(axis = 1), 
                 edgecolor='gray', facecolor='lightgray')
-ax.set_ylabel(r'$F_{obs} / F_{\lambda 5635}$')
+ax.set_ylabel(r'$f_{obs}$')
 ax.xaxis.set_minor_locator(mpl.ticker.MaxNLocator(nbins = 35))
 #ax.set_xlim([3800, 6850])
 ax.grid()

@@ -49,14 +49,12 @@ hfig = nPCs * 5
 
 f = plt.figure(figsize = (15, hfig))
 gs = gridspec.GridSpec(nPCs, 2, width_ratios = [5, 8])
-#f = plt.figure(figsize = (30, hfig))
-#gs = gridspec.GridSpec(3, 4, width_ratios = [5, 8, 5, 8])
 
 for i in range(nPCs):
     tn = i + 1
     gsi = 2 * i
 
-    if i == 2:
+    if i == 0 or i == 2:
         tomo_pc = P.tomo_obs__kyx[i, :, :]
         pc = P.eigVec_obs__lk[:, i]
     else:
@@ -77,7 +75,7 @@ for i in range(nPCs):
     eval_perc = 100. * eval / evals.sum()
 
     if i == 0:
-        ax2.set_title(r'PCA com $F_{obs} / F_{\lambda 5365}$. - var: $%.2f\ \%%$' % eval_perc)
+        ax2.set_title(r'PCA com $F_{obs}$. - var: $%.2f\ \%%$' % eval_perc)
     else:
         ax2.set_title(r'var: $%.2f\ \%%$' % eval_perc)
 

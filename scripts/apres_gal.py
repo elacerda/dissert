@@ -5,31 +5,44 @@ import numpy as np
 import matplotlib as mpl
 from matplotlib import pyplot as plt
 from scipy import stats as st
-import PCAlifa as PCA
+from pycasso import fitsQ3DataCube
+import argparse as ap
 
-galimg_dir = '/home/lacerda/CALIFA/images'
-galimg_fmt = 'jpg'
+def parser_args():
+    parser = ap.ArgumentParser(description = '%s' % sys.argv[0])
+    parser.add_argument('--fitsfile', '-f',
+                        help = 'The file must be named KXXXX*.fits',
+                        metavar = 'PyCASSO FITS FILE',
+                        type = str,
+                        default = None)
+    parser.add_argument('--galaxyimgfile', '-g',
+                        help = 'The image of the galaxy',
+                        metavar = 'FILE',
+                        type = str,
+                        default = None)
+    parser.add_argument('--outputimgsuffix', '-o',
+                        help = 'Suffix of image file. Sometimes denote the image type. (Ex.: image.png)',
+                        type = str,
+                        default = 'png')
+    parser.add_argument('--outputdir', '-d',
+                        help = 'Image output directory',
+                        metavar = 'DIR',
+                        type = str,
+                        default = 'png')
 
-output_fmt = 'pdf'
+    return parser.parse_args()
 
-fitsfile = sys.argv[1]
+args = parser_args()
 
-if len(sys.argv) > 2:
-    output_dir = sys.argv[2]
-else:
-    output_dir = '../figuras'
+print('Output directory: %s' % args.outputdir)
 
-print('Output directory: %s' % output_dir)
+K = fitsQ3DataCube(args.fitsfile)
 
-P = PCA.PCAlifa(fitsFile = fitsfile, quantilQFlag = 0.95, lc = [3800, 6850])
-P.setStarlightMaskFile('/home/lacerda/CALIFA/Mask.mC')
-P.setImgSuffix(output_fmt)
-
-K = P.K
+#xxx
 
 prop = {
     'arr'   : [ K.at_flux__yx, np.log10(K.aZ_flux__yx / 0.019), K.A_V__yx, K.v_0__yx, K.v_d__yx ],
-    'label' : [ r'$\log\ t\ [yr]$', r'$\log\ Z\ [Z_\odot]$', r'$A_V\ [mag]$', r'$v_\star\ [km/s]$', r'$\sigma_\star\ [km/s]$' ],
+    'label' : [ r'$\langle \log\ t rangle_L\ [yr]$', r'$\log\ \langle Z \rangle_L\ [Z_\odot]$', r'$A_V\ [mag]$', r'$v_\star\ [km/s]$', r'$\sigma_\star\ [km/s]$' ],
     'name'  : [ 'at_flux', 'aZ_flux', 'AV', 'v0', 'vd' ]
 }
 
@@ -39,7 +52,7 @@ f.set_size_inches((15, 13))
 for ax in f.axes:
     ax.set_axis_off()
 
-galimg = plt.imread('%s/%s.%s' % (galimg_dir, K.califaID, galimg_fmt))
+galimg = plt.imread(args.galaxyimgfile)
 
 ax = axArr[0,1]
 ax.set_axis_on()
@@ -93,4 +106,4 @@ im = ax.imshow(prop['arr'][p_i], origin = 'lower', interpolation = 'nearest', as
 f.colorbar(ax = ax, mappable = im, use_gridspec = True)
 
 plt.suptitle(r'%s - %s' % (K.galaxyName, K.califaID))
-f.savefig('%s/%s-apresent.%s' % (output_dir, K.califaID, P.imgSuffix))
+f.savefig('%s/%s-apresent.%s' % (args.outputdir, K.califaID, args.outputimgsuffix))

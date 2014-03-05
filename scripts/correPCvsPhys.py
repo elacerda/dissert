@@ -25,7 +25,7 @@ def parser_args():
                         help = 'Suffix of image file. Sometimes denote the image type. (Ex.: image.png)',
                         type = str,
                         default = 'png')
-    parser.add_argument('--outputdir', '-o',
+    parser.add_argument('--outputdir', '-d',
                         help = 'Image output directory',
                         metavar = 'DIR',
                         type = str,
@@ -35,6 +35,24 @@ def parser_args():
 
 ###############################################################################
 ###############################################################################
+
+args = parser_args()
+
+print('Output directory: %s' % args.outputdir)
+
+P = PCA.PCAlifa(fitsFile = args.fitsfile, quantilQFlag = 0.95, lc = args.lc)
+P.setStarlightMaskFile('/home/lacerda/CALIFA/Mask.mC')
+
+P.PCA_obs()
+P.tomograms_obs()
+P.PCA_obs_norm()
+P.tomograms_obs_norm()
+P.PCA_syn_norm()
+P.tomograms_syn_norm()
+
+K = P.K
+
+#xxx
 
 def plot_corr_axes(x, y, ax):
     rhoPearson, pvalPearson = st.pearsonr(x, y)
@@ -58,24 +76,9 @@ def plot_evec_ax(l, evec, ax, *kwargs):
     ax.axhline(y = 0, c = 'r')
     plt.setp(ax.get_yticklabels(), visible = False)
 
-###############################################################################
-###############################################################################
-
-args = parser_args()
-
-print('Output directory: %s' % args.outputdir)
-
-P = PCA.PCAlifa(fitsFile = args.fitsfile, quantilQFlag = 0.95, lc = args.lc)
-P.setStarlightMaskFile('/home/lacerda/CALIFA/Mask.mC')
-
-P.PCA_obs_norm()
-P.tomograms_obs_norm()
-
-K = P.K
-
 prop = {
     'arr'   : [ K.at_flux__z, np.log10(K.aZ_flux__z / 0.019), K.A_V, K.v_0, K.v_d ],
-    'label' : [ r'$\log\ t\ [yr]$', r'$\log\ Z\ [Z_\odot]$', r'$A_V\ [mag]$', r'$v_\star\ [km/s]$', r'$\sigma_\star\ [km/s]$', r'eigenvector' ],
+    'label' : [ r'$\langle \log\ t \rangle_L\ [yr]$', r'$\log\ \langle Z \rangle_L\ [Z_\odot]$', r'$A_V\ [mag]$', r'$v_\star\ [km/s]$', r'$\sigma_\star\ [km/s]$', r'eigenvector' ],
 }
 
 nPCs = 6
@@ -120,14 +123,7 @@ for i in range(nCols):
 
 f.suptitle(u'Correlações $f_{obs}$', fontsize=16)
 f.savefig('%s/%s-correl-f_obs_norm-PCvsPhys.%s' % (args.outputdir, K.califaID, args.outputimgsuffix))
-f.clf()
 
-################################################################################
-################################################################################
-
-P.PCA_syn_norm()
-P.tomograms_syn_norm()
-f.clf()
 f, axArr = plt.subplots(nPCs, nCols)
 f.set_size_inches(18, 10)
 
@@ -169,12 +165,6 @@ for i in range(nCols):
 f.suptitle(u'Correlações $f_{syn}$', fontsize=16)
 f.savefig('%s/%s-correl-f_syn_norm-PCvsPhys.%s' % (args.outputdir, K.califaID, args.outputimgsuffix))
 
-###############################################################################
-###############################################################################
-
-P.PCA_obs()
-P.tomograms_obs()
-f.clf()
 f, axArr = plt.subplots(nPCs, nCols)
 f.set_size_inches(18, 10)
 

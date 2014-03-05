@@ -24,7 +24,7 @@ def parser_args():
                         help = 'Suffix of image file. Sometimes denote the image type. (Ex.: image.png)',
                         type = str,
                         default = 'png')
-    parser.add_argument('--outputdir', '-o',
+    parser.add_argument('--outputdir', '-d',
                         help = 'Image output directory',
                         metavar = 'DIR',
                         type = str,
@@ -44,14 +44,13 @@ P.tomograms_syn_norm()
 
 K = P.K
 
+#xxx
+
 nPCs = 5
 hfig = nPCs * 5
-#hfig = 15
 
 f = plt.figure(figsize = (15, hfig))
 gs = gridspec.GridSpec(nPCs, 2, width_ratios = [5, 8])
-#f = plt.figure(figsize = (30, hfig))
-#gs = gridspec.GridSpec(3, 4, width_ratios = [5, 8, 5, 8])
 
 for i in range(nPCs):
     tn = i + 1
