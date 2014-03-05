@@ -565,7 +565,7 @@
   %\setlength{\textwidth}{\@frontmattertextwidth}%
   %\begin{@narrow}{\@abstractextramargin}
   \cleardoublepage%
-  \vspace*{\@frontmattertopskip}%
+  %\vspace*{\@frontmattertopskip}%
   \begin{center}%
     {\Large\chapfont #1}%
   \end{center}%
