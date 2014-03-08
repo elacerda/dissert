@@ -21,8 +21,8 @@ do
     FITSFILE=${FITSDIR}/${g}/${g}${FITSUFFIX}
     GALIMGFILE=${WORKDIR}/images/${g}.jpg
 
-    time ./tudo.py -f $FITSFILE -d $OUTPUTDIR -o $OUTPUTIMGFMT -g $GALIMGFILE 
-#    time ./apres_gal.py -f $FITSFILE -d $OUTPUTDIR -o $OUTPUTIMGFMT -g $GALIMGFILE &
+#    time ./tudo.py -f $FITSFILE -d $OUTPUTDIR -o $OUTPUTIMGFMT -g $GALIMGFILE 
+    time ./apres_gal.py -f $FITSFILE -d $OUTPUTDIR -o $OUTPUTIMGFMT -g $GALIMGFILE &
 #    time ./correPCvsPC.py -f $FITSFILE -d $OUTPUTDIR -o $OUTPUTIMGFMT &
 #    time ./correPCvsPhys.py -f $FITSFILE -d $OUTPUTDIR -o $OUTPUTIMGFMT 
 #    time ./tomo_obs_norm.py -f $FITSFILE -d $OUTPUTDIR -o $OUTPUTIMGFMT &

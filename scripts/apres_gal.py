@@ -42,7 +42,7 @@ K = fitsQ3DataCube(args.fitsfile)
 
 prop = {
     'arr'   : [ K.at_flux__yx, np.log10(K.aZ_flux__yx / 0.019), K.A_V__yx, K.v_0__yx, K.v_d__yx ],
-    'label' : [ r'$\langle \log\ t rangle_L\ [yr]$', r'$\log\ \langle Z \rangle_L\ [Z_\odot]$', r'$A_V\ [mag]$', r'$v_\star\ [km/s]$', r'$\sigma_\star\ [km/s]$' ],
+    'label' : [ r'$\langle \log\ t \rangle_L\ [yr]$', r'$\log\ \langle Z \rangle_L\ [Z_\odot]$', r'$A_V\ [mag]$', r'$v_\star\ [km/s]$', r'$\sigma_\star\ [km/s]$' ],
     'name'  : [ 'at_flux', 'aZ_flux', 'AV', 'v0', 'vd' ]
 }
 
