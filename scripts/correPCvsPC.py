@@ -1,42 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import sys
 import numpy as np
 import matplotlib as mpl
 from matplotlib import pyplot as plt
 from scipy import stats as st
 import PCAlifa as PCA
-import argparse as ap
-
-def parser_args():
-    parser = ap.ArgumentParser(description = '%s' % sys.argv[0])
-    parser.add_argument('--fitsfile', '-f',
-                        help = 'The file must be named KXXXX*.fits',
-                        metavar = 'PyCASSO FITS FILE',
-                        type = str,
-                        default = None)
-    parser.add_argument('--lc', '-l',
-                        help = 'Lambda constrains',
-                        metavar = 'LAMBDA',
-                        type = int,
-                        nargs = 2,
-                        default = [3800, 6850])
-    parser.add_argument('--outputimgsuffix', '-o',
-                        help = 'Suffix of image file. Sometimes denote the image type. (Ex.: image.png)',
-                        type = str,
-                        default = 'png')
-    parser.add_argument('--outputdir', '-d',
-                        help = 'Image output directory',
-                        metavar = 'DIR',
-                        type = str,
-                        default = 'png')
-
-    return parser.parse_args()
-
-###############################################################################
-###############################################################################
+from parser_opt import *
 
 args = parser_args()
+
 print('Output directory: %s' % args.outputdir)
 
 P = PCA.PCAlifa(fitsFile = args.fitsfile, quantilQFlag = 0.95, lc = args.lc)
@@ -49,7 +21,7 @@ P.tomograms_obs_norm()
 P.PCA_syn_norm()
 P.tomograms_syn_norm()
 
-#!xxx
+#xxx
 
 def corr_PCvsPC(tomo__zk, nPCs, title, fnamepref):
     prop = {

@@ -1,37 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import sys
 import numpy as np
 import matplotlib as mpl
 from matplotlib import pyplot as plt
 import PCAlifa as PCA
 import matplotlib.gridspec as gridspec
-import argparse as ap
-
-def parser_args():
-    parser = ap.ArgumentParser(description = '%s' % sys.argv[0])
-    parser.add_argument('--fitsfile', '-f',
-                        help = 'The file must be named KXXXX*.fits',
-                        metavar = 'PyCASSO FITS FILE',
-                        type = str,
-                        default = None)
-    parser.add_argument('--lc', '-l',
-                        help = 'Lambda constrains',
-                        metavar = 'LAMBDA',
-                        type = int,
-                        nargs = 2,
-                        default = [3800, 6850])
-    parser.add_argument('--outputimgsuffix', '-o',
-                        help = 'Suffix of image file. Sometimes denote the image type. (Ex.: image.png)',
-                        type = str,
-                        default = 'png')
-    parser.add_argument('--outputdir', '-d',
-                        help = 'Image output directory',
-                        metavar = 'DIR',
-                        type = str,
-                        default = '../figuras')
-
-    return parser.parse_args()
+from parser_opt import *
 
 args = parser_args()
 
@@ -67,6 +41,7 @@ def add_subplot_axes(ax,rect,axisbg='w'):
     y_labelsize *= rect[3]**0.5
     subax.xaxis.set_tick_params(labelsize=x_labelsize)
     subax.yaxis.set_tick_params(labelsize=y_labelsize)
+
     return subax
 
 maxPCs = 15

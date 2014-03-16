@@ -1,36 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import sys
 import numpy as np
 import matplotlib as mpl
 from matplotlib import pyplot as plt
 from scipy import stats as st
 from pycasso import fitsQ3DataCube
-import argparse as ap
-
-def parser_args():
-    parser = ap.ArgumentParser(description = '%s' % sys.argv[0])
-    parser.add_argument('--fitsfile', '-f',
-                        help = 'The file must be named KXXXX*.fits',
-                        metavar = 'PyCASSO FITS FILE',
-                        type = str,
-                        default = None)
-    parser.add_argument('--galaxyimgfile', '-g',
-                        help = 'The image of the galaxy',
-                        metavar = 'FILE',
-                        type = str,
-                        default = None)
-    parser.add_argument('--outputimgsuffix', '-o',
-                        help = 'Suffix of image file. Sometimes denote the image type. (Ex.: image.png)',
-                        type = str,
-                        default = 'png')
-    parser.add_argument('--outputdir', '-d',
-                        help = 'Image output directory',
-                        metavar = 'DIR',
-                        type = str,
-                        default = 'png')
-
-    return parser.parse_args()
+from parser_opt import *
 
 args = parser_args()
 

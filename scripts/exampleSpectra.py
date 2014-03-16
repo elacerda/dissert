@@ -1,36 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import sys
 import numpy as np
 import PCAlifa as PCA
 import matplotlib as mpl
 from matplotlib import pyplot as plt
-import argparse as ap
-
-def parser_args():
-    parser = ap.ArgumentParser(description = '%s' % sys.argv[0])
-    parser.add_argument('--fitsfile', '-f',
-                        help = 'The file must be named KXXXX*.fits',
-                        metavar = 'PyCASSO FITS FILE',
-                        type = str,
-                        default = None)
-    parser.add_argument('--lc', '-l',
-                        help = 'Lambda constrains',
-                        metavar = 'LAMBDA',
-                        type = int,
-                        nargs = 2,
-                        default = [3800, 6850])
-    parser.add_argument('--outputimgsuffix', '-o',
-                        help = 'Suffix of image file. Sometimes denote the image type. (Ex.: image.png)',
-                        type = str,
-                        default = 'png')
-    parser.add_argument('--outputdir', '-d',
-                        help = 'Image output directory',
-                        metavar = 'DIR',
-                        type = str,
-                        default = 'png')
-
-    return parser.parse_args()
+from parser_opt import *
 
 args = parser_args()
 
@@ -42,7 +16,9 @@ P.setStarlightMaskFile('/home/lacerda/CALIFA/Mask.mC')
 K = P.K
 
 #xxx
+
 nSpec = 5
+
 mask = P.maskQFlag & P.maskEmLines & P.maskLambdaConstrains
 mask2d = (mask[..., np.newaxis] & np.ones_like(K.f_obs, dtype = np.bool))
 mf_obs__lz = np.ma.masked_array(K.f_obs, mask = ~mask2d)

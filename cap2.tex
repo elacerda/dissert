@@ -236,13 +236,11 @@ rotinas como essas. Todos os códigos desenvolvidos nessa dissertação foram es
 # Carregar arquivo FITS com os dados.
 from pycasso import fitsQ3DataCube
 K = fitsQ3DataCube('K0277_synthesis_suffix.fits')
-
 # Acessar a idade media ponderada pela luminosidade.
 at = K.at_flux__z
-
 # Calcular a idade media da galaxia.
 at_total = (at * K.Lobn__z).sum() / K.Lobn__z.sum()
-print 'Idade media da galaxia K0277: \%.2f' % at_total
+print 'Idade media da galaxia K0277: %.2f' % at_total
 	\end{python}
 	\caption[Exemplo de programa utilizando \pycasso.]
 	{Exemplo de acesso aos cubo de dados por arquivo FITS e o cálculo da idade estelar média de uma galáxia.}
@@ -254,17 +252,15 @@ print 'Idade media da galaxia K0277: \%.2f' % at_total
 # Carregar arquivo FITS com os dados.
 from pycasso import fitsQ3DataCube
 K = fitsQ3DataCube('K0277_synthesis_suffix.fits')
-
 # Converter zonas para imagem.
 at_image = K.zoneToYX(K.at_flux__z, extensive=False)
-
 # Desenhar o mapa.
 import matplotlib.pyplot as plt
 plt.imshow(at_image, origin='lower', interpolation='nearest')
 plt.xlabel('Pixels')
 cb = plt.colorbar()
-cb.set_label(r'\langle \log t \langle_L [anos]')
-plt.title(r'\langle \log t \langle_{L z}')
+cb.set_label(r'$\langle \log$ t $\langle_L$ [anos]')
+plt.title('%s - %s', % (K.galaxyName, K.califaID))
 	\end{python}
 	\caption[Programa idade estelar média.]
 	{Programa para desenhar o mapa de idade	estelar média ponderada pela luminosidade.}
@@ -272,7 +268,7 @@ plt.title(r'\langle \log t \langle_{L z}')
 \end{figure}
 
 \begin{figure}
-	\includegraphics{figuras/at_flux_zone.pdf}
+	\includegraphics[width=0.8\textwidth]{figuras/K0277-at_flux_zone.pdf}
 	\caption[Mapa da idade estelar média da galáxia NGC 2916 (CALIFA 277).] 
 	{Mapa de idade estelar média ponderada pela luminosidade da galáxia NGC 2916 (CALIFA 277) gerado pelo programa da
 	Figura \ref{fig:programaMapaIdade}.}
@@ -293,23 +289,22 @@ da Figura \ref{fig:programaMapaIdade} (e a imagem gerada na Figura \ref{fig:mapa
 # Carregar arquivo FITS com os dados.
 from pycasso import fitsQ3DataCube
 K = fitsQ3DataCube('K0277_synthesis_suffix.fits')
-
 # Converter zonas para imagem.
 at_image = K.zoneToYX(K.at_flux__z, extensive=False)
-
 # Calcular o perfil radial.
 bins = np.arange(0, 26, 1)
 bin_center = (bins[1:] + bins[:-1]) / 2.0
 at_rad = K.radialProfile(at_imagem, bins, rad_scale = 1.0)
-LobsnSD__r = K.radialProfile(K.LobnSD__yx, bin_r=bins, rad_scale=1, mode='sum')
+LobsnSD__r = K.radialProfile(K.LobnSD__yx, bin_r=bins, 
+							 rad_scale=1, mode='sum')
 at_flux_LobsnSD__r = K.radialProfile(K.at_flux__yx * K.LobnSD__yx, 
-									 bin_r=bins, rad_scale=1, mode='sum')
+									 bin_r=bins, rad_scale=1, 
+									 mode='sum')
 at_flux__r = at_flux_LobsnSD__r / LobsnSD__r 
 # Desenhar o perfil.
 import matplotlib.pyplot as plt
 plt.xlabel('radius [arcsec]')
-plt.ylabel(r'\langle \log t \langle_L [anos]')
-cb = plt.colorbar()
+plt.ylabel(r'$\langle \log$ t $\langle_L$ [anos]')
 plt.plot(bin_center, at_rad)
 	\end{python}
 	\caption[Exemplo de programa para perfil radial.]
@@ -319,7 +314,7 @@ plt.plot(bin_center, at_rad)
 \end{figure}
 
 \begin{figure}
-	\includegraphics{figuras/at_flux_radprof.pdf}
+	\includegraphics[width=0.75\textwidth]{figuras/K0277-at_flux_radprof.pdf}
 	\caption[Perfil radial da idade estelar média da galáxia NGC 2916 (CALIFA 277).]
 	{Perfil radial da idade estelar média ponderada pela luminosidade da galáxia
 	NGC 2916 (CALIFA 277) gerado pelo programa da Figura \ref{fig:programaPerfRad}.}
