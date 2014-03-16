@@ -301,7 +301,9 @@ at_image = K.zoneToYX(K.at_flux__z, extensive=False)
 bins = np.arange(0, 26, 1)
 bin_center = (bins[1:] + bins[:-1]) / 2.0
 at_rad = K.radialProfile(at_imagem, bins, rad_scale = 1.0)
-
+LobsnSD__r = K.radialProfile(K.LobnSD__yx, bin_r=bins, rad_scale=1, mode='sum')
+at_flux_LobsnSD__r = K.radialProfile(K.at_flux__yx * K.LobnSD__yx, bin_r=bins, rad_scale=1, mode='sum')
+at_flux__r = at_flux_LobsnSD__r / LobsnSD__r 
 # Desenhar o perfil.
 import matplotlib.pyplot as plt
 plt.xlabel('radius [arcsec]')
