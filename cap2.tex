@@ -289,12 +289,9 @@ da Figura \ref{fig:programaMapaIdade} (e a imagem gerada na Figura \ref{fig:mapa
 # Carregar arquivo FITS com os dados.
 from pycasso import fitsQ3DataCube
 K = fitsQ3DataCube('K0277_synthesis_suffix.fits')
-# Converter zonas para imagem.
-at_image = K.zoneToYX(K.at_flux__z, extensive=False)
 # Calcular o perfil radial.
 bins = np.arange(0, 26, 1)
 bin_center = (bins[1:] + bins[:-1]) / 2.0
-at_rad = K.radialProfile(at_imagem, bins, rad_scale = 1.0)
 LobsnSD__r = K.radialProfile(K.LobnSD__yx, bin_r=bins, 
 							 rad_scale=1, mode='sum')
 at_flux_LobsnSD__r = K.radialProfile(K.at_flux__yx * K.LobnSD__yx, 
@@ -306,6 +303,7 @@ import matplotlib.pyplot as plt
 plt.xlabel('radius [arcsec]')
 plt.ylabel(r'$\langle \log$ t $\langle_L$ [anos]')
 plt.plot(bin_center, at_rad)
+plt.title('%s - %s', % (K.galaxyName, K.califaID))
 	\end{python}
 	\caption[Exemplo de programa para perfil radial.]
 	{Programa para desenhar o perfil radial da idade estelar média ponderada pela
