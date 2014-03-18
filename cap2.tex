@@ -259,7 +259,7 @@ import matplotlib.pyplot as plt
 plt.imshow(at_image, origin='lower', interpolation='nearest')
 plt.xlabel('Pixels')
 cb = plt.colorbar()
-cb.set_label(r'$\langle \log$ t $\langle_L$ [anos]')
+cb.set_label(r'$\langle \log$ t $\rangle_L$ [anos]')
 plt.title('%s - %s', % (K.galaxyName, K.califaID))
 	\end{python}
 	\caption[Programa idade estelar média.]
@@ -301,7 +301,7 @@ at_flux__r = at_flux_LobsnSD__r / LobsnSD__r
 # Desenhar o perfil.
 import matplotlib.pyplot as plt
 plt.xlabel('radius [arcsec]')
-plt.ylabel(r'$\langle \log$ t $\langle_L$ [anos]')
+plt.ylabel(r'$\langle \log$ t $\rangle_L$ [anos]')
 plt.plot(bin_center, at_rad)
 plt.title('%s - %s', % (K.galaxyName, K.califaID))
 	\end{python}
