@@ -55,26 +55,34 @@ A aplicação desse método a quase um milhão de espectros de galáxias do \SDS
 \citep{Panter2003, Gallazzi2005, Ocvirk2006} propõe uma pergunta bem definida (``qual a história de formação de
 uma dada galáxia'') e a respondem através de parâmetros extraídos do ajuste dos dados (i.e., da síntese espectral). O
 mapeamento do espaço de observáveis em um espaço de parâmetros envolve uma série de questões matemáticas e estatísticas
-complexas. Mesmo assim, este método é essencialmente calcado em princípios físicos.
+complexas, ou seja, a base do espaço é dada, e nem sempre é ortonormal, permitindo dependência entre as soluções, ou
+seja, multiplas soluções equivalentes. Mesmo assim, este método é essencialmente calcado em princípios físicos.
 
 Outros métodos são de natureza mais puramente matemática, buscando no espaço de dados observados estruturas e
 correlações que possivelmente revelem (ou pelo menos nos dêem pistas sobre) os fenômenos subjacentes. Aqui, a pergunta é
 bem definida em um sentido matemático, e o desafio é interpretar a resposta em termos físicos.
 \citet{SanchezAlmeida2010}, por exemplo, categorizam espectros de galáxias do \SDSS/DR7 em termos de {\em clusters}
 formados pelas distâncias euclidianas entre os pontos formados pelo espectro de cada galáxia em um espaço de dimensão
-$N_\lambda$. Cada cluster desse foi caracterizado por um espectro médio chamado de {\em K-mean} e é usado para posterior
-comparação com outros espectros. 
+$N_\lambda$. Essa técnica de clusterização ({\em clustering}) faz com que cada um desses {\em clusters} com vários
+espectros seja caracterizado por um espectro médio chamado de {\em K-mean} que é usado para posterior comparação e
+clássificação de outros espectros.
 
 Um método bem mais popular e tradicional nessa mesma linha é a análise de componentes principais (PCA - {\em Principal
 Component Analisys}). A técnica de PCA é simples, não-paramétrica, e nos ajuda a extrair informações de conjuntos de
 dados com muitas variáveis. Resumidamente, a PCA parte de uma tabela de $N$ linhas (objetos) por $M$ colunas (contendo
-propriedades observadas para cada objeto) e reorganiza as colunas transformando as propriedades originais em combinações
-delas mesmas de forma que as diferenças (a variância) entre os objetos  esteja concentrada nas primeiras colunas,
-reduzindo assim dimensionalidade do problema (mais detalhes em \ref{sec:PCAeTomoPCA:PCA}). A tabela pode conter
+propriedades observadas para cada objeto). Essa tabela forma uma base que, como comentamos anteriormente, nem sempre é
+ortonormal. Com essa tabela então partimos para um processo de ortonormalização, ou seja, encontramos uma base
+matemática que converte o conjunto de observações em um conjunto de valores que são linearmente descorrelacionado,
+chamados de componentes principais. Esse processo é feito de forma que, além de descorrelacionadas na nova base, a
+primeira componente tenha a máxima variância possível, e as seguintes componentes tem a máxima variância sob a restrição
+de ser ortonormal às outras, e assim por diante. Como podemos estabelecer um limite para o quanto queremos de
+informação, em variância, podemos utilizar quantas componentes principais seja necessário para atingir esse determinado
+limite, reduzindo assim dimensionalidade do problema (mais detalhes em \ref{sec:PCAeTomoPCA:PCA}). A tabela pode conter
 quaisquer tipos de dados, como cores, tamanho, dispersão de velocidade, luminosidade, etc. No caso de espectros de
 diferentes galáxias \citep[e.g., ][]{Francis1992, Sodre1994, Sodre1997}, as propriedades são as medidas de fluxo para
 cada comprimento de onda: $F_{gl} = F_g(\lambda_l)$, com $l = 1 \ldots M$ comprimentos de onda, para cada galáxia $g = 1
 \ldots N$.
+%XXX VERIFICAR CRASE em ``as outras''.
 
 Hoje, PCA é utilizada exaustivamente em várias áreas de conhecimento, principalmente em reconhecimento de padrões,
 computação visual, filtragem e compactação de dados \citep{Kamruzzaman2010, Borcea2012}. Podemos ver exemplos também em
@@ -88,12 +96,12 @@ Outro exemplo de uso de PCA aparece no artigo IV do grupo SEAGal/\starlight \cit
 dependência ambiental de algumas propriedades físicas (idade estelar média ponderada pela luz, massa estelar,
 metalicidade estelar e razão massa/luminosidade) em uma amostra de galáxias do \SDSS/DR4. Em \citet{Chen2012} é criada
 uma biblioteca com $25$ mil modelos de espectros de galáxias com diferentes idades, metalicidades, dispersão de
-velocidades, SFH ({\em star formation history}), extinção por poeira e aplicado PCA em cima dessa biblioteca (ver Figura
-\ref{fig:Chen2012fig2}). Usando uma minimização quadrática encontram quais os coeficientes e qual o número ótimo de PCs
-que melhor estimam os parâmetros físicos dos espectros modelo. Então projetam os espectros observados pelo \SDSS/DR7
-\citep{Abazajian2009} e pelo {\em Baryon Oscillation Spectroscopic Survey} \citep[BOSS;][]{Ahn2012}, atribuindo um
-sentido físico a cada PC. Os trabalhos de \citet{Ferreras2006, Wild2006, Rogers2007} exemplificam outras aplicações de
-PCA a espectros do \SDSS.
+velocidades, história de formação estelar (SFH - {\em star formation history}), extinção por poeira e aplicado PCA em
+cima dessa biblioteca (ver Figura \ref{fig:Chen2012fig2}). Usando uma minimização quadrática encontram quais os
+coeficientes e qual o número ótimo de PCs que melhor estimam os parâmetros físicos dos espectros modelo. Então projetam
+os espectros observados pelo \SDSS/DR7 \citep{Abazajian2009} e pelo {\em Baryon Oscillation Spectroscopic Survey}
+\citep[BOSS;][]{Ahn2012}, atribuindo um sentido físico a cada PC. Os trabalhos de \citet{Ferreras2006, Wild2006,
+Rogers2007} exemplificam outras aplicações de PCA a espectros do \SDSS.
 
 \begin{figure}
     \includegraphics[height=1.\textwidth]{figuras/figChen2012fig2.pdf}
@@ -113,11 +121,12 @@ estrelas) ou matemáticas (e.g, suas componentes principais ou variâncias). Exi
 síntese espectral baseadas em espectros nucleares \citep[e.g., ][]{Trager2000I, CidFernandes2004}. Assim como espectros
 integrados, tais estudos não possuem resolução espacial, ou seja, cada galáxia é representada por apenas um espectro.
 
-Hoje, com o uso de painéis de fibras óticas apontadas para as galáxias, temos os {\em surveys} de IFS ({\em Integral
-Field Spectroscopy}) onde passamos a reunir de dezenas até milhares de espectros cobrindo um {\em FoV} ({\em
-field-of-view}\footnote{Campo de visão.}) de toda uma galáxia. Assim temos para cada píxel (duas dimensões espaciais) um
-espectro (uma dimensão espectral), formando assim um cubo de {\em spaxels}\footnote{spectral pixels}. Um pioneiro nessa
-produção em massa de dados é o {\em Calar Alto Legacy Integral Field spectroscopy Area
+Hoje, com o uso de painéis de fibras óticas apontadas para as galáxias, temos os {\em surveys} de Espectroscopia de
+Campo Integrado (IFS - {\em Integral Field Spectroscopy}) onde passamos a reunir de dezenas até milhares de espectros
+cobrindo um campo de visão (FoV - {\em field-of-view}) de toda uma galáxia. Assim temos para cada píxel (duas dimensões
+espaciais) um espectro (uma dimensão espectral), formando assim um cubo de {\em spaxels}\footnote{{\em Spaxel} vem de
+{\em Spectral pixel}. Um {\em spaxel} é um píxel com três dimensões (x, y, $\lambda$)}. Um pioneiro nessa produção em
+massa de dados é o {\em Calar Alto Legacy Integral Field spectroscopy Area
 survey\footnote{\url{http://www.caha.es/CALIFA/}}} \citep[CALIFA; ][]{CALIFAPresent2012}, produzindo cerca de quatro mil
 espectros por galáxia observada. Outros {\em mega-surveys} IFS estão por vir (veja a seção \ref{sec:CALePyC:Apresent}).
 
@@ -128,7 +137,7 @@ Este tipo de análise vem sendo realizado por pesquisadores do Instituto de Astr
 Enrique Pérez, Rosa González Delgado, Rubén García-Benito) e do Grupo de Astrofísica da Universidade Federal de Santa
 Catarina (GAS-UFSC; André Luiz de Amorim, Natália Vale Asari, Roberto Cid Fernandes). Aspectos técnicos e incertezas são
 discutidos em \citet[][CF13 daqui pra frente]{CidFernandes2013} e \citet{CidFernandes2014}, enquanto \citet{Perez2013},
-e \citet{GonzalezDelgado2014} apresentam resultados astrofísicos dessa análise. Neste trabalho explorarenos os mesmo
+e \citet{GonzalezDelgado2014} apresentam resultados astrofísicos dessa análise. Neste trabalho explorarenos os mesmos
 dados através da técnica de PCA.
 
 A aplicação de PCA a cubos de dados foi realizada pela primeira vez por \citet[][S09 daqui pra frente]{Steiner2009}, que
@@ -151,7 +160,8 @@ os dados de IFS das galáxias observadas por esse projeto, que ainda está em an
 Release\footnote{\url{http://www.caha.es/CALIFA/public_html/?q=content/califa-dr1}}} \citep[][DR1]{Husemann2013} possui
 $100$ objetos e por volta de $400$ mil espectros. A previsão é que ao término do projeto serão observadas até $600$
 objetos. Embora outros surveys de IFS estejam completos ou em andamento (ver Seção \ref{sec:CALePyC:Apresent}), o CALIFA
-é o que podemos chamar de {\em estado da arte} em surveys de espectroscopia de campo integrado (IFS).
+é o que podemos chamar de {\em estado da arte} em surveys de IFS, pelo fato de que teremos, para cada uma dessas
+galáxias, espectros que, juntos, cobrem $\sim 100$\% da luz.
 
 Como já citado, pesquisadores do IAA e da UFSC vêm aplicando o \starlight aos cubos do CALIFA e com isso mapeando as
 propriedades das populações estelares nessas galáxias. Mais de 300 cubos de dados já foram analisados, embora os
@@ -159,16 +169,16 @@ resultados publicados até agora se restrinjam a pouco mais que 100 galáxias, d
 incluindo alguns sistemas em interação. Ferramentas desenvolvidas nesses trabalhos anteriores serão utilizadas nessa
 dissertação, como veremos mais adiante.
 
-Neste trabalho aplicaremos a técnica de Tomografia PCA a alguns cubos de dados do CALIFA. O objetivo é pura e
-simplesmente ver o que se obtém! Como bem colocado por \citet{Steiner2009}, o grande problema da PCA é que você tem a
-resposta, mas não sabe exatamente qual é a pergunta! Este é, portanto, um estudo eminentemente exploratório, motivado
-pelo sucesso dos trabalhos de Steiner e colaboradores em suas aplicações dessa nova ferramenta de análise de cubos
-dados.
+Neste trabalho aplicaremos a técnica de Tomografia PCA a alguns cubos de dados do CALIFA. O objetivo é, além desse,
+procurar correlações entre as componentes principais e certas propriedades físicas obtidas através da síntese de
+populações estelares. Como bem colocado por \citet{Steiner2009}, o grande problema da PCA é que você tem a resposta, mas
+não sabe exatamente qual é a pergunta! Este é, portanto, um estudo eminentemente exploratório, motivado pelo sucesso dos
+trabalhos de Steiner e colaboradores em suas aplicações dessa nova ferramenta de análise de cubos dados.
 
 É importante notar, no entanto, que existe uma grande diferença entre esses trabalhos anteriores e esse estudo.  Nossos
 cubos de dados cobrem uma escala completamente diferente. De fato, o CALIFA foi desenhado para observar galáxias
 inteiras. O campo do instrumento utilizado é de aproximadamente 1.3 arcmin$^2$. Em comparação com os estudos de Steiner
-e colaboradores, temos uma resolução espacial muito ``pior'', mas em compensação mapeamos estruturas muito diferentes,
+e colaboradores, temos uma resolução espacial muito menor, mas em compensação mapeamos estruturas muito diferentes,
 como o bojo, disco, braços e regiões H{\sc ii} a muitos kpc do núcleo. Como veremos, esta diferença nos levou a tratar
 os dados de formas que diferem daquelas empregadas por Steiner e seus colaboradores. De fato, até onde temos conhecimento,
 este trabalho é o primeiro a aplicar a técnica de tomografa PCA à galáxias interias.
