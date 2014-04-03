@@ -91,17 +91,17 @@ até nossos telescópios sofre influência de ruído e é afetada pela atenuaç�
 ótica através de objetos que estejam no mesmo campo, entre outros. Os próprios instrumentos também geram diversas
 assinaturas indesejadas. Por todos esses motivos fica claro que os dados geralmente necessitam de uma boa filtragem.
 Junto com outras técnicas (tomogramas, wavelets, Fourier), o PCA vem sendo muito utilizado para filtragem de dados,
-principalmente cubos de dados advindos de IFS que possuem muitas dessas assinaturas instrumentais \citep{Riffel2011}.
-Outro exemplo de uso de PCA aparece no artigo IV do grupo SEAGal/\starlight \citep{Mateus2007} auxiliando no estudo da
-dependência ambiental de algumas propriedades físicas (idade estelar média ponderada pela luz, massa estelar,
-metalicidade estelar e razão massa/luminosidade) em uma amostra de galáxias do \SDSS/DR4. Em \citet{Chen2012} é criada
-uma biblioteca com $25$ mil modelos de espectros de galáxias com diferentes idades, metalicidades, dispersão de
-velocidades, história de formação estelar (SFH - {\em star formation history}), extinção por poeira e aplicado PCA em
-cima dessa biblioteca (ver Figura \ref{fig:Chen2012fig2}). Usando uma minimização quadrática encontram quais os
-coeficientes e qual o número ótimo de PCs que melhor estimam os parâmetros físicos dos espectros modelo. Então projetam
-os espectros observados pelo \SDSS/DR7 \citep{Abazajian2009} e pelo {\em Baryon Oscillation Spectroscopic Survey}
-\citep[BOSS;][]{Ahn2012}, atribuindo um sentido físico a cada PC. Os trabalhos de \citet{Ferreras2006, Wild2006,
-Rogers2007} exemplificam outras aplicações de PCA a espectros do \SDSS.
+principalmente cubos de dados advindos de espectroscopia de campo integrado (IFS - {\em Integral Field Spectroscopy})
+que possuem muitas dessas assinaturas instrumentais \citep{Riffel2011}. Outro exemplo de uso de PCA aparece no artigo IV
+do grupo SEAGal/\starlight \citep{Mateus2007} auxiliando no estudo da dependência ambiental de algumas propriedades
+físicas (idade estelar média ponderada pela luz, massa estelar, metalicidade estelar e razão massa/luminosidade) em uma
+amostra de galáxias do \SDSS/DR4. Em \citet{Chen2012} é criada uma biblioteca com $25$ mil modelos de espectros de
+galáxias com diferentes idades, metalicidades, dispersão de velocidades, história de formação estelar (SFH - {\em star
+formation history}), extinção por poeira e aplicado PCA em cima dessa biblioteca (ver Figura \ref{fig:Chen2012fig2}).
+Usando uma minimização quadrática encontram quais os coeficientes e qual o número ótimo de PCs que melhor estimam os
+parâmetros físicos dos espectros modelo. Então projetam os espectros observados pelo \SDSS/DR7 \citep{Abazajian2009} e
+pelo {\em Baryon Oscillation Spectroscopic Survey} \citep[BOSS;][]{Ahn2012}, atribuindo um sentido físico a cada PC. Os
+trabalhos de \citet{Ferreras2006, Wild2006, Rogers2007} exemplificam outras aplicações de PCA a espectros do \SDSS.
 
 \begin{figure}
     \includegraphics[height=1.\textwidth]{figuras/figChen2012fig2.pdf}
@@ -121,12 +121,11 @@ estrelas) ou matemáticas (e.g, suas componentes principais ou variâncias). Exi
 síntese espectral baseadas em espectros nucleares \citep[e.g., ][]{Trager2000I, CidFernandes2004}. Assim como espectros
 integrados, tais estudos não possuem resolução espacial, ou seja, cada galáxia é representada por apenas um espectro.
 
-Hoje, com o uso de painéis de fibras óticas apontadas para as galáxias, temos os {\em surveys} de Espectroscopia de
-Campo Integrado (IFS - {\em Integral Field Spectroscopy}) onde passamos a reunir de dezenas até milhares de espectros
-cobrindo um campo de visão (FoV - {\em field-of-view}) de toda uma galáxia. Assim temos para cada píxel (duas dimensões
-espaciais) um espectro (uma dimensão espectral), formando assim um cubo de {\em spaxels}\footnote{{\em Spaxel} vem de
-{\em Spectral pixel}. Um {\em spaxel} é um píxel com três dimensões (x, y, $\lambda$)}. Um pioneiro nessa produção em
-massa de dados é o {\em Calar Alto Legacy Integral Field spectroscopy Area
+Hoje, com o uso de painéis de fibras óticas apontadas para as galáxias, temos os {\em surveys} de IFS onde passamos a
+reunir de dezenas até milhares de espectros cobrindo um campo de visão (FoV - {\em field-of-view}) de toda uma galáxia.
+Assim temos para cada píxel (duas dimensões espaciais) um espectro (uma dimensão espectral), formando assim um cubo de
+{\em spaxels}\footnote{{\em Spaxel} vem de {\em Spectral pixel}. Um {\em spaxel} é um píxel com três dimensões (x, y,
+$\lambda$)}. Um pioneiro nessa produção em massa de dados é o {\em Calar Alto Legacy Integral Field spectroscopy Area
 survey\footnote{\url{http://www.caha.es/CALIFA/}}} \citep[CALIFA; ][]{CALIFAPresent2012}, produzindo cerca de quatro mil
 espectros por galáxia observada. Outros {\em mega-surveys} IFS estão por vir (veja a seção \ref{sec:CALePyC:Apresent}).
 

@@ -44,14 +44,16 @@ descrição e alguns exemplos de utilização do PyCASSO.
 No sul da Espanha, mais precisamente em {\em Sierra de Los Filabres} (Andalucía), está situado Observatório Astronômico
 Hispano-Alemão de {\em Calar Alto}. O projeto CALIFA está sendo possível através de observações pelo maior de seus 3
 telescópios (3.5m) ao longo de 250 noites. Em comparação com o \SDSS, o CALIFA terá a mesma ordem de número de espectros
-para estudo ($\sim 10^6$). Apesar de um número muito menor de galáxias, graças ao IFU será o com melhor completeza por
-objeto. Existem alguns poucos surveys IFU e todos com, além de poucos objetos e {\em FoV} menor, focos de estudo mais
-estreitos, dificultando o legado do survey para outras pequisas científicas mais abrangentes \citep[SAURON;][região
-central de 72 galáxias com $z < 0.01$.]{de-Zeeuw2002} \citep[PINGS;][algumas galáxias muito próximas ($\sim 10$ Mpc) e o
-estudo atual de 70 (U)LIRGs com $z <0.26$]{RosalesOrtega2010} \citep[VENGA;][$30$ galáxias espirais]{Blanc2010}
+para estudo ($\sim 10^6$). Apesar de um número muito menor de galáxias, graças a unidade de campo
+integral\footnote{Unidade responsável pela espectrografia de campo integral. Com diversas fibras ópticas, combina
+espectrografia e imageamento.} (IFU - {\em Integral Field Unity}) será o com melhor completeza por objeto. Existem
+alguns poucos surveys IFU e todos com, além de poucos objetos e {\em FoV} menor, focos de estudo mais estreitos, dificultando o
+legado do survey para outras pequisas científicas mais abrangentes \citep[SAURON;][região central de 72 galáxias com $z
+< 0.01$.]{de-Zeeuw2002} \citep[PINGS;][algumas galáxias muito próximas ($\sim 10$ Mpc) e o estudo atual de 70 (U)LIRGs
+com $z <0.26$]{RosalesOrtega2010} \citep[VENGA;][$30$ galáxias espirais]{Blanc2010}
 \citep[ATLAS\textsuperscript{3D};][260 galáxias {\em early-type} próximas]{Cappellari2011}. O CALIFA foi concebido para
-que seu legado seja abrangente, possibilitando diversos tipos de estudos em diversas áreas. Outros surveys IFU ainda estão por vir,
-como SAMI \citep{Croom2012} e MaNGA\footnote{\url{http://www.sdss3.org/future/manga.php}}
+que seu legado seja abrangente, possibilitando diversos tipos de estudos em diversas áreas. Outros surveys IFU ainda
+estão por vir, como SAMI \citep{Croom2012} e MaNGA\footnote{\url{http://www.sdss3.org/future/manga.php}}
 
 A amostra-mãe do projeto contém 939 galáxias (das quais $\sim 600$ serão observadas) com {\em redshifts} entre $0.005 <
 z < 0.03$ que distribuídas cobrem o diagrama cor-magnitude com $M_r < -18$ (Figura \ref{fig:cm-uzMz}) em uma ampla
@@ -125,8 +127,9 @@ ou galáxias).
 espectros das regiões de menor fluxo.
 \item Desloca o espectro para o referencial de repouso (usando o {\em redshift} calculado dentro dos $5^{\prime\prime}$
 centrais da galáxia) e o reamostra a 2 \AA.
-\item Define zonas de Voronoi, tal que o espectro total dessas zonas tem uma relação S/N $\ge 20$ em uma janela
-espectral de 90 \AA\ de largura e centrada em 5635 \AA, e, por fim, extrai os espectros correspondentes.
+\item Define zonas de Voronoi. São agrumentos de spaxels em uma região tal que o espectro total desses (que formam uma
+zona) tenham uma relação S/N determinada em uma janela espectral de 90 \AA\ de largura e centrada em 5635 \AA. Em nossos
+dados a relação S/N é $\ge 20$. Por fim, se extrai os espectros correspondentes de cada zona.
 \end{enumerate}
 
 \begin{figure}
@@ -178,7 +181,7 @@ Podemos ver na Tabela \ref{tab:pixelZones} esses dados para as galáxias estudad
 original é transformado numa matriz de zonas e comprimentos de onda: $F_{zl}$ com $z = 1 \ldots N_z$ e $l = 3800 \ldots
 6850$ \AA.
 
-A motivação para a ``zonificação'' do cubo é garantir espectros de qualidade boa o suficiente para análise com o
+A motivação para o ``zoneamento'' do cubo é garantir espectros de qualidade boa o suficiente para análise com o
 \starlight. Nossa análise PCA poderia ser realizada sobre os cubos de dados originais, mas a realizaremos sobre as zonas
 produzidas pelo {\sc qbick}. A razão para isso é que queremos comparar os resultados de nossa análise com os parâmetros
 extraídos pelo \starlight, o que servirá de auxílio a interpretação dos resultados da PCA.
