@@ -29,13 +29,14 @@ cubos de dados (Tomografia PCA).
 %                                                               % 
 %***************************************************************%
 
-\section{Principal Component Analisys}
+\section{Análise de Componentes Principais}
 \label{sec:PCAeTomoPCA:PCA}
 
-Baseada em encontrar os eixos com maiores variâncias em um conjunto de variáveis (no nosso caso, fluxos por lambda e por
-zona espacial), a técnica de PCA vem sendo de grande utilidade quando o assunto é estatística com muitas variáveis.
-Através de operações relativamente simples usando álgebra linear, é feita uma rotação na base de dados original, gerando
-uma nova base ortonormal não correlacionada através de um conjunto de autovalores e autovetores.
+Baseada em encontrar o eixo com maior variância em um conjunto de variáveis (no nosso caso, fluxos por lambda e por zona
+espacial) e gerar, a partir dele, uma base ortogonal e normalizada, a técnica de PCA vem sendo de grande utilidade
+quando o assunto é estatística com muitas variáveis. Através de operações relativamente simples, utilizando álgebra
+linear podemos obter essa nova base. Com a nova base podemos realizar a projeção dos dados observados nela, como uma
+rotação na base de dados original, gerando um novo conjunto de dados não correlacionados linearmente.
 
 Existem diversas formas de se calcular essa base final. A prova matemática que você pode obter essa base é feita através
 de multiplicadores de Lagrange, calculando os autovetores ($\mathbf{e}{}_k$) e autovalores ($\Lambda_k$) que maximizam o
@@ -46,6 +47,21 @@ com espectros, o fluxo em cada comprimento de onda varia através das zonas. Enc
 significativos desse espaço em relação à variância, sujeitos às restrições acima. Fazemos esse cálculo encontrando os
 autovetores e autovalores da matriz de covariância (a matriz tem dimensão $N_\lambda \times N_\lambda$) usando a
 biblioteca científica \texttt{SciPy}\footnote{\url{http://scipy.org/}}.
+
+Para exemplificar em uma forma visualizável (Figura \ref{fig:PCA:exempl2D}), imaginemos que todos os espectros que temos
+possuem apenas dois comprimentos de onda ($N_\lambda\ =\ 2$). Podemos então gerar um gráfico num plano cartesiano
+($\lambda_1 \times \lambda_2$) onde cada ponto representa um espectro. A primeira componente principal (PC) está na
+direção que possui maior variância nos dados, e a segunda, é a que possui maior variância, com a limitação de ser
+ortonormal a primeira PC.
+
+\begin{figure}
+    \includegraphics[width=0.8\textwidth]{figuras/PCA2D.pdf}
+    \caption[Exemplo de PCA com duas dimens\~{o}es.]
+    {Cada ponto no gráfico representa um espectro com dois comprimentos de onda, $\lambda_1$ e $\lambda_2$. A PC1
+    representa a direção onde está contida a maior variância nos dados. A segunda PC (PC2) deve seguir as limitações de
+    ser ortonormal à primeira.}
+    \label{fig:PCA:exempl2D}
+\end{figure}
 
 \subsection{PCA das galáxias do CALIFA}
 
