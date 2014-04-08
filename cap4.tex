@@ -20,16 +20,12 @@
 \label{sec:PCAaplic}
 
 Com os dados e ferramentas apresentados nos capítulos anteriores estamos prontos para aplicar a Tomografia PCA a
-galáxias do CALIFA. Como a PCA é uma técnica que calcula os eixos que, através da variância, melhor expandem a base de
-dados, é natural que qualquer pré-processamento que modifique os espectros de entrada acarrete mudancas na variância
-entre eles e portanto resulte num conjunto diferente de PCs. 
-
-Durante nossas investigações fizemos uma série de testes com pré-processamentos e manipulações nos espectros
-(normalização, remoção de cinemática, janelas diferentes em comprimento de onda, PCA das linhas de emissão, logarítmo do
-fluxo, entre outros), verificando suas implicações no resultado. Neste capítulo comentaremos alguns {\em insights} que
-tivemos nesse processo, e definiremos operações que julgamos adequadas a análise PCA de galáxias inteiras. Por fim
-faremos uma espécie de engenharia reversa, estudando correlações entra PCs e propriedades derivadas da síntese de
-populações estelares, o que nos auxilia na busca do sentido físico das PCs resultantes.
+galáxias do CALIFA. Durante nossas investigações fizemos uma série de testes com pré-processamentos e manipulações nos
+espectros (normalização, remoção de cinemática, janelas diferentes em comprimento de onda, PCA das linhas de emissão,
+logarítmo do fluxo, entre outros), verificando suas implicações no resultado da PCA. Neste capítulo comentaremos alguns
+{\em insights} que tivemos nesse processo, e definiremos operações que julgamos adequadas a análise PCA de galáxias
+inteiras. Por fim faremos uma espécie de engenharia reversa, estudando correlações entre PCs e propriedades derivadas da
+síntese de populações estelares, o que nos auxilia na busca do sentido físico das PCs resultantes.
 
 Todas as análises neste capítulo serão feitas usando a galáxia NGC 2916 (CALIFA 277), uma espiral de tipo Sbc (Figura
 \ref{fig:K0277apresent}). A discussão detalhada desse caso particular serve de guia para os resultados para outras
@@ -76,7 +72,7 @@ complicado dizer o que cada uma representa. No final desse capítulo falaremos m
 fisicamente.
 
 Da mesma forma, fazemos a PCA para o mesmo cubo, mas com os espectros normalizados, i.e., reescalonando cada espectro de
-modo que o fluxo médio na janela de $5590-5680$ \AA\ seja igual a 1. Daqui para frente vamos nos referir aos espectros
+modo que o fluxo mediano na janela de $5590-5680$ \AA\ seja igual a 1. Daqui para frente vamos nos referir aos espectros
 normalizados utilizando a letra $f$:
 \begin{equation}
 f_{obs} = \dfrac{F_{obs}}{F_{\lambda5635}}
@@ -124,16 +120,18 @@ motivo, em nossas análises daqui para frente usaremos o cubo com os espectros n
 \begin{figure}
     \includegraphics[width=0.8\textwidth]{figuras/K0277-tomo-obs.pdf}
     \caption[Tomogramas de 1 a 5 da gal\'axia NGC 2916 - $F_{obs}$.]
-    {Cinco primeiras PCs (e seus respectivos tomogramas) resultantes da Tomografia PCA aplicado aos espectros sem
-    normalização ($F_{obs}$) da galáxia NGC 2916.}
+    {Cinco primeiras PCs (em preto à direita) e seus respectivos tomogramas (imagem à esquerda) resultantes da
+    Tomografia PCA aplicado aos espectros sem normalização ($F_{obs}$) da galáxia NGC 2916. Em cinza o espectro médio
+    para comparação.}
     \label{fig:K0277tomofobs}
 \end{figure}
 
 \begin{figure}
     \includegraphics[width=0.8\textwidth]{figuras/K0277-tomo-obs-norm.pdf}
     \caption[Tomogramas de 1 a 5 da gal\'axia NGC 2916 - $f_{obs}$.]
-    {Cinco primeiras PCs (e seus respectivos tomogramas) resultantes da Tomografia PCA aplicado aos espectros observados
-    normalizados ($f_{obs}$) da galáxia NGC 2916.}
+    {Cinco primeiras PCs (em preto à direita) e seus respectivos tomogramas (imagem à esquerda) resultantes da
+    Tomografia PCA aplicado aos espectros observados normalizados ($f_{obs}$) da galáxia NGC 2916. Em cinza o espectro
+    médio para comparação.}
     \label{fig:K0277tomofobsnorm}
 \end{figure}
 
@@ -149,18 +147,19 @@ motivo, em nossas análises daqui para frente usaremos o cubo com os espectros n
 \label{sec:PCAaplic:OBSxSYN}
 
 Na seção anterior realizamos a PCA no cubo de espectros observados de CALIFA 277. Com o resultado da síntese de
-populações estelares já organizado com o pipeline \pycasso podemos aplicar a mesma tecnica aos espectros sintéticos
+populações estelares já organizado com o pipeline \pycasso podemos aplicar a mesma técnica aos espectros sintéticos
 gerados pelo \starlight.
 
 A grande diferença é que nos espectros sintéticos estão contidas apenas as informações sobre populações
 estelares\footnote{Efeitos de extinção/avermelhamento e cinemática também são incluidos no processo de síntese
 \citep{CidFernandes2005}}. Como os espectros sintéticos não possuem as assinaturas dos equipamentos observacionais, dos
 processos para subtração do céu, ruídos e afins, quando submetidas à técnica de PCA esperamos que as informações mais
-relevantes se condensem em menos PCs. Comparando os dois {\em scree tests} na Figura \ref{fig:K0277scree} vemos que para
-o caso com os espectros sintéticos a curva converge mais rápidamente ao zero de variância, mostrando que, como esperado,
-temos as informações mais compactadas nas primeiras PCs quando comparadas ao caso com os espectros observados.
-Observando o caso sem normalização, plotado no gráfico com linha pontilhada, vemos que o efeito causado pelo fator de
-escala (PC1) diminui a ``importância'' (i.e., variância) das demais PCs.
+relevantes se condensem em menos PCs. Uma forma de comparar isso pode ser usando um {\em scree test}, que é um gráfico
+aonde vemos os autovalores (variância) de cada PC. Comparando os dois {\em scree tests} na Figura \ref{fig:K0277scree}
+vemos que para o caso com os espectros sintéticos a curva converge mais rápidamente ao zero de variância, mostrando que,
+como esperado, temos as informações mais compactadas nas primeiras PCs quando comparadas ao caso com os espectros
+observados. Observando o caso sem normalização, plotado no gráfico com linha pontilhada, vemos que o efeito causado pelo
+fator de escala (PC1) diminui a ``importância'' (i.e., variância) das demais PCs.
 
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0277-screetest.pdf}
@@ -275,19 +274,18 @@ pontos.
 
 Tanto para os dados observados quanto sintéticos vemos que a primeira PC representa basicamente um fator de idade.
 Possui correlação também com a metalicidade. A segunda PC também em ambos os casos representa uma forte correlação com a
-velocidade estelar, refletindo a curva de rotação da galáxia. A terceira PC com os dados observados parece ser um bom
-sensor para o padrão global de extinção ($A_V$). Essa PC parece se dissolver em duas no caso do espectro sintético (PC3
-e 4). As PC4 e PC5 no caso observado não parecem ter correlação com nenhum desses parâmetros físicos comparados, salvo
-pequenas correlações com $A_V$ e $v_\star$ na PC5. Essa última, para o caso sintético, parece estar correlacionada com
-$A_V$ também, mas de forma mais fraca. Também possui um padrão de correlação com $v_\star$. Por fim, a PC6 no caso
-observado parece ter uma mistura de idade, metalicidade, extinção e com a dispersão de velocidades. Para o caso
-sintético existe uma correlação com a metalicidade e a dispersão de velocidades. Um padrão de rotação também aparece mas
-com um coeficiente de Spearman baixo.
+velocidade estelar, refletindo a rotação da galáxia. A terceira PC com os dados observados parece ser um bom sensor para
+o padrão global de extinção ($A_V$). Essa PC parece se dissolver em duas no caso do espectro sintético (PC3 e 4). As PC4
+e PC5 no caso observado não parecem ter correlação com nenhum desses parâmetros físicos comparados, salvo pequenas
+correlações com $A_V$ e $v_\star$ na PC5. Essa última, para o caso sintético, parece estar correlacionada com $A_V$
+também, mas de forma mais fraca. Também possui um padrão de correlação com $v_\star$. Por fim, a PC6 no caso observado
+parece ter uma mistura de idade, metalicidade, extinção e com a dispersão de velocidades. Para o caso sintético existe
+uma correlação com a metalicidade e a dispersão de velocidades. Um padrão de rotação também aparece mas com um
+coeficiente de Spearman baixo.
 
 Outra forma de se observar essas correlações é graficando os dados nos eixos das PCs, colorindo os pontos por
-determinado parâmetro físico. No Apêndice estarão todos os gráficos com todos os parâmetros físicos. Como exemplo aqui
-deixamos as Figuras \ref{fig:K0277correfobsnormPCvsPC:AV} e \ref{fig:K0277correfsynnormPCvsPC:AV} que mostram
-as PCs para o caso observado e sintético, coloridos pelo $A_V$.
+determinado parâmetro físico. Como exemplo aqui deixamos as Figuras \ref{fig:K0277correfobsnormPCvsPC:AV} e
+\ref{fig:K0277correfsynnormPCvsPC:AV} que mostram as PCs para o caso observado e sintético, coloridos pelo $A_V$.
 
 \begin{figure}
     \includegraphics[width=1.2\textwidth,angle=-90]{figuras/K0277-correl-f_obs_norm-PCvsPhys.pdf}
