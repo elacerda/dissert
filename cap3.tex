@@ -40,13 +40,14 @@ rotação na base de dados original, gerando um novo conjunto de dados não corr
 
 Existem diversas formas de se calcular essa base final. A prova matemática que você pode obter essa base é feita através
 de multiplicadores de Lagrange, calculando os autovetores ($\mathbf{e}{}_k$) e autovalores ($\Lambda_k$) que maximizam o
-valor de $\mathbf{e}{}_k^T \cdot \mathbf{C}{}_{cov} \cdot \mathbf{e}{}_k$ (ver Eq. \ref{eq:PCA:covMatrix}) sujeito à
-restrição de que um autovetor deve ser ortogonal a qualquer outro da base ($\mathbf{e}{}_i^T \mathbf{e}{}_j = 0$) e que
-todos devem ser normalizados ($\mathbf{e}{}_i{}^T \mathbf{e}{}_i = 1$) \citep[][p. 5-6]{JolliffePCA1986}. No caso de PCA
-com espectros, o fluxo em cada comprimento de onda varia através das zonas. Encontramos então quais são os eixos mais
-significativos desse espaço em relação à variância, sujeitos às restrições acima. Fazemos esse cálculo encontrando os
-autovetores e autovalores da matriz de covariância (a matriz tem dimensão $N_\lambda \times N_\lambda$) usando a
-biblioteca científica \texttt{SciPy}\footnote{\url{http://scipy.org/}}.
+valor de $\mathbf{e}{}_k^T \cdot \mathbf{C}{}_{cov} \cdot \mathbf{e}{}_k$, onde $\mathbf{C}{}_{cov}$ é a matriz de
+covariância (ver Eq. \ref{eq:PCA:covMatrix}), sujeito à restrição de que um autovetor deve ser ortogonal a qualquer
+outro da base ($\mathbf{e}{}_i^T \cdot \mathbf{e}{}_j = 0$) e que todos devem ser normalizados ($\mathbf{e}{}_i{}^T
+\cdot \mathbf{e}{}_i = 1$) \citep[][p. 5-6]{JolliffePCA1986}. No caso de PCA com espectros, o fluxo em cada comprimento
+de onda varia através das zonas. Encontramos então quais são os eixos mais significativos desse espaço em relação à
+variância, sujeitos às restrições acima. Fazemos esse cálculo encontrando os autovetores e autovalores da matriz de
+covariância (a matriz tem dimensão $N_\lambda \times N_\lambda$) usando a biblioteca científica
+\texttt{SciPy}\footnote{\url{http://scipy.org/}}.
 
 Para exemplificar em uma forma visualizável (Figura \ref{fig:PCA:exempl2D}), imaginemos que todos os espectros que temos
 possuem apenas dois comprimentos de onda ($N_\lambda\ =\ 2$). Podemos então gerar um gráfico num plano cartesiano
@@ -66,7 +67,7 @@ ortonormal a primeira PC.
 
 \subsection{PCA das galáxias do CALIFA}
 
-Conforme a Seção \ref{sec:CALePyC:pipelines} vimos que o cubo de espectros das galáxias do CALIFA estão acessíveis no
+Conforme a Seção \ref{sec:CALePyC:pipeline} vimos que o cubo de espectros das galáxias do CALIFA estão acessíveis no
 \pycasso separados por zonas, muitas correspondendo a píxeis individuiais e outras a conjuntos de pixeis (zonas de
 Voronoi). Os espectros observados estão armazenados em forma de uma matriz ($N_\lambda \times N_z$) com $N_\lambda$
 comprimentos de onda e $N_z$ zonas (\texttt{f\_obs} no \pycasso). Em nosso trabalho vamos usar a forma transposta dessa
@@ -111,8 +112,8 @@ zonas. Os elementos da diagonal ($\mathbf{C}{}_{i i}$) expressam a variância do
 $\lambda_i$ entre todas as zonas.
 
 Agora calculamos os autovalores e autovetores da matriz de covariância. Neste trabalho usamos o nome autoespectro para
-designar esses autovetores pois são de uma matriz de covariâncias entre espectros de cada zona. Então ordenamos-os
-decrescentemente pelo valor de seus autovalores. Os autoespectros são as componentes principais (PCs) e os autovalores
+designar esses autovetores pois são de uma matriz de covariâncias entre espectros de cada zona. Então ordenamos os
+autoespectros decrescentemente pelo valor de seus autovalores. Eles são as componentes principais (PCs) e os autovalores
 as respectivas variâncias. Isso feito, temos então o que necessitamos para iniciar o cálculo do Tomograma PCA. Um
 exemplo de programa para calcular a matriz de covariâncias e seus autovetores e autovalores usando o \pycasso e o
 \texttt{SciPy} pode ser visto na Figura \ref{fig:programaCovMatrix}.
@@ -155,7 +156,7 @@ eigvect = e[:, S]
 
 Muitas figuras de PCs e suas utilizações e diferenças nos pré-processamentos serão mostradas nos Capítulos
 \ref{sec:PCAaplic} e \ref{sec:result}, juntamente com a Tomografia PCA e as comparações com os parâmetros físicos da
-sintese de populações estelares com o \starlight.
+síntese de populações estelares com o \starlight.
 
 %***************************************************************%
 %                                                               %
@@ -183,14 +184,14 @@ conjunto, trazem novas perspectivas e ideias para a interpretação de ambos.
 
 \section{Exemplo de resultado da Tomografia PCA}
 
-Para ilustrar o potencial da tecnica de Tomografia PCA, ilustramos os resultados obtidos por S09.
+Para ilustrar o potencial da técnica de Tomografia PCA, ilustramos os resultados obtidos por S09.
 
 \subsection{Descoberta de linhas largas em um LINER}
 
 No artigo citado anteriormente, através do estudo dos autoespectros e suas respectivas imagens do núcleo da galáxia
 LINER ({\em Low Ionization Nuclear Emission-line Region}) NGC 4736, foram encontradas evidências de linhas largas.
-Quando temos uma fonte que é capaz de produzir linhas largas no espectro é sinal da existência de um SMBH ({\em Super
-Massive Black Hole}). \citet{CidFernandes2004} mostram que, pelo menos em alguns casos, a subtração detalhada das
+Quando temos uma fonte que é capaz de produzir linhas largas no espectro é sinal da existência de um {\em Super
+Massive Black Hole} (SMBH). \citet{CidFernandes2004} mostram que, pelo menos em alguns casos, a subtração detalhada das
 populações estelares nos espectros ajuda a encontrar linhas largas mais fracas em Seyferts 2, que são aquelas que (por
 definição) possuem apenas linhas estreitas, ajudando assim na classificação desses objetos como tipo 1 ou 2. A PCA,
 juntamente com a Tomografia PCA, fazem esse papel da subtração das populações estelares sem haver nenhuma
@@ -202,7 +203,7 @@ tratado como E1) possui $99.74\%$ da variância e reproduz comportamento do gás
 \ref{fig:S09eigspec1}). O segundo contribui com $0.088\%$ para a variância e tem um claro padrão de rotação, tanto
 nas linhas do autoespectro quanto na imagem da tomografia (Figura \ref{fig:S09eigspec2}). É o terceiro ($0.032\%$
 da variância) que mostra evidência clara de uma emissão larga de \Halpha (Figura \ref{fig:S09eigspec3}). Essa
-assinatura é uma evidência tipica de AGNs de tipo 1.
+assinatura é uma evidência típica de AGNs de tipo 1.
 
 \begin{figure}
     \includegraphics[width=0.7\textwidth]{figuras/figSteiner2009fig1.pdf}

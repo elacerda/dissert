@@ -15,7 +15,7 @@
 %                                                               %
 %***************************************************************%
 
-\chapter{O projeto CALIFA e os {\em pipelines} QBICK e PyCASSO}
+\chapter{O projeto CALIFA e os programas QBICK e PyCASSO}
 \label{sec:CALePyC}
 
 Nesse cenário de crescimento exponencial na quantidade de dados alavancados por novas tecnologias surge o CALIFA: um
@@ -26,11 +26,11 @@ $(x, y)$ temos um espectro. Na primeira seção deste capítulo iremos apresenta
 trabalho seja pioneiro na execução de análise PCA em cubos de espectros abrangendo o campo de uma galáxia completa.
 
 Com a enorme quantidade de dados obtidos, resultado direto de um projeto de ciência de ponta, vem também a dificuldade
-da organização dos dados para futuras investigações científicas. Dois {\em pipelines} nos ajudam na preparação dos dados
-que iremos usar neste trabalho, {\sc qbick} e PyCASSO. O {\sc qbick} prepara os dados para a síntese de populações
-estelares e o PyCASSO organiza a saída da síntese, que é executada para cada espectro dentro da galáxia. Na segunda
-seção apresentaremos ambos, mostrando as peculiaridades e técnicas empregadas sobre os dados através do {\sc qbick} e da
-descrição e alguns exemplos de utilização do PyCASSO.
+da organização dos dados para futuras investigações científicas. Dois programas pertencentes ao {\em pipeline} do CALIFA
+nos ajudam na preparação dos dados que iremos usar neste trabalho, {\sc qbick} e PyCASSO. O {\sc qbick} prepara os dados
+para a síntese de populações estelares e o PyCASSO organiza a saída da síntese, que é executada para cada espectro
+dentro da galáxia. Na segunda seção apresentaremos ambos, mostrando as peculiaridades e técnicas empregadas sobre os
+dados através do {\sc qbick} e da descrição e alguns exemplos de utilização do PyCASSO.
 
 %***************************************************************%
 %                                                               %
@@ -47,22 +47,22 @@ telescópios (3.5m) ao longo de 250 noites. Em comparação com o \SDSS, o CALIF
 para estudo ($\sim 10^6$). Apesar de um número muito menor de galáxias, graças a unidade de campo
 integral\footnote{Unidade responsável pela espectrografia de campo integral. Com diversas fibras ópticas, combina
 espectrografia e imageamento.} (IFU - {\em Integral Field Unity}) será o com melhor completeza por objeto. Existem
-alguns poucos surveys IFU e todos com, além de poucos objetos e {\em FoV} menor, focos de estudo mais estreitos, dificultando o
-legado do survey para outras pequisas científicas mais abrangentes \citep[SAURON;][região central de 72 galáxias com $z
-< 0.01$.]{de-Zeeuw2002} \citep[PINGS;][algumas galáxias muito próximas ($\sim 10$ Mpc) e o estudo atual de 70 (U)LIRGs
-com $z <0.26$]{RosalesOrtega2010} \citep[VENGA;][$30$ galáxias espirais]{Blanc2010}
+alguns poucos {\em surveys} IFU e todos com, além de poucos objetos e FoV menor, focos de estudo mais estreitos,
+dificultando o legado do {\em survey} para outras pequisas científicas mais abrangentes \citep[SAURON;][região central
+de 72 galáxias com $z < 0.01$.]{de-Zeeuw2002} \citep[PINGS;][algumas galáxias muito próximas ($\sim 10$ Mpc) e o estudo
+atual de 70 (U)LIRGs com $z <0.26$]{RosalesOrtega2010} \citep[VENGA;][$30$ galáxias espirais]{Blanc2010}
 \citep[ATLAS\textsuperscript{3D};][260 galáxias {\em early-type} próximas]{Cappellari2011}. O CALIFA foi concebido para
 que seu legado seja abrangente, possibilitando diversos tipos de estudos em diversas áreas. Outros surveys IFU ainda
 estão por vir, como SAMI \citep{Croom2012} e MaNGA\footnote{\url{http://www.sdss3.org/future/manga.php}}
 
 A amostra-mãe do projeto contém 939 galáxias (das quais $\sim 600$ serão observadas) com {\em redshifts} entre $0.005 <
 z < 0.03$ que distribuídas cobrem o diagrama cor-magnitude com $M_r < -18$ (Figura \ref{fig:cm-uzMz}) em uma ampla
-variedade de tipos morfologicos, massa em estrelas, condições do gás ionizado. Para melhor aproveitar o {\em FoV} do
+variedade de tipos morfológicos, massa em estrelas, condições do gás ionizado. Para melhor aproveitar o {\em FoV} do
 instrumento de IFU é feito também um corte em dimensão ($\sim1^{\prime}$ em diâmetro). No telescópio usado para o
-projeto está instalado o equipamento Potsdam Multi Aperture Spectrograph \citep[PMAS; ][]{Roth2005} no modo PPAK
-\citep{Verheijen2004, Kelz2006} formando um espectrofotômetro de campo integrado com um {\em bundle} de 382 fibras
-(Figura \ref{fig:BundlePPAK}), das quais, 331 são para observação dos objetos, outras 36 que fazem amostras para a
-sutração do céu e outras 15 para calibração. Cada uma das {\em science fibers} (331) possui $2.7^{\prime\prime}$ de
+projeto está instalado o equipamento {\em Potsdam Multi Aperture Spectrograph} \citep[PMAS; ][]{Roth2005} no modo
+{\em PPAK} \citep{Verheijen2004, Kelz2006} formando um espectrofotômetro de campo integrado com um {\em bundle} de 382
+fibras (Figura \ref{fig:BundlePPAK}), das quais, 331 são para observação dos objetos, outras 36 que fazem amostras para a
+subtração do céu e outras 15 para calibração. Cada uma das {\em science fibers} (331) possui $2.7^{\prime\prime}$ de
 diâmetro, formando um campo de visão hexagonal de $74^{\prime\prime} \times 64^{\prime\prime}$ ($\sim1.3$ arcmin$^2$)
 que, através de uma técnica de três pontos de {\em dithering} torna possível a observação de 100\% do campo.
 
@@ -92,15 +92,17 @@ cubo de espectros de forma que cada spaxel tenha área de $1^{\prime\prime} \tim
 píxel do cubo final não seja completamente independente, ou seja, numa automática correlação entre os pixels vizinhos.
 Os espectros vêm em duas configurações de rede: a V500 cobrindo de $\sim 3700$ até 7000 \AA\ com resolução de $\sim 6$
 \AA\ de largura à meia altura (FWHM) e a V1200 ($\sim 3650-4600$ \AA\ FWHM $\sim2.3$ \AA). A cobertura espectral da
-V$500$ é ideal para os propósitos de ciência feita pelo \starlight, mas por problemas com {\em vignetting} com a parte
-azul dessa configuração, os dados são reamostrados numa combinação das duas redes, criando cubos que chamamos de COMBO:
-A parte com $\lambda < 4600$ \AA\ vem da V1200 e o resto da V500. Nessa montagem os espectros da V1200 foram suavizados
-à mesma resolução espectral da V500 (FWHM $= 6$ \AA). Como outros cubos do CALIFA, os cubos COMBO provêm, para cada
-posição e comprimento de onda, o fluxo ($F_{\lambda,x,y}^{orig}$), seu erro ($\epsilon_{\lambda,x,y}$) e uma flag
+V$500$ é ideal para os propósitos de ciência feita pelo \starlight, mas por problemas com {\em vignetting}\footnote{{\em
+Vignetting}, é um efeito que causa diferença de brilho e constraste nos cantos das imagens. Em imagens digitais
+geralmente é causado pela dependência angular dos sensores e a incidência normal da luz.} com a parte azul dessa
+configuração, os dados são reamostrados numa combinação das duas redes, criando cubos que chamamos de COMBO: A parte com
+$\lambda < 4600$ \AA\ vem da V1200 e o resto da V500. Nessa montagem os espectros da V1200 foram suavizados à mesma
+resolução espectral da V500 (FWHM $= 6$ \AA). Como outros cubos do CALIFA, os cubos COMBO provêm, para cada posição e
+comprimento de onda, o fluxo ($F_{\lambda,x,y}^{orig}$), seu erro ($\epsilon_{\lambda,x,y}$) e uma flag
 ($b_{\lambda,x,y}$) que sinaliza pixels defeituosos.
 
 Nesse trabalho usaremos exclusivamente dados dos cubos COMBO. Por motivos que veremos na próxima seção não analisarermos
-exatamente esses dados em sua forma original, mas os provenientes de dois outros {\em pipelines} desenvolvidas por nossa
+exatamente esses dados em sua forma original, mas os provenientes de dois outros programas desenvolvidos por nossa
 equipe.
 
 %***************************************************************%
@@ -109,16 +111,16 @@ equipe.
 %                                                               %
 %***************************************************************%
 
-\section{Os {\em pipelines} QBICK e PyCASSO}
-\label{sec:CALePyC:pipelines}
+\section{O {\em pipeline} de organização dos dados do CALIFA: QBICK e PyCASSO}
+\label{sec:CALePyC:pipeline}
 
-Em CF13 temos a descrição de duas pipelines usadas na análise dos cubos COMBO: O {\sc qbick} e o PyCASSO. Abaixo
-revisamos esses pipelines, ambas muito importantes nesse trabalho.
+Em CF13 temos a descrição de dois programas pertencentes a {\em pipeline} do CALIFA que são usados na análise dos cubos
+COMBO: O {\sc qbick} e o PyCASSO. Abaixo revisamos esses programas, ambos muito importantes nesse trabalho.
 
 \subsection{QBICK}
 
-O primeira é o {\sc qbick}, desenvolvido por Rubén García-Benito, do IAA, e explicado em detalhe em CF13. Resumidamente,
-este pipeline:
+O primeiro é o {\sc qbick}, desenvolvido por Rubén García-Benito, do IAA, e explicado em detalhe em CF13. Resumidamente,
+este programa:
 
 \begin{enumerate}
 \item Cria máscaras espaciais que removem regiões externas de baixo S/N, e objetos indesejáveis no {\em FoV} (estrelas
@@ -158,9 +160,9 @@ Escolhemos mascarar as seguintes janelas: $\mathrm{H}\epsilon$: de 3960 a 3980 \
 $\mathrm{He\,\textsc{i}}$ e $\mathrm{Na\,\textsc{i}\ D}$\footnote{Na {\sc i} D não é uma linha de emissão, mas
 mascaramos esse dubleto porque ele pode conter uma componente de absorção devida a presença de gás neutro no meio
 interestelar.}:de 5866 a 5916 \AA; \Halpha e \nII: de 6528 a 6608 \AA; $\mathrm{S\,\textsc{ii}}$: de 6696 a 6752 \AA.
-Essas máscaras são na verdade introduzidas em uma etapa posterior ao {\sc qbick}, quando os espectros são procesados com
-o \starlight. Também nessa etapa os espectros são cortados entre 3800 e 6850 \AA. O espectro após todas máscaras pode
-ser visto no painel inferior da Figura \ref{fig:checkmask}.
+Essas máscaras são na verdade introduzidas em uma etapa posterior ao {\sc qbick}, quando os espectros são processados
+com o \starlight. Também nessa etapa os espectros são cortados entre 3800 e 6850 \AA. O espectro após todas máscaras
+pode ser visto no painel inferior da Figura \ref{fig:checkmask}.
 
 \begin{figure}
 	\includegraphics[width=1.0\textwidth]{figuras/figCF13fig1.pdf}
@@ -207,23 +209,22 @@ extraídos pelo \starlight, o que servirá de auxílio a interpretação dos res
 	\label{tab:pixelZones}
 \end{table}
 
-Todas informações e pré-processamentos provenientes do {\sc qbick} são herdadas pelo {\em pipeline} apresentado a
-seguir.
+Todas informações e pré-processamentos provenientes do {\sc qbick} são herdadas pelo programa apresentado a seguir.
 
 \subsection{\pycasso}
 
 Os espectros extraídos pelo {\sc qbick} são processados pelo \starlight, produzindo, no caso de CALIFA 277, 1639
 arquivos ASCII como output. Dado o grande número de informações contidas em cada um desses arquivos (e.g., história de
 formação estelar em luz e massa, extinção, parâmetros cinemáticos, figuras de mérito do ajuste), necessitamos de um
-{\em pipeline} que faça a organização de todos os dados para que cálculos e gráficos sejam fácil para que até um programador
+programa que faça a organização de todos os dados para que cálculos e gráficos sejam fácil para que até um programador
 de nível iniciante possa fazer. André L. de Amorim, juntamente com outros colaboradores de nosso grupo e do projeto
 CALIFA construiu o \pycasso ({\em Python CALIFA \starlight Synthesis Organizer}, descrito na sec. 4 de CF13) que faz a
 organização dos dados que vêm do {\sc qbick} e das etapas inicais de redução juntamente com a síntese de populações
 estelares feitas com o \starlight, facilitando, e muito, o trabalho de quem usa estes dados. Sem a ajuda deste
 organizador, este trabalho seria muito mais difícil, além de infactível no tempo de um mestrado.
 
-O \pycasso é uma biblioteca desenvolvida em Python para organizar os dados da síntese feita pelo \starlight. A versão
-usada neste trabalho é a $0.9.3$\footnote{\url{http://minerva.ufsc.br/~andre/PyCASSO-0.9.3/}}. Para um acesso mais
+O \pycasso é uma biblioteca desenvolvida em {\em Python} para organizar os dados da síntese feita pelo \starlight. A
+versão usada neste trabalho é a $0.9.3$\footnote{\url{http://minerva.ufsc.br/~andre/PyCASSO-0.9.3/}}. Para um acesso mais
 rápido e reutilizável do código e dos dados em qualquer ambiente, organiza os cubos em formatos FITS ou HDF5. Em outra
 camada, várias matrizes e cubos são armazenados para acesso com nomes próprio (um exemplo, \texttt{popx}, representa a
 fração de luz distribuída pelas populações estelares da base usada na síntese espectral com o \starlight) de forma que a
@@ -284,7 +285,7 @@ luminosidade, por zona (\texttt{at\_flux\_\_z}). A idade estelar média é calcu
 \rangle^{gal}_L = \sum_z \langle \log t \rangle_{L,z} L_z /\sum_z L_z$ onde $L_Z $ é a luminosidade e $ \langle \log t
 \rangle_L $ é a idade estelar média, ambas por zona. A passagem de coordenadas $z \to (x, y)$ exemplificada no programa
 da Figura \ref{fig:programaMapaIdade} (e a imagem gerada na Figura \ref{fig:mapaIdade}) é feita através da função de
-\texttt{zoneToYX} dentro do \pycasso. Os gráficos são feitos utilizando a biblioteca gráfica de Python,
+\texttt{zoneToYX} dentro do \pycasso. Os gráficos são feitos utilizando a biblioteca gráfica de {\em Python},
 \texttt{matplotlib}\footnote{\url{http://matplotlib.org}}.
 
 \begin{figure}
@@ -331,7 +332,7 @@ GonzalezDelgado2014}, também há alguns usando indiretamente \citep{Husemann201
 doutorado em curso (uma na UFSC e duas no IAA). São mais de 10 pessoas utilizando a biblioteca em nossa colaboração. 
 
 Os cálculos necessários para a PCA e também para a Tomografia PCA se tornam simples contas usando pacotes matemáticos de
-python. O software dessenvolvido para a PCA e Tomografia PCA desta dissertação (por ora apelidado de ``PCAlifa'') foi
-feito de forma compativel com o \pycasso, visando futuramente integrá-lo como um novo módulo dessa ferramenta.
+{\em Python}. O software dessenvolvido para a PCA e Tomografia PCA desta dissertação (por ora apelidado de ``PCAlifa'')
+foi feito de forma compatível com o \pycasso, visando futuramente integrá-lo como um novo módulo dessa ferramenta.
 
 % End of this chapter
