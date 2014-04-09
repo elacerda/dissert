@@ -62,7 +62,7 @@ espectros observados desse objeto. No painel direito vemos o mesmo mas para os e
 A Figura \ref{fig:K0277tomofobs} apresenta os resultados da tomografia PCA para esse cubo de dados. O tomograma é
 formado pelo ``peso'' da PC em cada zona (ver Equação \ref{eq:TomoPCA:tomogram2D}). O primeiro autoespectro lembra o
 espectro médio (linha em cinza claro nos painéis à direita), embora muito mais azul. O segundo autoespectro se assemelha
-com um espectro de população muito jovem. Com o auxilio de seu tomograma vemos que para as zonas mais internas da
+com um espectro de população muito jovem. Com o auxílio de seu tomograma vemos que para as zonas mais internas da
 galáxia (onde as populações são mais velhas, como vimos nas Figuras \ref{fig:mapaIdade} e \ref{fig:K0277apresent}) o seu
 peso é negativo. De forma contrária, em regiões mais afastadas do núcleo, onde, para essa galáxia, parecem existir
 algumas regiões H{\sc ii}, vemos que seu peso é positivo. A terceira componente parece mostrar um padrão de rotação, ao
@@ -71,7 +71,7 @@ tratamento no tomograma, mas falaremos mais sobre isso no final dessa seção. D
 complicado dizer o que cada uma representa. No final desse capítulo falaremos mais sobre como melhor interpretar as PCs
 fisicamente.
 
-Da mesma forma, fazemos a PCA para o mesmo cubo, mas com os espectros normalizados, i.e., reescalonando cada espectro de
+Da mesma forma, fazemos a PCA para o mesmo cubo, mas com os espectros normalizados, i.e., cada espectro reescalonado de
 modo que o fluxo mediano na janela de $5590-5680$ \AA\ seja igual a 1. Daqui para frente vamos nos referir aos espectros
 normalizados utilizando a letra $f$:
 \begin{equation}
@@ -95,7 +95,7 @@ também não trás maiores informações.
 
 Imagine uma galáxia composta inteiramente pela mesma população estelar, em repouso, distribuídas da mesma maneira no
 espaço. Ou seja, em qualquer ponto da galáxia o espectro é o mesmo. Uma PCA nessa galáxia hipotética não identificaria
-nenhuma fonte de variancia, pois todos espectros são iguais ao espectro médio. Adicione então a essa galáxia uma função
+nenhuma fonte de variância, pois todos espectros são iguais ao espectro médio. Adicione então a essa galáxia uma função
 de densidade de massa estelar em função do raio (ou, equivalentemente, um perfil de brilho superficial), permitindo que
 de uma posição para outra a quantidade dessa determinada população se altera (mudando a intensidade da região). Uma
 componente nova irá surgir na sua PCA, mostrando que existe uma variância agora numa componente de escala (amplitude)
@@ -113,7 +113,7 @@ sem normalização mostra exatamente esse fator de escala. Seu tomograma mostra 
 
 Em suma, concluímos que é bem mais útil analisar espectros normalizados. Os trabalhos do grupo de J. Steiner não
 utilizaram esse esquema de normalização, mas isso é muito provavelmente devido ao pequeno campo coberto por seus dados.
-Nesse caso, as variações em amplitude são pequenas e não participam com um papel importante na analise. No caso do
+Nesse caso, as variações em amplitude são pequenas e não participam com um papel importante na análise. No caso do
 CALIFA, contudo, os efeitos de amplitude são muito maiores, e complicam a interpretação dos resultados da PCA. Por esse
 motivo, em nossas análises daqui para frente usaremos o cubo com os espectros normalizados.
 
@@ -156,7 +156,7 @@ estelares\footnote{Efeitos de extinção/avermelhamento e cinemática também s�
 processos para subtração do céu, ruídos e afins, quando submetidas à técnica de PCA esperamos que as informações mais
 relevantes se condensem em menos PCs. Uma forma de comparar isso pode ser usando um {\em scree test}, que é um gráfico
 aonde vemos os autovalores (variância) de cada PC. Comparando os dois {\em scree tests} na Figura \ref{fig:K0277scree}
-vemos que para o caso com os espectros sintéticos a curva converge mais rápidamente ao zero de variância, mostrando que,
+vemos que para o caso com os espectros sintéticos a curva converge mais rapidamente ao zero de variância, mostrando que,
 como esperado, temos as informações mais compactadas nas primeiras PCs quando comparadas ao caso com os espectros
 observados. Observando o caso sem normalização, plotado no gráfico com linha pontilhada, vemos que o efeito causado pelo
 fator de escala (PC1) diminui a ``importância'' (i.e., variância) das demais PCs.
@@ -259,9 +259,9 @@ velocidade de rotação projetada.
 \section{Comparando as PCs com o \STARLIGHT: engenharia reversa}
 \label{sec:PCAaplic:EngRev}
 
-Descobrir o sentido físico de cada PC não é tarefa fácil. Como comentamos anteriormente, o PCA te dá a resposta, mas
-você geralmente não sabe qual a pergunta. Uma forma de buscar sentido físico nas componentes é analisar as correlações
-com propriedades físicas da galáxia.
+Descobrir o sentido físico de cada PC não é tarefa fácil e geralmente as medidas físicas vêm dissolvidas em diversas
+PCs. Como comentamos anteriormente, a PCA nos dá a resposta, mas geralmente não sabemos qual a pergunta. Uma forma de
+buscar sentido físico nas componentes é analisar as correlações com propriedades físicas da galáxia.
 
 Com o resultado da síntese de populações estelares obtido pelo \starlight e organizado pelo \pycasso fica simples
 correlacionarmos os dados na base gerada pela PCA. Nas Figuras \ref{fig:K0277correfobsnorm} e
