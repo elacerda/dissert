@@ -19,7 +19,7 @@
 \label{sec:PCAeTomoPCA}
 
 De medidas fisiológicas, como pulsação e respiração, até reconhecimento de padrões em sistemas complexos como
-reconhecimento facial e criptografia, passando por compactação de imagem, neurosciência e redução de ruídos em dados,
+reconhecimento facial e criptografia, passando por compactação de imagem, neurociência e redução de ruídos em dados,
 podemos ver atuação de técnicas de PCA. Neste capítulo revisamos os fundamentos matemáticos da PCA e de sua versão para
 cubos de dados (Tomografia PCA).
 
@@ -91,7 +91,7 @@ Calculamos então o espectro médio de uma galáxia
 \begin{equation}
 \mean{\mathbf{F}{}_\lambda} = \frac{1}{N_z} \sum_{i=1}^{N_z} F_{z_i}{}_{\lambda}
 \end{equation}
-\noindent e então subtraímos a média de todos os espectros
+\noindent em seguida subtraímos a média de todos os espectros
 \begin{equation}
 	\label{eq:PCA:Izl}
 	\mathbf{I}{}_{z \lambda} = \mathbf{F}{}_{z \lambda} - \mean{\mathbf{F}{}_\lambda}
@@ -101,7 +101,7 @@ Calculamos então o espectro médio de uma galáxia
 	\label{eq:PCA:covMatrix}
 	\mathbf{C}{}_{cov} = \frac{[\mathbf{I}{}_{z \lambda}]^T \cdot \mathbf{I}{}_{z \lambda}}{N_z - 1}
 \end{equation}
-\noindent Vemos que a matriz de covariância possui dimensão $N_\lambda \times N_\lambda$. Um elemento dessa matriz e
+\noindent Vemos que a matriz de covariância possui dimensão $N_\lambda \times N_\lambda$. Um elemento dessa matriz é
 dado por
 \begin{equation}
 	\label{eq:PCA:covMatrix}
@@ -133,7 +133,7 @@ f_obs_mean__l = K.f_obs.mean(axis = 1)
 I_obs__zl = K.f_obs.transpose() - f_obs_mean__l
 
 # Calcular a matrix de convariancia
-import scipy as sp
+from scipy import linalg
 n = K.N_zone
 dot_product = sp.dot(I_obs__zl.transpose(), I_obs__zl)
 covMat__ll = dot_product / (n - 1.0)   
@@ -149,8 +149,8 @@ eigvect = e[:, S]
 	\caption[Exemplo de cálculo de PCA usando o \pycasso e SciPy.] 
 	{Cálculo do procedimento completo de PCA para os espectros observados de uma galáxia do CALIFA usando o \pycasso e a
 	biblioteca científica de Python chamada \texttt{SciPy}. No final do código temos armazenado nos vetores \texttt{eigval}
-	e \texttt{eigvect} os autovalores e autovetores da matriz de covariância (\texttt{covMat\_\_ll}) ordenados
-	decrescentemente.}
+	e \texttt{eigvect} os autovalores e autovetores da matriz de covariância (\texttt{covMat\_\_ll}) ordenados de forma
+	decrescentes.}
 	\label{fig:programaCovMatrix}
 \end{figure}
 
@@ -190,7 +190,7 @@ Para ilustrar o potencial da técnica de Tomografia PCA, ilustramos os resultado
 
 No artigo citado anteriormente, através do estudo dos autoespectros e suas respectivas imagens do núcleo da galáxia
 LINER ({\em Low Ionization Nuclear Emission-line Region}) NGC 4736, foram encontradas evidências de linhas largas.
-Quando temos uma fonte que é capaz de produzir linhas largas no espectro é sinal da existência de um {\em Super
+Quando temos uma fonte que é capaz de produzir linhas largas no espectro, é sinal da existência de um {\em Super
 Massive Black Hole} (SMBH). \citet{CidFernandes2004} mostram que, pelo menos em alguns casos, a subtração detalhada das
 populações estelares nos espectros ajuda a encontrar linhas largas mais fracas em Seyferts 2, que são aquelas que (por
 definição) possuem apenas linhas estreitas, ajudando assim na classificação desses objetos como tipo 1 ou 2. A PCA,
@@ -252,13 +252,13 @@ com dados do Gemini (8m) com $3 \times 20$ min de integração, enquanto nossos 
 Além disso, eles aplicam técnicas de deconvolução das imagens com o algorítmo de Richardson-Lucy. Dado o pequeno {\em
 FoV} do IFU do Gemini, o ganho com tais técnicas é perceptível. Não aplicaremos isso no nosso caso porque nosso {\em
 FoV} é muito maior, e não esperamos grandes ganhos em resolução espacial com a aplicação de tais técnicas de
-deconvolução espacial.
+deconvolução.
 
 Como dito na Seção \ref{sec:CALePyC:Apresent} a escala e resolução espacial de nossos dados difere brutalmente daquelas
 nos trabalhos acima resumidos: $3^{\prime\prime} \times 5^{\prime\prime}$ e resolução de $0.47^{\prime\prime}$ no Gemini
 contra $74^{\prime\prime} \times 64^{\prime\prime}$ e resolução de $\sim3.7^{\prime\prime}$ no CALIFA. Portanto, o {\em
-FoV} estudado por S09 equivalem a aproximadamente $\sim2$ elementos de resolução do CALIFA! Isto de cara mostra que a
-ciência que podemos obter com Tomografia PCA aplicada aos dados do CALIFA não será a mesma que aquela estudada por S09.
+FoV} estudado por S09 equivalem a aproximadamente $\sim2$ elementos de resolução do CALIFA! Isto já mostra que a ciência
+que podemos obter com Tomografia PCA aplicada aos dados do CALIFA não será a mesma que aquela estudada por S09.
 
 Em resumo, apesar de inspirado diretamente pelos resultados de S09, este estudo difere muito dos trabalhos deles. Estas
 diferenças ficarão evidentes já a partir do próximo capítulo, onde apresentamos nossos primeiros resultados e discutimos

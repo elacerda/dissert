@@ -53,11 +53,11 @@ de 72 galáxias com $z < 0.01$.]{de-Zeeuw2002} \citep[PINGS;][algumas galáxias 
 atual de 70 (U)LIRGs com $z <0.26$]{RosalesOrtega2010} \citep[VENGA;][$30$ galáxias espirais]{Blanc2010}
 \citep[ATLAS\textsuperscript{3D};][260 galáxias {\em early-type} próximas]{Cappellari2011}. O CALIFA foi concebido para
 que seu legado seja abrangente, possibilitando diversos tipos de estudos em diversas áreas. Outros surveys IFU ainda
-estão por vir, como SAMI \citep{Croom2012} e MaNGA\footnote{\url{http://www.sdss3.org/future/manga.php}}
+estão por vir, como SAMI \citep{Croom2012} e MaNGA\footnote{\url{http://www.sdss3.org/future/manga.php}}.
 
 A amostra-mãe do projeto contém 939 galáxias (das quais $\sim 600$ serão observadas) com {\em redshifts} entre $0.005 <
 z < 0.03$ que distribuídas cobrem o diagrama cor-magnitude com $M_r < -18$ (Figura \ref{fig:cm-uzMz}) em uma ampla
-variedade de tipos morfológicos, massa em estrelas, condições do gás ionizado. Para melhor aproveitar o {\em FoV} do
+variedade de tipos morfológicos, massa em estrelas e condições do gás ionizado. Para melhor aproveitar o {\em FoV} do
 instrumento de IFU é feito também um corte em dimensão ($\sim1^{\prime}$ em diâmetro). No telescópio usado para o
 projeto está instalado o equipamento {\em Potsdam Multi Aperture Spectrograph} \citep[PMAS; ][]{Roth2005} no modo
 {\em PPAK} \citep{Verheijen2004, Kelz2006} formando um espectrofotômetro de campo integrado com um {\em bundle} de 382
@@ -71,7 +71,7 @@ que, através de uma técnica de três pontos de {\em dithering} torna possível
     \caption[Diagrama cor-magnitude para as galáxias do CALIFA.]
     {Distribui\c{c}\~ao das galáxias do CALIFA no diagrama cor magnitude $u-z$ vs. $M_z$. {\em Painel superior}: Em
     pontos pretos est\~ao as galáxias pertencente a amostra-m\~ae e em cores as galáxias presentes no CALIFA DR1. As
-    diferentes cores representam os diferentes tipos morfológicos. {\em Painel inferor}: A fra\c{c}\~ao de galáxias
+    diferentes cores representam os diferentes tipos morfológicos. {\em Painel inferior}: A fra\c{c}\~ao de galáxias
     observadas pelo DR1 em rela\c{c}\~ao a amostra-m\~ae. Retirado de \citet{Husemann2013}.}
     \label{fig:cm-uzMz}
 \end{figure}
@@ -86,20 +86,21 @@ que, através de uma técnica de três pontos de {\em dithering} torna possível
 
 Os dados são reduzidos utilizando o CALIFA Pipeline versão 1.3c, descrito em \citet{Husemann2013}. Com as 331 {\em
 science fibers} e o processo de {\em dithering} em 3 posições, temos 993 espectros independentes por objeto observado.
-\citet{Husemann2013} estimam que a resolução espacial final é $\sim3.7^{\prime\prime}$ (FWHM). Com a reamostragem do
-cubo de espectros de forma que cada spaxel tenha área de $1^{\prime\prime} \times 1^{\prime\prime}$ obtêm-se mais de
-4000 espectros por galáxia. Isto, somado ao {\em seeing} do céu e o processo de observação e redução, implica que cada
-píxel do cubo final não seja completamente independente, ou seja, numa automática correlação entre os pixels vizinhos.
-Os espectros vêm em duas configurações de rede: a V500 cobrindo de $\sim 3700$ até 7000 \AA\ com resolução de $\sim 6$
-\AA\ de largura à meia altura (FWHM) e a V1200 ($\sim 3650-4600$ \AA\ FWHM $\sim2.3$ \AA). A cobertura espectral da
-V$500$ é ideal para os propósitos de ciência feita pelo \starlight, mas por problemas com {\em vignetting}\footnote{{\em
-Vignetting}, é um efeito que causa diferença de brilho e constraste nos cantos das imagens. Em imagens digitais
-geralmente é causado pela dependência angular dos sensores e a incidência normal da luz.} com a parte azul dessa
-configuração, os dados são reamostrados numa combinação das duas redes, criando cubos que chamamos de COMBO: A parte com
-$\lambda < 4600$ \AA\ vem da V1200 e o resto da V500. Nessa montagem os espectros da V1200 foram suavizados à mesma
-resolução espectral da V500 (FWHM $= 6$ \AA). Como outros cubos do CALIFA, os cubos COMBO provêm, para cada posição e
-comprimento de onda, o fluxo ($F_{\lambda,x,y}^{orig}$), seu erro ($\epsilon_{\lambda,x,y}$) e uma flag
-($b_{\lambda,x,y}$) que sinaliza pixels defeituosos.
+\citet{Husemann2013} estimam que a resolução espacial final é $\sim3.7^{\prime\prime}$ largura à meia altura (FWHM -
+{\em Full Width at Half Maximum}). Com a reamostragem do cubo de espectros de forma que cada spaxel tenha área de
+$1^{\prime\prime} \times 1^{\prime\prime}$ obtêm-se mais de 4000 espectros por galáxia. Isto, somado ao {\em seeing} do
+céu e o processo de observação e redução, implica que cada píxel do cubo final não seja completamente independente, ou
+seja, numa automática correlação entre os pixels vizinhos. Os espectros vêm em duas configurações de rede: a V500
+cobrindo de $\sim 3700$ até 7000 \AA\ com resolução de $\sim 6$ \AA\ de largura à meia altura (FWHM) e a V1200 cobrindo
+$\sim 3650-4600$ \AA\ com resolução de $\sim2.3$ \AA. A cobertura espectral da V$500$ é ideal para os propósitos de
+ciência feita pelo \starlight, mas por problemas com {\em vignetting}\footnote{{\em Vignetting}, é um efeito que causa
+diferença de brilho e constraste nos cantos das imagens. Em imagens digitais geralmente é causado pela dependência
+angular dos sensores e a incidência normal da luz.} com a parte azul dessa configuração, os dados são reamostrados numa
+combinação das duas redes, criando cubos que chamamos de COMBO: A parte com $\lambda < 4600$ \AA\ vem da V1200 e o resto
+da V500. Nessa montagem os espectros da V1200 foram suavizados à mesma resolução espectral da V500 (FWHM $= 6$ \AA).
+Como outros cubos do CALIFA, os cubos COMBO provêm, para cada posição e comprimento de onda, o fluxo
+($F_{\lambda,x,y}^{orig}$), seu erro ($\epsilon_{\lambda,x,y}$) e uma {\em flag} ($b_{\lambda,x,y}$) que sinaliza pixels
+defeituosos.
 
 Nesse trabalho usaremos exclusivamente dados dos cubos COMBO. Por motivos que veremos na próxima seção não analisarermos
 exatamente esses dados em sua forma original, mas os provenientes de dois outros programas desenvolvidos por nossa
@@ -125,8 +126,8 @@ este programa:
 \begin{enumerate}
 \item Cria máscaras espaciais que removem regiões externas de baixo S/N, e objetos indesejáveis no {\em FoV} (estrelas
 ou galáxias).
-\item Introduz flags espectrais que indicam janelas contendo linhas telúricas, cuja remoção imperfeita pode afetar os
-espectros das regiões de menor fluxo.
+\item Introduz {\em flags} espectrais que indicam janelas contendo linhas telúricas, cuja remoção imperfeita pode afetar
+os espectros das regiões de menor fluxo.
 \item Desloca o espectro para o referencial de repouso (usando o {\em redshift} calculado dentro dos $5^{\prime\prime}$
 centrais da galáxia) e o reamostra a 2 \AA.
 \item Define zonas de Voronoi. São agrumentos de spaxels em uma região tal que o espectro total desses (que formam uma
@@ -138,20 +139,20 @@ dados a relação S/N é $\ge 20$. Por fim, se extrai os espectros correspondent
     \includegraphics[width=1.0\textwidth]{figuras/K0277-constant_inital_mask-399.pdf}
     \caption[Exemplo de máscaras em um espectro do cubo de dados.]
     {Espectro da zona 399 da galáxia NGC 2916 (CALIFA 277). Acima está o espectro completo. No segundo vemos o espectro
-    com linhas telúricas e bad-pixels removidos, além do limite de intervalo em comprimendo de onda de $3800$ a $6850$
-    \AA. No espectro mais abaixo, além das partes removidas no segundo, foram removidas também as mesmas linhas de
-    emissão mascaradas na síntese de populações estelares.}
+    com linhas telúricas e pixels problemáticos removidos, além do limite de intervalo em comprimendo de onda de $3800$
+    a $6850$ \AA. No espectro mais abaixo, além das partes removidas no segundo, foram removidas também as mesmas linhas
+    de emissão mascaradas na síntese de populações estelares.}
     \label{fig:checkmask}
 \end{figure}
 
 A Figura \ref{fig:checkmask} ilustra as máscaras espectrais utilizadas, tomando como exemplo a zona 399 para a galáxia
 NGC 2916 (CALIFA 277). O painel superior mostra o espectro original. No painel do meio as janelas mascaradas pelo {\sc
 qbick} são removidas do espectro. Essas janelas correspondem a regiões contendo linhas telúricas\footnote{Linhas de
-emissão ou absorção referentes à atmosfera.}, as quais dificilmente são perfeitamente removidas na redução. Pixels
-identificados como problemáticos durante a redução dos dados são igualmente mascarados. Em nossa análise fazemos uma
-estatística com todos os {\em bad pixels} de cada cubo e removemos qualquer um que esteja presente em mais de $5\%$ dos
-espectros. Cabe aqui lembrar que todos os espectros precisam ter os mesmos pontos em comprimento de onda pois precisamos
-construir a matriz de covariância (ver Equação \ref{eq:PCA:covMatrix}).
+emissão ou absorção referentes à atmosfera terrestre.}, as quais dificilmente são perfeitamente removidas na redução.
+Pixels identificados como problemáticos durante a redução dos dados são igualmente mascarados. Em nossa análise fazemos
+uma estatística com todos os pixels problemáticos de cada cubo e removemos qualquer um que esteja presente em mais de
+$5\%$ dos espectros. Cabe aqui lembrar que todos os espectros precisam ter os mesmos pontos em comprimento de onda pois
+precisamos construir a matriz de covariância (ver Equação \ref{eq:PCA:covMatrix}).
                                                                                                                                                                                                                                                                                
 Além dos {\em bad pixels} e linhas telúricas, podemos mascarar regiões desnecessárias para determinada investigação
 científica. Nosso foco é o estudo das populações estelares, e portanto optamos por mascarar as linhas de emissão.
@@ -174,7 +175,7 @@ pode ser visto no painel inferior da Figura \ref{fig:checkmask}.
    	\label{fig:zonesfig1CF13}
 \end{figure}
 
-O efeito do agrupamento em zonas de Voronoi é ilustrado na Figura \ref{fig:zonesfig1CF13} para a galáxia NGC 2916 cujos
+O efeito do agrupamento em zonas de Voronoi é ilustrado na Figura \ref{fig:zonesfig1CF13} para a galáxia NGC 2916, cujos
 pixels úteis (i.e., não mascarados espacialmente) são agrupados em $N_z = 1638$ zonas. Como esperado, o efeito é maior
 nas partes externas. Vale aqui frisar que a grande maioria das zonas comporta um pixel apenas. Para a galáxia NGC 2916,
 por exemplo, $93\%$ das zonas possuem apenas 1 píxel e $\sim 3\%$ com mais de 10 pixels agrupados, mesmo com a imposição
@@ -216,7 +217,7 @@ Todas informações e pré-processamentos provenientes do {\sc qbick} são herda
 Os espectros extraídos pelo {\sc qbick} são processados pelo \starlight, produzindo, no caso de CALIFA 277, 1639
 arquivos ASCII como output. Dado o grande número de informações contidas em cada um desses arquivos (e.g., história de
 formação estelar em luz e massa, extinção, parâmetros cinemáticos, figuras de mérito do ajuste), necessitamos de um
-programa que faça a organização de todos os dados para que cálculos e gráficos sejam fácil para que até um programador
+programa que faça a organização de todos os dados para que cálculos e gráficos sejam fáceis para que até um programador
 de nível iniciante possa fazer. André L. de Amorim, juntamente com outros colaboradores de nosso grupo e do projeto
 CALIFA construiu o \pycasso ({\em Python CALIFA \starlight Synthesis Organizer}, descrito na sec. 4 de CF13) que faz a
 organização dos dados que vêm do {\sc qbick} e das etapas inicais de redução juntamente com a síntese de populações
@@ -231,7 +232,7 @@ fração de luz distribuída pelas populações estelares da base usada na sínt
 programação exploratória não precise se preocupar com as características de cada formato de armazenamento de dados. Por
 fim, existe uma camada construída para análise, com funções que retornam a indexação de cada zona para um par $(x, y)$,
 cálculos de perfis radiais e azimutais, geometria, entre outras rotinas. Um programador facilmente pode adicionar mais
-rotinas como essas. Todos os códigos desenvolvidos nessa dissertação foram escritos de forma compatível com o \pycasso.
+rotinas como essas. Todo o código desenvolvido nessa dissertação foi escrito de forma compatível com o \pycasso.
 
 \subsection{Exemplos de utilização do \pycasso}
 
@@ -324,7 +325,7 @@ plt.title('%s - %s', % (K.galaxyName, K.califaID))
 \end{figure}
 
 Perfis radiais ou axiais também são importantes para o estudo de diversas propriedades galáticas. Podemos ver na Figura
-\ref{fig:programaPerfRad} (e a imagem gerada na Figura \ref{fig:perfRad}) um exemplo de perfil radial executado
+\ref{fig:programaPerfRad} (e na imagem gerada na Figura \ref{fig:perfRad}) um exemplo de perfil radial executado
 através da função \texttt{radialProfile} do \pycasso.
 
 Já existem vários artigos utilizando o \pycasso \citep{CidFernandes2013, CidFernandes2014, Perez2013,
