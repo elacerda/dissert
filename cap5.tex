@@ -24,7 +24,8 @@ populações estelares obtidas pela síntese com o \starlight. Este conjunto de 
 exploração científica usando Tomografia PCA em galáxias do CALIFA. 
 
 Nesse capítulo apresentamos resultados para uma amostra de 8 galáxias, escolhidas de forma a varrer vários tipos
-morfológicos. Essa é a primeira vez que esta técnica é aplicada a galáxias inteiras.
+morfológicos. Como essa é a primeira vez que esta técnica é aplicada a galáxias inteiras, nos dedicaremos mais na
+apresentação dos resultados e menos na discussão sobre os mesmos. 
 
 \section{Apresentação das galáxias}
 \label{sec:result:apres}
@@ -98,7 +99,10 @@ PC6, juntamente com metalicidade e $A_V$, como índices maiores de correlação.
 (Figura \ref{fig:K0008apresent}, segunda imagem na última linha) podemos ver que essa galáxia não possui um padrão muito
 claro de rotação, mas na análise das correlações para os dados sintéticos vemos que a PC4 se correlaciona de maneira
 formidável com $v_\star$ ($s\ =\ 0.88$). Para o caso observado vemos que a rotação aparece, mesmo que com uma correlação
-mais fraca que no caso sintético, na PC3.
+mais fraca que no caso sintético, na PC3. Podemos ver nas Tabelas \ref{tab:K0008tabcorreobs} e
+\ref{tab:K0008tabcorresyn} as principais correlações encontradas. Vemos que para essa galáxia as propriedades físicas
+aparece muito ``dissolvidas'' entre várias PCs. Dissolvidas no sentido de uma propriedade física ter correlações com
+várias PCs.
 
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0008-apresent.pdf}
@@ -158,6 +162,49 @@ mais fraca que no caso sintético, na PC3.
     \label{fig:K0008correfsynnorm}
 \end{figure}
 
+\begin{table}
+	\caption[Principais correlações - $f_{obs}$ - NGC 0001]
+	{Principais correlações encontradas para a PCA com os espectros observados normalizados ($f_{obs}$) da galáxia NGC
+	0001.}
+	\begin{tabular}{c c c}
+		Tomograma & Propriedade Física & Coef. de Spearman \\
+		\midrule 
+		1 & \meanL{\log t}   & -0.33 \\
+		1 & $\log \meanL{Z}$ & -0.36 \\
+		1 & $A_v$            & -0.38 \\
+		2 & $\log \meanL{Z}$ & -0.36 \\
+		2 & $v_\star$        & -0.45 \\
+		3 & $v_\star$        & -0.45 \\
+		4 & \meanL{\log t}   & -0.69 \\
+		4 & $\log \meanL{Z}$ & -0.36 \\
+		\end{tabular}
+	\label{tab:K0008tabcorreobs}
+\end{table}
+
+\begin{table}
+	\caption[Principais correlações - $f_{syn}$ - NGC 0001]
+	{Principais correlações encontradas para a PCA com os espectros sintéticos normalizados ($f_{obs}$) da galáxia NGC
+	0001.}
+	\begin{tabular}{c c c}
+		Tomograma & Propriedade Física & Coef. de Spearman \\ 
+		\midrule
+		1 & \meanL{\log t}   & -0.35 \\
+		1 & $\log \meanL{Z}$ & -0.33 \\
+		1 & $A_v$            & -0.35 \\
+		2 & $v_\star$        & -0.36 \\
+		3 & \meanL{\log t}   & 0.36 \\
+		3 & $A_v$            & -0.38 \\
+		3 & $v_\star$        & -0.31 \\
+		4 & $v_\star$        & -0.88 \\
+		5 & $\log \meanL{Z}$ & 0.46 \\
+		6 & \meanL{\log t}   & -0.56 \\
+		6 & $\log \meanL{Z}$ & 0.52 \\
+		6 & $A_v$            & 0.43 \\
+		\end{tabular}
+	\label{tab:K0008tabcorresyn}
+\end{table}
+
+
 \subsection{NGC 0776 - CALIFA 73}
 
 A galáxia espiral barrada NGC 0776 é apresentada na Figura \ref{fig:K0073apresent}. A análise com o \starlight revela
@@ -178,7 +225,8 @@ na PC4) e correlacionar com $A_V$. Já para o caso observado possui melhor corre
 informação sobre $A_V$ parece estar melhor representada pela PC3 para o caso observado, diferentemente do caso sintético
 que parece conter essa informação de maneira um pouco mais clara na PC4. Vale a pena ressaltar que apesar dessa galáxia
 não ter um campo de velocidades muito distribuído, a PC5 para o caso sintético parece ser uma boa sonda dessa
-propriedade.
+propriedade. Podemos ver nas Tabelas \ref{tab:K0073tabcorreobs} e \ref{tab:K0073tabcorresyn} que algumas propriedades
+físicas estão menos espalhadas pelas PCs.
 
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0073-apresent.pdf}
@@ -210,17 +258,48 @@ propriedade.
 
 \begin{figure}
     \includegraphics[width=1.2\textwidth, angle=-90]{figuras/K0073-correl-f_obs_norm-PCvsPhys.pdf}
-	\caption[Correlações PCs vs. par\^ametros f\'isicos - $f_{obs}$ - NGC 0001]
+	\caption[Correlações PCs vs. par\^ametros f\'isicos - $f_{obs}$ - NGC 0776]
 	{Igual a Figura \ref{fig:K0008correfobsnorm} para a galáxia NGC 0776.}
     \label{fig:K0073correfobsnorm}
 \end{figure}
 
 \begin{figure}
     \includegraphics[width=1.2\textwidth, angle=-90]{figuras/K0073-correl-f_syn_norm-PCvsPhys.pdf}
-	\caption[Correlações PCs vs. par\^ametros f\'isicos - $f_{syn}$ - NGC 0001]
+	\caption[Correlações PCs vs. par\^ametros f\'isicos - $f_{syn}$ - NGC 0776]
 	{Igual a Figura \ref{fig:K0008correfsynnorm} para a galáxia NGC 0776.}
     \label{fig:K0073correfsynnorm}
 \end{figure}
+
+\begin{table}
+	\caption[Principais correlações - $f_{obs}$ - NGC 0776]
+	{Principais correlações encontradas para a PCA com os espectros observados normalizados ($f_{obs}$) da galáxia NGC
+	0776.}
+	\begin{tabular}{c c c}
+		Tomograma & Propriedade Física & Coef. de Spearman \\ 
+		\midrule
+		1 & \meanL{\log t}   & -0.74 \\
+		2 & $v_\star$        & -0.65 \\
+		2 & $\sigma_\star$   & -0.39 \\
+		3 & $A_v$            & -0.35 \\
+		\end{tabular}
+	\label{tab:K0073tabcorreobs}
+\end{table}
+
+\begin{table}
+	\caption[Principais correlações - $f_{syn}$ - NGC 0776]
+	{Principais correlações encontradas para a PCA com os espectros sintéticos normalizados ($f_{obs}$) da galáxia NGC
+	0776.}
+	\begin{tabular}{c c c}
+		Tomograma & Propriedade Física & Coef. de Spearman \\ 
+		\midrule
+		1 & \meanL{\log t}   & -0.76 \\
+		3 & $A_v$            & -0.40 \\
+		4 & $A_v$            & 0.56 \\
+		4 & $v_\star$        & 0.64 \\
+		5 & $v_\star$        & -0.73 \\
+		\end{tabular}
+	\label{tab:K0073tabcorresyn}
+\end{table}
 
 \subsection{NGC 4210 - CALIFA 518}
 
@@ -247,7 +326,8 @@ sentido físico dessas PCs, mas olhando as correlações para o caso observado (
 que a PC4 é uma boa medida da velocidade ($s\ =\ 0.80$). Através das correlações usando o resultado para os espectros
 sintéticos (Figura \ref{fig:K0518correfsynnorm}) podemos ver que segue o padrão para outras galáxias espirais, onde a
 PC1 está geralmente fortemente correlacionada a idade. A PC4, da mesma forma que o observado, reproduz $v_\star$ e a PC5
-mais próximo de $A_V$.
+mais próximo de $A_V$. O resumo das principais correlações podem ser encontrados nas Tabelas \ref{tab:K0518tabcorreobs}
+e \ref{tab:K0518tabcorresyn}.
 
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0518-apresent.pdf}
@@ -291,6 +371,37 @@ mais próximo de $A_V$.
     \label{fig:K0518correfsynnorm}
 \end{figure}
 
+\begin{table}
+	\caption[Principais correlações - $f_{obs}$ - NGC 4210]
+	{Principais correlações encontradas para a PCA com os espectros observados normalizados ($f_{obs}$) da galáxia NGC
+	4210.}
+	\begin{tabular}{c c c}
+		Tomograma & Propriedade Física & Coef. de Spearman \\ 
+		\midrule
+		1 & \meanL{\log t}   & -0.76 \\
+		2 & \meanL{\log t}   & 0.60 \\
+		4 & $v_\star$        & 0.90 \\
+		\end{tabular}
+	\label{tab:K0518tabcorreobs}
+\end{table}
+
+\begin{table}
+	\caption[Principais correlações - $f_{syn}$ - NGC 4210]
+	{Principais correlações encontradas para a PCA com os espectros sintéticos normalizados ($f_{obs}$) da galáxia NGC
+	4210.}
+	\begin{tabular}{c c c}
+		Tomograma & Propriedade Física & Coef. de Spearman \\ 
+		\midrule
+		1 & \meanL{\log t}   & -0.77 \\
+		1 & $\log \meanL{Z}$ & -0.41 \\
+		3 & $v_\star$        & 0.58 \\
+		4 & $v_\star$        & 0.85 \\
+		5 & $\log \meanL{Z}$ & -0.49 \\
+		5 & $A_v$            & 0.57 \\
+		\end{tabular}
+	\label{tab:K0518tabcorresyn}
+\end{table}
+
 \section{Gal\'axias {\em early-type}}
 \label{sec:result:elipt}
 
@@ -318,7 +429,8 @@ clara para ambos os casos na PC3, com um incrível índice de correlação de Sp
 que a dispersão de velocidades ($\sigma_\star$) aparece correlacionando fracamente com quase todas as principais PCs,
 mas no caso sintético vemos uma correlação maior ($s\ =\ 0.53$). A idade média estelar fica mais distribuída entre as
 PC5 e PC6 no caso sintético, mas mesmo assim com correlações não tão gritantes quanto para as galáxias espirais. Já no
-caso observado correlaciona um pouco com a PC2 mas nada muito evidente também.
+caso observado correlaciona um pouco com a PC2 mas nada muito evidente também. As principais correlações podem ser
+vistas nas Tabelas \ref{tab:K0119tabcorreobs} e \ref{tab:K0119tabcorresyn}.
 
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0119-apresent.pdf}
@@ -362,6 +474,37 @@ caso observado correlaciona um pouco com a PC2 mas nada muito evidente também.
     \label{fig:K0119correfsynnorm}
 \end{figure}
 
+\begin{table}
+	\caption[Principais correlações - $f_{obs}$ - NGC 1167]
+	{Principais correlações encontradas para a PCA com os espectros observados normalizados ($f_{obs}$) da galáxia NGC
+	1167.}
+	\begin{tabular}{c c c}
+		Tomograma & Propriedade Física & Coef. de Spearman \\ 
+		\midrule
+		1 & $\log \meanL{Z}$ & -0.66 \\
+		1 & $A_v$            & 0.75 \\
+		3 & $v_\star$        & 0.84 \\
+		5 & $A_v$            & 0.46 \\
+		\end{tabular}
+	\label{tab:K0119tabcorreobs}
+\end{table}
+
+\begin{table}
+	\caption[Principais correlações - $f_{syn}$ - NGC 1167]
+	{Principais correlações encontradas para a PCA com os espectros sintéticos normalizados ($f_{obs}$) da galáxia NGC
+	1167.}
+	\begin{tabular}{c c c}
+		Tomograma & Propriedade Física & Coef. de Spearman \\ 
+		\midrule
+		2 & $\log \meanL{Z}$ & 0.59 \\
+		2 & $A_v$            & -0.77 \\
+		3 & $v_\star$        & 0.98 \\
+		4 & $A_v$            & -0.48 \\
+		5 & $\log \meanL{Z}$ & -0.57 \\
+		\end{tabular}
+	\label{tab:K0119tabcorresyn}
+\end{table}
+
 \subsection{NGC 6515 - CALIFA 864}
 
 A primeira coisa que chama atenção nas imagens produzidas pelas propriedades físicas dessa galáxia elíptica é o número
@@ -380,7 +523,9 @@ de fator de escala que segue o mesmo gradiente das demais propriedades físicas.
 dispersão de velocidades a correlação é um pouco mais alta ($s\ =\ 0.62$). A PC4 possui o mesmo padrão de correlações
 distribuidas entre as propriedades, mas é mais notável a correlação com a velocidade estelar ($v_\star$), o que fica
 claro também observando a PC (autoespectro) que possui um padrão de oscilação em torno do zero. Detalhe para a PC6 que
-possui forte correlação com idade e metalicidade.
+possui forte correlação com idade e metalicidade. Nas Tabelas \ref{tab:K0864tabcorreobs} e \ref{tab:K0864tabcorresyn}
+podemos ver as principais correlações. No caso sintético vemos que as propriedades físicas ficam mais distribuídas pelas
+PCs do que no caso observado.
 
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0864-apresent.pdf}
@@ -424,6 +569,43 @@ possui forte correlação com idade e metalicidade.
     \label{fig:K0864correfsynnorm}
 \end{figure}
 
+\begin{table}
+	\caption[Principais correlações - $f_{obs}$ - NGC 6515]
+	{Principais correlações encontradas para a PCA com os espectros observados normalizados ($f_{obs}$) da galáxia NGC
+	6515.}
+	\begin{tabular}{c c c}
+		Tomograma & Propriedade Física & Coef. de Spearman \\ 
+		\midrule
+		1 & $A_v$            & -0.46 \\
+		3 & \meanL{\log t}   & -0.44 \\
+		3 & $\log \meanL{Z}$ & 0.45 \\
+		3 & $\sigma_\star$   & 0.52 \\
+		\end{tabular}
+	\label{tab:K0864tabcorreobs}
+\end{table}
+
+\begin{table}
+	\caption[Principais correlações - $f_{syn}$ - NGC 6515]
+	{Principais correlações encontradas para a PCA com os espectros sintéticos normalizados ($f_{obs}$) da galáxia NGC
+	6515.}
+	\begin{tabular}{c c c}
+		Tomograma & Propriedade Física & Coef. de Spearman \\ 
+		\midrule
+		1 & $A_v$            & -0.45 \\
+		3 & \meanL{\log t}   & -0.46 \\
+		3 & $\log \meanL{Z}$ & 0.54 \\
+		3 & $A_v$            & -0.42 \\
+		3 & $\sigma_\star$   & 0.61 \\
+		4 & \meanL{\log t}   & 0.53 \\
+		4 & $\log \meanL{Z}$ & -0.52 \\
+		4 & $v_\star$        & -0.75 \\
+		4 & $\sigma_\star$   & -0.50 \\
+		6 & \meanL{\log t}   & -0.62 \\
+		6 & $\log \meanL{Z}$ & 0.57 \\
+		\end{tabular}
+	\label{tab:K0864tabcorresyn}
+\end{table}
+
 \section{{\em Mergers}}
 \label{sec:result:mergers}
 
@@ -449,7 +631,7 @@ Chama atenção a sequência de Balmer (típica de estrelas A, e portanto de pop
 caso sintético, mas tanto no caso sintético quanto no observado não parece correlacionar com nada. A quinta componente
 no caso observado parece ter algum vestígio de idade e metalicidade em ambos os casos, mas mais fortemente para o caso
 sintético. Com uma correlação um pouco maior, a velocidade estelar aparece na PC6 do caso sintético, mas não na do caso
-observado.
+observado. As principais correlações estão nas Tabelas \ref{tab:K0213tabcorreobs} e \ref{tab:K0213tabcorresyn}. 
 
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0213-apresent.pdf}
@@ -493,6 +675,44 @@ observado.
     \label{fig:K0213correfsynnorm}
 \end{figure}
 
+\begin{table}
+	\caption[Principais correlações - $f_{obs}$ - NGC 2623]
+	{Principais correlações encontradas para a PCA com os espectros observados normalizados ($f_{obs}$) da galáxia NGC
+	2623.}
+	\begin{tabular}{c c c}
+		Tomograma & Propriedade Física & Coef. de Spearman \\ 
+		\midrule
+		1 & $A_v$            & -0.89 \\
+		2 & \meanL{\log t}   & -0.67 \\
+		2 & $\log \meanL{Z}$ & -0.46 \\
+		2 & $A_v$            & 0.39 \\
+		2 & $v_\star$        & -0.56 \\
+		2 & $\sigma_\star$   & -0.50 \\
+		3 & $\log \meanL{Z}$ & 0.41 \\
+		\end{tabular}
+	\label{tab:K0213tabcorreobs}
+\end{table}
+
+\begin{table}
+	\caption[Principais correlações - $f_{syn}$ - NGC 2623]
+	{Principais correlações encontradas para a PCA com os espectros sintéticos normalizados ($f_{obs}$) da galáxia NGC
+	2623.}
+	\begin{tabular}{c c c}
+		Tomograma & Propriedade Física & Coef. de Spearman \\ 
+		\midrule
+		1 & $A_v$            & -0.89 \\
+		2 & \meanL{\log t}   & -0.67 \\
+		2 & $\log \meanL{Z}$ & -0.46 \\
+		2 & $A_v$            & 0.42 \\
+		2 & $v_\star$        & -0.58 \\
+		2 & $\sigma_\star$   & -0.49 \\
+		5 & \meanL{\log t}   & 0.53 \\
+		5 & $\log \meanL{Z}$ & -0.51 \\
+		6 & $v_\star$        & -0.60 \\
+		\end{tabular}
+	\label{tab:K0213tabcorresyn}
+\end{table}
+
 \subsection{ARP 220 - CALIFA 802}
 
 Esse objeto peculiar é a ULIRG ({\em Ultraluminous infrared galaxy}) mais próxima da Terra. Como a NGC 2623, possui uma
@@ -508,7 +728,8 @@ casos. Para o caso observado a PC3 correlaciona melhor com a velocidade estelar.
 sequência de Balmer tanto na PC3 (que não correlaciona fortemente com nada) quanto na PC4 (que parece ser uma boa medida
 de $v_\star$). Ainda no caso sintético, vemos que a velocidade aparece fortemente também na PC5, mas divide espaço (em
 correlação) com idade e metalicidade de maneira mais fraca. Já para o caso observado nenhuma delas (PC4, PC5) paracem
-ter correlação com nenhum dos parâmetros físicos comparados. O mesmo para a PC6 em ambos os casos.
+ter correlação com nenhum dos parâmetros físicos comparados. O mesmo para a PC6 em ambos os casos. As pricipais
+correlações aparecem nas Tabelas \ref{tab:K0802tabcorreobs} e \ref{tab:K0802tabcorresyn}.
 
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0802-apresent.pdf}
@@ -552,6 +773,38 @@ ter correlação com nenhum dos parâmetros físicos comparados. O mesmo para a 
     \label{fig:K0802correfsynnorm}
 \end{figure}
 
+\begin{table}
+	\caption[Principais correlações - $f_{obs}$ - ARP 220]
+	{Principais correlações encontradas para a PCA com os espectros observados normalizados ($f_{obs}$) da galáxia ARP
+	220.}
+	\begin{tabular}{c c c}
+		Tomograma & Propriedade Física & Coef. de Spearman \\ 
+		\midrule
+		1 & \meanL{\log t}   & 0.49 \\
+		1 & $A_v$            & -0.88 \\
+		2 & $\log \meanL{Z}$ & -0.52 \\
+		3 & $v_\star$        & 0.48 \\
+		\end{tabular}
+	\label{tab:K0802tabcorreobs}
+\end{table}
+
+\begin{table}
+	\caption[Principais correlações - $f_{syn}$ - ARP 220]
+	{Principais correlações encontradas para a PCA com os espectros sintéticos normalizados ($f_{obs}$) da galáxia ARP
+	220.}
+	\begin{tabular}{c c c}
+		Tomograma & Propriedade Física & Coef. de Spearman \\ 
+		\midrule
+		1 & \meanL{\log t}   & 0.48 \\
+		1 & $A_v$            & -0.88 \\
+		2 & $\log \meanL{Z}$ & -0.50 \\
+		4 & $v_\star$        & 0.59 \\
+		5 & $\log \meanL{Z}$ & 0.45 \\
+		5 & $v_\star$        & -0.69 \\
+		\end{tabular}
+	\label{tab:K0802tabcorresyn}
+\end{table}
+
 \section{Considerações gerais}
 
 Nesse capítulo exploramos algumas galáxias do CALIFA utilizando a Tomografia PCA para os espectros, observados e
@@ -587,9 +840,9 @@ número de componentes necessárias para obtermos 90\% da variância acumulada.
 
 Muita informação contida nessa tabela ainda necessita ser explorada, mas podemos ver que a soma dos autovalores das PCs
 para cada galáxia ($\Lambda$), que é igual a soma da variância de todos os comprimentos de onda através das zonas,
-parecem crescer juntamente com a ``complexidade'' da galáxia análisada. A variância acumulada para os casos observado e
-sintético parecem confirmar que a informação fica mais comprimida para as primeiras PCs para o segundo caso, em relação
-ao primeiro. 
+parecem crescer juntamente com a ``complexidade'' da galáxia análisada. A variância acumulada $k_{90\%}$ para os casos
+observado e sintético parecem confirmar que a informação fica mais comprimida para as primeiras PCs para o segundo caso,
+em relação ao primeiro.
 
 Pelo fato de que o campo do CALIFA engloba $\sim100\%$ da luz da galáxia, as estruturas mapeadas pelos cubos de
 espectros são diversas, mas não nos impediram de encontrar certas similaridades nos resultados para diferentes galáxias
