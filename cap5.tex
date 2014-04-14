@@ -88,21 +88,21 @@ através da nossa análise dos tomogramas as componentes daí pra frente não pa
 
 Através da análise das PCs para o caso observado dessa galáxia (Figura \ref{fig:K0008tomofobsnorm}), notamos que a parte
 inicial (os primeros $\sim40$ \AA) e a parte final (os últimos $\sim10$ \AA) dos autoespectros chamam atenção e, através
-de uma revisão dos espectros do cubo, vimos que elas, na verdade, evidenciam a existência problemas com o fluxo nesses
-comprimentos de onda em alguns espectros. Mesmo assim, seguimos com nossa análise. Como a NGC 2916, a primeira PC, e seu
-respectivo tomograma (Figuras \ref{fig:K0008tomofobsnorm} e \ref{fig:K0008tomofsynnorm}), parece ser relacionada a uma
-população muito azul, tanto para a PCA com os dados observados, quanto sintéticos, correlacionando geralmente com a
-idade. Mas, vemos nas correlações (Figuras \ref{fig:K0008correfobsnorm} e \ref{fig:K0008correfsynnorm}), que a primeira
-componente, para essa galáxia, se correlaciona praticamente com todas as quantidades avaliadas, salvo $v_\star$. A idade
-média aparece mais definida junto com o $A_V$ na PC4 para o caso observado. Já no caso sintético ela aparece melhor na
-PC6, juntamente com metalicidade e $A_V$, como índices maiores de correlação. Observado a imagem da velocidade estelar
-(Figura \ref{fig:K0008apresent}, segunda imagem na última linha) podemos ver que essa galáxia não possui um padrão muito
-claro de rotação, mas na análise das correlações para os dados sintéticos vemos que a PC4 se correlaciona de maneira
-formidável com $v_\star$ ($s\ =\ 0.88$). Para o caso observado vemos que a rotação aparece, mesmo que com uma correlação
-mais fraca que no caso sintético, na PC3. Podemos ver nas Tabelas \ref{tab:K0008tabcorreobs} e
-\ref{tab:K0008tabcorresyn} as principais correlações encontradas. Vemos que para essa galáxia as propriedades físicas
-aparece muito ``dissolvidas'' entre várias PCs. Dissolvidas no sentido de uma propriedade física ter correlações com
-várias PCs.
+de uma revisão dos espectros do cubo, vimos que elas, na verdade, evidenciam a existência de problemas com o fluxo
+nesses comprimentos de onda em alguns espectros. Mesmo assim, seguimos com nossa análise. Como a NGC 2916, a primeira
+PC, e seu respectivo tomograma (Figuras \ref{fig:K0008tomofobsnorm} e \ref{fig:K0008tomofsynnorm}), parece ser
+relacionada a uma população muito azul, tanto para a PCA com os dados observados, quanto sintéticos, correlacionando
+geralmente com a idade. Mas, vemos nas correlações (Figuras \ref{fig:K0008correfobsnorm} e
+\ref{fig:K0008correfsynnorm}), que a primeira componente, para essa galáxia, se correlaciona praticamente com todas as
+quantidades avaliadas, salvo $v_\star$. A idade média aparece mais definida junto com o $A_V$ na PC4 para o caso
+observado. Já no caso sintético ela aparece melhor na PC6, juntamente com metalicidade e $A_V$, como índices maiores de
+correlação. Observado a imagem da velocidade estelar (Figura \ref{fig:K0008apresent}, segunda imagem na última linha)
+podemos ver que essa galáxia não possui um padrão muito claro de rotação, mas na análise das correlações para os dados
+sintéticos vemos que a PC4 se correlaciona de maneira formidável com $v_\star$ ($s\ =\ 0.88$). Para o caso observado
+vemos que a rotação aparece, mesmo que com uma correlação mais fraca que no caso sintético, na PC3. Podemos ver nas
+Tabelas \ref{tab:K0008tabcorreobs} e \ref{tab:K0008tabcorresyn} as principais correlações encontradas. Vemos que para
+essa galáxia as propriedades físicas aparece muito ``dissolvidas'' entre várias PCs. Dissolvidas no sentido de uma
+propriedade física ter correlações com várias PCs.
 
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0008-apresent.pdf}
@@ -210,7 +210,7 @@ várias PCs.
 A galáxia espiral barrada NGC 0776 é apresentada na Figura \ref{fig:K0073apresent}. A análise com o \starlight revela
 populações mais jovens nos braços espirais, uma populacao velha na região da barra e levemente mais jovem no núcleo. A
 imagem de $A_V$ mostra que a poeira se concentra no núcleo e nos braços. O campo de velocidade mostra pequenos valores
-de $v_\star$, o que não é supreendente dado que a galáxias está praticamente {\em face-on}.
+de $v_\star$, o que não é supreendente dado que a galáxia está praticamente {\em face-on}.
 
 A análise da variância percentual de cada componente através do {\em scree test} (Figura \ref{fig:K0073scree}) segue o
 mesmo padrão de todas apresentadas até agora, sempre com a convergência ao zero de variância seguindo a ordem primeiro
@@ -304,11 +304,12 @@ físicas estão menos espalhadas pelas PCs.
 \subsection{NGC 4210 - CALIFA 518}
 
 A galáxia NGC 4210, também é uma espiral com uma barra bem notável, assim como a NGC 0776 (Figura
-\ref{fig:K0518apresent}). Pelas figuras podemos notar 3 conjuntos aproximadamente circulares de pixeis à direita do
-núcleo. Evidentemente existem problemas com esses pixeis e esses problemas se propagaram para a síntese, fazendo com que
-os resultados dessas zonas ficassem díspares ao todo. Esses problemas passaram para o cubo final mesmo passando pelos
-{\em pipelines} de redução e os filtros de qualidade do {\sc qbick}. Ao invés de voltar atrás e corrigir esses defeitos,
-usaremos esse cubo como exemplo de como o PCA pode nos ajudar a identificar problemas nos dados.
+\ref{fig:K0518apresent}). Pelas figuras podemos notar 3 conjuntos aproximadamente circulares de pixels à direita do
+núcleo. Evidentemente existem problemas com esses pixels e esses problemas se propagaram para a síntese, fazendo com que
+os resultados dessas zonas ficassem díspares ao todo. Esses problemas passaram para o cubo final mesmo passando pelo
+{\em pipeline} de redução e os filtros de qualidade do {\sc qbick} e entraram em nossa análise pois não entraram no
+critério de corte, como explicado na Seção \ref{sec:CALePyC:pipeline}. Ao invés de voltar atrás e corrigir esses
+defeitos, usaremos esse cubo como exemplo de como o PCA pode nos ajudar a identificar problemas nos dados.
 
 O {\em scree test} (Figura \ref{fig:K0518scree}) apesar de seguir o mesmo padrão das demais parece ter uma distribuição
 de variâncias mais parecida entre as PCs para casos diferentes, mas como falamos a seguir, essa galáxia é um caso à
@@ -325,9 +326,9 @@ Com esses problemas, o surgimento dessa PC2 no caso observado faz com que fique 
 sentido físico dessas PCs, mas olhando as correlações para o caso observado (Figura \ref{fig:K0518correfobsnorm}) vemos
 que a PC4 é uma boa medida da velocidade ($s\ =\ 0.80$). Através das correlações usando o resultado para os espectros
 sintéticos (Figura \ref{fig:K0518correfsynnorm}) podemos ver que segue o padrão para outras galáxias espirais, onde a
-PC1 está geralmente fortemente correlacionada a idade. A PC4, da mesma forma que o observado, reproduz $v_\star$ e a PC5
-mais próximo de $A_V$. O resumo das principais correlações podem ser encontrados nas Tabelas \ref{tab:K0518tabcorreobs}
-e \ref{tab:K0518tabcorresyn}.
+PC1 está geralmente fortemente correlacionada com a idade. A PC4, da mesma forma que o observado, reproduz $v_\star$ e a
+PC5 possui uma boa correlação com $\log \meanL{Z}$ e $A_V$. O resumo das principais correlações podem ser encontrados
+nas Tabelas \ref{tab:K0518tabcorreobs} e \ref{tab:K0518tabcorresyn}.
 
 \begin{figure}
     \includegraphics[width=1.\textwidth]{figuras/K0518-apresent.pdf}
@@ -508,10 +509,10 @@ vistas nas Tabelas \ref{tab:K0119tabcorreobs} e \ref{tab:K0119tabcorresyn}.
 \subsection{NGC 6515 - CALIFA 864}
 
 A primeira coisa que chama atenção nas imagens produzidas pelas propriedades físicas dessa galáxia elíptica é o número
-de zonas faltantes na análise. Existem muitos objetos no {\em FoV} de observação dessa galáxia, portanto esses
-``buracos'' são causados pelas máscaras espaciais criadas pelo {\sc qbick} conforme discutido na Seção
-\ref{sec:CALePyC:pipelines}. O {\em scree test} (Figura \ref{fig:K0864scree}) possui o mesmo resultado assintótico das
-outras galáxias, mas mostra uma variância percentual alta mesmo para componentes mais afastadas das cinco principais.
+de zonas faltantes na análise. Existem muitos objetos no {\em FoV} dessa galáxia, portanto esses ``buracos'' são
+causados pelas máscaras espaciais criadas pelo {\sc qbick} conforme discutido na Seção \ref{sec:CALePyC:pipelines}. O
+{\em scree test} (Figura \ref{fig:K0864scree}) possui o mesmo resultado assintótico das outras galáxias, mas mostra uma
+variância percentual alta mesmo para componentes mais afastadas das cinco principais.
 
 Analisando os tomogramas e PCs para o caso observado (Figura \ref{fig:K0864tomofobsnorm}) não parecem refletir
 comportamentos físicos bem definidos. Podemos ver através das correlações (Figura \ref{fig:K0864correfobsnorm}) que não
@@ -611,7 +612,7 @@ PCs do que no caso observado.
 
 Se para galáxias {\em early-type} esperávamos (e observamos) uma certa homgeneidade nas distribuições espaciais de PCs e
 propriedades físicias, o contrário acontece no caso de {\em mergers}. Estes objetos complexos representam misturas de
-duas galáxias, às quais se adiciona toda "confusão" gerada pela concentracao de gás e poeira e a formação estelar
+duas galáxias, às quais se adiciona toda ``confusão'' gerada pela concentracao de gás e poeira e a formação estelar
 resultante. Nessa seção analisaremos dois sistemas desse tipo.
 
 \subsection{NGC 2623 - CALIFA 213}
@@ -620,7 +621,7 @@ Quando olhamos a figura de apresentação da imagem e das propriedades da galáx
 \ref{fig:K0213apresent}) fica evidente a natureza irregular e a diferença na distribuição espacial da idade média das
 populações estelares. Seu {\em scree test} (Figura \ref{fig:K0213scree}) possui o mesmo comportamento com as variâncias
 indo a zero mais rápido no caso sintético, mas surpreende pela alta concentração de informação em variância nas 4
-primeiras componentes para o caso sintético.
+primeiras componentes nesse caso.
 
 As duas primeiras PCs e tomogramas são muito semelhantes nos dois casos (Figuras \ref{fig:K0213tomofobsnorm} e
 \ref{fig:K0213tomofsynnorm}) mas começam a diferir a partir do terceiro autovetor. A PC1 para os dois casos correlaciona
