@@ -4,7 +4,8 @@
 \ProvidesClass{nathesis}
 
 %% Standard printing:
-\LoadClass[a4paper,oneside]{hepthesis}
+\LoadClass[a4paper,twoside]{hepthesis}
+%\LoadClass[a4paper,oneside]{hepthesis}
 
 %%%% Tips from hepthesis class:
 %% For normal draft builds
