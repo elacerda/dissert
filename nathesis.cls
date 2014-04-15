@@ -41,8 +41,8 @@
 \usepackage{nadefinitions}
 
 %%%% André %%%%
-\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, filecolor=blue, pagecolor=blue, urlcolor=cyan]{hyperref}
-%\usepackage{hyperref}
+%\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, filecolor=blue, pagecolor=blue, urlcolor=cyan]{hyperref}
+\usepackage{hyperref}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
