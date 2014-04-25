@@ -1,6 +1,7 @@
 #!/usr/bin/python
+from os.path import expanduser
 import numpy as np
-import PCAlifa as PCA
+import pcalifa as PCA
 import matplotlib as mpl
 from matplotlib import pyplot as plt
 import matplotlib.gridspec as gridspec
@@ -8,17 +9,17 @@ from parser_opt import *
 
 args = parser_args()
 
-print('Output directory: %s' % args.outputdir)
+print('Output directory: %s' % args.outputDir)
 
 P = PCA.PCAlifa(fitsFile = args.fitsfile, quantilQFlag = 0.95, lc = args.lc)
-P.setStarlightMaskFile('/home/lacerda/CALIFA/Mask.mC')
+P.setStarlightMaskFile('%s/CALIFA/Mask.mC' % expanduser('~'))
 
 P.PCA_obs_norm()
-P.tomograms_obs_norm()
+P.tomograms()
 
 K = P.K
 
-#xxx
+# xxx
 
 firstPC = args.firstTomo
 nPCs = args.nTomo
@@ -33,15 +34,15 @@ for i in range(nPCs):
     gsi = 2 * iTomo
 
     if iTomo == 2:
-        tomo_pc = P.tomo_obs_norm__kyx[iTomo, :, :]
-        pc = P.eigVec_obs_norm__lk[:, iTomo]
+        tomo_pc = P.tomo__kyx[iTomo, :, :]
+        pc = P.eigVec__lk[:, iTomo]
     else:
-        tomo_pc = -1. * P.tomo_obs_norm__kyx[iTomo, :, :]
-        pc = -1. * P.eigVec_obs_norm__lk[:, iTomo]
+        tomo_pc = -1. * P.tomo__kyx[iTomo, :, :]
+        pc = -1. * P.eigVec__lk[:, iTomo]
 
-    eval = P.eigVal_obs_norm__k[iTomo]
-    evals = P.eigVal_obs_norm__k
-    f_obs_mean = P.ms_obs_norm__l
+    eval = P.eigVal__k[iTomo]
+    evals = P.eigVal__k
+    f_obs_mean = P.ms__l
     l = P.l_obs
 
     ax1 = plt.subplot(gs[gsi])
@@ -70,4 +71,4 @@ for i in range(nPCs):
         ax2.axvline(x = xmin, ls = ':', c = 'grey')
 
 f.tight_layout()
-f.savefig('%s/%s-tomo-obs-norm.%s' % (args.outputdir, K.califaID, args.outputimgsuffix))
+f.savefig('%s/%s-tomo-obs-norm.%s' % (args.outputDir, K.califaID, args.outputImgSuffix))
